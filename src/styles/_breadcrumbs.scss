@@ -1,0 +1,27 @@
+/**
+ * Developer    :   SongQian
+ * Time         :   2020-04-21
+ * eMail        :   songqian@wtoe.cn
+ * Description  :   button 按钮样式封装
+ */
+ @import "./ivsom-variable";
+ @import "./ivsom-mixin";
+
+ .ivsom-breadcrumbs {
+    display:block;
+    padding: 10px;
+    box-sizing: border-box;
+    
+    > section {
+        display: inline-block;
+        list-style: none;
+        margin-left: 5px;
+        padding: 0;
+        @include font-text;
+
+        > a {
+            cursor: pointer;
+        }
+    }
+
+ }

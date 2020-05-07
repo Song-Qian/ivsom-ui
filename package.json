@@ -1,0 +1,49 @@
+{
+  "name": "ivsom-ui",
+  "version": "0.0.1",
+  "description": "微创光电内部WEBUI组件库",
+  "main": "index.js",
+  "scripts": {
+    "webpack:dev": "cross-env NODE_ENV=development webpack-dev-server --config ./webpack/webpack.config.js --open --hot  --port 9001 --host localhost --progress --hide-modules",
+    "webpack:build": "cross-env NODE_ENV=development webpack -p -w --config ./webpack/webpack.config.js --progress --hide-modules",
+    "webpack:server": "http-server ./dist -a 127.0.0.1 -p 9001",
+    "start": "concurrently 'npm:webpack:build' 'npm:webpack:server'"
+  },
+  "author": "SongQian",
+  "license": "MIT",
+  "dependencies": {
+    "vue-class-component": "^7.2.3",
+    "vue-property-decorator": "^8.4.1",
+    "vue-tsx-support": "^2.3.3"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.9.0",
+    "@babel/plugin-proposal-class-properties": "^7.8.3",
+    "@babel/plugin-proposal-decorators": "^7.8.3",
+    "@babel/plugin-syntax-jsx": "^7.8.3",
+    "@babel/plugin-transform-typescript": "^7.9.4",
+    "@babel/preset-env": "^7.9.5",
+    "babel-helper-vue-jsx-merge-props": "^2.0.3",
+    "babel-loader": "^8.1.0",
+    "babel-plugin-syntax-jsx": "^6.18.0",
+    "babel-plugin-transform-vue-jsx": "^3.7.0",
+    "copy-webpack-plugin": "^5.1.1",
+    "cross-env": "^7.0.2",
+    "css-loader": "^3.5.2",
+    "extract-text-webpack-plugin": "^4.0.0-beta.0",
+    "file-loader": "^6.0.0",
+    "html-webpack-plugin": "^4.2.0",
+    "node-sass": "^4.13.1",
+    "sass-loader": "^8.0.2",
+    "style-loader": "^1.1.4",
+    "terser-webpack-plugin": "^2.3.6",
+    "ts-loader": "^7.0.1",
+    "tslint": "^6.1.1",
+    "typescript": "^3.8.3",
+    "vue": "^2.6.11",
+    "webpack": "^4.42.1",
+    "webpack-cli": "^3.3.11",
+    "webpack-dev-server": "^3.10.3",
+    "webpack-merge": "^4.2.2"
+  }
+}

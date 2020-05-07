@@ -1,0 +1,127 @@
+/**
+ * Developer    :   SongQian
+ * Time         :   2020-04-21
+ * eMail        :   songqian@wtoe.cn
+ * Description  :   button 按钮样式封装
+ */
+
+@import "./ivsom-variable";
+@import "./ivsom-mixin";
+
+.ivsom-btn {
+    min-width: 100px;
+    min-height: 38px;
+    border-radius: 3px;
+    padding: 5px;
+    box-sizing: border-box;
+    cursor: pointer;
+    background-color: $default-color;
+    color: $font-common-color;
+    border: 1px solid $border-default-color;
+    transition: all .3s ease;
+    outline: none;
+    @include font-text;
+
+    &:hover {
+        color: $default-color;
+        background: #969696;
+    }
+    
+    &.ivsom-btn-primary {
+        background-color: $primary-color;
+        color: $default-color !important;
+        border: 1px solid $border-primary-color;
+
+        & > .iconfont {
+            color: $default-color;
+        }
+
+        &:hover {
+            border: 1px solid #47abff;
+            background-color: #47abff;
+        }
+
+        &.ivsom-btn_disabled,
+        &.ivsom-btn_disabled:hover {
+            border: 1px solid #b0d9fa;
+            background-color: #b0d9fa;
+        }
+    }
+    
+    &.ivsom-btn-success {
+        background-color: $success-color;
+        color: $default-color !important;
+        border: 1px solid $border-success-color;
+
+        & > .iconfont {
+            color: $default-color;
+        }
+
+        &:hover {
+            border: 1px solid #48f740;
+            background-color: #48f740;
+        }
+        
+        &.ivsom-btn_disabled,
+        &.ivsom-btn_disabled:hover {
+            border: 1px solid #a6faa1;
+            background-color: #a6faa1;
+        }
+    }
+    
+    &.ivsom-btn-warning {
+        background-color: $warning-color;
+        color: $default-color !important;
+        border: 1px solid $border-warning-color;
+        
+        & > .iconfont {
+            color: $default-color;
+        }
+
+        &:hover {
+            border: 1px solid #ffd43f;
+            background-color: #ffd43f;
+        }
+
+        &.ivsom-btn_disabled,
+        &.ivsom-btn_disabled:hover {
+            border: 1px solid #ffe791;
+            background-color: #ffe791;
+        }
+    }
+    
+    &.ivsom-btn-danger {
+        background-color: $danger-color;
+        color: $default-color !important;
+        border: 1px solid $border-danger-color;
+
+        & > .iconfont {
+            color: $default-color;
+        }
+
+        &:hover {
+            border: 1px solid #ff6d4c;
+            background-color: #ff6d4c;
+        }
+
+        &.ivsom-btn_disabled,
+        &.ivsom-btn_disabled:hover {
+            border: 1px solid #f7ab9b;
+            background-color: #f7ab9b;
+        }
+    }
+
+    &.ivsom-btn__plain {
+        border-radius: 19px;
+    }
+    
+    &.ivsom-btn_disabled,
+    &.ivsom-btn_disabled:hover {
+        cursor: no-drop;
+        color: $font-common-color;
+        background-color: $default-color;
+        border: 1px solid #e0e0e0;
+        background-color: #e0e0e0;
+    }
+
+}

@@ -1,0 +1,48 @@
+/**
+ * Developer    :   SongQian
+ * Time         :   2020-04-21
+ * eMail        :   songqian@wtoe.cn
+ * Description  :   button 按钮样式封装
+ */
+
+ .ivsom-btn-group {
+    white-space : nowrap;
+    display : inline-block;
+    border-radius: 3px;
+    overflow: hidden;
+    box-sizing: border-box;
+
+    & > .ivsom-btn {
+        float:left;
+        border-radius: 0px;
+
+        //重置按钮组里面的按钮默认边框圆角
+        & > .ivsom-btn:first-child {
+            border-top-left-radius: 3px;
+            border-bottom-left-radius: 3px;
+        }
+        
+        //重置按钮组里面的按钮默认边框圆角
+        & > .ivsom-btn:last-child {
+            border-top-right-radius: 3px;
+            border-bottom-right-radius: 3px;
+        }
+    }
+
+    //按钮组圆角样式
+    &.ivsom-btn-group__plain {
+        border-radius: 19px;
+
+        //重置按钮组里面的按钮边框圆角
+        & > .ivsom-btn:first-child {
+            border-top-left-radius: 19px;
+            border-bottom-left-radius: 19px;
+        }
+        
+        //重置按钮组里面的按钮边框圆角
+        & > .ivsom-btn:last-child {
+            border-top-right-radius: 19px;
+            border-bottom-right-radius: 19px;
+        }
+    }
+ }
