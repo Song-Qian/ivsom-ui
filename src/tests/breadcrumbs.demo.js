@@ -12,22 +12,60 @@
         el : '#app',
         data : function() {
             return {
-            }
-        },
-        computed : {
-            getDebris : function() {
-                return [
-                    { text : '面包屑一', url : '#1'},
-                    { text : '面包屑二', url : '#2'},
-                    { text : '面包屑三', url : '#3'},
-                    { text : '面包屑四', url : '#4'},
-                    { text : '面包屑五', url : '#5'},
-                    { text : '面包屑六', url : '#6'},
-                    { text : '面包屑七', url : '#7'}
+                num : 0,
+                items : [
+                    { text : '面包屑一', to : '#1'},
+                    { text : '面包屑二', to : '#2'},
+                    { text : '面包屑三', to : '#3'},
+                    { text : '面包屑四', to : '#4'},
+                    { text : '面包屑五', to : '#5'},
+                    { text : '面包屑六', to : '#6'},
+                    { text : '面包屑七', to : '#7'}
+                ],
+                items_1 :  [
+                    { text : '面包屑一', to : '#1'},
+                    { text : '面包屑二', to : '#2'},
+                    { text : '面包屑三', to : '#3'},
+                    { text : '面包屑四', to : '#4'},
+                    { text : '面包屑五', to : '#5'},
+                    { text : '面包屑六', to : '#6'},
+                    { text : '面包屑七', to : '#7'}
+                ],
+                items_2 :  [
+                    { text : '面包屑一', to : '#1'},
+                    { text : '面包屑二', to : '#2'},
+                    { text : '面包屑三', to : '#3'},
+                    { text : '面包屑四', to : '#4'},
+                    { text : '面包屑五', to : '#5'},
+                    { text : '面包屑六', to : '#6'},
+                    { text : '面包屑七', to : '#7'}
+                ],
+                items_3 :  [
+                    { text : '面包屑一', to : '#1'},
+                    { text : '面包屑二', to : '#2'},
+                    { text : '面包屑三', to : '#3'},
+                    { text : '面包屑四', to : '#4'},
+                    { text : '面包屑五', to : '#5'},
+                    { text : '面包屑六', to : '#6'},
+                    { text : '面包屑七', to : '#7'}
+                ],
+                items_4 :  [
+                    { text : '面包屑一', to : '#1'},
+                    { text : '面包屑二', to : '#2'},
+                    { text : '面包屑三', to : '#3'},
+                    { text : '面包屑四', to : '#4'},
+                    { text : '面包屑五', to : '#5'},
+                    { text : '面包屑六', to : '#6'},
+                    { text : '面包屑七', to : '#7'}
                 ]
             }
         },
         methods : {
+            JumpTo : function(args) {
+                var me = this;
+                var key = args[1];
+                alert("路由地址：" +  me.$refs.breadcrumbs.map.get(key).to);
+            }
         }
     })
 

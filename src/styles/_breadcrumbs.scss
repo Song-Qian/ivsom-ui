@@ -17,10 +17,17 @@
         list-style: none;
         margin-left: 5px;
         padding: 0;
-        @include font-text;
 
         > a {
             cursor: pointer;
+            color: $border-default-color;
+            @include font-text;
+        }
+
+        &:last-child {
+            > a {
+                font-weight: bold;
+            }
         }
     }
 

@@ -18,7 +18,7 @@ const components : Array<any> = [
 ]
 
 const install = (Vue : any) => {
-    components.forEach((el : Vue, n : number) => {
+    components.forEach((el, n : number) => {
         Vue.component((<any>el).name, el);
     })
 }

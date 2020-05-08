@@ -6,66 +6,71 @@
  */
 
 import * as tsx from 'vue-tsx-support'
-import { Component, Prop } from 'vue-property-decorator'
+import { Component, Prop, PropSync, Emit } from 'vue-property-decorator'
 import uuid from '~/utils/uuid'
 
 interface Props {
     //面包屑层级数据
-    debris : Array<{ text : String,  to : String }>
-    //是否开启动跳转路由， 支持vue-router
-    auto : Boolean,
+    Debris : Array<{ text : string,  to : string }>
+    //是否开启跳转路由， 支持vue-router
+    AutoRoute : boolean,
     //路由跳转链接文档方式
-    target : '_parent' | '_blank' | '_self' | '_top' | string,
+    Target : '_parent' | '_blank' | '_self' | '_top' | string,
     //分隔符样式
-    separator : String
+    Separator : string
+}
+
+type Event = {
+    onJumpTo : (e : MouseEvent, key : string) => void
 }
 
 @Component
-export default class iVsomBreadCrumbs extends tsx.Component<Props> {
+export default class iVsomBreadCrumbs extends tsx.Component<Props, Event> {
     
     constructor() {
         super()
     }
 
-    @Prop({ default : null }) debris !:Array<{ text : String,  to : String }>
+    @Prop({ default : null }) readonly Debris !: Array<{ text : string,  to : string }>;
 
-    @Prop({ default : false }) auto !: Boolean;
+    @Prop({ default : false, type : Boolean }) readonly AutoRoute !: boolean;
 
-    @Prop({ default : '_blank' }) target !:  '_parent' | '_blank' | '_self' | '_top' | string;
+    @Prop({ default : '_self' }) readonly Target !:  '_parent' | '_blank' | '_self' | '_top' | string;
 
-    @Prop({ default : 'icon-gongnengtubiao-29' }) separator !: string;
+    @Prop({ default : 'icon-gongnengtubiao-29' }) readonly Separator !: string;
 
-    private readonly map = new Map<String, { text : String, to : String }>();
+    private readonly map = new Map<string, { text : string, to : string }>();
 
-    protected get getDebris() : Map<String, { text : String, to : String }> {
+    protected get DebrisProvide() : Map<string, { text : string, to : string }> {
         const me = this;
-        const hasCreateHashMap = me.map.size <= 0;
         let len = 0;
-        while(me.debris && len < me.debris.length && hasCreateHashMap) {
-            me.map.set(uuid(), me.debris[len]);
-            ++len
+        me.map.clear();
+        while(me.Debris && len < me.Debris.length) {
+            me.map.set(uuid(), me.Debris[len]);
+            ++len;
         }
         return me.map;
     }
 
-    protected set setDebris(map : Map<String, { text : String, to : String }>) {
+    protected set DebrisProvide(map : Map<string, { text : string, to : string }>) {
         const me = this;
-        me.$emit('update:debris', map.values());
+        me.$emit('update:debris', [ ...map.values()]);
     }
 
 
-    protected onJumpTo(e : MouseEvent, key : String) : void {
+    @Emit()
+    protected onJumpTo(e : MouseEvent, key : string) : void {
         const me = this;
-        const map = me.getDebris;
-        const item = map.get(key);
-        const iterator = map.entries();
-        let k, i, done;
-        // for(let [k, i] of map.entries()) {
-        //     console.log(k);
-        // }
-        while(({ value : [k, i], done }= iterator.next()) && !done) {
-            console.log(k);
-        }
+        const map : Map<string, { text : string, to : string }> = me.map;
+        const keys = [ ...map.keys()];
+        let k, len = keys.length, n = keys.indexOf(key);
+        do { 
+            ++n;
+            if(keys[n]) {
+                map.delete(keys[n]);
+            }                            
+        }while(n < len)
+        me.DebrisProvide = map;
     }
 
     protected render() : JSX.Element {
@@ -73,11 +78,19 @@ export default class iVsomBreadCrumbs extends tsx.Component<Props> {
         const debrisEl = ((map) => {
             const element = [];
             for (let [k, item] of map.entries()) {
-                element.push(<section key={ k as string }><a target={ me.target } onClick={ (e : MouseEvent) => { me.onJumpTo.apply(me, [e, k]) } } >{ item.text }</a></section>);
-                element.push(<i class={ `iconfont ${ me.separator }` }></i>)
+                let c = (<section key={ k as string }>
+                            <route-link to={{ path : item.to }} target={ me.Target } onClick={ (e : MouseEvent) => { me.onJumpTo.apply(me, [e, k]); return me.AutoRoute; } } >{ item.text }</route-link>
+                        </section>)
+                if(!me.AutoRoute) {
+                    c = (<section key={ k as string }>
+                            <a href={ item.to } target={ me.Target } onClick={ (e : MouseEvent) => { me.onJumpTo.apply(me, [e, k]) } } >{ item.text }</a>
+                        </section>)
+                }
+                element.push(c);
+                element.push(<i class={ `iconfont ${ me.Separator }` }></i>)
             }
             return element.slice(0, element.length - 1);
-         })(me.getDebris)
+        })(me.DebrisProvide)
         return (
             <div class="ivsom-breadcrumbs">{ debrisEl }</div>
         )

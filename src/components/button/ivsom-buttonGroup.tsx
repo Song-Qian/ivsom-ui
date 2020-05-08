@@ -6,7 +6,7 @@
  */
 
  import * as tsx from 'vue-tsx-support'
- import { Component, Prop, Inject } from 'vue-property-decorator'
+ import { Component, Prop } from 'vue-property-decorator'
 
  type Props = {
     plain : Boolean
