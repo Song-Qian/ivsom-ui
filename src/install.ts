@@ -2,7 +2,7 @@
  * Developer    :   SongQian
  * Time         :   2020-04-21
  * eMail        :   songqian@wtoe.cn
- * Description  :   ivsom组件打包入口
+ * Description  :   ivsom组件打包入口   
  */
 
 import '~/styles'
