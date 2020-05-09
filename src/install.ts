@@ -12,13 +12,17 @@ import iVsomButtonGroup from './components/button/ivsom-buttonGroup'
 import iVsomBreadCrumbs from './components/breadcrumbs/ivsom-breadcrumbs'
 import iVsomRow from './components/layout/ivsom-row'
 import iVsomCol from './components/layout/ivsom-col'
+import iVsomTabs from './components/tabs/ivsom-tabs'
+import iVsomTabsPanel from './components/tabs/ivsom-tabs-panel'
 
 const components : Array<any> = [
     iVsomRow,
     iVsomCol,
     iVsomButton,
     iVsomButtonGroup,
-    iVsomBreadCrumbs
+    iVsomBreadCrumbs,
+    iVsomTabs, 
+    iVsomTabsPanel
 ]
 
 const install = (Vue : any) => {
