@@ -7,7 +7,7 @@
 var path = require("path");
 
 module.exports = {
-  path : path.resolve(__dirname, '../', 'dist'),
+  path : path.resolve(__dirname, '../', 'docs'),
   chunkFilename : '[name].min.js',
   publicPath: '/',
   filename: '[name].[hash:8].min.js',
