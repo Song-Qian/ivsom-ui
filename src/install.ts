@@ -10,8 +10,12 @@ import '~/styles'
 import iVsomButton from './components/button/ivsom-button'
 import iVsomButtonGroup from './components/button/ivsom-buttonGroup'
 import iVsomBreadCrumbs from './components/breadcrumbs/ivsom-breadcrumbs'
+import iVsomRow from './components/layout/ivsom-row'
+import iVsomCol from './components/layout/ivsom-col'
 
 const components : Array<any> = [
+    iVsomRow,
+    iVsomCol,
     iVsomButton,
     iVsomButtonGroup,
     iVsomBreadCrumbs

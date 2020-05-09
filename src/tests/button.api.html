@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8" />
-    <title>buttons api demo</title>
+    <title>button api demo</title>
     <link rel="stylesheet" href="./cube.min.css">
     <link rel="stylesheet" href="./demo.css">
     <script src="/vue.min.js"></script>
@@ -79,6 +79,33 @@
  &lt;i-vsom-button type="warning"&gt;&lt;i class="iconfont"&gt;&#38;#xe705;&lt;/i&gt; 警示按钮&lt;/i-vsom-button&gt;
  &lt;i-vsom-button type="danger"&gt;&lt;i class="iconfont"&gt;&#38;#xe6f9;&lt;/i&gt; 删除按钮&lt;/i-vsom-button&gt;
 </code></pre>
+                    <pre><code class="language-html"
+>&lt;i-vsom-button&gt;
+    &lt;template #default&gt;
+        &lt;i class="iconfont"&gt;&#38;#xe6e4;&lt;/i&gt; 打印按钮
+    &lt;/template&gt;
+ &lt;/i-vsom-button&gt;
+ &lt;i-vsom-button type="success"&gt;
+    &lt;template #default&gt;
+        &lt;i class="iconfont"&gt;&#38;#xe6d5;&lt;/i&gt; 确认按钮
+    &lt;/template&gt;
+ &lt;/i-vsom-button&gt;
+ &lt;i-vsom-button type="primary"&gt;
+    &lt;template #default&gt;
+        &lt;i class="iconfont"&gt;&#38;#xe6d6;&lt;/i&gt; 查询按钮
+    &lt;/template&gt;
+ &lt;/i-vsom-button&gt;
+ &lt;i-vsom-button type="warning"&gt;
+    lt;template #default&gt;
+        &lt;i class="iconfont"&gt;&#38;#xe705;&lt;/i&gt; 警示按钮
+    &lt;/template&gt;
+ &lt;/i-vsom-button&gt;
+ &lt;i-vsom-button type="danger"&gt;
+    &lt;template #default&gt;
+        &lt;i class="iconfont"&gt;&#38;#xe6f9;&lt;/i&gt; 删除按钮
+    &lt;template&gt;
+ &lt;/i-vsom-button&gt;
+</code></pre>
                     <h2 id="unicode-">圆角按钮</h2>
                     <hr>
                     <p>Plain 属性接口</p>
@@ -98,7 +125,7 @@
 </code></pre>
                     <h2 id="unicode-">禁用按钮</h2>
                     <hr>
-                    <p>Plain 属性接口</p>
+                    <p>disabled 属性接口</p>
                     <blockquote>
                         <i-vsom-button disabled><i class="iconfont">&#xe6e4;</i> 打印按钮</i-vsom-button>
                         <i-vsom-button type="success" disabled><i class="iconfont">&#xe6d5;</i> 确认按钮</i-vsom-button>

@@ -1,0 +1,57 @@
+.ivsom-row {
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    margin-block-start: 0px;
+    margin-block-end: 0px;
+    padding-inline-start: 0px;
+    padding-inline-end: 0px;
+    padding-block-start: 0px;
+    padding-block-end: 0px;
+
+    @for $col from 1 through 30 {
+        > .ivsom-col-#{$col} {
+            width: (100% / 30) * $col;
+            padding: 0px;
+            padding-top:10px;
+            padding-bottom: 10px;
+            display: inline-block;
+            box-sizing: border-box;
+        }
+    }
+    
+    @for $col from 1 through 30 {
+        > .ivsom-col-jump-#{$col} {
+            margin-left: (100% / 30) * $col;
+        }
+    }
+
+    &.ivsom-row-flex {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        
+        @for $col from 1 through 30 {
+            > .ivsom-col-#{$col} {
+                width: (100% / 30) * $col;
+                flex: 0 0 (100% / 30) * $col;
+            }
+        }
+
+        //水平居中
+        @each $justify, $val in (start: flex-start, end: flex-end, center: center, space-around: space-around, space-between: space-between) {
+            &.ivsom-row-justify-#{$justify} {
+                justify-content: $val;
+            }
+        }
+
+        //垂直居中
+        @each $align, $val in (top : flex-start, middle : center, bottom : flex-end ) {
+            &.ivsom-row-align-#{$align} {
+                align-items: $val;
+            }
+        }
+    }
+}
