@@ -4,6 +4,7 @@
         "button.api.html",
         "icons.api.html",
         "breadcrumbs.api.html",
-        "number-input.api.html"
+        "number-input.api.html",
+        "layout.api.html"
     ]
 }

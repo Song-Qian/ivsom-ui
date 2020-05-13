@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "webpack:dev": "cross-env NODE_ENV=development webpack-dev-server --config ./webpack/webpack.config.js --open --hot  --port 9001 --host localhost --progress --hide-modules",
-    "webpack:build": "cross-env NODE_ENV=development webpack -p -w --config ./webpack/webpack.config.js --progress --hide-modules",
-    "webpack:server": "http-server ./dist -a 127.0.0.1 -p 9001",
+    "webpack:build": "cross-env NODE_ENV=production webpack -p -w --config ./webpack/webpack.config.js --progress --hide-modules",
+    "webpack:server": "http-server ./docs -a 127.0.0.1 -p 9001",
     "start": "concurrently 'npm:webpack:build' 'npm:webpack:server'"
   },
   "author": "SongQian",

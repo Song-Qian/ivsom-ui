@@ -11,16 +11,24 @@ import iVsomButton from './components/button/ivsom-button'
 import iVsomButtonGroup from './components/button/ivsom-buttonGroup'
 import iVsomBreadCrumbs from './components/breadcrumbs/ivsom-breadcrumbs'
 import iVsomNumberInput from './components/form/ivsom-number-input'
+import iVsomRow from './components/layout/ivsom-row'
+import iVsomCol from './components/layout/ivsom-col'
+import iVsomTabs from './components/tabs/ivsom-tabs'
+import iVsomTabsPanel from './components/tabs/ivsom-tabs-panel'
 
 const components : Array<any> = [
+    iVsomRow,
+    iVsomCol,
     iVsomButton,
     iVsomButtonGroup,
     iVsomBreadCrumbs, 
-    iVsomNumberInput
+    iVsomNumberInput,
+    iVsomTabs, 
+    iVsomTabsPanel
 ]
 
 const install = (Vue : any) => {
-    components.forEach((el : Vue, n : number) => {
+    components.forEach((el, n : number) => {
         Vue.component((<any>el).name, el);
     })
 }

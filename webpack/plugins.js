@@ -29,17 +29,17 @@ Description :  武汉微创光电股份公司 iVsomUI 组件库`,
                 glob : path.join(__dirname, '../src', 'tests', '*.js'),
                 dot : true
             },
-            to : path.join(__dirname, '../dist', 'demo', '[name].js'),
+            to : path.join(__dirname, '../docs', 'demo', '[name].js'),
             force : true,
             flatten : true,
             copyUnmodified : true
         },
         {
             from : {
-                glob : path.join(__dirname, '../node_modules', 'vue', 'dist', 'vue.min.js'),
+                glob : path.join(__dirname, '../node_modules', 'vue', 'docs', 'vue.min.js'),
                 dot : true
             },
-            to : path.join(__dirname, '../dist', 'vue.min.js'),
+            to : path.join(__dirname, '../docs', 'vue.min.js'),
             force : true,
             flatten : true,
             copyUnmodified : true
@@ -49,7 +49,7 @@ Description :  武汉微创光电股份公司 iVsomUI 组件库`,
                 glob : path.join(__dirname, '../src', 'tests', '*.css'),
                 dot : true
             },
-            to : path.join(__dirname, '../dist', 'demo', '[name].css'),
+            to : path.join(__dirname, '../docs', 'demo', '[name].css'),
             force : true,
             flatten : true,
             copyUnmodified : true
@@ -59,7 +59,7 @@ Description :  武汉微创光电股份公司 iVsomUI 组件库`,
     const extensionPlugin = [];
     pages.forEach((page, n) => {
         extensionPlugin.push(new htmlWebpackPlugin({
-            filename : path.join(__dirname, '../dist', 'demo', page),
+            filename : path.join(__dirname, '../docs', 'demo', page),
             template : path.join(__dirname, '../src', 'tests', page),
             inject : 'head',
             minify : false,
