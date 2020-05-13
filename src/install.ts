@@ -10,11 +10,13 @@ import '~/styles'
 import iVsomButton from './components/button/ivsom-button'
 import iVsomButtonGroup from './components/button/ivsom-buttonGroup'
 import iVsomBreadCrumbs from './components/breadcrumbs/ivsom-breadcrumbs'
+import iVsomNumberInput from './components/form/ivsom-number-input'
 
 const components : Array<any> = [
     iVsomButton,
     iVsomButtonGroup,
-    iVsomBreadCrumbs
+    iVsomBreadCrumbs, 
+    iVsomNumberInput
 ]
 
 const install = (Vue : any) => {

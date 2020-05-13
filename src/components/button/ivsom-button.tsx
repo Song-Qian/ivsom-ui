@@ -49,7 +49,7 @@ export default class iVsomButton extends tsx.Component<Props, Event, ScopedSlots
         return this.type !== 'default' ? css[this.type] : ''; 
     }
 
-    public render() : JSX.Element {
+    protected render() : JSX.Element {
         return (
             <button  class={ `ivsom-btn ${this.cssName} ${ this.plain ? 'ivsom-btn__plain' : ''} ${ this.disabled ? 'ivsom-btn_disabled' : '' }` } disabled={ !!this.disabled }  onClick={ (event : MouseEvent) => this.$emit('click', event) }>
                 { this.icon ? <i class={ `iconfont ${this.icon}` } ></i> : '' }
