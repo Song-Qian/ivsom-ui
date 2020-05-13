@@ -36,7 +36,7 @@ Description :  武汉微创光电股份公司 iVsomUI 组件库`,
         },
         {
             from : {
-                glob : path.join(__dirname, '../node_modules', 'vue', 'docs', 'vue.min.js'),
+                glob : path.join(__dirname, '../node_modules', 'vue', 'dist', 'vue.min.js'),
                 dot : true
             },
             to : path.join(__dirname, '../docs', 'vue.min.js'),

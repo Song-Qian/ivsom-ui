@@ -9,11 +9,10 @@ import * as tsx from 'vue-tsx-support'
 import { Component, Inject, Prop } from 'vue-property-decorator'
 
 interface Props {
-    name : String,
-    icon : String,
-    plain : Boolean,
-    disabled: Boolean,
-    type : 'success' | 'primary' | 'warning' | 'danger' | 'default'
+    Icon : String,
+    Plain : Boolean,
+    Disabled: Boolean,
+    Type : 'success' | 'primary' | 'warning' | 'danger' | 'default'
 }
 
 interface Event {
@@ -31,11 +30,11 @@ export default class iVsomButton extends tsx.Component<Props, Event, ScopedSlots
         super()
     }
 
-    @Prop({ default : '', type: String }) readonly icon !: String;
+    @Prop({ default : '', type: String }) readonly Icon !: String;
 
-    @Prop({ default : false, type : Boolean }) readonly plain !: Boolean;
+    @Prop({ default : false, type : Boolean }) readonly Plain !: Boolean;
 
-    @Prop({ default : false, type : Boolean }) readonly disabled !: Boolean;
+    @Prop({ default : false, type : Boolean }) readonly Disabled !: Boolean;
 
     @Prop({ default : 'default' }) readonly type !: 'success' | 'primary' | 'warning' | 'danger' | 'default';
 
@@ -51,8 +50,8 @@ export default class iVsomButton extends tsx.Component<Props, Event, ScopedSlots
 
     protected render() : JSX.Element {
         return (
-            <button  class={ `ivsom-btn ${this.cssName} ${ this.plain ? 'ivsom-btn__plain' : ''} ${ this.disabled ? 'ivsom-btn_disabled' : '' }` } disabled={ !!this.disabled }  onClick={ (event : MouseEvent) => this.$emit('click', event) }>
-                { this.icon ? <i class={ `iconfont ${this.icon}` } ></i> : '' }
+            <button  class={ `ivsom-btn ${this.cssName} ${ this.Plain ? 'ivsom-btn__plain' : ''} ${ this.Disabled ? 'ivsom-btn_disabled' : '' }` } disabled={ !!this.Disabled }  onClick={ (event : MouseEvent) => this.$emit('click', event) }>
+                { this.Icon ? <i class={ `iconfont ${this.Icon}` } ></i> : '' }
                 { this.$scopedSlots.default() }
             </button>
         )
