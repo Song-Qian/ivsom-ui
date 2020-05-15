@@ -10,9 +10,9 @@
 
  type Props = {
     // Tabs label 标题
-    Name : string
+    Name : String
     //  Tab label 选中值
-    Index : string
+    Index : String
  }
 
  type ScopedSlots = {
@@ -26,9 +26,9 @@
          super()
      }
 
-     @Prop({ default : '', type : String }) readonly Name !: string;
+     @Prop({ default : '', type : String }) readonly name !: string;
 
-     @Prop({ default : '', type : String }) readonly Index !: string;
+     @Prop({ default : '', type : String }) readonly index !: string;
 
      protected created() {
          const me = this;
@@ -39,10 +39,10 @@
 
      protected render() : JSX.Element {
         const me = this;
-        const { Value, Flex} = me.$vnode.parent as any;
+        const { value, flex } = me.$vnode.parent as any;
     
         return (
-            <div class= { ['ivsom-tabs-panel', Value  === me.Index ? 'ivsom-tabs-panel__active' : '', Flex ? 'ivsom-tabs-panel__flex' : ''] }>
+            <div class= { ['ivsom-tabs-panel', value  === me.index ? 'ivsom-tabs-panel__active' : '', flex ? 'ivsom-tabs-panel__flex' : ''] }>
                 { me.$scopedSlots.default && me.$scopedSlots.default() }
             </div>
         )

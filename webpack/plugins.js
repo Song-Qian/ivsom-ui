@@ -63,7 +63,7 @@ Description :  武汉微创光电股份公司 iVsomUI 组件库`,
             template : path.join(__dirname, '../src', 'tests', page),
             inject : 'head',
             minify : false,
-            chunks : ['vue.runtime', 'vue-class-component', 'vue-tsx-support', 'vue-property-decorator', 'index']
+            chunks : ['index']
         }))
     })
 

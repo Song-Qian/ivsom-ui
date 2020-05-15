@@ -52,7 +52,7 @@
 
                 &.active {
                     background-color: transparent;
-                    border-bottom: 2px solid $danger-color;
+                    border-bottom: 1px solid $danger-color;
                 }
             }
         }
@@ -70,6 +70,11 @@
             > .ivsom-tabs-nav__prev,
             > .ivsom-tabs-nav__next {
                 display: table;
+                cursor: pointer;
+
+                &:hover > i {
+                    color: $primary-color;
+                }
             }
         }
 
@@ -125,11 +130,25 @@
                 
                 > span {
                     width: 100%;
-                    display: block;
+                    display: inline-block;
                     overflow: hidden;
                     white-space : nowrap;
                     text-overflow: ellipsis;
+                    vertical-align: sub;
                     color : $font-primary-color;
+
+                    &.isClosable {
+                        width: calc(100% - 20px);
+                    }
+
+                    ~ i.iconfont {
+                        display: inline-block;
+                        border-radius: 50%;
+                        transition: all .3s ease;
+                        &:hover {
+                            background-color: #d2d2d2;
+                        }
+                    }
                 }
     
                 &:hover {
@@ -151,7 +170,7 @@
 
                 > li {
                     max-width: inherit;
-                    flex: 1 1 auto;
+                    flex: 1 1 100%;
                     flex-direction: row;
                     flex-wrap: nowrap;
                     flex-shrink: nowrap;

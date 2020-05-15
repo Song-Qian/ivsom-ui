@@ -16,8 +16,8 @@
         <h1 class="logo">layout Api</h1>
         <div class="nav-tabs">
             <ul id="tabs" class="dib-box">
-                <li class="dib active"><span>普通布局</span></li>
-                <li class="dib"><span>流式布局</span></li>
+                <li class="dib active"><span> CDN </span></li>
+                <li class="dib"><span> NodeJS </span></li>
             </ul>
         </div>
         <div class="tab-container">
@@ -103,14 +103,8 @@
     &gt;&lt;i-vsom-col :span="5" :jump="5"&gt;&lt;div style='height: 32px; background: #99a9bf; border-radius: 5px;'&gt;&lt;/div&gt;&lt;/i-vsom-col&gt;
  &lt;/i-vsom-row&gt;
 </code></pre>
-                </div>
-            </div>
-        </div>
 
-        <div class="tab-container">
-            <div class="content unicode">
-                <div class="article markdown">
-                    <h2 id="unicode-">基础用法</h2>
+                    <h2 id="unicode-">流式布局</h2>
                     <hr>
                     <p>常规布局</p>
                     <ul>
@@ -137,23 +131,22 @@
                         </i-vsom-row>
                     </blockquote>
                     <pre><code class="language-html"
->
-&lt;i-vsom-row flex&gt;
+>&lt;i-vsom-row flex&gt;
     &lt;i-vsom-col :span="30"&gt;&lt;div style='height: 32px; background: #99a9bf; border-radius: 5px;'&gt;&lt;/div&gt;&lt;/i-vsom-col&gt;
-&lt;/i-vsom-row&gt;
-&lt;i-vsom-row flex&gt;
+ &lt;/i-vsom-row&gt;
+ &lt;i-vsom-row flex&gt;
     &lt;i-vsom-col :span="10"&gt;&lt;div style='height: 32px; background: #99a9bf; border-radius: 5px;'&gt;&lt;/div&gt;&lt;/i-vsom-col&gt;
     &lt;i-vsom-col :span="10"&gt;&lt;div style='height: 32px; background: #d3dce6; border-radius: 5px;'&gt;&lt;/div&gt;&lt;/i-vsom-col&gt;
     &lt;i-vsom-col :span="10"&gt;&lt;div style='height: 32px; background: #99a9bf; border-radius: 5px;'&gt;&lt;/div&gt;&lt;/i-vsom-col&gt;
-&lt;/i-vsom-row&gt;
-&lt;i-vsom-row flex&gt;
+ &lt;/i-vsom-row&gt;
+ &lt;i-vsom-row flex&gt;
     &lt;i-vsom-col :span="5"&gt;&lt;div style='height: 32px; background: #99a9bf; border-radius: 5px;'&gt;&lt;/div&gt;&lt;/i-vsom-col&gt;
     &lt;i-vsom-col :span="5"&gt;&lt;div style='height: 32px; background: #d3dce6; border-radius: 5px;'&gt;&lt;/div&gt;&lt;/i-vsom-col&gt;
     &lt;i-vsom-col :span="5"&gt;&lt;div style='height: 32px; background: #99a9bf; border-radius: 5px;'&gt;&lt;/div&gt;&lt;/i-vsom-col&gt;
     &lt;i-vsom-col :span="5"&gt;&lt;div style='height: 32px; background: #d3dce6; border-radius: 5px;'&gt;&lt;/div&gt;&lt;/i-vsom-col&gt;
     &lt;i-vsom-col :span="5"&gt;&lt;div style='height: 32px; background: #99a9bf; border-radius: 5px;'&gt;&lt;/div&gt;&lt;/i-vsom-col&gt;
     &lt;i-vsom-col :span="5"&gt;&lt;div style='height: 32px; background: #d3dce6; border-radius: 5px;'&gt;&lt;/div&gt;&lt;/i-vsom-col&gt;
-&lt;/i-vsom-row&gt;
+ &lt;/i-vsom-row&gt;
 </code></pre>
                     <p>流式栅格偏移</p>
                     <ul>
@@ -186,9 +179,9 @@
     &lt;i-vsom-col :span="5" :jump="5"&gt;&lt;div style='height: 32px; background: #99a9bf; border-radius: 5px;'&gt;&lt;/div&gt;&lt;/i-vsom-col&gt;
  &lt;/i-vsom-row&gt;
  &lt;i-vsom-row flex&gt;
-    &lt;i-vsom-col :span="5"&gt;&lt;div style='height: 32px; background: #99a9bf; border-radius: 5px;'&gt;&lt;/div&gt;&lt;/i-vsom-col&gt;
+    &lt;i-vsom-l :span="5"&gt;&lt;div style='height: 32px; background: #99a9bf; border-radius: 5px;'&gt;&lt;/div&gt;&lt;/i-vsom-col&gt;
     &lt;i-vsom-col :span="10" :jump="5"&gt;&lt;div style='height: 32px; background: #d3dce6; border-radius: 5px;'&gt;&lt;/div&gt;&lt;/i-vsom-col&gt;
-    &lt;i-vsom-col :span="5" :jump="5"&gt;&lt;div style='height: 32px; background: #99a9bf; border-radius: 5px;'&gt;&lt;/div&gt;&lt;/i-vsom-col&gt;
+    &lt;i-vsom-col :span="5" :jump="5"&gcot;&lt;div style='height: 32px; background: #99a9bf; border-radius: 5px;'&gt;&lt;/div&gt;&lt;/i-vsom-col&gt;
  &lt;/i-vsom-row&gt;
 </code></pre>
 
@@ -259,7 +252,7 @@
     &lt;i-vsom-col :span="5"&gt;&lt;div style='height: 32px; background: #d3dce6; border-radius: 5px;'&gt;&lt;/div&gt;&lt;/i-vsom-col&gt;
     &lt;i-vsom-col :span="5"&gt;&lt;div style='height: 32px; background: #99a9bf; border-radius: 5px;'&gt;&lt;/div&gt;&lt;/i-vsom-col&gt;
  &lt;/i-vsom-row&gt;
- &lt;i-vsom-row style='background: #e5e9f2; height: 80px; margin-top: 5px;' justify="end" align="bottom" flex&gt;
+    &lt;i-vsom-row style='background: #e5e9f2; height: 80px; margin-top: 5px;' justify="end" align="bottom" flex&gt;
     &lt;i-vsom-col :span="5"&gt;&lt;div style='height: 32px; background: #99a9bf; border-radius: 5px;'&gt;&lt;/div&gt;&lt;/i-vsom-col&gt;
     &lt;i-vsom-col :span="10"&gt;&lt;div style='height: 32px; background: #d3dce6; border-radius: 5px;'&gt;&lt;/div&gt;&lt;/i-vsom-col&gt;
     &lt;i-vsom-col :span="5"&gt;&lt;div style='height: 32px; background: #99a9bf; border-radius: 5px;'&gt;&lt;/div&gt;&lt;/i-vsom-col&gt;

@@ -140,9 +140,8 @@
             }
         },
         methods : {
-            JumpTo : function(args) {
+            JumpTo : function(e, key) {
                 var me = this;
-                var key = args[1];
                 alert("路由地址：" +  me.$refs.breadcrumbs.map.get(key).to);
             }
         }

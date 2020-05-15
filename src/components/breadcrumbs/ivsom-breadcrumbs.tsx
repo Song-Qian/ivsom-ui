@@ -31,13 +31,13 @@ export default class iVsomBreadCrumbs extends tsx.Component<Props, Event> {
         super()
     }
 
-    @Prop({ default : null }) readonly Debris !: Array<{ text : string,  to : string }>;
+    @Prop({ default : null }) readonly debris !: Array<{ text : string,  to : string }>;
 
-    @Prop({ default : false, type : Boolean }) readonly AutoRoute !: boolean;
+    @Prop({ default : false, type : Boolean }) readonly autoRoute !: boolean;
 
-    @Prop({ default : '_self' }) readonly Target !:  '_parent' | '_blank' | '_self' | '_top' | string;
+    @Prop({ default : '_self' }) readonly target !:  '_parent' | '_blank' | '_self' | '_top' | string;
 
-    @Prop({ default : 'icon-gongnengtubiao-29' }) readonly Separator !: string;
+    @Prop({ default : 'icon-gongnengtubiao-29' }) readonly separator !: string;
 
     private readonly map = new Map<string, { text : string, to : string }>();
 
@@ -45,8 +45,8 @@ export default class iVsomBreadCrumbs extends tsx.Component<Props, Event> {
         const me = this;
         let len = 0;
         me.map.clear();
-        while(me.Debris && len < me.Debris.length) {
-            me.map.set(uuid(), me.Debris[len]);
+        while(me.debris && len < me.debris.length) {
+            me.map.set(uuid(), me.debris[len]);
             ++len;
         }
         return me.map;
@@ -79,15 +79,15 @@ export default class iVsomBreadCrumbs extends tsx.Component<Props, Event> {
             const element = [];
             for (let [k, item] of map.entries()) {
                 let c = (<section key={ k as string }>
-                            <route-link to={{ path : item.to }} target={ me.Target } onClick={ (e : MouseEvent) => { me.onJumpTo.apply(me, [e, k]); return me.AutoRoute; } } >{ item.text }</route-link>
+                            <route-link to={{ path : item.to }} target={ me.target } onClick={ (e : MouseEvent) => { me.onJumpTo.apply(me, [e, k]); return me.autoRoute; } } >{ item.text }</route-link>
                         </section>)
-                if(!me.AutoRoute) {
+                if(!me.autoRoute) {
                     c = (<section key={ k as string }>
-                            <a href={ item.to } target={ me.Target } onClick={ (e : MouseEvent) => { me.onJumpTo.apply(me, [e, k]) } } >{ item.text }</a>
+                            <a href={ item.to } target={ me.target } onClick={ (e : MouseEvent) => { me.onJumpTo.apply(me, [e, k]) } } >{ item.text }</a>
                         </section>)
                 }
                 element.push(c);
-                element.push(<i class={ `iconfont ${ me.Separator }` }></i>)
+                element.push(<i class={ `iconfont ${ me.separator }` }></i>)
             }
             return element.slice(0, element.length - 1);
         })(me.DebrisProvide)

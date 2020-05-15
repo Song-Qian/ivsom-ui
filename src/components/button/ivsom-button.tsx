@@ -30,11 +30,11 @@ export default class iVsomButton extends tsx.Component<Props, Event, ScopedSlots
         super()
     }
 
-    @Prop({ default : '', type: String }) readonly Icon !: String;
+    @Prop({ default : '', type: String }) readonly icon !: String;
 
-    @Prop({ default : false, type : Boolean }) readonly Plain !: Boolean;
+    @Prop({ default : false, type : Boolean }) readonly plain !: Boolean;
 
-    @Prop({ default : false, type : Boolean }) readonly Disabled !: Boolean;
+    @Prop({ default : false, type : Boolean }) readonly disabled !: Boolean;
 
     @Prop({ default : 'default' }) readonly type !: 'success' | 'primary' | 'warning' | 'danger' | 'default';
 
@@ -50,8 +50,8 @@ export default class iVsomButton extends tsx.Component<Props, Event, ScopedSlots
 
     protected render() : JSX.Element {
         return (
-            <button  class={ `ivsom-btn ${this.cssName} ${ this.Plain ? 'ivsom-btn__plain' : ''} ${ this.Disabled ? 'ivsom-btn_disabled' : '' }` } disabled={ !!this.Disabled }  onClick={ (event : MouseEvent) => this.$emit('click', event) }>
-                { this.Icon ? <i class={ `iconfont ${this.Icon}` } ></i> : '' }
+            <button  class={ `ivsom-btn ${this.cssName} ${ this.plain ? 'ivsom-btn__plain' : ''} ${ this.disabled ? 'ivsom-btn_disabled' : '' }` } disabled={ !!this.disabled }  onClick={ (event : MouseEvent) => this.$emit('click', event) }>
+                { this.icon ? <i class={ `iconfont ${this.icon}` } ></i> : '' }
                 { this.$scopedSlots.default() }
             </button>
         )

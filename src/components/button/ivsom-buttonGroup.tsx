@@ -11,27 +11,23 @@
  type Props = {
     Plain : Boolean
  }
-
- type Event = {
-
- }
-
+ 
  type scopedLSlots = {
-    default : String
+    default : void
  }
 
  @Component
- export default class iVsomButtonGroup extends tsx.Component<Props, Event, scopedLSlots> {
+ export default class iVsomButtonGroup extends tsx.Component<Props, any, scopedLSlots> {
 
     constructor() {
         super()
     }
 
-    @Prop({ default : false, type : Boolean }) readonly Plain !: Boolean;
+    @Prop({ default : false, type : Boolean }) readonly plain !: Boolean;
 
     protected render() : JSX.Element {
         return (
-            <div class={ `ivsom-btn-group ${ this.Plain ? 'ivsom-btn-group__plain' : '' }` }>{ this.$scopedSlots.default('text') }</div>
+            <div class={ `ivsom-btn-group ${ this.plain ? 'ivsom-btn-group__plain' : '' }` }>{ this.$scopedSlots.default() }</div>
         )
     }
 

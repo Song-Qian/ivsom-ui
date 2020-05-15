@@ -21,6 +21,14 @@ module.exports = merge({}, {
     resolve,
     optimization,
     devServer,
+    externals: {
+        vue: {
+            root: 'Vue',
+            commonjs: 'vue',
+            commonjs2: 'vue',
+            amd: 'vue',
+        },
+    },
     plugins: [
         basicExtract,
         ...plugins()
