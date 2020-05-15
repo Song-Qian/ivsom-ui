@@ -4,12 +4,9 @@
         "button.api.html",
         "icons.api.html",
         "breadcrumbs.api.html",
-<<<<<<< HEAD
         "layout.api.html",
-        "tabs.api.html"
-=======
+        "tabs.api.html",
         "number-input.api.html",
         "layout.api.html"
->>>>>>> 11cf8469d8080f56ab6610be535f0763a0d55966
     ]
 }
