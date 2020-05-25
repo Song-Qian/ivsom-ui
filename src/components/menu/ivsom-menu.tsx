@@ -47,7 +47,7 @@
                 const submenu = children.componentInstance?.$scopedSlots.submenu && children.componentInstance.$scopedSlots.submenu(children) || null;
                 if(submenu instanceof Array) {
                     submenu.forEach((item, n) => {
-                        deepMenuFilter.apply(item)
+                        // deepMenuFilter.apply(item)
                     })
                 }
                 
