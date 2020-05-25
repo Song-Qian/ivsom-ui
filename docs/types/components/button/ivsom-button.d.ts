@@ -1,10 +1,9 @@
 import * as tsx from 'vue-tsx-support';
 interface Props {
-    name: String;
-    icon: String;
-    plain: Boolean;
-    disabled: Boolean;
-    type: 'success' | 'primary' | 'warning' | 'danger' | 'default';
+    Icon: String;
+    Plain: Boolean;
+    Disabled: Boolean;
+    Type: 'success' | 'primary' | 'warning' | 'danger' | 'default';
 }
 interface Event {
     onClick: (e: MouseEvent) => void;

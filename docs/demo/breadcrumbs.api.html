@@ -10,14 +10,15 @@
     <script src="./vue-route.js"></script>
     <script src="./jQuery-1.9.1.js"></script>
     <script src="./PrismJs.js"></script>
-<link href="/iVsomUI.css" rel="stylesheet"><script src="/vue-tsx-support.min.js"></script><script src="/vue-class-component.min.js"></script><script src="/vue-property-decorator.min.js"></script><script src="/vue.runtime.min.js"></script><script src="/index.be7ba33f.min.js"></script></head>
+<link href="/iVsomUI.css" rel="stylesheet"><script src="/vue-tsx-support.min.js"></script><script src="/vue-class-component.min.js"></script><script src="/vue-property-decorator.min.js"></script><script src="/vendors~index.min.js"></script><script src="/index.6516fcac.min.js"></script></head>
 
 <body>
     <div id="app" class="main">
         <h1 class="logo">Breadcrumbs Api</h1>
         <div class="nav-tabs">
             <ul id="tabs" class="dib-box">
-                <li class="dib active"><span>面包屑</span></li>
+                <li class="dib active"><span> CDN </span></li>
+                <li class="dib"><span> NodeJS </span></li>
             </ul>
         </div>
         <div class="tab-container">
@@ -140,9 +141,8 @@
             }
         },
         methods : {
-            JumpTo : function(args) {
+            JumpTo : function(e, key) {
                 var me = this;
-                var key = args[1];
                 alert("路由地址：" +  me.$refs.breadcrumbs.map.get(key).to);
             }
         }

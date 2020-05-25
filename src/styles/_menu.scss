@@ -1,0 +1,261 @@
+/**
+ * Developer    :   SongQian
+ * Time         :   2020-05-10
+ * eMail        :   songqian@wtoe.cn
+ * Description  :   button 按钮样式封装
+ */
+
+ @import "./ivsom-variable";
+ @import "./ivsom-mixin";
+
+ .ivsom-menu {
+     width: 100%;
+     height: 100%;
+     padding: 10px;
+     box-sizing: border-box;
+     background: $default-color;
+     transition: width .3s ease;
+
+     &.ivsom-menu-dark {
+         background-color: #0e1429;
+
+         > i.iconfont {
+            color: #fff;
+         }
+
+         > .ivsom-menu__search {
+             border: 1px solid rgba(255,255,255, .2);
+             background-color: rgba(255,255,255, .2);
+            
+             > i.iconfont,
+             input {
+                 color: $default-color;
+                 background-color: rgba(255, 255, 255, .2);
+
+                &::-webkit-input-placeholder {
+                    color: $default-color;
+                }
+             }
+         }
+
+         > .ivsom-menu__wrap {
+            &::-webkit-scrollbar-track {
+                background: #0e1429;
+            }
+         }
+
+         .ivsom-menu__wrap .ivsom-menu__panel {
+            background: #0e1429;
+
+            > .ivsom-menu-item > .ivsom-menu__text,
+            > .ivsom-menu-item > .ivsom-menu__icon > .iconfont,
+            > .ivsom-menu-item > .ivsom-menu__collapse > .iconfont {
+                color: $default-color;
+            }
+         }
+     }
+
+     &.ivsom-menu-aside {
+         width: 80px;
+         padding: 10px 0px;
+         text-align: center;
+
+         > .ivsom-menu__search {
+            width: 50px;
+            margin-left: auto;
+            margin-right:auto;
+            
+            > input {
+                display: none;
+            }
+        }
+
+        > .ivsom-menu__wrap {
+            overflow: inherit;
+
+            > .ivsom-menu__panel > .ivsom-menu-item > .ivsom-menu__text,
+            > .ivsom-menu__panel > .ivsom-menu-item > .ivsom-menu__collapse {
+                display: none;
+            }
+
+            > .ivsom-menu__panel .ivsom-sub-menu {
+
+                > .ivsom-menu__panel { 
+                    display: none;
+                }
+                &:hover {
+                    background-color: rgba(41, 153, 247, .1);
+                    border-left: 3px solid $primary-color;
+                    > .ivsom-menu__panel { 
+                        top: 0px;
+                        left: 100%;
+                        width: 300px;
+                        z-index: 999;
+                        display: block;
+                        position: absolute;
+                        border-left: 3px solid #fff;
+                    }
+                }
+    
+            }
+        }
+
+     }
+
+     > .ivsom-menu__search {
+         width: 100%;
+         height: 46px;
+         display: table;
+         border-radius: 3px;
+         border: 1px solid $border-sub-color;
+         background-color: $default-color;
+         > i.iconfont {
+             width: 20px;
+             height: 100%;
+             color: $font-sub-color;
+             padding: 0px 10px;
+             display: table-cell;
+             vertical-align: middle;
+         }
+
+         > input {
+             width: 100%;
+             height: 100%;
+             outline: none;
+             display: table-cell;
+             vertical-align: middle;
+             border: 0px solid $default-color;
+         }
+     }
+
+     > .ivsom-menu__wrap {
+         height: calc(100% - 85px);
+         margin-top: 5px;
+         overflow-y: auto;
+
+         &::-webkit-scrollbar {
+            width: 6px;
+            border-radius: 3px;
+         }
+
+         &::-webkit-scrollbar-thumb {
+            width: 6px;
+            border-radius: 3px;
+            background: #969696;
+         }
+
+         &::-webkit-scrollbar-track {
+            width: 6px;
+            border-radius: 3px;
+            background: #fff;
+         }
+
+         .ivsom-menu__panel {
+            width: 100%;
+            display: block;
+            list-style: none;
+            background: $default-color;
+
+            &.ivsom-menu__hide {
+                display: none;
+            }
+
+            
+            > .ivsom-menu-item {
+                display: block;
+                width: 100%;
+                margin: 0px;
+                padding: 0px;
+                min-height: 46px;
+                line-height: 46px;
+                cursor: pointer;
+                position: relative;
+                box-sizing: border-box;
+                border-left: 3px solid transparent;
+                user-select: none;
+                -webkit-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                transition: all .3s ease;
+
+                &.ivsom-menu-item__isFileter {
+                    display: none;
+                }
+
+                &.ivsom-menu-item__isDisabled {
+                    cursor: no-drop;
+                    > .ivsom-menu__text {
+                        color: $font-sub-color;
+                    }
+                }
+
+                &:not(.ivsom-sub-menu):hover {
+                    background-color: rgba(41, 153, 247, .1);
+                    border-left: 3px solid $primary-color;
+                    color: $primary-color;
+
+                    > .ivsom-menu__text,
+                    > .ivsom-menu__icon > i {
+                        color: $primary-color;
+                    }
+                }
+
+                &.ivsom-sub-menu:hover {
+                    > .ivsom-menu__text,
+                    > .ivsom-menu__icon > i {
+                        color: $primary-color;
+                    }
+                }
+
+                @for $indentation from 0 through 30 {
+                    &.ivsom-menu-item__indent_#{$indentation}X {
+                        &:before { 
+                            width: 20px * ($indentation);
+                            height: 100%;
+                            content: ' ';
+                            display: inline-block;
+                        }
+
+                        > .ivsom-menu__text {
+                            width: calc(100% - 80px - #{20px * $indentation});
+                        }
+                    }
+                }
+
+                .ivsom-menu__text {
+                    color: $font-primary-color;
+                    height: 46px;
+                    text-align: left;
+                    display:inline-block;
+                    width: calc(100% - 80px);
+                }
+
+                .ivsom-menu__icon {
+                    width: 40px;
+                    height: 46px;
+                    text-align: center;
+                    display: inline-block;
+                    box-sizing: border-box;
+
+                    > .iconfont {
+                        font-size: 38px;
+                        vertical-align: middle;
+                    }
+                }
+
+                .ivsom-menu__collapse {
+                    width: 40px;
+                    height: 46px;
+                    padding: 0px 10px;
+                    text-align: center;
+                    display: inline-block;
+                    box-sizing: border-box;
+                }
+            }
+
+         }
+     }
+
+
+
+ }

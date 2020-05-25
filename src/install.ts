@@ -15,6 +15,8 @@ import iVsomRow from './components/layout/ivsom-row'
 import iVsomCol from './components/layout/ivsom-col'
 import iVsomTabs from './components/tabs/ivsom-tabs'
 import iVsomTabsPanel from './components/tabs/ivsom-tabs-panel'
+import iVsomMenu from './components/menu/ivsom-menu'
+import iVsomMenuItem from './components/menu/ivsom-menu-item'
 
 const components : Array<any> = [
     iVsomRow,
@@ -24,7 +26,9 @@ const components : Array<any> = [
     iVsomBreadCrumbs, 
     iVsomNumberInput,
     iVsomTabs, 
-    iVsomTabsPanel
+    iVsomTabsPanel,
+    iVsomMenu,
+    iVsomMenuItem
 ]
 
 const install = (Vue : any) => {

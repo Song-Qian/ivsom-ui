@@ -13,13 +13,13 @@ declare type Event = {
 };
 export default class iVsomBreadCrumbs extends tsx.Component<Props, Event> {
     constructor();
-    readonly Debris: Array<{
+    readonly debris: Array<{
         text: string;
         to: string;
     }>;
-    readonly AutoRoute: boolean;
-    readonly Target: '_parent' | '_blank' | '_self' | '_top' | string;
-    readonly Separator: string;
+    readonly autoRoute: boolean;
+    readonly target: '_parent' | '_blank' | '_self' | '_top' | string;
+    readonly separator: string;
     private readonly map;
     protected get DebrisProvide(): Map<string, {
         text: string;

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>menu api demo</title>
+    <link rel="stylesheet" href="./cube.min.css">
+    <link rel="stylesheet" href="./demo.css">
+    <script src="/vue.min.js"></script>
+    <script src="./jQuery-1.9.1.js"></script>
+    <script src="./PrismJs.js"></script>
+<link href="/iVsomUI.css" rel="stylesheet"><script src="/vue-tsx-support.min.js"></script><script src="/vue-class-component.min.js"></script><script src="/vue-property-decorator.min.js"></script><script src="/vendors~index.min.js"></script><script src="/index.6516fcac.min.js"></script></head>
+
+<body>
+    <div id="app" class="main">
+        <h1 class="logo">Menu Api</h1>
+        <div class="nav-tabs">
+            <ul id="tabs" class="dib-box">
+                <li class="dib active"><span> CDN </span></li>
+                <li class="dib"><span> NodeJS </span></li>
+            </ul>
+        </div>
+        <div class="tab-container">
+            <div class="content unicode" style="display: block;">
+                <div class="article markdown">
+                    <h2 id="unicode-">基础用法</h2>
+                    <hr>
+                    <p>常规布局</p>
+                    <ul>
+                        <li>Layout 组件在使用之前，需要有相关的依赖库进行支持，如需阅读：<a href="./start.api.html" target="_blank" >快速开始</a></li>
+                    </ul>
+                    <blockquote style='height: 700px'>
+                        <i-vsom-menu :data="menu" search></i-vsom-menu>
+                    </blockquote>
+                    <pre><code class="language-html"
+>&lt;i-vsom-row&gt;
+    &lt;i-vsom-col :span="30"&gt;&lt;div style='height: 32px; background: #99a9bf; border-radius: 5px;'&gt;&lt;/div&gt;&lt;/i-vsom-col&gt;
+ &lt;/i-vsom-row&gt;
+ &lt;i-vsom-row&gt;
+    &lt;i-vsom-col :span="10"&gt;&lt;div style='height: 32px; background: #99a9bf; border-radius: 5px;'&gt;&lt;/div&gt;&lt;/i-vsom-col
+    &gt;&lt;i-vsom-col :span="10"&gt;&lt;div style='height: 32px; background: #d3dce6; border-radius: 5px;'&gt;&lt;/div&gt;&lt;/i-vsom-col
+    &gt;&lt;i-vsom-col :span="10"&gt;&lt;div style='height: 32px; background: #99a9bf; border-radius: 5px;'&gt;&lt;/div&gt;&lt;/i-vsom-col&gt;
+ &lt;/i-vsom-row&gt;
+ &lt;i-vsom-row&gt;
+    &lt;i-vsom-col :span="5"&gt;&lt;div style='height: 32px; background: #99a9bf; border-radius: 5px;'&gt;&lt;/div&gt;&lt;/i-vsom-col
+    &gt;&lt;i-vsom-col :span="5"&gt;&lt;div style='height: 32px; background: #d3dce6; border-radius: 5px;'&gt;&lt;/div&gt;&lt;/i-vsom-col
+    &gt;&lt;i-vsom-col :span="5"&gt;&lt;div style='height: 32px; background: #99a9bf; border-radius: 5px;'&gt;&lt;/div&gt;&lt;/i-vsom-col
+    &gt;&lt;i-vsom-col :span="5"&gt;&lt;div style='height: 32px; background: #d3dce6; border-radius: 5px;'&gt;&lt;/div&gt;&lt;/i-vsom-col
+    &gt;&lt;i-vsom-col :span="5"&gt;&lt;div style='height: 32px; background: #99a9bf; border-radius: 5px;'&gt;&lt;/div&gt;&lt;/i-vsom-col
+    &gt;&lt;i-vsom-col :span="5"&gt;&lt;div style='height: 32px; background: #d3dce6; border-radius: 5px;'&gt;&lt;/div&gt;&lt;/i-vsom-col&gt;
+ &lt;/i-vsom-row&gt;
+</code></pre>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        $(document).ready(function () {
+            $('.tab-container .content:first').show()
+
+            $('#tabs li').click(function (e) {
+                var tabContent = $('.tab-container .content')
+                var index = $(this).index()
+
+                if ($(this).hasClass('active')) {
+                    return
+                } else {
+                    $('#tabs li').removeClass('active')
+                    $(this).addClass('active')
+
+                    tabContent.hide().eq(index).fadeIn()
+                }
+            })
+        })
+    </script>
+    <script src="./menu.demo.js"></script>
+</body>
+
+</html>
