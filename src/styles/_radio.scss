@@ -1,0 +1,60 @@
+@import "./ivsom-variable";
+@import "./ivsom-mixin";
+
+.radio-wrapper{
+    display: inline-block;
+    cursor: pointer;
+   
+    .ivsom-radio{
+        width: 14px;
+        height: 14px;
+        border-radius: 50%;
+        border: 1px solid #4693fe;
+        display: inline-block;
+        position: relative;
+        margin-left: 10px;
+       cursor: pointer;
+    }
+    .ivsom-radio::after{
+        content: '';
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        display: inline-block;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        margin: -5px 0 0 -5px;
+        background-color: #4693fe;
+        transition: all .5s ease;
+        opacity: 0;
+        transform: scale(0);
+    }
+    .ivsom-radio.ivsom-radio_disabled{
+        cursor: no-drop;
+        border-color: #ccc;
+        &::after {
+            cursor: no-drop;
+          }
+    
+    }
+    .ivsom-radio.checked::after {
+        opacity: 1;
+        transform: scale(1);
+    }
+    .ivsom-radio input[type=radio]{
+        opacity: 0;
+        margin: 0;
+        cursor: pointer;
+    }
+    
+}
+.radio-wrapper.radio-wrapper_disabled{
+    cursor: no-drop;
+    .ivsom-radio input[type=radio]{
+        opacity: 0;
+        margin: 0;
+        cursor: no-drop;
+    }
+
+}

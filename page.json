@@ -8,6 +8,8 @@
         "tabs.api.html",
         "number-input.api.html",
         "layout.api.html",
-        "menu.api.html"
+        "menu.api.html",
+        "radio.api.html",
+        "checkbox.api.html"
     ]
 }

@@ -101,11 +101,13 @@
                     <hr>
                     <p>search</p>
                     <ul>
-                        <li>Menu 组件过滤筛选功能只能在菜单展开情况下使用</li>
+                        <li>Menu 组件search是开启/关闭筛选功能</li>
+                        <li>Menu 组件search-text是筛选过程中输入的文本内容</li>
+                        <li>Menu 组件过滤筛选功能需要配合filter属性回调函数完成</li>
                     </ul>
                     <blockquote>
                         <div style="height: 400px; width: 400px; vertical-align: top;">
-                            <i-vsom-menu search dark>
+                            <i-vsom-menu :filter="handlerFilter" :search-text.sync="searchText" search dark>
                                 <i-vsom-menu-item v-for='n in 3' :key="n" icon="icon-gongnengtubiao-95">
                                     一级菜单 - {{ n }}
                                     <template #submenu>
@@ -125,6 +127,47 @@
                             </i-vsom-menu>
                         </div>
                     </blockquote>
+                    <pre><code class="language-html"
+>&lt;i-vsom-menu :filter="handlerFilter" :search-text.sync="searchText" search dark&gt;
+    &lt;i-vsom-menu-item v-for='n in 3' :key="n" icon="icon-gongnengtubiao-95"&gt;
+        一级菜单 - {{ '\u007b\u007b n \u007d\u007d' }}
+        &lt;template #submenu&gt;
+            &lt;i-vsom-menu-item v-for="k in 3" icon="icon-gongnengtubiao-97"&gt;
+                二级菜单 - {{ '\u007b\u007b k \u007d\u007d' }}
+                &lt;template #submenu&gt;
+                    &lt;i-vsom-menu-item v-for="j in 3" icon="icon-gongnengtubiao-114"&gt;
+                        三级菜单 - {{ '\u007b\u007b j \u007d\u007d' }}
+                        &lt;template #submenu&gt;
+                            &lt;i-vsom-menu-item v-for="i in 3" icon="icon-gongnengtubiao-114"&gt;四级菜单 - {{ '\u007b\u007b i \u007d\u007d' }}&lt;/template&gt;
+                        &lt;/template&gt;
+                    &lt;/i-vsom-menu-item&gt;
+                &lt;/template&gt;
+            &lt;/i-vsom-menu-item&gt;
+        &lt;/template&gt;
+    &lt;/i-vsom-menu-item&gt;
+ &lt;/i-vsom-menu&gt;
+</code></pre>
+                    <pre><code class="language-js"
+> var app = new Vue({
+    el : '#app',
+    data : function() {
+        return {
+            searchText : ''
+        }
+    },
+    methods : {
+        handlerFilter : function(els, text, deepLevel) {
+            var me = this;
+            if(els.$children.length && !!me.searchText && els.$children.every(function(item) { return item.hasFilter; })  && text.indexOf(me.searchText) === -1) {
+                return true;
+            } else if (!els.$children.length && !!me.searchText && text.indexOf(me.searchText) === -1 ) {
+                return true;
+            }
+            return false;
+        }
+    }
+ })
+</code></pre>
                 </div>
             </div>
         </div>
