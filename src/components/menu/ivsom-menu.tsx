@@ -11,6 +11,8 @@
  type Props = {
     Search : Boolean
     Dark : Boolean
+    Filter : (children : any, text : string, deepNumber : number) => boolean
+    SearchText : String
  }
 
  type ScopedSlots = {
@@ -28,6 +30,10 @@
 
     @Prop({ default : false, type : Boolean }) readonly dark !: boolean;
 
+    @Prop({ default : void 0 }) readonly filter !: (children : any, text : string, deepNumber : number) => boolean;
+
+    @Prop({ default: '', type : Boolean }) readonly searchText !: string;
+
     private aside : Boolean = false;
 
     private _panes() : JSX.Element[] | undefined {
@@ -43,19 +49,22 @@
         const me = this;
         if(!!me.$scopedSlots.default) {
             const { value } = e.target as any;
-            const deepMenuFilter = (children : any, text : string, deepNumber : number) : any => {
-                const submenu = children.componentInstance?.$scopedSlots.submenu && children.componentInstance.$scopedSlots.submenu(children) || null;
-                if(submenu instanceof Array) {
-                    submenu.forEach((item, n) => {
-                        // deepMenuFilter.apply(item)
+            me.$emit("update:search-text", value);
+            const deepMenuFilter = (elm : any, text : string, deepNumber : number) : any => {
+                if(elm.$children instanceof Array && elm.$children.length) {
+                    elm.$children.forEach((item: any, n: any) => {
+                        const text = item.$slots.default.map((it : any) => it.text).join('').replace(/(^\s+)|(\s+)$/g, '');
+                        deepMenuFilter.apply(null, [item, text, deepNumber + 1]);
                     })
                 }
-                
+                elm.__handlerShowNode();
+                if( me.filter && me.filter(elm, text, deepNumber) ) {
+                    elm.__handlerHideNode();
+                }
             }
             me.$scopedSlots.default()?.forEach(it => {
                 const text = (it.componentInstance?.$el as any).innerText;
-                const children = it.componentInstance?.$scopedSlots.submenu && it.componentInstance.$scopedSlots.submenu(it) || null;
-                deepMenuFilter(children, text, 0);
+                deepMenuFilter(it.componentInstance, text, 0);
             });
         }
     }

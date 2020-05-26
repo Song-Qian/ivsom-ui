@@ -34,6 +34,8 @@
 
     private collapse : boolean = false;
 
+    private hasFilter : boolean = false;
+
     private get children() : JSX.Element | undefined{
         const me = this;
         const { aside } = me.__handlerRoot();
@@ -63,7 +65,13 @@
     }
 
     private __handlerHideNode() : void {
+        const me = this;
+        me.hasFilter = true;
+    }
 
+    private __handlerShowNode() : void {
+        const me = this;
+        me.hasFilter = false;
     }
 
     // private hasFilter(menu_search : string) : boolean {
@@ -93,7 +101,7 @@
 
         return (
             <li 
-                class={{ 'ivsom-menu-item' : true, 'ivsom-sub-menu' : !!childrenEl, 'ivsom-menu-item__isDisabled' : me.disabled, 'ivsom-menu-item__isFileter' : false,  [`ivsom-menu-item__indent_${indent}X`] : true }} 
+                class={{ 'ivsom-menu-item' : true, 'ivsom-sub-menu' : !!childrenEl, 'ivsom-menu-item__isDisabled' : me.disabled, 'ivsom-menu-item__isFileter' : me.hasFilter,  [`ivsom-menu-item__indent_${indent}X`] : true }} 
                 onClick={ m.stop(!me.disabled ? me.onMenuItemClick : () => void 0 ) } >
                 { iconEl }
                 <div class="ivsom-menu__text"><span>{ me.$scopedSlots.default() }</span></div>

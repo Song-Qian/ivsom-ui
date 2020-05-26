@@ -105,7 +105,7 @@
                     </ul>
                     <blockquote>
                         <div style="height: 400px; width: 400px; vertical-align: top;">
-                            <i-vsom-menu search dark>
+                            <i-vsom-menu :filter="handlerFilter" :search-text.sync="searchText" search dark>
                                 <i-vsom-menu-item v-for='n in 3' :key="n" icon="icon-gongnengtubiao-95">
                                     一级菜单 - {{ n }}
                                     <template #submenu>
