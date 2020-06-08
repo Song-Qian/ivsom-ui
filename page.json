@@ -10,6 +10,7 @@
         "layout.api.html",
         "menu.api.html",
         "radio.api.html",
-        "checkbox.api.html"
+        "checkbox.api.html",
+        "input-number.api.html"
     ]
 }
