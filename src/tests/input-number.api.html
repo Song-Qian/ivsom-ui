@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta charset="utf-8" />
-        <title>checkbox api demo</title>
+        <title>inputNumber api demo</title>
         <link rel="stylesheet" href="./cube.min.css">
         <link rel="stylesheet" href="./demo.css">
         <script src="/vue.min.js"></script>
@@ -11,7 +11,7 @@
     </head>
     <body>
         <div id="app" class="main">
-            <h1 class="logo">Checkbox Api</h1>
+            <h1 class="logo">inputNumber Api</h1>
             <div class="nav-tabs">
                 <ul id="tabs" class="dib-box">
                     <li class="dib active"><span> CDN </span></li>
@@ -23,124 +23,103 @@
                     <div class="article markdown">
                         <h2 id="unicode-">基础用法</h2>
                         <hr>
-                        <p>常规复选框</p>
+                        <p>常规计数器</p>
                         <ul>
-                            <li>Checkbox 组件在使用之前，需要有相关的依赖库进行支持，如需阅读：<a href="./start.api.html" target="_blank" >快速开始</a></li>
+                            <li>inputNumber 组件在使用之前，需要有相关的依赖库进行支持，如需阅读：<a href="./start.api.html" target="_blank" >快速开始</a></li>
+                            <li>v-model双向绑定value值</li>
+                            <li>max min 分别表示限制最小最大的值</li>
                         </ul>
                         <blockquote>
-                            <i-vsom-checkbox :data-source="optionData" @change="change"></i-vsom-checkbox>
+                            <i-vsom-input-number v-model="val" :min="1" :max="10" @change="change"></i-vsom-input-number>
                         </blockquote>
                         <pre><code class="language-html"
-                            >&lt;i-vsom-checkbox :data-source="optionData"&gt;&lt;/i-vsom-checkbox&gt;   
+                            >&lt;i-vsom-input-number v-model="val" :min="1" :max="10" @change="change" &gt;&lt;/i-vsom-button&gt;   
                             </code></pre>
                         <pre><code class="language-js" >
                             var app = new Vue({
                                 el : '#app',
                                 data : function() {
                                     return {
-                                        optionData:[
-                                            {label:'苹果',value:'red'},{label:'香蕉'',value:'write'},
-                                        ]
+                                        val:5
                                     }
                                 },
+                                methods:{
+                                    change(value){
+                                        console.log(value)
+                                    }
+                                }
                                
                             })
                         </code></pre>
-                        <h2 id="unicode-">v-model双向绑定复选框</h2>
+                        <h2 id="unicode-">精度用法</h2>
                         <hr>
+                        <p>常规计数器</p>
                         <ul>
-                            <li>v-model支持双向数据绑定，当默认为空则不选中值，默认有值则选中对应的vaule值</li>
+                            <li>precision支持精度属性</li>
                         </ul>
                         <blockquote>
-                            <i-vsom-checkbox v-model="model" @change="change" :data-source="optionData"></i-vsom-checkbox>
+                            <i-vsom-input-number v-model="val1" :precision="2"></i-vsom-input-number>
                         </blockquote>
                         <pre><code class="language-html"
-                            >&lt;i-vsom-checkbox v-model="model" @change="change" :data-source="optionData"&gt;&lt;/i-vsom-checkbox&gt;   
+                            >&lt;i-vsom-input-number v-model="val1" :precision="2" &gt;&lt;/i-vsom-button&gt;   
                             </code></pre>
                         <pre><code class="language-js" >
                             var app = new Vue({
                                 el : '#app',
                                 data : function() {
                                     return {
-                                        optionData:[
-                                            {label:'苹果',value:'red'},{label:'香蕉',value:'write'},
-                                        ],
-                                        model:"red"
+                                        val1:5
                                     }
                                 },
-                                methods:{
-                                    change(value){
-                                       console.log(value)
-                                    }
-                                 }
                                
                             })
                         </code></pre>
-                        <h2 id="unicode-">禁用复选框</h2>
+                        <h2 id="unicode-">步数用法</h2>
                         <hr>
+                        <p>常规计数器</p>
                         <ul>
-                            <li>Checkbox 组件支持禁用属性</li>
-                            <li>当某一个复选框是禁用稍微，只需在对应的数据源里加上disabled字段</li>
+                            <li>step属性可以控制步长</li>
                         </ul>
                         <blockquote>
-                            <i-vsom-checkbox v-model="model1" @change="change" :data-source="optionData1"></i-vsom-checkbox>
+                            <i-vsom-input-number v-model="val2" :step="2"></i-vsom-input-number>
                         </blockquote>
                         <pre><code class="language-html"
-                            >&lt;i-vsom-checkbox v-model="model1" @change="change" :data-source="optionData"&gt;&lt;/i-vsom-checkbox&gt;   
+                            >&lt;i-vsom-input-number v-model="val2" :step="2" &gt;&lt;/i-vsom-button&gt;   
                             </code></pre>
                         <pre><code class="language-js" >
                             var app = new Vue({
                                 el : '#app',
                                 data : function() {
                                     return {
-                                        optionData1:[
-                                            {label:'苹果',value:'red'},{label:'香蕉',value:'write',disabled:true},
-                                        ],
-                                        model1:"write"
+                                        val:5
                                     }
                                 },
-                                methods:{
-                                    change(value){
-                                       console.log(value)
-                                    }
-                                 }
                                
                             })
                         </code></pre>
-                        <h2 id="unicode-">复选框组</h2>
+                        <h2 id="unicode-">禁用用法</h2>
                         <hr>
                         <ul>
-                            <li>Checkbox 组件支持禁用属性</li>
-                            <li>当某一个复选框是禁用稍微，只需在对应的数据源里加上disabled字段</li>
+                            <li>disabled属性支持禁用状态</li>
                         </ul>
                         <blockquote>
-                            <i-vsom-checkbox-group >
-                                <i-vsom-checkbox  v-model="model1"  @change="change" :data-source="optionData"></i-vsom-checkbox>
-                            </i-vsom-checkbox-group>
+                            <i-vsom-input-number v-model="val3" disabled></i-vsom-input-number>
                         </blockquote>
                         <pre><code class="language-html"
-                            >&lt;i-vsom-checkbox-group&gt;&lt;i-vsom-checkbox v-model="model1" @change="change" :data-source="optionData"&gt;&lt;/i-vsom-checkbox&gt; 
-                            &lt;/i-vsom-checkbox-group>  
-                        </code></pre>
+                            >&lt;i-vsom-input-number v-model="val" disabled &gt;&lt;/i-vsom-button&gt;   
+                            </code></pre>
                         <pre><code class="language-js" >
                             var app = new Vue({
                                 el : '#app',
                                 data : function() {
                                     return {
-                                        optionData1:[
-                                            {label:'苹果',value:'red'},{label:'香蕉',value:'write',disabled:true},
-                                        ],
-                                        model1:"write"
+                                        val:5
                                     }
                                 },
-                                methods:{
-                                    change(value){
-                                       console.log(value)
-                                    }
-                                 }
                                
                             })
                         </code></pre>
+                        
                     </div>
                 </div>
             </div>
@@ -154,21 +133,16 @@
         el : '#app',
         data : function() {
             return {
-                optionData:[
-                    {label:'苹果',value:'red'},{label:'香蕉',value:'write'},
-                ],
-                optionData1:[
-                    {label:'苹果',value:'red'},{label:'香蕉',value:'write',disabled:true},
-                ],
-                model:"red",
-                model1:"write",
-                val:"aaaa"
+                val:5,
+                val1:6,
+                val2:7,
+                val3:3,
             }
         },
         methods:{
-           change(value){
-              console.log(value)
-           }
+            change(value){
+                console.log(value)
+            }
         }
        
     })

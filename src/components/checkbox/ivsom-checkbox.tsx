@@ -14,9 +14,15 @@ interface Props{
     dataSource:Array<{ label : string,  value : string }>//复选框对应的数据源
 
 }
+interface HTMLInputEvent extends Event {
+    target: HTMLInputElement & EventTarget&InputEvent;
+}
+type ScopedSlots = {
+    default : void
+ }
 
 @Component
-export default class iVsomCheckbox extends tsx.Component<Props,any>{
+export default class iVsomCheckbox extends tsx.Component<Props,Event,ScopedSlots>{
     constructor(){
         super()
     }
@@ -26,24 +32,29 @@ export default class iVsomCheckbox extends tsx.Component<Props,any>{
     private checkedModel :any = this.value;
    
     // @Emit()
-    protected  change(event: InputEvent){
-        var vModel = this.getModel(); //每次触发都先获取父级的v-model，保证多个选项的数据同步，v-model初始值中可能存在冗余数据，后面需要用filterModel过滤掉冗余数据。
+    protected  change(event: HTMLInputEvent){
+        var vModel = this.getModel; //每次触发都先获取父级的v-model，保证多个选项的数据同步，v-model初始值中可能存在冗余数据，后面需要用filterModel过滤掉冗余数据。
         if (this.dataSource.length <= 1)
         {
         vModel.splice(0, vModel.length);
         }
-        var $obj = event.target;
-        var index = vModel.indexOf($obj);
-        if (event){
-        if (index < 0)
-        {
-        vModel.push($obj);
-        }
-        }
-        else {
-        if (index >= 0) {
-        vModel.splice(index, 1); //数组中移除
-        }
+        const  val  = event.target.value as any
+        const isChecked=event.target.checked as boolean
+        var index = vModel.indexOf(val);
+        if(isChecked){
+            if (event){
+                if (index < 0)
+                {
+                vModel.push(val);
+                }
+                }
+                else {
+                if (index >= 0) {
+                vModel.splice(index, 1); //数组中移除
+                }
+                }
+        }else{
+            vModel.splice(index, 1) 
         }
         vModel = this.filterModel(vModel);//清除冗余数值
         if (!Array.isArray(this.value)) {
@@ -53,7 +64,7 @@ export default class iVsomCheckbox extends tsx.Component<Props,any>{
     }
       
     protected isChecked(val:any){
-        var vModel = this.getModel();
+        var vModel = this.getModel;
         //务必toString()后再查找，否则会和数值型不兼容。
         if (vModel.indexOf(val.toString()) > -1)
         {
@@ -65,7 +76,7 @@ export default class iVsomCheckbox extends tsx.Component<Props,any>{
         }
     }
 
-   protected getModel() {
+   get getModel() {
     if (Array.isArray(this.value)) {
     this.checkedModel = this.value;
     }
@@ -115,16 +126,17 @@ export default class iVsomCheckbox extends tsx.Component<Props,any>{
         const optionsEl = ((map) => {
             const element = [];
             for (let [k, item] of map.entries()) {
-                let c =<span data-value={this.value}> 
+                let c =<span data-value={item.value}> 
                 <label class={ `ivsom-checkbox  ${ item.disabled ? 'ivsom-checkbox_disabled' : '' }` }  key={ k as any }>
-                 <input type="checkbox" checked={me.isChecked(item.value)} disabled={!!item.disabled} onChange={ (e) => { me.change(e as InputEvent) } } value={item.value}/> {item.label}
+                 <input type="checkbox" checked={this.isChecked(item.value)}  disabled={!!item.disabled} onChange={ (e) => { me.change(e as HTMLInputEvent) } } value={item.value}/> {item.label}
                  </label></span>
                 element.push(c);
             }
              return element.slice(0, element.length);
         })(me.checkboxProvide)
         return (
-        <div>{optionsEl}</div>
+        <div>{optionsEl}<span> { me.$scopedSlots.default && me.$scopedSlots.default() }
+        </span></div>
        )
     }
 }
