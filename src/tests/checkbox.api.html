@@ -31,7 +31,7 @@
                             <i-vsom-checkbox :data-source="optionData"></i-vsom-checkbox>
                         </blockquote>
                         <pre><code class="language-html"
-                            >&lt;i-vsom-checkbox :data-source="optionData"&gt;   
+                            >&lt;i-vsom-checkbox :data-source="optionData"&gt;&lt;/i-vsom-checkbox&gt;   
                             </code></pre>
                         <pre><code class="language-js" >
                             var app = new Vue({
@@ -46,7 +46,7 @@
                                
                             })
                         </code></pre>
-                        <h2 id="unicode-">常规复选框</h2>
+                        <h2 id="unicode-">v-model双向绑定复选框</h2>
                         <hr>
                         <ul>
                             <li>v-model支持双向数据绑定，当默认为空则不选中值，默认有值则选中对应的vaule值</li>
@@ -55,7 +55,7 @@
                             <i-vsom-checkbox v-model="model" @change="change" :data-source="optionData"></i-vsom-checkbox>
                         </blockquote>
                         <pre><code class="language-html"
-                            >&lt;i-vsom-checkbox v-model="model" @change="change" :data-source="optionData"&gt;   
+                            >&lt;i-vsom-checkbox v-model="model" @change="change" :data-source="optionData"&gt;&lt;/i-vsom-checkbox&gt;   
                             </code></pre>
                         <pre><code class="language-js" >
                             var app = new Vue({
@@ -86,7 +86,7 @@
                             <i-vsom-checkbox v-model="model1" @change="change" :data-source="optionData1"></i-vsom-checkbox>
                         </blockquote>
                         <pre><code class="language-html"
-                            >&lt;i-vsom-checkbox v-model="model1" @change="change" :data-source="optionData"&gt;   
+                            >&lt;i-vsom-checkbox v-model="model1" @change="change" :data-source="optionData"&gt;&lt;/i-vsom-checkbox&gt;   
                             </code></pre>
                         <pre><code class="language-js" >
                             var app = new Vue({
