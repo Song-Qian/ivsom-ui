@@ -20,7 +20,7 @@ import iVsomMenuItem from './components/menu/ivsom-menu-item'
 import iVsomRadio from './components/radio/ivsom-radio'
 import iVsomCheckbox from './components/checkbox/ivsom-checkbox'
 import iVsomInputNumber from './components/number/ivsom-input-number'
-import iVsomCheckboxGroup from './components/checkbox/ivsom-checkboxGroup'
+import iVsomSwitch from './components/switch/ivsom-switch'
 
 const components : Array<any> = [
     iVsomRow,
@@ -36,7 +36,7 @@ const components : Array<any> = [
     iVsomRadio,
     iVsomCheckbox,
     iVsomInputNumber,
-    iVsomCheckboxGroup
+    iVsomSwitch
 ]
 
 const install = (Vue : any) => {
