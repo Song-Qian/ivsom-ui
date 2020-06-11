@@ -1,18 +1,24 @@
 import * as tsx from 'vue-tsx-support';
-declare type MenuItem = {
-    Icon: string;
-    Text: string;
-    Children: Array<MenuItem> | undefined;
-};
 declare type Props = {
     Search: Boolean;
-    Data: MenuItem;
+    Dark: Boolean;
+    Filter: (children: any, text: string, deepNumber: number) => boolean;
+    SearchText: String;
+    Horizontal: boolean;
 };
-export default class iVsomMenu extends tsx.Component<Props> {
+declare type ScopedSlots = {
+    default: void;
+};
+export default class iVsomMenu extends tsx.Component<Props, any, ScopedSlots> {
     constructor();
     readonly search: boolean;
-    readonly data: Array<MenuItem>;
-    private menu_search;
+    readonly dark: boolean;
+    readonly filter: (children: any, text: string, deepNumber: number) => boolean;
+    readonly searchText: string;
+    readonly horizontal: boolean;
+    private aside;
+    private _panes;
+    protected onMenuFilter(e: InputEvent): void;
     protected render(): JSX.Element;
 }
 export {};
