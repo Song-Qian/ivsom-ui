@@ -6,12 +6,14 @@
  */
 
  import * as tsx from 'vue-tsx-support'
- import { Component, Prop, Emit } from 'vue-property-decorator'
+ import { Component, Prop, Emit, Watch } from 'vue-property-decorator'
 
  import 'vue-tsx-support/enable-check'
 
  type Props = {
+    // 菜单项图标
     Icon : String
+    // 禁用菜单项
     Disabled : Boolean
  }
 
@@ -25,7 +27,6 @@
 
     constructor() {
         super()
-        this.onMenuItemClick = this.onMenuItemClick.bind(this);
     }
 
     @Prop({ default : '', type : String }) readonly icon !: string;
@@ -38,10 +39,9 @@
 
     private get children() : JSX.Element | undefined{
         const me = this;
-        const { aside } = me.__handlerRoot();
         const menuItemsScopedSlots = me.$scopedSlots.submenu && me.$scopedSlots.submenu()?.filter(c => c.componentOptions?.Ctor.name === 'iVsomMenuItem' );
         menuItemsScopedSlots?.forEach(c => c.parent = (me as any));
-        return menuItemsScopedSlots ? <ul class={ ['ivsom-menu__panel', me.collapse && !aside ? '' : 'ivsom-menu__hide'] }>{ menuItemsScopedSlots }</ul> : undefined;
+        return menuItemsScopedSlots ? <ul class={ ['ivsom-menu__panel', me.collapse ? '' : 'ivsom-menu__hide'] }>{ menuItemsScopedSlots }</ul> : undefined;
     }
 
     private __handlerRoot() : any {
@@ -74,35 +74,50 @@
         me.hasFilter = false;
     }
 
-    // private hasFilter(menu_search : string) : boolean {
-        // const me = this;
-        //(!!me.$scopedSlots?.submenu && !!menu_search && (me.$scopedSlots?.submenu() as any).every((it : any) => it.componentOptions.children.every((item : any ) => item.text.indexOf(menu_search) === -1)))
-        // return (
-        //     (!!!me.$scopedSlots?.submenu && !!menu_search) || 
-        //     (!!me.$scopedSlots?.submenu && !!menu_search && (me.$scopedSlots?.submenu() as any).every((it : any) => it.componentOptions.children.every((item : any ) => item.text.indexOf(menu_search) === -1)))
-        // ) && (me.$scopedSlots.default() as any).map((it : any) => it.text).join('').replace(/(^\s+)|(\s+)$/g, '').indexOf(menu_search) === -1;
-        // return !!menu_search && ((me.$scopedSlots.default() as any).map((it : any) => it.text).join('').replace(/(^\s+)|(\s+)$/g, '').indexOf(menu_search) === -1 || me.$scopedSlots?.submenu && (me.$scopedSlots?.submenu() as any).every((it : any) => it.componentOptions.children.every((item : any ) => item.text.indexOf(menu_search) === -1)));
-    // }
+    @Emit()
+    protected onMenuItemClick(e : MouseEvent, aside : boolean, horizontal : boolean) {
+        const me = this;
+        //当菜单为默认模式，则由点击事件控制菜单项的展开和关闭
+        const rootMenu = me.__handlerRoot();
+        rootMenu.$emit('on-menu-item-click', e);
+        if(!aside && !horizontal) {
+            me.collapse = !me.collapse;
+        }
+    }
 
     @Emit()
-    protected onMenuItemClick(e : MouseEvent) {
+    protected onMenuItemMouseIn(e : MouseEvent, aside : boolean, horizontal : boolean) {
         const me = this;
-        me.collapse = !me.collapse;
+        //当菜单为收缩列表项模式或者水平导航模式，则点鼠标的移入控制展开
+        if(aside || horizontal) {
+            me.collapse = true;
+        }
+    }
+
+    @Emit()
+    protected onMenuItemMouseOut(e : MouseEvent, aside : boolean, horizontal : boolean) {
+        const me = this;
+        //当菜单为收缩列表项模式或者水平导航模式，则点鼠标的移出控制关闭
+        if(aside || horizontal) {
+            me.collapse = false;
+        }
     }
 
     protected render() : JSX.Element {
         const me = this;
-        const { aside, menu_search } = me.__handlerRoot();
+        const { aside, horizontal } = me.__handlerRoot();
         const childrenEl = me.children;
-        const iconEl = me.icon ? <div class="ivsom-menu__icon"><i class={ ['iconfont', me.icon] } ></i></div> : <i class="iconfont">&nbsp;</i>;
-        const collapseEl = childrenEl ? <div class="ivsom-menu__collapse"><i class={ ['iconfont', aside ? 'icon-gongnengtubiao-29' : me.collapse ? 'icon-gongnengtubiao-30' : 'icon-gongnengtubiao-31'] }></i></div> : null;
         const indent = me.__handlerLevels();
+        const iconEl = me.icon ? <div class="ivsom-menu__icon"><i class={ ['iconfont', me.icon] } ></i></div> : <i class="iconfont">&nbsp;</i>;
+        const collapseEl = childrenEl ? <div class="ivsom-menu__collapse"><i class={ ['iconfont', aside || horizontal && indent > 0 ? 'icon-gongnengtubiao-29' : me.collapse ? 'icon-gongnengtubiao-30' : 'icon-gongnengtubiao-31'] }></i></div> : <div class="ivsom-menu__collapse"></div>;
         const m = tsx.modifiers;
 
         return (
             <li 
                 class={{ 'ivsom-menu-item' : true, 'ivsom-sub-menu' : !!childrenEl, 'ivsom-menu-item__isDisabled' : me.disabled, 'ivsom-menu-item__isFileter' : me.hasFilter,  [`ivsom-menu-item__indent_${indent}X`] : true }} 
-                onClick={ m.stop(!me.disabled ? me.onMenuItemClick : () => void 0 ) } >
+                onClick={ m.stop((e : MouseEvent) => { !me.disabled ? me.onMenuItemClick(e, aside, horizontal) : void 0 }) }
+                onMouseenter={ m.stop((e : MouseEvent) => { !me.disabled ? me.onMenuItemMouseIn(e, aside, horizontal) : void 0 }) } 
+                onMouseleave={ m.stop((e : MouseEvent) => { !me.disabled ? me.onMenuItemMouseOut(e, aside, horizontal) : void 0 }) }>
                 { iconEl }
                 <div class="ivsom-menu__text"><span>{ me.$scopedSlots.default() }</span></div>
                 { collapseEl }

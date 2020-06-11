@@ -104,7 +104,7 @@ export default class iVsomSwitch extends tsx.Component<Props>{
         return (
            <div class="switch">
                <div style={{'width':this.width+'px','height': this.height+'px','border-radius': (this.height/2)+'px','background':this.status?this.switchBg:this.closeBg}} class={{'switch-wrapper':true,'close':!this.status,'disabled':this.disabled}}   onClick={ (e) => { this.handleSwitch(e as MouseEvent) } }>
-                   <div class="slider" style={{'width':(this.height-2)+'px','height':(this.height-2)+'px','left':this.left+'px'}}></div>
+                   <div class="switchSlider" style={{'width':(this.height-2)+'px','height':(this.height-2)+'px','left':this.left+'px'}}></div>
                 </div>
             </div>
         )

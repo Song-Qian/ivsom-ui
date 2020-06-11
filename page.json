@@ -12,6 +12,8 @@
         "radio.api.html",
         "checkbox.api.html",
         "input-number.api.html",
-        "switch.api.html"
+        "switch.api.html",
+        "slider.api.html",
+        "pagination.api.html"
     ]
 }
