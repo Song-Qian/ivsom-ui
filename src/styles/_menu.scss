@@ -7,7 +7,8 @@
 
  @import "./ivsom-variable";
  @import "./ivsom-mixin";
-
+ @import "./animate";
+ 
  .ivsom-menu {
      width: 100%;
      height: 100%;
@@ -27,6 +28,9 @@
              border: 1px solid rgba(255,255,255, .2);
              background-color: rgba(255,255,255, .2);
             
+             > i.iconfont {
+                text-align:center;
+             }
              > i.iconfont,
              input {
                  color: $default-color;
@@ -64,7 +68,10 @@
             width: 50px;
             margin-left: auto;
             margin-right:auto;
-            
+            > i.iconfont {
+                text-align:center;
+                cursor: no-drop;
+            }
             > input {
                 display: none;
             }
@@ -73,42 +80,173 @@
         > .ivsom-menu__wrap {
             overflow: inherit;
 
-            > .ivsom-menu__panel > .ivsom-menu-item > .ivsom-menu__text,
-            > .ivsom-menu__panel > .ivsom-menu-item > .ivsom-menu__collapse {
-                display: none;
+            > .ivsom-menu__panel {
+                
+                & .ivsom-menu-item:before { 
+                    display: none !important;
+                }
+
+                .ivsom-menu-item > .ivsom-menu__text {
+                    width: calc(100% - 80px) !important;
+                }
+
+                > .ivsom-menu-item > .ivsom-menu__text,
+                > .ivsom-menu-item > .ivsom-menu__collapse {
+                    display: none;
+                }
             }
+            
 
             > .ivsom-menu__panel .ivsom-sub-menu {
 
-                > .ivsom-menu__panel { 
-                    display: none;
-                }
                 &:hover {
-                    background-color: rgba(41, 153, 247, .1);
                     border-left: 3px solid $primary-color;
-                    > .ivsom-menu__panel { 
-                        top: 0px;
-                        left: 100%;
-                        width: 300px;
-                        z-index: 999;
-                        display: block;
-                        position: absolute;
-                        border-left: 3px solid #fff;
-                    }
+                    background-color: rgba(41, 153, 247, .1);
                 }
-    
+
+                > .ivsom-menu__panel { 
+                    top: 0px;
+                    left: 100%;
+                    width: 240px;
+                    z-index: 999;
+                    position: absolute;
+                    border-left: 3px solid #fff;
+                }
             }
         }
 
      }
+
+     &.ivsom-menu-horizontal {
+        height: 56px;
+        padding: 0px;
+        display: flex;
+        flex-flow: row nowrap;
+
+        > i.iconfont.icon-gongnengtubiao-74 {
+            display: none;
+        }
+
+        > .ivsom-menu__search {
+            width: 46px;
+            flex: 0 0 46x;
+            margin-top: 5px;
+            margin-left: 10px;
+            vertical-align: middle;
+
+            &.ivsom-menu__search__unfold {
+                width: 180px;
+                flex: 0 0 180px;
+                > input {
+                    display: block;
+                }
+            }
+
+            > i.iconfont {
+                text-align:center;
+                cursor: text;
+            }
+
+            > input {
+                display:none;
+            }
+        }
+
+        > .ivsom-menu__wrap {
+            flex: 1 1 auto;
+            height:100%;
+            margin-top: 0px;
+            overflow: inherit;
+
+            > ul.ivsom-menu__panel {
+                width: 100%;
+                height: 100%;
+                list-style: none;
+                white-space : nowrap;
+                 
+                & .ivsom-menu-item:before { 
+                    display: none !important;
+                }
+
+                .ivsom-menu-item > .ivsom-menu__text {
+                    width: calc(100% - 80px) !important;
+                }
+
+                .ivsom-sub-menu {
+                    &:hover {
+                        background-color: rgba(41, 153, 247, .1);
+                        border-left: 3px solid $primary-color;
+                    }
+    
+                    &.ivsom-menu-item__indent_0X {
+                        height: 100%;
+                        padding: 5px 0px;
+                        > .ivsom-menu__panel {
+                            border-top: 3px solid #fff;
+                            border-left: 0px solid #fff;
+                        }
+    
+                        &:hover {
+                            background-color: inherit;
+                            border-left: 3px solid transparent;
+                        }
+                    }
+                    
+                    > .ivsom-menu__panel { 
+                        top: 0px;
+                        left: 100%;
+                        width: 240px;
+                        z-index: 999;
+                        position: absolute;
+                        border-left: 3px solid #fff;
+                    }
+                }
+
+                > li.ivsom-menu-item {
+                    display:inline-block;
+                    white-space: nowrap;
+                    width: 180px;
+
+                    &.ivsom-menu-item__indent_0X > ul.ivsom-menu__panel {
+                        position: absolute;
+                        top: 56px;
+                        left: 0px;
+                    }
+                }
+
+                > li.ivsom-menu-item__other {
+                    width: 60px;
+                    
+                    &.ivsom-menu-item__indent_0X > ul.ivsom-menu__panel {
+                        position: absolute;
+                        top: 56px;
+                        right: 0px;
+                        left: auto;
+                    }
+
+                    .ivsom-sub-menu > .ivsom-menu__panel {
+                        top: 0px;
+                        left: auto;
+                        right: 100%;
+                        border-right: 3px solid #fff;
+                        border-left: 0px solid #fff;
+                        box-sizing: border-box;
+                        transform: translateX(-3px);
+                    }
+                }
+            }
+        }
+    }
 
      > .ivsom-menu__search {
          width: 100%;
          height: 46px;
          display: table;
          border-radius: 3px;
+         box-sizing: border-box;
          border: 1px solid $border-sub-color;
          background-color: $default-color;
+         transition: width .3s ease;
          > i.iconfont {
              width: 20px;
              height: 100%;
@@ -152,14 +290,13 @@
 
          .ivsom-menu__panel {
             width: 100%;
-            display: block;
             list-style: none;
             background: $default-color;
+            animation: ivsom-zoom-in .3s ease 0s 1 normal forwards;
 
             &.ivsom-menu__hide {
                 display: none;
             }
-
             
             > .ivsom-menu-item {
                 display: block;
@@ -207,6 +344,17 @@
                     }
                 }
 
+                &.ivsom-menu-item__other {
+                    width : 60px;
+                    float: right;
+                    text-align: center;
+
+                    > .ivsom-menu__text,
+                    > .ivsom-menu__collapse {
+                        display: none;
+                    }
+                }
+
                 @for $indentation from 0 through 30 {
                     &.ivsom-menu-item__indent_#{$indentation}X {
                         &:before { 
@@ -227,6 +375,9 @@
                     height: 46px;
                     text-align: left;
                     display:inline-block;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    vertical-align: top;
                     width: calc(100% - 80px);
                 }
 
@@ -236,6 +387,7 @@
                     text-align: center;
                     display: inline-block;
                     box-sizing: border-box;
+                    vertical-align: top;
 
                     > .iconfont {
                         font-size: 38px;
@@ -250,12 +402,11 @@
                     text-align: center;
                     display: inline-block;
                     box-sizing: border-box;
+                    vertical-align: top;
                 }
             }
 
          }
      }
-
-
 
  }
