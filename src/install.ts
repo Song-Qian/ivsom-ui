@@ -10,7 +10,6 @@ import '~/styles'
 import iVsomButton from './components/button/ivsom-button'
 import iVsomButtonGroup from './components/button/ivsom-button-group'
 import iVsomBreadCrumbs from './components/breadcrumbs/ivsom-breadcrumbs'
-import iVsomNumberInput from './components/form/ivsom-number-input'
 import iVsomRow from './components/layout/ivsom-row'
 import iVsomCol from './components/layout/ivsom-col'
 import iVsomTabs from './components/tabs/ivsom-tabs'
@@ -21,6 +20,7 @@ import iVsomRadio from './components/radio/ivsom-radio'
 import iVsomCheckbox from './components/checkbox/ivsom-checkbox'
 import iVsomInputNumber from './components/number/ivsom-input-number'
 import iVsomSwitch from './components/switch/ivsom-switch'
+import iVsomInput from './components/form/ivsom-input'
 
 const components : Array<any> = [
     iVsomRow,
@@ -28,7 +28,6 @@ const components : Array<any> = [
     iVsomButton,
     iVsomButtonGroup,
     iVsomBreadCrumbs, 
-    iVsomNumberInput,
     iVsomTabs, 
     iVsomTabsPanel,
     iVsomMenu,
@@ -36,7 +35,8 @@ const components : Array<any> = [
     iVsomRadio,
     iVsomCheckbox,
     iVsomInputNumber,
-    iVsomSwitch
+    iVsomSwitch,
+    iVsomInput
 ]
 
 const install = (Vue : any) => {
