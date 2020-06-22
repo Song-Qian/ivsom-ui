@@ -1,0 +1,140 @@
+/**
+ * Developer    :   SongQian
+ * Time         :   2020-06-16
+ * eMail        :   songqian@wtoe.cn
+ * Description  :   表单输入框样式
+ */
+ @import "./ivsom-variable";
+ @import "./ivsom-mixin";
+
+ .ivsom-input {
+    border:1px solid $border-primary-color ;
+    border-radius: 5px;
+    display:flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    overflow: hidden;
+    transition: border .3s ease;
+     
+    &.ivsom-input__medium {
+        height : 32px;
+        line-height: 32px;
+        @include font-text;
+
+        > .ivsom-input__prefix {
+            flex: 0 0 32px;
+        }
+
+        > .ivsom-input__suffix {
+            flex: 0 0 32px;
+        }
+    }
+
+    &.ivsom-input__small {
+        height : 26px;
+        line-height: 26px;
+        @include font-text;
+
+        > .ivsom-input__prefix {
+            flex: 0 0 26px;
+        }
+
+        > .ivsom-input__suffix {
+            flex: 0 0 26px;
+        }
+    }
+    
+    &.ivsom-input__mini {
+        height : 20px;
+        line-height: 20px;
+        @include font-text;
+
+        > .ivsom-input__prefix {
+            flex: 0 0 20px;
+        }
+
+        > .ivsom-input__suffix {
+            flex: 0 0 20px;
+        }
+    }
+
+    &.ivsom-input__limit {
+        height: 80px;
+        resize: both;
+    }
+
+    &.ivsom-input__disabled {
+        border: 1px solid $border-gray-color;
+        background-color: #eee;
+        cursor: no-drop;
+
+        > textarea,
+        > input {
+            cursor: no-drop;
+        }
+    }
+
+    &.ivsom-input__hasErorr {
+        border:1px solid $border-danger-color;
+    }
+
+    &::-webkit-input-placeholder {
+        color: $font-symbol-color;
+    }
+
+    > textarea,
+    > input {
+        width: 100%;
+        height: 100%;
+        border: 0px solid #fff;
+        flex: 1 1 auto;
+        outline: none;
+        text-indent: 1em;
+        background: transparent;
+        resize: none;
+        @include font-text;
+    }
+
+    > textarea {
+        text-indent: 0em;
+
+        &::-webkit-scrollbar {
+            width : 10px;
+            height: 1px;
+        }
+
+        &::-webkit-scrollbar-thumb {
+            border-radius: 10px;
+            box-shadow   : inset 0 0 5px rgba(0, 0, 0, 0.2);
+            background   : $border-gray-color;
+        }
+
+        &::-webkit-scrollbar-track {
+            box-shadow   : inset 0 0 5px rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            background   : #fff;
+        }
+    }
+
+    > .ivsom-input__prefix {
+        text-align: center;
+        align-self: center;
+        @include font-sub-text;
+
+        + textarea,
+        + input {
+            text-indent: 0px;
+        }
+    }
+
+    > .ivsom-input__suffix {
+        text-align: center;
+        @include font-sub-text;
+
+        + textarea,
+        + input {
+            text-indent: 0px;
+        }
+    }
+
+ }
