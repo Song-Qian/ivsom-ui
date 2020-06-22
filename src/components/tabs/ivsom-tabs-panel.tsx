@@ -30,13 +30,6 @@
 
      @Prop({ default : '', type : String }) readonly index !: string;
 
-     protected created() {
-         const me = this;
-         me.$on('tabs-updated-active', () => {
-            console.log("test");
-         })
-     }
-
      protected render() : JSX.Element {
         const me = this;
         const { value, flex } = me.$vnode.parent as any;

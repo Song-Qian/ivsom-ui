@@ -25,7 +25,7 @@
                         <hr>
                         <p>常规复选框</p>
                         <ul>
-                            <li>Checkbox 组件在使用之前，需要有相关的依赖库进行支持，如需阅读：<a href="./start.api.html" target="_blank" >快速开始</a></li>
+                            <li>slider 组件在使用之前，需要有相关的依赖库进行支持，如需阅读：<a href="./start.api.html" target="_blank" >快速开始</a></li>
                         </ul>
                         <blockquote>
                             <i-vsom-slider :min="0" :max="100" @value-fun="valuefun"></i-vsom-slider>
@@ -49,13 +49,13 @@
                         <h2 id="unicode-">双滑块用法</h2>
                         <hr>
                         <ul>
-                            <li>Checkbox 组件在使用之前，需要有相关的依赖库进行支持，如需阅读：<a href="./start.api.html" target="_blank" >快速开始</a></li>
+                            <li>range属性支持双滑块用法</li>
                         </ul>
                         <blockquote>
                             <i-vsom-slider :min="10" :max="80" range="true" @value-fun="valuefun"></i-vsom-slider>
                         </blockquote>
                         <pre><code class="language-html"
-                            >&lt;i-vsom-slider :min="0" :max="100" @value-fun="valuefun"&gt;&lt;/i-vsom-slider&gt;   
+                            >&lt;i-vsom-slider :min="10" :max="80" range="true" @value-fun="valuefun"&gt;&lt;/i-vsom-slider&gt;   
                             </code></pre>
                         <pre><code class="language-js" >
                             var app = new Vue({
@@ -73,13 +73,13 @@
                         <h2 id="unicode-">禁用用法</h2>
                         <hr>
                         <ul>
-                            <li>Checkbox 组件在使用之前，需要有相关的依赖库进行支持，如需阅读：<a href="./start.api.html" target="_blank" >快速开始</a></li>
+                            <li>disabled属性支持禁用语法</li>
                         </ul>
                         <blockquote>
                             <i-vsom-slider :min="0" :max="100" disabled="true" @value-fun="valuefun"></i-vsom-slider>
                         </blockquote>
                         <pre><code class="language-html"
-                            >&lt;i-vsom-slider :min="0" :max="100"  @value-fun="valuefun"&gt;&lt;/i-vsom-slider&gt;   
+                            >&lt;i-vsom-slider :min="0" :max="100" disabled="true"  @value-fun="valuefun"&gt;&lt;/i-vsom-slider&gt;   
                             </code></pre>
                         <pre><code class="language-js" >
                             var app = new Vue({
@@ -111,8 +111,8 @@
             }
         },
         methods:{
-            valuefun(value){
-              console.log(value)
+            valuefun(value,value1,value2){
+              console.log(value,value1,value2)
            }
         }
        

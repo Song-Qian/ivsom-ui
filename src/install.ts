@@ -10,7 +10,6 @@ import '~/styles'
 import iVsomButton from './components/button/ivsom-button'
 import iVsomButtonGroup from './components/button/ivsom-button-group'
 import iVsomBreadCrumbs from './components/breadcrumbs/ivsom-breadcrumbs'
-import iVsomNumberInput from './components/form/ivsom-number-input'
 import iVsomRow from './components/layout/ivsom-row'
 import iVsomCol from './components/layout/ivsom-col'
 import iVsomTabs from './components/tabs/ivsom-tabs'
@@ -23,6 +22,7 @@ import iVsomInputNumber from './components/number/ivsom-input-number'
 import iVsomSwitch from './components/switch/ivsom-switch'
 import iVsomSlider from './components/slider/ivsom-slider'
 import iVsomPagination from './components/page/ivsom-pagination'
+import iVsomInput from './components/form/ivsom-input'
 
 const components : Array<any> = [
     iVsomRow,
@@ -30,7 +30,6 @@ const components : Array<any> = [
     iVsomButton,
     iVsomButtonGroup,
     iVsomBreadCrumbs, 
-    iVsomNumberInput,
     iVsomTabs, 
     iVsomTabsPanel,
     iVsomMenu,
@@ -40,7 +39,8 @@ const components : Array<any> = [
     iVsomInputNumber,
     iVsomSwitch,
     iVsomSlider,
-    iVsomPagination
+    iVsomPagination,
+    iVsomInput
 ]
 
 const install = (Vue : any) => {
