@@ -6,7 +6,7 @@
  */
 
 import * as tsx from 'vue-tsx-support'
-import { Component, Inject, Prop } from 'vue-property-decorator'
+import { Component, Prop } from 'vue-property-decorator'
 
 interface Props {
     Icon : String,

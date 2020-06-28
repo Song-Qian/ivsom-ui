@@ -37,11 +37,6 @@
         maxInitialRequests : 5,
         name: true,
         cacheGroups : {
-            'vue' : {
-                test : /[\\/]node_modules[\\/]vue[\\/]/,
-                name : 'vue.runtime',
-                priority : 5
-            },
             'vue-class-component' : {
                 test : /[\\/]node_modules[\\/]vue-class-component[\\/]/,
                 name : 'vue-class-component',
