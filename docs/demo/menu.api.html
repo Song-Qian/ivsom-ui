@@ -9,7 +9,7 @@
     <script src="/vue.min.js"></script>
     <script src="./jQuery-1.9.1.js"></script>
     <script src="./PrismJs.js"></script>
-<link href="/iVsomUI.css" rel="stylesheet"><script src="/vue-tsx-support.min.js"></script><script src="/vue-class-component.min.js"></script><script src="/vue-property-decorator.min.js"></script><script src="/vendors~index.min.js"></script><script src="/index.9396ee9f.min.js"></script></head>
+<link href="/iVsomUI.css" rel="stylesheet"><script src="/vue-tsx-support.min.js"></script><script src="/vue-class-component.min.js"></script><script src="/vue-property-decorator.min.js"></script><script src="/vendors~index.min.js"></script><script src="/index.2d17d51b.min.js"></script></head>
 
 <body>
     <div id="app" class="main">
@@ -46,7 +46,32 @@
                                 </i-vsom-menu-item>
                             </i-vsom-menu>
                         </div>
-                        
+                    </blockquote>
+                    <pre><code class="language-html"
+>&lt;div style="height: 400px; width: 400px; display: inline-block; vertical-align: top;"&gt;
+    &lt;i-vsom-menu&gt;
+        &lt;i-vsom-menu-item v-for='n in 3' :key="n" icon="icon-gongnengtubiao-95"&gt;
+            一级菜单 - {{ '\u007b\u007b n \u007d\u007d' }}
+            &lt;template #submenu&gt;
+                &lt;i-vsom-menu-item v-for="k in 3" icon="icon-gongnengtubiao-97"&gt;
+                    二级菜单 - {{ '\u007b\u007b k \u007d\u007d' }}
+                    &lt;template #submenu&gt;
+                        &lt;i-vsom-menu-item v-for="j in 3" icon="icon-gongnengtubiao-114"&gt;三级菜单 - {{ '\u007b\u007b j \u007d\u007d' }}&lt;/i-vsom-menu-item&gt;
+                    &lt;/template&gt;
+                &lt;/i-vsom-menu-item&gt;
+            &lt;/template&gt;
+        &lt;/i-vsom-menu-item&gt;
+    &lt;/i-vsom-menu&gt;
+&lt;/div&gt;
+</code></pre>
+                    <h2 id="unicode-">肤色</h2>
+                    <hr>
+                    <p>dark</p>
+                    <ul>
+                        <li>菜单默认是白色皮肤</li>
+                        <li>dark 开启菜单使用专业黑色皮肤，该模式适用各种操作环境</li>
+                    </ul>
+                    <blockquote>
                         <div style="height: 400px; width: 400px; display: inline-block; vertical-align: top;">
                             <i-vsom-menu dark>
                                 <i-vsom-menu-item v-for='n in 3' :key="n" icon="icon-gongnengtubiao-95">
@@ -65,22 +90,6 @@
                     </blockquote>
                     <pre><code class="language-html"
 >&lt;div style="height: 400px; width: 400px; display: inline-block; vertical-align: top;"&gt;
-    &lt;i-vsom-menu&gt;
-        &lt;i-vsom-menu-item v-for='n in 3' :key="n" icon="icon-gongnengtubiao-95"&gt;
-            一级菜单 - {{ '\u007b\u007b n \u007d\u007d' }}
-            &lt;template #submenu&gt;
-                &lt;i-vsom-menu-item v-for="k in 3" icon="icon-gongnengtubiao-97"&gt;
-                    二级菜单 - {{ '\u007b\u007b k \u007d\u007d' }}
-                    &lt;template #submenu&gt;
-                        &lt;i-vsom-menu-item v-for="j in 3" icon="icon-gongnengtubiao-114"&gt;三级菜单 - {{ '\u007b\u007b j \u007d\u007d' }}&lt;/i-vsom-menu-item&gt;
-                    &lt;/template&gt;
-                &lt;/i-vsom-menu-item&gt;
-            &lt;/template&gt;
-        &lt;/i-vsom-menu-item&gt;
-    &lt;/i-vsom-menu&gt;
-&lt;/div&gt;
-
-&lt;div style="height: 400px; width: 400px; display: inline-block; vertical-align: top;"&gt;
     &lt;i-vsom-menu dark&gt;
         &lt;i-vsom-menu-item v-for='n in 3' :key="n" icon="icon-gongnengtubiao-95"&gt;
             一级菜单 - {{ '\u007b\u007b n \u007d\u007d' }}
@@ -151,9 +160,14 @@
                     <h2 id="unicode-">横向菜单</h2>
                     <hr>
                     <p>Horizontal</p>
+                    <ul>
+                        <li>Menu 横向菜单使用horizontal属于开启/关闭该功能</li>
+                        <li>Menu horizontal 菜单依外部容器的宽度自适可，也可以使用style固定菜单宽度。</li>
+                        <li>Menu horizontal 菜单的检索输入框默认是46px宽度占位内容， 激活检索输入框会扩张到180px宽度占位内容，会挤压列表宽度。</li>
+                    </ul>
                     <blockquote>
-                        <div style="height: 80px; width: 100%; vertical-align: top;">
-                            <i-vsom-menu horizontal search dark>
+                        <div style="width: 100%; vertical-align: top;">
+                            <i-vsom-menu :filter="handlerFilter" :search-text.sync="searchText" horizontal search dark>
                                 <i-vsom-menu-item v-for='n in 3' :key="n" icon="icon-gongnengtubiao-95">
                                     一级菜单 - {{ n }}
                                     <template #submenu>
@@ -173,7 +187,169 @@
                             </i-vsom-menu>
                         </div>
                     </blockquote>
-
+                    <pre><code class="language-html"
+>&lt;div style="width: 100%; vertical-align: top;"&gt;
+    &lt;i-vsom-menu :filter="handlerFilter" :search-text.sync="searchText" horizontal search dark&gt;
+        &lt;i-vsom-menu-item v-for='n in 3' :key="n" icon="icon-gongnengtubiao-95"&gt;
+            一级菜单 - {{ '\u007b\u007b n \u007d\u007d' }}
+            &lt;template #submenu&gt;
+                &lt;i-vsom-menu-item v-for="k in 3" icon="icon-gongnengtubiao-97"&gt;
+                    二级菜单 - {{ '\u007b\u007b k \u007d\u007d' }}
+                    &lt;template #submenu&gt;
+                        &lt;i-vsom-menu-item v-for="j in 3" icon="icon-gongnengtubiao-114"&gt;
+                            三级菜单 - {{ '\u007b\u007b j \u007d\u007d' }}
+                            &lt;template #submenu&gt;
+                                &lt;i-vsom-menu-item v-for="i in 3" icon="icon-gongnengtubiao-114"&gt;四级菜单 - {{ '\u007b\u007b i \u007d\u007d' }}&lt;/template&gt;
+                            &lt;/template&gt;
+                        &lt;/i-vsom-menu-item&gt;
+                    &lt;/template&gt;
+                &lt;/i-vsom-menu-item&gt;
+            &lt;/template&gt;
+        &lt;/i-vsom-menu-item&gt;
+    &lt;/i-vsom-menu&gt;
+&lt;/div&gt;
+</code></pre> 
+                    <p>横向菜单溢出项处理</p>
+                    <ul>
+                        <li>Menu 横向菜单使用可能会有需求菜单项过多，导致菜单显示不全，ivsom-menu组件目前会自动适应该状态</li>
+                    </ul>
+                    <blockquote>
+                        <div style="width: 100%; vertical-align: top;">
+                            <i-vsom-menu :filter="handlerFilter" :search-text.sync="searchText" horizontal search dark>
+                                <i-vsom-menu-item v-for='n in 7' :key="n" icon="icon-gongnengtubiao-95">
+                                    一级菜单 - {{ n }}
+                                    <template #submenu>
+                                        <i-vsom-menu-item v-for="k in 3" icon="icon-gongnengtubiao-97">
+                                            二级菜单 - {{ k }}
+                                            <template #submenu>
+                                                <i-vsom-menu-item v-for="j in 3" icon="icon-gongnengtubiao-114">
+                                                    三级菜单 - {{ j }}
+                                                    <template #submenu>
+                                                        <i-vsom-menu-item v-for="i in 3" icon="icon-gongnengtubiao-114">四级菜单 - {{ i }}</template>
+                                                    </template>
+                                                </i-vsom-menu-item>
+                                            </template>
+                                        </i-vsom-menu-item>
+                                    </template>
+                                </i-vsom-menu-item>
+                            </i-vsom-menu>
+                        </div>
+                    </blockquote>
+                    <pre><code class="language-html"
+>&lt;div style="width: 100%; vertical-align: top;"&gt;
+    &lt;i-vsom-menu :filter="handlerFilter" :search-text.sync="searchText" horizontal search dark&gt;
+        &lt;i-vsom-menu-item v-for='n in 7' :key="n" icon="icon-gongnengtubiao-95"&gt;
+            一级菜单 - {{ '\u007b\u007b n \u007d\u007d' }}
+            &lt;template #submenu&gt;
+                &lt;i-vsom-menu-item v-for="k in 3" icon="icon-gongnengtubiao-97"&gt;
+                    二级菜单 - {{ '\u007b\u007b k \u007d\u007d' }}
+                    &lt;template #submenu&gt;
+                        &lt;i-vsom-menu-item v-for="j in 3" icon="icon-gongnengtubiao-114"&gt;
+                            三级菜单 - {{ '\u007b\u007b j \u007d\u007d' }}
+                            &lt;template #submenu&gt;
+                                &lt;i-vsom-menu-item v-for="i in 3" icon="icon-gongnengtubiao-114"&gt;四级菜单 - {{ '\u007b\u007b i \u007d\u007d' }}&lt;/template&gt;
+                            &lt;/template&gt;
+                        &lt;/i-vsom-menu-item&gt;
+                    &lt;/template&gt;
+                &lt;/i-vsom-menu-item&gt;
+            &lt;/template&gt;
+        &lt;/i-vsom-menu-item&gt;
+    &lt;/i-vsom-menu&gt;
+&lt;/div&gt;
+</code></pre>
+                    <h2 id="unicode-">Menu Event 事件</h2>
+                    <hr>
+                    <ul>
+                        <li>onMenuItemClick: Arguments(e : MouseEvent) 每个菜单项点击事件。</li>
+                        <li>onSearchActivation: Arguments(e : MouseEvent) 横向菜单检索输入框激活事件</li>
+                        <li>onSearchDeactivated: Arguments(e : MouseEvent) 横向菜单检索输入框失活事件</li>
+                    </ul>
+                    <blockquote>
+                        <div style="width: 100%; vertical-align: top;">
+                            <i-vsom-menu @on-menu-item-click="handlerMenuItemClick" horizontal dark>
+                                <i-vsom-menu-item v-for='n in 3' :key="n" icon="icon-gongnengtubiao-95">
+                                    一级菜单 - {{ n }}
+                                    <template #submenu>
+                                        <i-vsom-menu-item v-for="k in 3" icon="icon-gongnengtubiao-97">
+                                            二级菜单 - {{ k }}
+                                            <template #submenu>
+                                                <i-vsom-menu-item v-for="j in 3" icon="icon-gongnengtubiao-114">
+                                                    三级菜单 - {{ j }}
+                                                    <template #submenu>
+                                                        <i-vsom-menu-item v-for="i in 3" icon="icon-gongnengtubiao-114">四级菜单 - {{ i }}</template>
+                                                    </template>
+                                                </i-vsom-menu-item>
+                                            </template>
+                                        </i-vsom-menu-item>
+                                    </template>
+                                </i-vsom-menu-item>
+                            </i-vsom-menu>
+                        </div>
+                    </blockquote>
+                    <pre><code class="language-html"
+>&lt;div style="width: 100%; vertical-align: top;"&gt;
+    &lt;i-vsom-menu @on-menu-item-click="handlerMenuItemClick" horizontal dark&gt;
+        &lt;i-vsom-menu-item v-for='n in 3' :key="n" icon="icon-gongnengtubiao-95"&gt;
+            一级菜单 - {{ '\u007b\u007b n \u007d\u007d' }}
+            &lt;template #submenu&gt;
+                &lt;i-vsom-menu-item v-for="k in 3" icon="icon-gongnengtubiao-97"&gt;
+                    二级菜单 - {{ '\u007b\u007b k \u007d\u007d' }}
+                    &lt;template #submenu&gt;
+                        &lt;i-vsom-menu-item v-for="j in 3" icon="icon-gongnengtubiao-114"&gt;
+                            三级菜单 - {{ '\u007b\u007b j \u007d\u007d' }}
+                            &lt;template #submenu&gt;
+                                &lt;i-vsom-menu-item v-for="i in 3" icon="icon-gongnengtubiao-114"&gt;四级菜单 - {{ '\u007b\u007b i \u007d\u007d' }}&lt;/template&gt;
+                            &lt;/template&gt;
+                        &lt;/i-vsom-menu-item&gt;
+                    &lt;/template&gt;
+                &lt;/i-vsom-menu-item&gt;
+            &lt;/template&gt;
+        &lt;/i-vsom-menu-item&gt;
+    &lt;/i-vsom-menu&gt;
+&lt;/div&gt;
+</code></pre>
+                    <blockquote>
+                        <div style="width: 100%; vertical-align: top;">
+                            <i-vsom-menu @on-search-activation="handlerSearchActivation" @on-search-deactivated="handlerSearchDeactivated" search horizontal dark>
+                                <i-vsom-menu-item v-for='n in 3' :key="n" icon="icon-gongnengtubiao-95">
+                                    一级菜单 - {{ n }}
+                                    <template #submenu>
+                                        <i-vsom-menu-item v-for="k in 3" icon="icon-gongnengtubiao-97">
+                                            二级菜单 - {{ k }}
+                                            <template #submenu>
+                                                <i-vsom-menu-item v-for="j in 3" icon="icon-gongnengtubiao-114">
+                                                    三级菜单 - {{ j }}
+                                                    <template #submenu>
+                                                        <i-vsom-menu-item v-for="i in 3" icon="icon-gongnengtubiao-114">四级菜单 - {{ i }}</template>
+                                                    </template>
+                                                </i-vsom-menu-item>
+                                            </template>
+                                        </i-vsom-menu-item>
+                                    </template>
+                                </i-vsom-menu-item>
+                            </i-vsom-menu>
+                        </div>
+                    </blockquote>
+                    <pre><code class="language-html"
+>&lt;i-vsom-menu @on-search-activation="handlerSearchActivation" @on-search-deactivated="handlerSearchDeactivated" search horizontal dark&gt;
+    &lt;i-vsom-menu-item v-for='n in 3' :key="n" icon="icon-gongnengtubiao-95"&gt;
+        一级菜单 -  {{ '\u007b\u007b n \u007d\u007d' }}
+        &lt;template #submenu&gt;
+            &lt;i-vsom-menu-item v-for="k in 3" icon="icon-gongnengtubiao-97"&gt;
+                二级菜单 -  {{ '\u007b\u007b k \u007d\u007d' }}
+                &lt;template #submenu&gt;
+                    &lt;i-vsom-menu-item v-for="j in 3" icon="icon-gongnengtubiao-114"&gt;
+                        三级菜单 -  {{ '\u007b\u007b j \u007d\u007d' }}
+                        &lt;template #submenu&gt;
+                            &lt;i-vsom-menu-item v-for="i in 3" icon="icon-gongnengtubiao-114"&gt;四级菜单 -  {{ '\u007b\u007b i \u007d\u007d' }}&lt;/template&gt;
+                        &lt;/template&gt;
+                    &lt;/i-vsom-menu-item&gt;
+                &lt;/template&gt;
+            &lt;/i-vsom-menu-item&gt;
+        &lt;/template&gt;
+    &lt;/i-vsom-menu-item&gt;
+&lt;/i-vsom-menu&gt;
+</code></pre>
                 </div>
             </div>
         </div>

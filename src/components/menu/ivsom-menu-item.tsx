@@ -6,7 +6,7 @@
  */
 
  import * as tsx from 'vue-tsx-support'
- import { Component, Prop, Emit, Watch } from 'vue-property-decorator'
+ import { Component, Prop, Emit, Watch, Inject } from 'vue-property-decorator'
 
  import 'vue-tsx-support/enable-check'
 
@@ -15,6 +15,8 @@
     Icon : String
     // 禁用菜单项
     Disabled : Boolean
+    // 菜单点击跳转路径
+    Href : String
  }
 
  type ScopedSlots = {
@@ -32,6 +34,10 @@
     @Prop({ default : '', type : String }) readonly icon !: string;
 
     @Prop({ default : false, type: Boolean }) readonly disabled !: boolean;
+
+    @Prop({ default : '', type : String }) readonly href !: string;
+
+    @Inject(Symbol.for('target')) target !: 'top' | 'blank' | 'parent' | 'self' | String;
 
     private collapse : boolean = false;
 
@@ -82,6 +88,25 @@
         rootMenu.$emit('on-menu-item-click', e);
         if(!aside && !horizontal) {
             me.collapse = !me.collapse;
+        }
+
+        if(me.href) {
+            switch(me.target) {
+                case "top" :
+                    window.top.location.href = me.href;
+                    break;
+                case "parent" :
+                    window.parent.location.href = me.href;
+                    break;
+                case "self" : 
+                    window.location.href = me.href;
+                    break;
+                case "blank" :
+                    window.top.open(me.href, '_blank');
+                    break;
+                default:
+                    window.top.frames[me.target as any].location.href = me.href;
+            }
         }
     }
 

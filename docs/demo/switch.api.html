@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>switch api demo</title>
+        <link rel="stylesheet" href="./cube.min.css">
+        <link rel="stylesheet" href="./demo.css">
+        <script src="/vue.min.js"></script>
+        <script src="./jQuery-1.9.1.js"></script>
+        <script src="./PrismJs.js"></script>
+    <link href="/iVsomUI.css" rel="stylesheet"><script src="/vue-tsx-support.min.js"></script><script src="/vue-class-component.min.js"></script><script src="/vue-property-decorator.min.js"></script><script src="/vendors~index.min.js"></script><script src="/index.2d17d51b.min.js"></script></head>
+    <body>
+        <div id="app" class="main">
+            <h1 class="logo">switch Api</h1>
+            <div class="nav-tabs">
+                <ul id="tabs" class="dib-box">
+                    <li class="dib active"><span> CDN </span></li>
+                    <li class="dib"><span> NodeJS </span></li>
+                </ul>
+            </div>
+            <div class="tab-container">
+                <div class="content unicode" style="display: block;">
+                    <div class="article markdown">
+                        <h2 id="unicode-">基础用法</h2>
+                        <hr>
+                        <p>常规switch</p>
+                        <ul>
+                            <li>switch 组件在使用之前，需要有相关的依赖库进行支持，如需阅读：<a href="./start.api.html" target="_blank" >快速开始</a></li>
+                        </ul>
+                        <blockquote>
+                            <i-vsom-switch v-model="status" ></i-vsom-switch>
+                        </blockquote>
+                        <pre><code class="language-html"
+                            >&lt;i-vsom-switch v-model="status" &gt;&lt;/i-vsom-switch&gt;   
+                            </code></pre>
+                        <pre><code class="language-js" >
+                            var app = new Vue({
+                                el : '#app',
+                                data : function() {
+                                    return {
+                                        status: true,
+                                    }
+                                },
+                               
+                            })
+                        </code></pre>
+                        <h2 id="unicode-">选择背景用法</h2>
+                        <hr>
+                        <ul>
+                            <li>open-color close-color 分别支持打开关闭switch时背景色的设置</li>
+                        </ul>
+                        <blockquote>
+                            <i-vsom-switch v-model="status" :open-color="background1" :close-color="background2" ></i-vsom-switch>
+                        </blockquote>
+                        <pre><code class="language-html"
+                            >&lt;i-vsom-switch v-model="status" :open-color="background1" :close-color="background2" &gt;&lt;/i-vsom-switch&gt;   
+                            </code></pre>
+                        <pre><code class="language-js" >
+                            var app = new Vue({
+                                el : '#app',
+                                data : function() {
+                                    return {
+                                        status: true,
+                                        background1: "#13CE66",
+                                        background2:"#ff4949",
+                                    }
+                                },
+                               
+                            })
+                        </code></pre>
+                        <h2 id="unicode-">宽高属性设置</h2>
+                        <hr>
+                        <ul>
+                            <li>width height 支持设置自定义宽高</li>
+                        </ul>
+                        <blockquote>
+                            <i-vsom-switch v-model="status" width="100" height="50" ></i-vsom-switch>
+                        </blockquote>
+                        <pre><code class="language-html"
+                            >&lt;i-vsom-switch v-model="status" width="100" height="50" &gt;&lt;/i-vsom-switch&gt;   
+                            </code></pre>
+                        <pre><code class="language-js" >
+                            var app = new Vue({
+                                el : '#app',
+                                data : function() {
+                                    return {
+                                        status: true,
+                                    }
+                                },
+                               
+                            })
+                        </code></pre>
+                        <h2 id="unicode-">禁用用法</h2>
+                        <hr>
+                        <ul>
+                            <li>disabled 支持设置禁用</li>
+                        </ul>
+                        <blockquote>
+                            <i-vsom-switch v-model="status" disabled="true" ></i-vsom-switch>
+                        </blockquote>
+                        <pre><code class="language-html"
+                            >&lt;i-vsom-switch v-model="status"  &gt;&lt;/i-vsom-switch&gt;   
+                            </code></pre>
+                        <pre><code class="language-js" >
+                            var app = new Vue({
+                                el : '#app',
+                                data : function() {
+                                    return {
+                                        status: true,
+                                    }
+                                },
+                               
+                            })
+                        </code></pre>
+                        <h2 id="unicode-">触发事件</h2>
+                        <hr>
+                        <ul>
+                            <li>支持change触发事件</li>
+                        </ul>
+                        <blockquote>
+                            <i-vsom-switch v-model="status" @change="change" ></i-vsom-switch>
+                        </blockquote>
+                        <pre><code class="language-html"
+                            >&lt;i-vsom-switch v-model="status" @change="change"  &gt;&lt;/i-vsom-switch&gt;   
+                            </code></pre>
+                        <pre><code class="language-js" >
+                            var app = new Vue({
+                                el : '#app',
+                                data : function() {
+                                    return {
+                                        status: true,
+                                    }
+                                },
+                                methods:{
+                                    change(value){
+                                       console.log(value)
+                                    }
+                                 }
+                               
+                            })
+                        </code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script>
+                        (function() {
+    
+    Vue.use(iVsomUI);
+
+    var app = new Vue({
+        el : '#app',
+        data : function() {
+            return {
+                status: true,
+                background1: "#13CE66",
+                background2:"#ff4949",
+            }
+        },
+        methods:{
+           change(value){
+              console.log(value)
+           }
+        }
+       
+    })
+
+
+})()
+            $(document).ready(function () {
+                $('.tab-container .content:first').show()
+    
+                $('#tabs li').click(function (e) {
+                    var tabContent = $('.tab-container .content')
+                    var index = $(this).index()
+    
+                    if ($(this).hasClass('active')) {
+                        return
+                    } else {
+                        $('#tabs li').removeClass('active')
+                        $(this).addClass('active')
+    
+                        tabContent.hide().eq(index).fadeIn()
+                    }
+                })
+            })
+        </script>
+      
+    </body>
+</html>
