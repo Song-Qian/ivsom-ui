@@ -82,6 +82,9 @@ Description :  武汉微创光电股份公司 iVsomUI 组件库`,
         template : path.join(__dirname, '../src', 'tests', 'index.html'),
         inject : 'head',
         minify : false,
+        templateParameters : {
+            vue : process.env.NODE_ENV === 'production' ? '/ivsom-ui/vue.min.js' : '/vue.min.js'
+        },
         chunks : ['index']
     }))
     // if(process.env.NODE_ENV === 'production') {
