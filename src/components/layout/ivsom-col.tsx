@@ -7,6 +7,8 @@
 
  import * as tsx from 'vue-tsx-support'
  import { Component, Prop } from 'vue-property-decorator'
+ 
+ import 'vue-tsx-support/enable-check'
 
  type Props = {
     //占位宽， max : 30

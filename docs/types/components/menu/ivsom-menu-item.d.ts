@@ -15,10 +15,10 @@ export default class iVsomMenuItem extends tsx.Component<Props, any, ScopedSlots
     readonly disabled: boolean;
     readonly href: string;
     target: 'top' | 'blank' | 'parent' | 'self' | String;
+    rootMenu: any;
     private collapse;
     private hasFilter;
     private get children();
-    private __handlerRoot;
     private __handlerLevels;
     private __handlerHideNode;
     private __handlerShowNode;

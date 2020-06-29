@@ -1,4 +1,5 @@
 import * as tsx from 'vue-tsx-support';
+import 'vue-tsx-support/enable-check';
 declare type Props = {
     Search: Boolean;
     Dark: Boolean;
@@ -18,6 +19,7 @@ export default class iVsomMenu extends tsx.Component<Props, any, ScopedSlots> {
     readonly searchText: string;
     readonly horizontal: boolean;
     readonly target: 'top' | 'blank' | 'parent' | 'self' | String;
+    get rootMenu(): this;
     readonly search_input: JSX.Element;
     protected readonly menu_warp: HTMLElement;
     private aside;

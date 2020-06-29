@@ -8,6 +8,8 @@
  import * as tsx from 'vue-tsx-support'
  import { Component, Prop, Emit, Ref, Watch } from 'vue-property-decorator'
 
+ import 'vue-tsx-support/enable-check'
+
  type Props = {
     // Tabs 宽度
     Width : number | string

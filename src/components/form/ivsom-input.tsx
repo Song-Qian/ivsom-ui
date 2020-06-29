@@ -8,6 +8,8 @@
  import * as tsx from 'vue-tsx-support'
  import { Component, Prop } from 'vue-property-decorator'
 
+ import 'vue-tsx-support/enable-check'
+
  type Props = {
      //是否密码输入框
      Password : Boolean

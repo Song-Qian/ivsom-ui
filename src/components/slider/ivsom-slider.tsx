@@ -8,6 +8,8 @@
 import * as tsx from 'vue-tsx-support'
 import { Component, Prop, Watch, Ref } from 'vue-property-decorator'
 
+import 'vue-tsx-support/enable-check'
+
 interface Props {
 	max: Number,
 	min: Number,

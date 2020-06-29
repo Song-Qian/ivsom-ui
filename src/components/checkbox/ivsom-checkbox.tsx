@@ -8,6 +8,7 @@ import * as tsx from 'vue-tsx-support'
 import { Component, Prop, Emit, Watch,} from 'vue-property-decorator'
 import uuid from '~/utils/uuid'
 
+import 'vue-tsx-support/enable-check'
 
 interface Props{
     value:string,//v-model绑定的值
@@ -128,7 +129,7 @@ export default class iVsomCheckbox extends tsx.Component<Props,Event,ScopedSlots
             for (let [k, item] of map.entries()) {
                 let c =<span data-value={item.value}> 
                 <label class={ `ivsom-checkbox  ${ item.disabled ? 'ivsom-checkbox_disabled' : '' }` }  key={ k as any }>
-                 <input type="checkbox" checked={this.isChecked(item.value)}  disabled={!!item.disabled} onChange={ (e) => { me.change(e as HTMLInputEvent) } } value={item.value}/> {item.label}
+                 <input type="checkbox" checked={this.isChecked(item.value)}  disabled={!!item.disabled} onChange={ (e) => { me.change(e as any) } } value={item.value}/> {item.label}
                  </label></span>
                 element.push(c);
             }

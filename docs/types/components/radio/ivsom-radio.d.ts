@@ -1,4 +1,5 @@
 import * as tsx from 'vue-tsx-support';
+import 'vue-tsx-support/enable-check';
 interface Props {
     options: Array<{
         name: string;

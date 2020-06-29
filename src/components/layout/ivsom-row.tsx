@@ -8,6 +8,8 @@
  import * as tsx from 'vue-tsx-support'
  import { Component, Prop } from 'vue-property-decorator'
 
+ import 'vue-tsx-support/enable-check'
+
  type Props = {
      //flex 布局下的垂直排列方式
      align : 'top' | 'middle' | 'bottom'

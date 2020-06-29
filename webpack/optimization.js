@@ -45,12 +45,12 @@
             'vue-tsx-support' : {
                 test : /[\\/]node_modules[\\/]vue-tsx-support[\\/]/,
                 name : 'vue-tsx-support',
-                priority : 5
+                priority : 3
             },
             'vue-property-decorator' : {
                 test : /[\\/]node_modules[\\/]vue-property-decorator[\\/]/,
                 name : 'vue-property-decorator',
-                priority : 5
+                priority : 4
             }
         }
     }

@@ -6,7 +6,9 @@
  */
 
  import * as tsx from 'vue-tsx-support'
- import { Component, Prop, Emit, Ref, Provide } from 'vue-property-decorator'
+ import { Component, Prop, Emit, Ref, Provide } from 'vue-property-decorator' 
+ 
+ import 'vue-tsx-support/enable-check'
 
  type Props = {
     //开启菜单筛选功能
@@ -45,6 +47,10 @@
     @Prop({ default : false, type : Boolean}) readonly horizontal !: boolean;
 
     @Provide(Symbol.for('target')) @Prop({ default : 'self'}) readonly target !: 'top' | 'blank' | 'parent' | 'self' | String;
+
+    @Provide(Symbol.for('menu')) get rootMenu() {
+        return this;
+    }
 
     @Ref('search_input') readonly search_input !: JSX.Element;
 

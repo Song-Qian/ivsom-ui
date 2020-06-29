@@ -39,6 +39,8 @@
 
     @Inject(Symbol.for('target')) target !: 'top' | 'blank' | 'parent' | 'self' | String;
 
+    @Inject(Symbol.for('menu')) rootMenu !: any;
+
     private collapse : boolean = false;
 
     private hasFilter : boolean = false;
@@ -48,16 +50,6 @@
         const menuItemsScopedSlots = me.$scopedSlots.submenu && me.$scopedSlots.submenu()?.filter(c => c.componentOptions?.Ctor.name === 'iVsomMenuItem' );
         menuItemsScopedSlots?.forEach(c => c.parent = (me as any));
         return menuItemsScopedSlots ? <ul class={ ['ivsom-menu__panel', me.collapse ? '' : 'ivsom-menu__hide'] }>{ menuItemsScopedSlots }</ul> : undefined;
-    }
-
-    private __handlerRoot() : any {
-        const me = this;
-        const deep = (parent : any) : boolean => {
-            if(parent.$vnode.componentOptions?.Ctor.name === "iVsomMenu")
-                return parent;
-            return deep(parent.$parent);
-        }
-        return deep(me);
     }
 
     private __handlerLevels() : number {
@@ -84,7 +76,7 @@
     protected onMenuItemClick(e : MouseEvent, aside : boolean, horizontal : boolean) {
         const me = this;
         //当菜单为默认模式，则由点击事件控制菜单项的展开和关闭
-        const rootMenu = me.__handlerRoot();
+        const rootMenu = me.rootMenu;
         rootMenu.$emit('on-menu-item-click', e);
         if(!aside && !horizontal) {
             me.collapse = !me.collapse;
@@ -130,7 +122,7 @@
 
     protected render() : JSX.Element {
         const me = this;
-        const { aside, horizontal } = me.__handlerRoot();
+        const { aside, horizontal } = me.rootMenu;
         const childrenEl = me.children;
         const indent = me.__handlerLevels();
         const iconEl = me.icon ? <div class="ivsom-menu__icon"><i class={ ['iconfont', me.icon] } ></i></div> : <i class="iconfont">&nbsp;</i>;

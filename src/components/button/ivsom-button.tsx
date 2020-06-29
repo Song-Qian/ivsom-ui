@@ -8,6 +8,8 @@
 import * as tsx from 'vue-tsx-support'
 import { Component, Prop } from 'vue-property-decorator'
 
+import 'vue-tsx-support/enable-check'
+
 interface Props {
     Icon : String,
     Plain : Boolean,
