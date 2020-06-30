@@ -1,6 +1,7 @@
 import * as tsx from 'vue-tsx-support'
 import { Component, Prop, Emit, Watch,Ref} from 'vue-property-decorator'
-import uuid from '~/utils/uuid'
+
+import 'vue-tsx-support/enable-check'
 
 interface Props{
     max:Number,

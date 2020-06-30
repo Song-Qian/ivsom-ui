@@ -36,6 +36,16 @@ Description :  武汉微创光电股份公司 iVsomUI 组件库`,
         },
         {
             from : {
+                glob : path.join(__dirname, '../src', 'assets/utils/iconfont.js'),
+                dot : true
+            },
+            to : path.join(__dirname, '../docs', 'iconfont.js'),
+            force : true,
+            flatten : true,
+            copyUnmodified : true
+        },
+        {
+            from : {
                 glob : path.join(__dirname, '../node_modules', 'vue', 'dist', 'vue.min.js'),
                 dot : true
             },
@@ -67,8 +77,17 @@ Description :  武汉微创光电股份公司 iVsomUI 组件库`,
         }))
     })
 
+    extensionPlugin.push(new htmlWebpackPlugin({
+        filename : path.join(__dirname, '../docs', 'index.html'),
+        template : path.join(__dirname, '../src', 'tests', 'index.html'),
+        inject : 'head',
+        minify : false,
+        // templateParameters : {
+        //     vue : process.env.NODE_ENV === 'production' ? './vue.min.js' : '/vue.min.js'
+        // },
+        chunks : ['index']
+    }))
     // if(process.env.NODE_ENV === 'production') {
-
     //     const uglifyJsPlugin = new webpack.optimize.UglifyJsPlugin({
     //         sourceMap: false,
     //         test : /\.(js|ts)$/,

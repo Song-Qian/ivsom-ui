@@ -6,7 +6,9 @@
  */
 
  import * as tsx from 'vue-tsx-support'
- import { Component, Prop, Emit, Ref } from 'vue-property-decorator'
+ import { Component, Prop, Emit, Ref, Provide } from 'vue-property-decorator' 
+ 
+ import 'vue-tsx-support/enable-check'
 
  type Props = {
     //开启菜单筛选功能
@@ -18,7 +20,9 @@
     //筛选功能输入文本，支持sync双向绑定
     SearchText : String
     //是否横向菜单
-    Horizontal : boolean 
+    Horizontal : boolean
+    //菜单跳转方式
+    Target : 'top' | 'blank' | 'parent' | 'self' | String
  }
 
  type ScopedSlots = {
@@ -41,6 +45,12 @@
     @Prop({ default: '', type : Boolean }) readonly searchText !: string;
 
     @Prop({ default : false, type : Boolean}) readonly horizontal !: boolean;
+
+    @Provide(Symbol.for('target')) @Prop({ default : 'self'}) readonly target !: 'top' | 'blank' | 'parent' | 'self' | String;
+
+    @Provide(Symbol.for('menu')) get rootMenu() {
+        return this;
+    }
 
     @Ref('search_input') readonly search_input !: JSX.Element;
 
@@ -130,7 +140,6 @@
              )
         }
         me.$forceUpdate();
-        
         // me.$on('on-menu-item-click', () => ));
     }
 

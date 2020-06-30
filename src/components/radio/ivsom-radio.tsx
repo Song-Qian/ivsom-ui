@@ -8,6 +8,8 @@ import * as tsx from 'vue-tsx-support'
 import { Component, Prop, Emit, Watch,} from 'vue-property-decorator'
 import uuid from '~/utils/uuid'
 
+import 'vue-tsx-support/enable-check'
+
 interface Props{
     options:Array<{ name : string,  value : string }>,//单选框对应的数据源
     selectOption:String,//双向绑定对应的选中的vaule值

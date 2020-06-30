@@ -1,4 +1,5 @@
 import * as tsx from 'vue-tsx-support';
+import 'vue-tsx-support/enable-check';
 declare type Props = {
     Span: number;
     Jump: number;

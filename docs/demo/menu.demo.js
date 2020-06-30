@@ -125,6 +125,15 @@
                     return true;
                 }
                 return false;
+            },
+            handlerMenuItemClick : function(e) {
+                alert(e.target.innerText);
+            },
+            handlerSearchActivation : function(e) {
+                console.log('我被激活了');
+            },
+            handlerSearchDeactivated : function(e) {
+                console.log('我失去了激活状态');
             }
         }
     })

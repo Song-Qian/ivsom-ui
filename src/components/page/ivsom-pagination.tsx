@@ -7,6 +7,8 @@
 import * as tsx from 'vue-tsx-support'
 import { Component, Prop, Emit, Watch,} from 'vue-property-decorator'
 
+import 'vue-tsx-support/enable-check'
+
 interface Props{
     pageNumber:Number,//当前页
     pageSize:number[],//每页显示条数
@@ -179,7 +181,7 @@ export default class iVsomPagination extends tsx.Component<Props,Event>{
                 })}
               </select>
               <span class="ml20">跳至</span>
-              <span class="page-jump-to"><input type="type" value={this.jumpPageNumber} onInput={e=>{this.input(e as HTMLInputEvent)}} /></span>
+              <span class="page-jump-to"><input type="type" value={this.jumpPageNumber} onInput={e=>{this.input(e as any)}} /></span>
               <span>页</span>
               <span class="page-item jump-go-btn" onClick={e=>{this.goPage(this.jumpPageNumber)}}>GO</span>
               </div>):(<div></div>)}   

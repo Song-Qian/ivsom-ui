@@ -7,6 +7,8 @@
 import * as tsx from 'vue-tsx-support'
 import { Component, Prop, Emit, Watch,} from 'vue-property-decorator'
 
+import 'vue-tsx-support/enable-check'
+
 interface Props{
     value:Boolean,
     width:Number,

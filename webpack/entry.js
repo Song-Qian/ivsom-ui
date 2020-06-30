@@ -7,6 +7,5 @@
 var path = require("path");
 
 module.exports = {
-    index : path.resolve(__dirname, '../src/install.ts'),
-    iconfont : path.resolve(__dirname, '../src/assets/utils/iconfont.js')
+    index : path.resolve(__dirname, '../src/install.ts')
 }

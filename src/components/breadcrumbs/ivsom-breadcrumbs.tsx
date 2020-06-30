@@ -6,8 +6,10 @@
  */
 
 import * as tsx from 'vue-tsx-support'
-import { Component, Prop, PropSync, Emit } from 'vue-property-decorator'
+import { Component, Prop, Emit } from 'vue-property-decorator'
 import uuid from '~/utils/uuid'
+
+import 'vue-tsx-support/enable-check'
 
 interface Props {
     //面包屑层级数据

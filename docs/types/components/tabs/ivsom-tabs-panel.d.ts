@@ -1,4 +1,5 @@
 import * as tsx from 'vue-tsx-support';
+import 'vue-tsx-support/enable-check';
 declare type Props = {
     Name: String;
     Index: String;
@@ -10,7 +11,6 @@ export default class iVsomTabsPanel extends tsx.Component<Props, any, ScopedSlot
     constructor();
     readonly name: string;
     readonly index: string;
-    protected created(): void;
     protected render(): JSX.Element;
 }
 export {};
