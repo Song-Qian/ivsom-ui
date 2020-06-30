@@ -30,6 +30,12 @@ export default class iVsomCheckbox extends tsx.Component<Props,Event,ScopedSlots
     @Prop({default:null}) readonly dataSource!:Array<{ label : string,  value : string,disabled:boolean}>;
 
     private checkedModel :any = this.value;
+    private validate : boolean = true;
+    public ValidateField(regexp : RegExp) {
+        const me = this;
+        me.validate = regexp.test(me.value);
+        return me.validate;
+    }
    
     // @Emit()
     protected  change(event: HTMLInputEvent){

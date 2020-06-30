@@ -34,7 +34,13 @@ export default class iVsomRadio extends tsx.Component<Props,Event,ScopedSlots>{
     // @Ref('radio') protected readonly radio !:  HTMLInputElement;
 
     private selectRadio : string = "";
-
+    private validate : boolean = true;
+ 
+    public ValidateField(regexp : RegExp) {
+        const me = this;
+        me.validate = regexp.test(me.selectoption);
+        return me.validate;
+    }
 
     protected mounted() {
          const me=this

@@ -127,6 +127,7 @@ export default class iVsomPagination extends tsx.Component<Props,Event>{
     }
     
     protected goPage (jumpPageNumber:number) {
+      console.log(jumpPageNumber)
       if(Number(jumpPageNumber) <= 0){
         jumpPageNumber = 1
       }if(Number(jumpPageNumber) >= this.totalPage){
@@ -136,7 +137,7 @@ export default class iVsomPagination extends tsx.Component<Props,Event>{
     }
     
     protected jumpPage (pageNumber:number) {
-      console.log(pageNumber)
+      console.log(pageNumber,this.currentPage)
       var arr = document.getElementsByClassName("page-item");
       if (this.currentPage !== pageNumber) { 
         arr[pageNumber+1].classList.add("page-current");
