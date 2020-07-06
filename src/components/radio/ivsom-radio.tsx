@@ -5,7 +5,7 @@
  * Description  :   radio组件
  */
 import * as tsx from 'vue-tsx-support'
-import { Component, Prop, Emit, Watch,} from 'vue-property-decorator'
+import { Component, Prop, Emit, Watch, InjectReactive,} from 'vue-property-decorator'
 import uuid from '~/utils/uuid'
 
 import 'vue-tsx-support/enable-check'
@@ -32,25 +32,28 @@ export default class iVsomRadio extends tsx.Component<Props,Event,ScopedSlots>{
     @Prop({ default : null }) readonly icon !: string;
 
     // @Prop({default : false, type : Boolean}) readonly disabled!:boolean;
-    @Prop({default :"", type : String}) readonly selectoption!:string;
+    @Prop({default :"", type : String}) readonly selectOption!:string;
     // @Ref('radio') protected readonly radio !:  HTMLInputElement;
 
+    @InjectReactive(Symbol.for('validate')) validate !: boolean;
+    @InjectReactive(Symbol.for('trigger')) trigger !: 'blur' | 'change';
+
     private selectRadio : string = "";
-    private validate : boolean = true;
+    // private validate : boolean = true;
  
-    public ValidateField(regexp : RegExp) {
-        const me = this;
-        me.validate = regexp.test(me.selectoption);
-        return me.validate;
-    }
+    // public ValidateField(regexp : RegExp) {
+    //     const me = this;
+    //     me.validate = regexp.test(me.selectoption);
+    //     return me.validate;
+    // }
 
     protected mounted() {
          const me=this
-         me.selectRadio = me.selectoption;  
+         me.selectRadio = me.selectOption;  
     }
      
     @Emit()
-    protected radioChange(e : MouseEvent): void {
+    protected onRadioChange(e : MouseEvent): void {
         const me=this
         const { value } = e.target as any
         me.selectRadio = value
@@ -82,7 +85,7 @@ export default class iVsomRadio extends tsx.Component<Props,Event,ScopedSlots>{
             for (let [k, item] of map.entries()) {
                 let c = (<div key={ k as string } class={{'radio-wrapper':true,"radio-wrapper_disabled":item.disabled==true}} >
                            <lable  class={{'ivsom-radio':true,"checked":me.selectRadio == item.value,"ivsom-radio_disabled":item.disabled==true}}>
-                               <input type="radio" value={item.value} disabled={ !!item.disabled } onClick={ (e) => { me.radioChange(e as MouseEvent) } }  />
+                               <input type="radio" value={item.value} disabled={ !!item.disabled } onClick={ (e) => { me.onRadioChange(e as MouseEvent) } }  />
                            </lable>
                            <i class={ `iconfont ${ me.icon }` }></i>
                            { item.name }

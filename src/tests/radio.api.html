@@ -28,167 +28,130 @@
                             <li>Radio 组件在使用之前，需要有相关的依赖库进行支持，如需阅读：<a href="./start.api.html" target="_blank" >快速开始</a></li>
                         </ul>
                         <blockquote>
-                            <i-vsom-radio :options="testArray" selectOption="2" @radio-change="setRadioValue"></i-vsom-radio>
+                            <i-vsom-radio :options="testArray" :select-option="2" @on-radio-change="setRadioValue"></i-vsom-radio>
                         </blockquote>
                         <blockquote>
-                            <i-vsom-radio :options="[{name:'苹果',value:1}]" :selectOption="1"  @radio-change="setRadioValue"></i-vsom-radio>
+                            <i-vsom-radio :options="[{name:'苹果',value:1}]" :select-option="1"  @on-radio-change="setRadioValue"></i-vsom-radio>
                         </blockquote>
                         <pre><code class="language-html"
-                            >&lt;i-vsom-radio :options="testArray" :selectOption="1"  @radio-change="setRadioValue"&gt;&lt;/i-vsom-radio&gt;   
+                            >&lt;i-vsom-radio :options="testArray" :select-option="1"  @on-radio-change="setRadioValue"&gt;&lt;/i-vsom-radio&gt;   
                             </code></pre>
-                            <pre><code class="language-js" >
-                            var app = new Vue({
-                                el : '#app',
-                                data : function() {
-                                    return {
-                                        testArray:[{
-                                            name:"苹果",
-                                            value:1,
-                                           
-                                        },{
-                                            name:"香蕉",
-                                            value:2,
-                                            
-                                        },{
-                                            name:"梨子",
-                                            value:3,
-                                            
-                                        }],
-                                        select:1,
-                                    }
-                                },
-                                methods : {
-                                    setRadioValue:function (value) {
-                                        const { val } = value.target 
-                                      console.log(value.target.value);
-                        
-                                    }
-                                }
-                            })
-                        </code></pre>
+                            <pre><code class="language-js"
+>var app = new Vue({
+    el : '#app',
+    data : function() {
+    return {
+        testArray:[
+           { name:"苹果",value:1 },
+           { name:"香蕉",value:2 },
+           { name:"梨子", value:3 }
+        ],
+        select:1,
+    }
+    },
+     methods : {
+        setRadioValue:function (value) {
+             const { val } = value.target 
+            console.log(value.target.value);
+         }
+    }
+})
+</code></pre>
                         <h2 id="unicode-">双响相应</h2>
                         <hr>
                         <ul>
                             <li>单选按钮组件options 属性支持使用.sync 修饰符来实现双向响应</li>
                         </ul>
                         <blockquote>
-                            <i-vsom-radio :options.snyc="testArray1" :selectOption="select"  @radio-change="setRadioValue"></i-vsom-radio>
+                            <i-vsom-radio :options.snyc="testArray1" :select-option="select"  @on-radio-change="setRadioValue"></i-vsom-radio>
                         </blockquote>
                         <pre><code class="language-html"
-                            >&lt;i-vsom-radio :options.snyc="testArray1" :selectOption="select"  @radio-change="setRadioValue"&gt;&lt;/i-vsom-radio&gt;   
+                            >&lt;i-vsom-radio :options.snyc="testArray1" :select-option="select"  @on-radio-change="setRadioValue"&gt;&lt;/i-vsom-radio&gt;   
                         </code></pre>
-                        <pre><code class="language-js" >
-                            var app = new Vue({
-                                el : '#app',
-                                data : function() {
-                                    return {
-                                        testArray1:[{
-                                            name:"苹果",
-                                            value:1,
-                            
-                                        },{
-                                            name:"香蕉",
-                                            value:2,
-                                            
-                                        },{
-                                            name:"梨子",
-                                            value:3,
-                                            
-                                        }],
-                                        select:1,
-                                    }
-                                },
-                                methods : {
-                                    setRadioValue:function (value) {
-                                        const { val } = value.target 
-                                      console.log(value.target.value);
-                        
-                                    }
-                                }
-                            })
-                        </code></pre>
+                        <pre><code class="language-js" 
+>var app = new Vue({
+    el : '#app',
+    data : function() {
+        return {
+            testArray1:[
+                { name:"苹果",value:1 },
+                { name:"香蕉",value:2 },
+                { name:"梨子", value:3 }
+            ],
+            select:1,
+        }
+    },
+    methods : {
+        setRadioValue:function (value) {
+            const { val } = value.target 
+                console.log(value.target.value);
+        }
+    }})
+</code></pre>
                         <h2 id="unicode-">禁用选项</h2>
                         <hr>
                         <ul>
                             <li>单选按钮组件disableed 属性支持使用</li>
                         </ul>
                         <blockquote>
-                            <i-vsom-radio :options.snyc="testArray2" :selectOption="select"  @radio-change="setRadioValue"></i-vsom-radio>
+                            <i-vsom-radio :options.snyc="testArray2" :select-option="select"  @on-radio-change="setRadioValue"></i-vsom-radio>
                         </blockquote>
                         <pre><code class="language-html"
-                            >&lt;i-vsom-radio :options.snyc="testArray2" :selectOption="select"  @radio-change="setRadioValue"&gt;&lt;/i-vsom-radio&gt;   
+                            >&lt;i-vsom-radio :options.snyc="testArray2" :select-option="select"  @on-radio-change="setRadioValue"&gt;&lt;/i-vsom-radio&gt;   
                         </code></pre>
-                        <pre><code class="language-js" >
-                            var app = new Vue({
-                                el : '#app',
-                                data : function() {
-                                    return {
-                                        testArray2:[{
-                                            name:"苹果",
-                                            value:1,
-                                            disabled:true
-                                        },{
-                                            name:"香蕉",
-                                            value:2,
-                                           
-                                        },{
-                                            name:"梨子",
-                                            value:3,
-                                            disabled:true
-                                        }],
-                                        select:1,
-                                    }
-                                },
-                                methods : {
-                                    setRadioValue:function (value) {
-                                        const { val } = value.target 
-                                      console.log(value.target.value);
-                        
-                                    }
-                                }
-                            })
-                            </code></pre>
+                        <pre><code class="language-js"
+>var app = new Vue({
+    el : '#app',
+    data : function() {
+        return {
+            testArray2:[
+                {name:"苹果",value:1,disabled:true},
+                {name:"香蕉",value:2},
+                {name:"梨子",value:3,disabled:true}
+            ],
+            select:1,
+        }
+     },
+     methods : {
+        setRadioValue:function (value) {
+            const { val } = value.target 
+             console.log(value.target.value);              
+         }
+    }
+  })
+</code></pre>
                             <h2 id="unicode-">自定义符号</h2>
                             <hr>
                             <ul>
                                 <li>单选按钮组件icon属性支持自定义符号</li>
                             </ul>
                             <blockquote>
-                                <i-vsom-radio :options.snyc="testArray2" :selectOption="select" icon="icon-gongnengtubiao-79"  @radio-change="setRadioValue"></i-vsom-radio>
+                                <i-vsom-radio :options.snyc="testArray2" :select-option="select" icon="icon-gongnengtubiao-79"  @on-radio-change="setRadioValue"></i-vsom-radio>
                             </blockquote>
                             <pre><code class="language-html"
-                                >&lt;i-vsom-radio :options.snyc="testArray" :selectOption="select" icon="icon-gongnengtubiao-79"  @radio-change="setRadioValue"&gt;&lt;/i-vsom-radio&gt;   
+                                >&lt;i-vsom-radio :options.snyc="testArray" :select-option="select" icon="icon-gongnengtubiao-79"  @on-radio-change="setRadioValue"&gt;&lt;/i-vsom-radio&gt;   
                             </code></pre>
-                            <pre><code class="language-js" >
-                                var app = new Vue({
-                                    el : '#app',
-                                    data : function() {
-                                        return {
-                                            testArray2:[{
-                                                name:"苹果",
-                                                value:1,
-                                                disabled:true
-                                            },{
-                                                name:"香蕉",
-                                                value:2,
-                                               
-                                            },{
-                                                name:"梨子",
-                                                value:3,
-                                                disabled:true
-                                            }],
-                                            select:1,
-                                        }
-                                    },
-                                    methods : {
-                                        setRadioValue:function (value) {
-                                            const { val } = value.target 
-                                          console.log(value.target.value);
-                            
-                                        }
-                                    }
-                                })
-                        </code></pre>
+                            <pre><code class="language-js" 
+>var app = new Vue({
+    el : '#app',
+    data : function() {
+        return {
+            testArray2:[
+                {name:"苹果",value:1,disabled:true},
+                {name:"香蕉",value:2},
+                {name:"梨子",value:3,disabled:true}
+            ],
+             select:1,
+        }
+    },
+    methods : {
+        setRadioValue:function (value) {
+            const { val } = value.target 
+            console.log(value.target.value);                  
+        }
+    }
+})
+ </code></pre>
                     </div>
                 </div>
             </div>

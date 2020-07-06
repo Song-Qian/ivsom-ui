@@ -58,7 +58,7 @@ export default class iVsomInputNumber extends tsx.Component<Props>{
         // 发出两个事件, 一个负责改变value, 一个负责返回给用户
         // 毕竟用户不可能监听input事件然后再把值附上去, 太麻烦
         this.$emit("input", value);
-        this.$emit("change", value);
+        this.$emit("on-change", value);
         // 这一步很重要
         // 下面会详细说
         // this.input.value = value;

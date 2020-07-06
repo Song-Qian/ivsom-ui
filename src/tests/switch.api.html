@@ -33,17 +33,16 @@
                         <pre><code class="language-html"
                             >&lt;i-vsom-switch v-model="status" &gt;&lt;/i-vsom-switch&gt;   
                             </code></pre>
-                        <pre><code class="language-js" >
-                            var app = new Vue({
-                                el : '#app',
-                                data : function() {
-                                    return {
-                                        status: true,
-                                    }
-                                },
-                               
-                            })
-                        </code></pre>
+                        <pre><code class="language-js" 
+ >var app = new Vue({
+    el : '#app',
+    data : function() {
+        return {
+            status: true,
+        }
+    },
+})
+</code></pre>
                         <h2 id="unicode-">选择背景用法</h2>
                         <hr>
                         <ul>
@@ -55,19 +54,18 @@
                         <pre><code class="language-html"
                             >&lt;i-vsom-switch v-model="status" :open-color="background1" :close-color="background2" &gt;&lt;/i-vsom-switch&gt;   
                             </code></pre>
-                        <pre><code class="language-js" >
-                            var app = new Vue({
-                                el : '#app',
-                                data : function() {
-                                    return {
-                                        status: true,
-                                        background1: "#13CE66",
-                                        background2:"#ff4949",
-                                    }
-                                },
-                               
-                            })
-                        </code></pre>
+                        <pre><code class="language-js"
+ >var app = new Vue({
+    el : '#app',
+    data : function() {
+        return {
+            status: true,
+            background1: "#13CE66",
+            background2:"#ff4949",
+        }
+    },
+})
+</code></pre>
                         <h2 id="unicode-">宽高属性设置</h2>
                         <hr>
                         <ul>
@@ -79,17 +77,16 @@
                         <pre><code class="language-html"
                             >&lt;i-vsom-switch v-model="status" width="100" height="50" &gt;&lt;/i-vsom-switch&gt;   
                             </code></pre>
-                        <pre><code class="language-js" >
-                            var app = new Vue({
-                                el : '#app',
-                                data : function() {
-                                    return {
-                                        status: true,
-                                    }
-                                },
-                               
-                            })
-                        </code></pre>
+                        <pre><code class="language-js"
+ >var app = new Vue({
+    el : '#app',
+    data : function() {
+        return {
+            status: true,
+        }
+    },
+})
+</code></pre>
                         <h2 id="unicode-">禁用用法</h2>
                         <hr>
                         <ul>
@@ -101,17 +98,16 @@
                         <pre><code class="language-html"
                             >&lt;i-vsom-switch v-model="status"  &gt;&lt;/i-vsom-switch&gt;   
                             </code></pre>
-                        <pre><code class="language-js" >
-                            var app = new Vue({
-                                el : '#app',
-                                data : function() {
-                                    return {
-                                        status: true,
-                                    }
-                                },
-                               
-                            })
-                        </code></pre>
+                        <pre><code class="language-js"
+ >var app = new Vue({
+    el : '#app',
+    data : function() {
+        return {
+             status: true,
+        }
+    },
+ })
+</code></pre>
                         <h2 id="unicode-">触发事件</h2>
                         <hr>
                         <ul>
@@ -123,22 +119,21 @@
                         <pre><code class="language-html"
                             >&lt;i-vsom-switch v-model="status" @change="change"  &gt;&lt;/i-vsom-switch&gt;   
                             </code></pre>
-                        <pre><code class="language-js" >
-                            var app = new Vue({
-                                el : '#app',
-                                data : function() {
-                                    return {
-                                        status: true,
-                                    }
-                                },
-                                methods:{
-                                    change(value){
-                                       console.log(value)
-                                    }
-                                 }
-                               
-                            })
-                        </code></pre>
+                        <pre><code class="language-js"
+> var app = new Vue({
+    el : '#app',
+    data : function() {
+        return {
+            status: true,
+        }
+    },
+    methods:{
+        change(value){
+            console.log(value)
+        }
+    }
+})
+</code></pre>
                     </div>
                 </div>
             </div>

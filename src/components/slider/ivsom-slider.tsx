@@ -75,6 +75,7 @@ export default class iVsomSlider extends tsx.Component<Props>{
 			let leftBtn = this.$refs.leftBtn as HTMLElement
 			let propoBg = this.$refs.propoBg as HTMLElement
 			let propoRange = this.$refs.propoRange as HTMLElement
+			var hasMove=false
 			const elementLeft = (e: any) => { //计算x坐标
 				var offset = e.offsetLeft;
 				if (e.offsetParent != null) offset += elementLeft(e.offsetParent);
@@ -138,61 +139,83 @@ export default class iVsomSlider extends tsx.Component<Props>{
 
 			if (!this.disabled) {
 				if (this.range) {
-					leftBtn.addEventListener('mousemove', (e: MouseEvent) => { //屏幕滑动事件
+					leftBtn.addEventListener('mousedown', (e: MouseEvent) => {
+						document.onmousemove= e =>{ //屏幕滑动事件
+							console.log(111)
+							if(hasMove){
+								let pageX = e.pageX - mySliderX //获取滑动x坐标
+								myWidth = (pageX / mySlider.offsetWidth) * 100 //计算百分比
+								if (myWidth > 100) { //判断不超出范围
+									myWidth = 100
+								} else if (myWidth < 0) {
+									myWidth = 0
+								}
+								if (this.myPosition.isBtn == 1 && myWidth < 50) {//判断焦点
+									this.myPosition.left = myWidth
+									rightBtn.style.left = myWidth + '%'
+								} else if (this.myPosition.isBtn == 2 && myWidth > 50) {
+									this.myPosition.right = myWidth
+									leftBtn.style.left = myWidth + '%'
+								}
+							
+								myCount()
+								e.preventDefault()
+							}	
+						}
+						document.onmouseup = e => {
+							//鼠标弹起来的时候不再移动
+							document.onmousemove = null;
+						   //预防鼠标弹起来后还会循环（即预防鼠标放上去的时候还会移动）  
+						  document.onmouseup = null;
+					  };
+					})
+					
+				}
+				rightBtn.addEventListener('mousedown', (e: MouseEvent) => {
+					document.onmousemove= e =>{ //屏幕滑动事件
+						console.log(222)
 						let pageX = e.pageX - mySliderX //获取滑动x坐标
 						myWidth = (pageX / mySlider.offsetWidth) * 100 //计算百分比
-						if (myWidth > 100) { //判断不超出范围
-							myWidth = 100
-						} else if (myWidth < 0) {
-							myWidth = 0
-						}
-						if (this.myPosition.isBtn == 1 && myWidth < 50) {//判断焦点
+						if (this.range) {
+							if (myWidth > 100) { //判断不超出范围
+								myWidth = 100
+							} else if (myWidth < 0) {
+								myWidth = 0
+							}
+							if (this.myPosition.isBtn == 1 && myWidth < 50) {//判断焦点
+								this.myPosition.left = myWidth
+								rightBtn.style.left = myWidth + '%'
+							} else if (this.myPosition.isBtn == 2 && myWidth > 50) {
+								this.myPosition.right = myWidth
+								leftBtn.style.left = myWidth + '%'
+							}
+						} else {
+							if (myWidth > 100) { //判断不超出范围
+								myWidth = 100
+							} else if (myWidth < 0) {
+								myWidth = 0
+							}
 							this.myPosition.left = myWidth
 							rightBtn.style.left = myWidth + '%'
-						} else if (this.myPosition.isBtn == 2 && myWidth > 50) {
-							this.myPosition.right = myWidth
-							leftBtn.style.left = myWidth + '%'
 						}
+					
 						myCount()
-						e.preventDefault()
-					})
+			        	e.preventDefault()	
+					
 				}
-
-
-				rightBtn.addEventListener('mousemove', (e: MouseEvent) => { //屏幕滑动事件
-					let pageX = e.pageX - mySliderX //获取滑动x坐标
-					myWidth = (pageX / mySlider.offsetWidth) * 100 //计算百分比
-					if (this.range) {
-						console.log(111)
-						if (myWidth > 100) { //判断不超出范围
-							myWidth = 100
-						} else if (myWidth < 0) {
-							myWidth = 0
-						}
-						if (this.myPosition.isBtn == 1 && myWidth < 50) {//判断焦点
-							this.myPosition.left = myWidth
-							rightBtn.style.left = myWidth + '%'
-						} else if (this.myPosition.isBtn == 2 && myWidth > 50) {
-							this.myPosition.right = myWidth
-							leftBtn.style.left = myWidth + '%'
-						}
-					} else {
-						if (myWidth > 100) { //判断不超出范围
-							myWidth = 100
-						} else if (myWidth < 0) {
-							myWidth = 0
-						}
-						this.myPosition.left = myWidth
-						rightBtn.style.left = myWidth + '%'
-					}
-					myCount()
-					e.preventDefault()
+				document.onmouseup = e => {
+					//鼠标弹起来的时候不再移动
+					document.onmousemove = null;
+				   //预防鼠标弹起来后还会循环（即预防鼠标放上去的时候还会移动）  
+				  document.onmouseup = null;
+			  };
 				})
-
-
+				
+		
 				mySlider.addEventListener('mousedown', (e: MouseEvent) => {//点击事件
 					let touchX = e.pageX - mySliderX
 					myWidth = (touchX / mySlider.offsetWidth) * 100 //计算百分比
+					hasMove=false;
 					if(this.range){
 						if (myWidth > 100) { //判断不超出范围
 							myWidth = 100
@@ -216,7 +239,6 @@ export default class iVsomSlider extends tsx.Component<Props>{
 						this.myPosition.left = myWidth
 						rightBtn.style.left = myWidth + '%'
 					}
-					
 					this.myPosition.now = (touchX / mySlider.offsetWidth) * 100
 					mySliderX = elementLeft(mySlider) //滑动块x坐标
 					myCount()

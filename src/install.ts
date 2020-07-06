@@ -24,6 +24,7 @@ import iVsomSlider from './components/slider/ivsom-slider'
 import iVsomPagination from './components/page/ivsom-pagination'
 import iVsomInput from './components/form/ivsom-input'
 import iVsomStep from './components/step/ivsom-step'
+import iVsomList from './components/list/ivsom-list'
 
 const components : Array<any> = [
     iVsomRow,
@@ -42,7 +43,8 @@ const components : Array<any> = [
     iVsomSlider,
     iVsomPagination,
     iVsomInput,
-    iVsomStep
+    iVsomStep,
+    iVsomList
 ]
 
 const install = (Vue : any) => {

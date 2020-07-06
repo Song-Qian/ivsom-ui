@@ -16,6 +16,7 @@
         "slider.api.html",
         "pagination.api.html",
         "input.api.html",
-        "step.api.html"
+        "step.api.html",
+        "list.api.html"
     ]
 }

@@ -33,19 +33,18 @@
                         <pre><code class="language-html"
                             >&lt;i-vsom-slider :min="0" :max="100" @value-fun="valuefun"&gt;&lt;/i-vsom-slider&gt;   
                             </code></pre>
-                        <pre><code class="language-js" >
-                            var app = new Vue({
-                                el : '#app',
-                                data : function() {
-                                    return {
-                                        valuefun(value){
-                                            console.log(value)
-                                         } 
-                                    }
-                                },
-                               
-                            })
-                        </code></pre>
+                        <pre><code class="language-js" 
+>var app = new Vue({
+    el : '#app',
+    data : function() {
+        return {
+            valuefun(value){
+                console.log(value)
+            } 
+        }
+     },                             
+})
+</code></pre>
                         <h2 id="unicode-">双滑块用法</h2>
                         <hr>
                         <ul>
@@ -57,19 +56,18 @@
                         <pre><code class="language-html"
                             >&lt;i-vsom-slider :min="10" :max="80" range="true" @value-fun="valuefun"&gt;&lt;/i-vsom-slider&gt;   
                             </code></pre>
-                        <pre><code class="language-js" >
-                            var app = new Vue({
-                                el : '#app',
-                                data : function() {
-                                    return {
-                                        valuefun(value){
-                                            console.log(value)
-                                         } 
-                                    }
-                                },
-                               
-                            })
-                        </code></pre>
+                        <pre><code class="language-js" 
+>var app = new Vue({
+    el : '#app',
+    data : function() {
+        return {
+            valuefun(value){
+                console.log(value)
+            } 
+        }
+    },
+ })
+  </code></pre>
                         <h2 id="unicode-">禁用用法</h2>
                         <hr>
                         <ul>
@@ -81,16 +79,16 @@
                         <pre><code class="language-html"
                             >&lt;i-vsom-slider :min="0" :max="100" disabled="true"  @value-fun="valuefun"&gt;&lt;/i-vsom-slider&gt;   
                             </code></pre>
-                        <pre><code class="language-js" >
-                            var app = new Vue({
-                                el : '#app',
-                                data : function() {
-                                    return {
-                                        valuefun(value){
-                                            console.log(value)
-                                         } 
-                                    }
-                                },
+                        <pre><code class="language-js"
+ >var app = new Vue({
+    el : '#app',
+    data : function() {
+        return {
+            valuefun(value){
+                console.log(value)
+            } 
+        }
+    },
                                
                             })
                         </code></pre>

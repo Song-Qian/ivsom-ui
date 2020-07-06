@@ -28,54 +28,53 @@
                             <li>Checkbox 组件在使用之前，需要有相关的依赖库进行支持，如需阅读：<a href="./start.api.html" target="_blank" >快速开始</a></li>
                         </ul>
                         <blockquote>
-                            <i-vsom-checkbox :data-source="optionData" @change="change"></i-vsom-checkbox>
+                            <i-vsom-checkbox :data-source="data" @on-change="change"></i-vsom-checkbox>
                         </blockquote>
                         <pre><code class="language-html"
-                            >&lt;i-vsom-checkbox :data-source="optionData"&gt;&lt;/i-vsom-checkbox&gt;   
+                            >&lt;i-vsom-checkbox :data-source="data"&gt;&lt;/i-vsom-checkbox&gt;   
                             </code></pre>
-                        <pre><code class="language-js" >
-                            var app = new Vue({
-                                el : '#app',
-                                data : function() {
-                                    return {
-                                        optionData:[
-                                            {label:'苹果',value:'red'},{label:'香蕉'',value:'write'},
-                                        ]
-                                    }
-                                },
+                        <pre><code class="language-js"
+ >var app = new Vue({
+     el : '#app',
+    data : function() {
+        return {
+            data:[
+                {label:'苹果',value:'red'},{label:'香蕉'',value:'write'},
+            ]
+        }
+    },
                                
-                            })
-                        </code></pre>
+})
+</code></pre>
                         <h2 id="unicode-">v-model双向绑定复选框</h2>
                         <hr>
                         <ul>
                             <li>v-model支持双向数据绑定，当默认为空则不选中值，默认有值则选中对应的vaule值</li>
                         </ul>
                         <blockquote>
-                            <i-vsom-checkbox v-model="model" @change="change" :data-source="optionData"></i-vsom-checkbox>
+                            <i-vsom-checkbox v-model="model" @on-change="change" :data-source="data"></i-vsom-checkbox>
                         </blockquote>
                         <pre><code class="language-html"
-                            >&lt;i-vsom-checkbox v-model="model" @change="change" :data-source="optionData"&gt;&lt;/i-vsom-checkbox&gt;   
+                            >&lt;i-vsom-checkbox v-model="model" @on-change="change" :data-source="data"&gt;&lt;/i-vsom-checkbox&gt;   
                             </code></pre>
-                        <pre><code class="language-js" >
-                            var app = new Vue({
-                                el : '#app',
-                                data : function() {
-                                    return {
-                                        optionData:[
-                                            {label:'苹果',value:'red'},{label:'香蕉',value:'write'},
-                                        ],
-                                        model:"red"
-                                    }
-                                },
-                                methods:{
-                                    change(value){
-                                       console.log(value)
-                                    }
-                                 }
-                               
-                            })
-                        </code></pre>
+                        <pre><code class="language-js" 
+>var app = new Vue({
+    el : '#app',
+    data : function() {
+        return {
+            data:[
+                {label:'苹果',value:'red'},{label:'香蕉',value:'write'},
+            ],
+            model:"red"
+        }
+    },
+    methods:{
+        change(value){
+            console.log(value)
+        }
+    }
+})
+</code></pre>
                         <h2 id="unicode-">禁用复选框</h2>
                         <hr>
                         <ul>
@@ -83,30 +82,29 @@
                             <li>当某一个复选框是禁用稍微，只需在对应的数据源里加上disabled字段</li>
                         </ul>
                         <blockquote>
-                            <i-vsom-checkbox v-model="model1" @change="change" :data-source="optionData1"></i-vsom-checkbox>
+                            <i-vsom-checkbox v-model="model1" @on-change="change" :data-source="data1"></i-vsom-checkbox>
                         </blockquote>
                         <pre><code class="language-html"
-                            >&lt;i-vsom-checkbox v-model="model1" @change="change" :data-source="optionData"&gt;&lt;/i-vsom-checkbox&gt;   
+                            >&lt;i-vsom-checkbox v-model="model1" @on-change="change" :data-source="data1"&gt;&lt;/i-vsom-checkbox&gt;   
                             </code></pre>
-                        <pre><code class="language-js" >
-                            var app = new Vue({
-                                el : '#app',
-                                data : function() {
-                                    return {
-                                        optionData1:[
-                                            {label:'苹果',value:'red'},{label:'香蕉',value:'write',disabled:true},
-                                        ],
-                                        model1:"write"
-                                    }
-                                },
-                                methods:{
-                                    change(value){
-                                       console.log(value)
-                                    }
-                                 }
-                               
-                            })
-                        </code></pre>
+                        <pre><code class="language-js" 
+>var app = new Vue({
+    el : '#app',
+    data : function() {
+        return {
+            optionData1:[
+                {label:'苹果',value:'red'},{label:'香蕉',value:'write',disabled:true},
+            ],
+            model1:"write"
+        }
+    },
+    methods:{
+        change(value){
+            console.log(value)
+        }
+    }
+})
+</code></pre>
                     </div>
                 </div>
             </div>
@@ -120,10 +118,10 @@
         el : '#app',
         data : function() {
             return {
-                optionData:[
+                data:[
                     {label:'苹果',value:'red'},{label:'香蕉',value:'write'},
                 ],
-                optionData1:[
+                data1:[
                     {label:'苹果',value:'red'},{label:'香蕉',value:'write',disabled:true},
                 ],
                 model:"red",

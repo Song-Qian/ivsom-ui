@@ -67,7 +67,7 @@ export default class iVsomCheckbox extends tsx.Component<Props,Event,ScopedSlots
         if (!Array.isArray(this.value)) {
         vModel = vModel.join(",");//如果v-model是字符串，同步时候也转为字符串。
         }
-        this.$emit("change",vModel);//同步父级的v-model 
+        this.$emit("on-change",vModel);//同步父级的v-model 
     }
       
     protected isChecked(val:any){

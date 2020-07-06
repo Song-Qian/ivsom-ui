@@ -29,27 +29,27 @@
                             <li>组件会根据Steps自动判断各步骤状态</li>
                         </ul>
                         <blockquote>
-                            <i-vsom-step :Steps="registSpets" :StepData="SetData"></i-vsom-step>
+                            <i-vsom-step :steps="registSpets" :step-data="SetData"></i-vsom-step>
                             <button @click="next">下一个</button>
                         </blockquote>
                         <div style="clear: both;"></div>
                         <pre><code class="language-html"
-                            >&lt;i-vsom-step :Steps="registSpets" :StepData="SetData"&gt;&lt;/i-vsom-step&gt;   
+                            >&lt;i-vsom-step :steps="registSpets" :step-data="SetData"&gt;&lt;/i-vsom-step&gt;   
                             </code></pre>
-                            <pre><code class="language-js" >
-                            var app = new Vue({
-                                el : '#app',
-                                data : function() {
-                                    return {
-                                        registSpets : 1,
-                                        SetData : ["步骤一", "步骤二", "步骤三", "步骤四", "步骤五"]
-                                    }
-                                },
-                                methods : {
-                                    
-                                }
-                            })
-                        </code></pre>
+                            <pre><code class="language-js"
+>var app = new Vue({
+    el : '#app',
+    data : function() {
+        return {
+            registSpets : 1,
+            SetData : ["步骤一", "步骤二", "步骤三", "步骤四", "步骤五"]
+        }
+    },
+     methods : {
+        
+    }
+})
+</code></pre>
                       
                     </div>
                 </div>

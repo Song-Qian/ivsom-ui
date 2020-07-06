@@ -30,27 +30,26 @@
                             <li>max min 分别表示限制最小最大的值</li>
                         </ul>
                         <blockquote>
-                            <i-vsom-input-number v-model="val" :min="1" :max="10" @change="change"></i-vsom-input-number>
+                            <i-vsom-input-number v-model="val" :min="1" :max="10" @on-change="change"></i-vsom-input-number>
                         </blockquote>
                         <pre><code class="language-html"
-                            >&lt;i-vsom-input-number v-model="val" :min="1" :max="10" @change="change" &gt;&lt;/i-vsom-button&gt;   
+                            >&lt;i-vsom-input-number v-model="val" :min="1" :max="10" @on-change="change" &gt;&lt;/i-vsom-button&gt;   
                             </code></pre>
-                        <pre><code class="language-js" >
-                            var app = new Vue({
-                                el : '#app',
-                                data : function() {
-                                    return {
-                                        val:5
-                                    }
-                                },
-                                methods:{
-                                    change(value){
-                                        console.log(value)
-                                    }
-                                }
-                               
-                            })
-                        </code></pre>
+                        <pre><code class="language-js"
+ >var app = new Vue({
+    el : '#app',
+    data : function() {
+        return {
+            val:5
+        }
+    },
+    methods:{
+        change(value){
+            console.log(value)
+        }
+    }
+})
+ </code></pre>
                         <h2 id="unicode-">精度用法</h2>
                         <hr>
                         <p>常规计数器</p>
@@ -63,17 +62,16 @@
                         <pre><code class="language-html"
                             >&lt;i-vsom-input-number v-model="val1" :precision="2" &gt;&lt;/i-vsom-button&gt;   
                             </code></pre>
-                        <pre><code class="language-js" >
-                            var app = new Vue({
-                                el : '#app',
-                                data : function() {
-                                    return {
-                                        val1:5
-                                    }
-                                },
-                               
-                            })
-                        </code></pre>
+                        <pre><code class="language-js" 
+> var app = new Vue({
+    el : '#app',
+    data : function() {
+        return {
+            val1:5
+       }
+   },
+ })
+</code></pre>
                         <h2 id="unicode-">步数用法</h2>
                         <hr>
                         <p>常规计数器</p>
@@ -86,17 +84,16 @@
                         <pre><code class="language-html"
                             >&lt;i-vsom-input-number v-model="val2" :step="2" &gt;&lt;/i-vsom-button&gt;   
                             </code></pre>
-                        <pre><code class="language-js" >
-                            var app = new Vue({
-                                el : '#app',
-                                data : function() {
-                                    return {
-                                        val:5
-                                    }
-                                },
-                               
-                            })
-                        </code></pre>
+                        <pre><code class="language-js"
+ >var app = new Vue({
+    el : '#app',
+    data : function() {
+        return {
+            val:5
+        }
+    },
+ })
+ </code></pre>
                         <h2 id="unicode-">禁用用法</h2>
                         <hr>
                         <ul>
@@ -108,17 +105,16 @@
                         <pre><code class="language-html"
                             >&lt;i-vsom-input-number v-model="val" disabled &gt;&lt;/i-vsom-button&gt;   
                             </code></pre>
-                        <pre><code class="language-js" >
-                            var app = new Vue({
-                                el : '#app',
-                                data : function() {
-                                    return {
-                                        val:5
-                                    }
-                                },
-                               
-                            })
-                        </code></pre>
+                        <pre><code class="language-js"
+ >var app = new Vue({
+    el : '#app',
+    data : function() {
+        return {
+            val:5
+        }
+    },
+})
+</code></pre>
                         
                     </div>
                 </div>

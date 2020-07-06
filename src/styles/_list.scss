@@ -1,0 +1,23 @@
+ .ivsom-list{
+     ul li, ol li{
+         list-style-type: none!important;
+     }
+     .list{
+        width: 20px;
+        height: 20px;
+        line-height: 20px;
+        padding-left: 0px!important;
+        text-align: center;
+     }
+     .lableColor{
+        color: white!important;
+     }
+     .ivsom-list-radiu{
+        border-radius:50%;
+        border: 1px solid #ddd;
+     }
+     .ivsom-list-rect{
+        border: 1px solid #ddd;
+        border-radius: 10%;
+     }
+ }

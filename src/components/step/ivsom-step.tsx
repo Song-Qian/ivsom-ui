@@ -8,8 +8,8 @@ import * as tsx from 'vue-tsx-support'
 import { Component, Prop, Emit, Watch,} from 'vue-property-decorator'
 
 interface  Props{
-    Steps:number,
-    StepData:string[]
+    steps:number,
+    stepData:string[]
 }
 
 @Component
@@ -17,17 +17,17 @@ export default class iVsomStep extends tsx.Component<Props>{
     constructor(){
         super()
     }
-    @Prop({default:0}) readonly Steps!: number
-    @Prop({}) readonly stepdata!:string[]
+    @Prop({default:0}) readonly steps!: number
+    @Prop({}) readonly stepData!:string[]
 
     protected render():JSX.Element{
         return(
             <div>
                 <ul class="steps">
-                    {this.stepdata.map((item,index)=>{
+                    {this.stepData.map((item,index)=>{
                         return(<li
                             key={item+index}
-                            class={{'active':this.Steps===index,"stepIcon":this.Steps>index}}
+                            class={{'active':this.steps===index,"stepIcon":this.steps>index}}
                           >{item}</li>)
                     })}
                </ul>
