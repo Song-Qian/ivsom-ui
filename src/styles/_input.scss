@@ -76,6 +76,10 @@
 
     &.ivsom-input__hasErorr {
         border:1px solid $border-danger-color;
+
+        > textarea, input, .ivsom-input__prefix > *, .ivsom-input__suffix > * {
+            color: $danger-color;
+        }
     }
 
     &::-webkit-input-placeholder {

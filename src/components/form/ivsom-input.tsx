@@ -6,7 +6,7 @@
  */
 
  import * as tsx from 'vue-tsx-support'
- import { Component, Prop } from 'vue-property-decorator'
+ import { Component, Prop, InjectReactive, PropSync } from 'vue-property-decorator'
 
  import 'vue-tsx-support/enable-check'
 
@@ -47,7 +47,7 @@
 
     @Prop({ default : '请输入'}) readonly placeholder !: string;
 
-    @Prop({ default : '' }) readonly value !: string;
+    @PropSync('value', { default : '', type : String}) syncedValue !: string;
 
     @Prop({ default : false, type : Boolean}) readonly disabled !: boolean;
 
@@ -61,12 +61,24 @@
 
     @Prop({ default : false, type : Boolean }) readonly limit !: boolean;
 
-    private validate : boolean = true;
+    @InjectReactive(Symbol.for('validate')) validate !: boolean;
 
-    public ValidateField(regexp : RegExp) {
-        const me = this;
-        me.validate = regexp.test(me.value);
-        return me.validate;
+    @InjectReactive(Symbol.for('trigger')) trigger !: 'blur' | 'change';
+
+    protected onChange(e : any) {
+        let me = this;
+        me.syncedValue = e.target.value;
+        me.$emit('input', e.target.value);
+        if(me.trigger === 'change') {
+            me.$vnode.componentInstance?.$parent.$emit('on-validate');
+        }
+    }
+
+    protected onBlur() {
+        let me = this;
+        if(me.trigger === 'blur') {
+            me.$vnode.componentInstance?.$parent.$emit('on-validate');
+        }
     }
 
     protected render() : JSX.Element {
@@ -77,8 +89,8 @@
         const suffixEl = ( me.$scopedSlots.Suffix ? <div class='ivsom-input__suffix'>{ me.$scopedSlots.Suffix && me.$scopedSlots.Suffix(me.suffix) }</div> : 
                 me.suffix ? <div class='ivsom-input__suffix'><i class={ ['iconfont', me.suffix ] }></i></div> :
                     null )
-        const inputEl = me.limit ? <textarea value={ me.value } onInput={ (e) => me.$emit('input', e.target.value) } placeholder={ me.placeholder } disabled={ me.disabled }></textarea> :
-                <input type={ me.password ? 'password' : 'text' } placeholder={ me.placeholder } value={ me.value } onInput={ (e) => me.$emit('input', e.target.value) } disabled={ me.disabled }></input>;
+        const inputEl = me.limit ? <textarea value={ me.syncedValue } onInput={ me.onChange } placeholder={ me.placeholder } disabled={ me.disabled }  onBlur={ me.onBlur }></textarea> :
+                <input type={ me.password ? 'password' : 'text' } placeholder={ me.placeholder } value={ me.syncedValue } onInput={ me.onChange } onBlur={ me.onBlur }  disabled={ me.disabled }></input>;
         const w = typeof me.width === 'number' ? `${me.width}px` : me.width;
         return (
             <div class={ { 'ivsom-input' : true, ['ivsom-input__' + me.size] : true, 'ivsom-input__disabled' : me.disabled, 'ivsom-input__hasErorr' : !me.validate, 'ivsom-input__limit' : me.limit } } style={{ width : w }} >
