@@ -5,7 +5,7 @@
  * Description  :   checkbox组件
  */
 import * as tsx from 'vue-tsx-support'
-import { Component, Prop, Emit, Watch,} from 'vue-property-decorator'
+import { Component, Prop,InjectReactive, Emit, Watch,} from 'vue-property-decorator'
 import uuid from '~/utils/uuid'
 
 import 'vue-tsx-support/enable-check'
@@ -29,14 +29,16 @@ export default class iVsomCheckbox extends tsx.Component<Props,Event,ScopedSlots
     }
     @Prop({ default : "" }) readonly value !: string;
     @Prop({default:null}) readonly dataSource!:Array<{ label : string,  value : string,disabled:boolean}>;
+    @InjectReactive(Symbol.for('validate')) validate !: boolean;
+    @InjectReactive(Symbol.for('trigger')) trigger !: 'blur' | 'change';
 
     private checkedModel :any = this.value;
-    private validate : boolean = true;
-    public ValidateField(regexp : RegExp) {
-        const me = this;
-        me.validate = regexp.test(me.value);
-        return me.validate;
-    }
+    // private validate : boolean = true;
+    // public ValidateField(regexp : RegExp) {
+    //     const me = this;
+    //     me.validate = regexp.test(me.value);
+    //     return me.validate;
+    // }
    
     // @Emit()
     protected  change(event: HTMLInputEvent){
@@ -68,6 +70,9 @@ export default class iVsomCheckbox extends tsx.Component<Props,Event,ScopedSlots
         vModel = vModel.join(",");//如果v-model是字符串，同步时候也转为字符串。
         }
         this.$emit("on-change",vModel);//同步父级的v-model 
+        if(this.trigger === 'change') {
+            this.$vnode.componentInstance?.$parent.$emit('on-validate');
+        }
     }
       
     protected isChecked(val:any){

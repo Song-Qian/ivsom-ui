@@ -57,6 +57,9 @@ export default class iVsomRadio extends tsx.Component<Props,Event,ScopedSlots>{
         const me=this
         const { value } = e.target as any
         me.selectRadio = value
+        if(me.trigger === 'change') {
+            me.$vnode.componentInstance?.$parent.$emit('on-validate');
+        }
    }
 
     private readonly map = new Map<string, { name : string,  value : string ,disabled:boolean }>();

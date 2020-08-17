@@ -27,10 +27,10 @@ export default class iVsomPagination extends tsx.Component<Props, Event>{
 
   @Prop({ default: 1 }) currentPage!: number
   @Prop({ default: 1 }) limit!: number
-  @Prop({}) readonly totalcount!: number
-  @Prop({default:false}) readonly showtotal!: boolean
-  @Prop({default:false}) readonly showsize!: boolean
-  @Prop({default:false}) readonly showelevator!: boolean
+  @Prop({}) readonly totalCount!: number
+  @Prop({default:false}) readonly showTotal!: boolean
+  @Prop({default:false}) readonly showSize!: boolean
+  @Prop({default:false}) readonly showElevator!: boolean
 
 
 
@@ -39,11 +39,11 @@ export default class iVsomPagination extends tsx.Component<Props, Event>{
   private jumpPageNumber=1
  
   get totalPage(){
-    return Math.ceil(this.totalcount / this.limit)
+    return Math.ceil(this.totalCount / this.limit)
   }
 
   get indexs() {
-    console.log(this.totalcount, this.limit)
+    console.log(this.totalCount, this.limit)
     console.log(this.totalPage)
     var left = 1
     var right = this.totalPage
@@ -83,7 +83,7 @@ export default class iVsomPagination extends tsx.Component<Props, Event>{
       if (data != this.currentPage) {
         this.currentPage = data
       }if(this.limitNum!==this.limit&&this.limitNum!==null){//每页显示条数改变
-        let pages=Math.ceil(this.totalcount / this.limitNum);
+        let pages=Math.ceil(this.totalCount / this.limitNum);
         if(data>pages){
           data=pages;
         }
@@ -97,7 +97,7 @@ export default class iVsomPagination extends tsx.Component<Props, Event>{
 
   protected nextPage(data: number) {
     console.log(this.totalPage)
-    console.log(this.totalcount, this.limit)
+    console.log(this.totalCount, this.limit)
     if (this.currentPage >= this.totalPage) return;
     this.btnClick(this.currentPage + 1);
   }
@@ -148,7 +148,7 @@ export default class iVsomPagination extends tsx.Component<Props, Event>{
     return (
       <div class="page-bar">
         <ul>
-          {this.showtotal?( <li><a style="border:none">共{this.totalcount}条记录  第{this.currentPage}/{this.totalPage}页</a></li>):null}
+          {this.showTotal?( <li><a style="border:none">共{this.totalCount}条记录  第{this.currentPage}/{this.totalPage}页</a></li>):null}
           <li><a class={this.setButtonClass(0)} onClick={e => { this.prvePage(this.currentPage) }}>上一页</a></li>
           {this.indexs.map((val, index) => {
             // console.log(this.indexs)
@@ -158,17 +158,17 @@ export default class iVsomPagination extends tsx.Component<Props, Event>{
             )
           })}
           <li><a class={this.setButtonClass(1)} onClick={e => { this.nextPage(this.currentPage) }}>下一页</a></li>
-          {this.showsize?( <li style="position: relative;width: 74px;">
+          {this.showSize?( <li style="position: relative;width: 74px;">
           <select  value={this.limitNum} onInput={e=>{this.input(e as any)}} onChange={e=>{this.btnClick(this.currentPage)}}>
             {this.limitNums.map((val,index)=>{
               return( <option value={val}>{val}条/页</option>)  
             })}
           </select>
           </li>):null}
-          {this.showelevator?(<li><a style="border:none">跳至</a></li> ):null}
-          {this.showelevator?(<li><a style="border:none"><input type="number" style="width:60px;height:20px" value={this.jumpPageNumber} onInput={e=>{this.input(e as any)}} /></a></li>):null}
-          {this.showelevator?(<li><a style="border:none">页</a></li>):null}
-          {this.showelevator?(<li><a class="page-item jump-go-btn" onClick={e=>{this.goPage(this.jumpPageNumber)}}>GO</a></li>):null}        
+          {this.showElevator?(<li><a style="border:none">跳至</a></li> ):null}
+          {this.showElevator?(<li><a style="border:none"><input type="number" style="width:60px;height:20px" value={this.jumpPageNumber} onInput={e=>{this.input(e as any)}} /></a></li>):null}
+          {this.showElevator?(<li><a style="border:none">页</a></li>):null}
+          {this.showElevator?(<li><a class="page-item jump-go-btn" onClick={e=>{this.goPage(this.jumpPageNumber)}}>GO</a></li>):null}        
         </ul>
       </div>
 
