@@ -30,7 +30,7 @@
                         <li>Form 组件在使用之前，需要有相关的依赖库进行支持，如需阅读：<a href="./start.api.html" target="_blank" >快速开始</a></li>
                     </ul>
                     <blockquote>
-                        <i-vsom-form :model="entity">
+                        <i-vsom-form :model="entity" :label-width="120" position="center">
                             <i-vsom-form-validater ref='valid' prop="name" :min="5" :max="20" label="测试名字" trigger='blur' required>
                                 <i-vsom-input v-model="entity.name" prefix="icon-gongnengtubiao-39"></i-vsom-input>
                             </i-vsom-form-validater>

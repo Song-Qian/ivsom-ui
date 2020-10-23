@@ -1,113 +1,194 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8" />
-        <title>pagination api demo</title>
-        <link rel="stylesheet" href="./cube.min.css">
-        <link rel="stylesheet" href="./demo.css">
-        <script src="../vue.min.js"></script>
-        <script src="./jQuery-1.9.1.js"></script>
-        <script src="./PrismJs.js"></script>
-    <link href="/ivsom-ui/iVsomUI.css" rel="stylesheet"><script src="/ivsom-ui/vue-class-component.min.js"></script><script src="/ivsom-ui/vue-property-decorator.min.js"></script><script src="/ivsom-ui/vue-tsx-support.min.js"></script><script src="/ivsom-ui/vendors~index.min.js"></script><script src="/ivsom-ui/index.e4c27e81.min.js"></script></head>
-    <body>
-        <div id="app" class="main">
-            <h1 class="logo">pagination Api</h1>
-            <div class="nav-tabs">
-                <ul id="tabs" class="dib-box">
-                    <li class="dib active"><span> CDN </span></li>
-                    <li class="dib"><span> NodeJS </span></li>
-                </ul>
-            </div>
-            <div class="tab-container">
-                <div class="content unicode" style="display: block;">
-                    <div class="article markdown">
-                        <h2 id="unicode-">基础用法</h2>
-                        <hr>
-                        <p>常规复选框</p>
-                        <ul>
-                            <li>pagination 组件在使用之前，需要有相关的依赖库进行支持，如需阅读：<a href="./start.api.html" target="_blank" >快速开始</a></li>
-                        </ul>
-                        <blockquote>
-                            <i-vsom-pagination @jumpPage="jumpPage" :totalCount="totalCount" :page-number="pageNumber" :pageGroup="3" :pageSize="PageSizeArray" ></i-vsom-pagination>
-                        </blockquote>
-                        <pre><code class="language-html"
-                            >&lt;i-vsom-pagination @jumpPage="jumpPage" :totalCount="totalCount" :page-number="pageNumber" :pageGroup="3" :pageSize="PageSizeArray" &gt;&lt;/i-vsom-pagination&gt;   
+
+<head>
+    <meta charset="utf-8" />
+    <title>pagination api demo</title>
+    <link rel="stylesheet" href="./cube.min.css">
+    <link rel="stylesheet" href="./demo.css">
+    <script src="../vue.min.js"></script>
+    <script src="./jQuery-1.9.1.js"></script>
+    <script src="./PrismJs.js"></script>
+<link href="/ivsom-ui/iVsomUI.css" rel="stylesheet"><script src="/ivsom-ui/vue-class-component.min.js"></script><script src="/ivsom-ui/vue-property-decorator.min.js"></script><script src="/ivsom-ui/vue-tsx-support.min.js"></script><script src="/ivsom-ui/vendors~index.min.js"></script><script src="/ivsom-ui/index.c0d2db52.min.js"></script></head>
+
+<body>
+    <div id="app" class="main">
+        <h1 class="logo">pagination Api</h1>
+        <div class="nav-tabs">
+            <ul id="tabs" class="dib-box">
+                <li class="dib active"><span> CDN </span></li>
+                <li class="dib"><span> NodeJS </span></li>
+            </ul>
+        </div>
+        <div class="tab-container">
+            <div class="content unicode" style="display: block;">
+                <div class="article markdown">
+                    <h2 id="unicode-">基础用法</h2>
+                    <hr>
+                    <p>常规分页用法</p>
+                    <ul>
+                        <li>pagination 组件在使用之前，需要有相关的依赖库进行支持，如需阅读：<a href="./start.api.html" target="_blank">快速开始</a>
+                        </li>
+                    </ul>
+                    <blockquote>
+                        <i-vsom-pagination :currentPage.sync="cur" :totalcount.sync="all"  :limit.sync="limit" v-on:change-handle="listen"></i-vsom-pagination>
+                    </blockquote>
+                    <pre><code class="language-html"
+                            >&lt;i-vsom-pagination :currentPage.sync="cur" :totalcount.sync="all" v-on:change-handle="listen" &gt;&lt;/i-vsom-pagination&gt;   
                             </code></pre>
-                        <pre><code class="language-js" >
+                    <pre><code class="language-js" >
                             var app = new Vue({
                                 el : '#app',
                                 data : function() {
                                     return {
-                                        pageNumber: 1,//当前页码
-                                        totalCount: 100,//总条数
-                                        PageSizeArray:[5,10,15,20]
+                                        cur: 1,//当前页数
+                                        all: 500,//总条数
+                                        limit:10//每页显示条数
                                     }
                                 },
-                                jumpPage(currentPage,currentSize){
-                                    console.log(currentPage,currentSize)
-                                  }
+                                listen: function (data) {
+                                    console.log(data)
+                                }
                                
                             })
                         </code></pre>
+                        <h2 id="unicode-">显示总条数</h2>
+                    <hr>
+                  
+                    <ul>
+                        <li>pagination 组件showtotal控制是否显示总条数
+                        </li>
+                    </ul>
+                    <blockquote>
+                        <i-vsom-pagination :currentPage.sync="cur" :totalcount.sync="all" showtotal="true"  :limit.sync="limit" v-on:change-handle="listen"></i-vsom-pagination>
+                    </blockquote>
+                    <pre><code class="language-html"
+                            >&lt;i-vsom-pagination :currentPage.sync="cur" showtotal="true" :totalcount.sync="all" v-on:change-handle="listen" &gt;&lt;/i-vsom-pagination&gt;   
+                            </code></pre>
+                    <pre><code class="language-js" >
+                            var app = new Vue({
+                                el : '#app',
+                                data : function() {
+                                    return {
+                                        cur: 1,//当前页数
+                                        all: 500,//总条数
+                                        limit:10//每页显示条数
+                                    }
+                                },
+                                listen: function (data) {
+                                    console.log(data)
+                                }
+                               
+                            })
+                        </code></pre>
+                        <h2 id="unicode-">显示快速跳转</h2>
+                        <hr>
                       
-                    </div>
+                        <ul>
+                            <li>pagination 组件showelevator控制是否显示跳转页
+                            </li>
+                        </ul>
+                        <blockquote>
+                            <i-vsom-pagination :currentPage.sync="cur" :totalcount.sync="all" showelevator="true"  :limit.sync="limit" v-on:change-handle="listen"></i-vsom-pagination>
+                        </blockquote>
+                        <pre><code class="language-html"
+                                >&lt;i-vsom-pagination :currentPage.sync="cur" showelevator="true" :totalcount.sync="all" v-on:change-handle="listen" &gt;&lt;/i-vsom-pagination&gt;   
+                                </code></pre>
+                        <pre><code class="language-js" >
+                                var app = new Vue({
+                                    el : '#app',
+                                    data : function() {
+                                        return {
+                                            cur: 1,//当前页数
+                                            all: 500,//总条数
+                                            limit:10//每页显示条数
+                                        }
+                                    },
+                                    listen: function (data) {
+                                        console.log(data)
+                                    }
+                                   
+                                })
+                            </code></pre>
+                            <h2 id="unicode-">显示分页条</h2>
+                            <hr>
+                          
+                            <ul>
+                                <li>pagination 组件showsize控制是否显示分页改变每页显示条数
+                                </li>
+                            </ul>
+                            <blockquote>
+                                <i-vsom-pagination :currentPage.sync="cur" showsize="true" :totalcount.sync="all"   :limit.sync="limit" v-on:change-handle="listen"></i-vsom-pagination>
+                            </blockquote>
+                            <pre><code class="language-html"
+                                    >&lt;i-vsom-pagination :currentPage.sync="cur" showsize="true" :totalcount.sync="all" v-on:change-handle="listen" &gt;&lt;/i-vsom-pagination&gt;   
+                                    </code></pre>
+                            <pre><code class="language-js" >
+                                    var app = new Vue({
+                                        el : '#app',
+                                        data : function() {
+                                            return {
+                                                cur: 1,//当前页数
+                                                all: 500,//总条数
+                                                limit:10//每页显示条数
+                                            }
+                                        },
+                                        listen: function (data) {
+                                            console.log(data)
+                                        }
+                                       
+                                    })
+                                </code></pre>
+            
+
+
                 </div>
             </div>
         </div>
-        <script>
-                        (function() {
-    
-    Vue.use(iVsomUI);
+    </div>
+    <script>
+        (function () {
 
-    var app = new Vue({
-        el : '#app',
-        data : function() {
-            return {
-                pageNumber: 1,//当前页码
-                totalCount: 30,//总条数
-                PageSizeArray:[5,10,15,20]
-            }
-        },
-        created: function () {
-      
-        },
-        methods:{
-            getTableData() {
-            let params = this.$qs.stringify({
-              'pageSize': this.limit,
-              'pageNum': this.currentPage
-            });
-            this.$http.post('/api/...', params).then(res => {
-              this.totalCount = res.data.totalCount;
-            });
-        },
-        jumpPage(currentPage,currentSize){
-          console.log(currentPage,currentSize)
-        }
-        }
-       
-    })
+            Vue.use(iVsomUI);
 
-
-})()
-            $(document).ready(function () {
-                $('.tab-container .content:first').show()
-    
-                $('#tabs li').click(function (e) {
-                    var tabContent = $('.tab-container .content')
-                    var index = $(this).index()
-    
-                    if ($(this).hasClass('active')) {
-                        return
-                    } else {
-                        $('#tabs li').removeClass('active')
-                        $(this).addClass('active')
-    
-                        tabContent.hide().eq(index).fadeIn()
+            var app = new Vue({
+                el: '#app',
+                data: function () {
+                    return {
+                        cur: 1,//当前页数
+                        all: 500,//总条数
+                        limit:10//每页显示条数
                     }
-                })
+                },
+                methods: {
+                    listen: function (data) {
+                        console.log(data)
+                    }
+                }
+
             })
-        </script>
-      
-    </body>
+
+
+        })()
+        $(document).ready(function () {
+            $('.tab-container .content:first').show()
+
+            $('#tabs li').click(function (e) {
+                var tabContent = $('.tab-container .content')
+                var index = $(this).index()
+
+                if ($(this).hasClass('active')) {
+                    return
+                } else {
+                    $('#tabs li').removeClass('active')
+                    $(this).addClass('active')
+
+                    tabContent.hide().eq(index).fadeIn()
+                }
+            })
+        })
+    </script>
+
+</body>
+
 </html>

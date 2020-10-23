@@ -1,39 +1,34 @@
 import * as tsx from 'vue-tsx-support';
 import 'vue-tsx-support/enable-check';
 interface Props {
-    pageNumber: Number;
-    pageSize: number[];
+    currentPage: Number;
     totalCount: Number;
-    pageGroup: Number;
+    limit: Number;
 }
 interface HTMLInputEvent extends Event {
     target: HTMLInputElement & EventTarget & InputEvent;
 }
 export default class iVsomPagination extends tsx.Component<Props, Event> {
     constructor();
-    readonly pageNumber: number;
-    readonly pagesize: number[];
+    currentPage: number;
+    limit: number;
     readonly totalcount: number;
-    readonly pagegroup: number;
-    private currentPage;
-    private currentSize;
+    readonly showtotal: boolean;
+    readonly showsize: boolean;
+    readonly showelevator: boolean;
+    private limitNums;
+    protected limitNum: number;
     private jumpPageNumber;
-    private showPrevMore;
-    private showNextMore;
-    currentSizeValue(newValue: any, oldValue: any): void;
-    protected created(): void;
-    get showPageHelper(): boolean;
-    get getCurrentPage(): number;
-    get getCurrent(): number;
     get totalPage(): number;
-    get groupList(): number[];
-    protected prevPage(): void;
-    protected nextPage(): void;
-    protected showPrevPage(): void;
-    protected showNextPage(): void;
-    protected goPage(jumpPageNumber: number): void;
-    protected jumpPage(pageNumber: number): void;
+    get indexs(): number[];
+    protected btnClick(data: any): void;
+    protected nextPage(data: number): void;
+    protected prvePage(data: number): void;
+    protected setButtonClass(isNext: any): "" | "page-button-disabled";
     protected input(e: HTMLInputEvent): void;
+    protected initLimitNums(): void;
+    protected created(): void;
+    protected goPage(jumpPageNumber: number): void;
     protected render(): JSX.Element;
 }
 export {};

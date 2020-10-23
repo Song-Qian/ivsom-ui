@@ -147,7 +147,7 @@
        return (
          <div class="ivsom-form-validator">
             { me.required ? <div class='has-required'>*</div> : <div class='has-required'></div> }
-            <div class='ivsom-form-validator-label' style={{ flexBasis: typeof me.label_width === 'number' ? `${me.label_width}px` : me.label_width, textAlign: me.label_position }} >{ me.label }</div>
+            <div class='ivsom-form-validator-label' style={{ width: typeof me.label_width === 'number' ? `${me.label_width}px` : me.label_width, textAlign: me.label_position }} >{ me.label }</div>
             <div class='ivsom-form-validator__wapper'>
                { me.$scopedSlots.default() }
                <div class={['ivsom-form-validator__error', me.validator ? '' : 'hasValidate']} >{ me.messages }</div>

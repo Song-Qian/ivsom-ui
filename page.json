@@ -17,6 +17,7 @@
         "pagination.api.html",
         "input.api.html",
         "step.api.html",
-        "list.api.html"
+        "list.api.html",
+        "form.api.html"
     ]
 }

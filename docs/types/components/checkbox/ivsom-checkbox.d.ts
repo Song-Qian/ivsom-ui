@@ -22,6 +22,8 @@ export default class iVsomCheckbox extends tsx.Component<Props, Event, ScopedSlo
         disabled: boolean;
     }>;
     private checkedModel;
+    private validate;
+    ValidateField(regexp: RegExp): boolean;
     protected change(event: HTMLInputEvent): void;
     protected isChecked(val: any): boolean;
     get getModel(): any;

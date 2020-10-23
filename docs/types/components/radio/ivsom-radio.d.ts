@@ -24,6 +24,8 @@ export default class iVsomRadio extends tsx.Component<Props, Event, ScopedSlots>
     readonly icon: string;
     readonly selectoption: string;
     private selectRadio;
+    private validate;
+    ValidateField(regexp: RegExp): boolean;
     protected mounted(): void;
     protected radioChange(e: MouseEvent): void;
     private readonly map;
