@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>Select api demo</title>
+    <link rel="stylesheet" href="./cube.min.css">
+    <link rel="stylesheet" href="./demo.css">
+    <script src="../vue.min.js"></script>
+    <script src="./vue-route.js"></script>
+    <script src="./jQuery-1.9.1.js"></script>
+    <script src="./PrismJs.js"></script>
+</head>
+
+<body>
+    <div id="app" class="main">
+        <h1 class="logo">Select Api</h1>
+        <div class="nav-tabs">
+            <ul id="tabs" class="dib-box">
+                <li class="dib active"><span> CDN </span></li>
+                <li class="dib"><span> NodeJS </span></li>
+            </ul>
+        </div>
+        <div class="tab-container">
+            <div class="content unicode" style="display: block;">
+                <div class="article markdown">
+                    <h2 id="unicode-">基础用法</h2>
+                    <hr>
+                    <p>常规使用</p>
+                    <ul>
+                        <li>Breadcrumbs 组件在使用之前，需要有相关的依赖库进行支持，如需阅读：<a href="./start.api.html" target="_blank" >快速开始</a></li>
+                    </ul>
+                    <blockquote>
+                        <i-vsom-select prefix="icon-gongnengtubiao-106" suffix="icon-gongnengtubiao-182"></i-vsom-select>
+                    </blockquote>
+                    <pre><code class="language-html"
+>&lt;i-vsom-bread-crumbs :debris='items'&gt;&lt;/i-vsom-bread-crumbs&gt;
+</code></pre>
+                    <pre><code class="language-js"
+>var app = new Vue({
+    el : '#app',
+    data : function() {
+        return {
+            items : [
+                { text : '面包屑一', to : '#1'},
+                { text : '面包屑二', to : '#2'},
+                { text : '面包屑三', to : '#3'},
+                { text : '面包屑四', to : '#4'},
+                { text : '面包屑五', to : '#5'},
+                { text : '面包屑六', to : '#6'},
+                { text : '面包屑七', to : '#7'}
+            ]
+        }
+    }
+})
+</code></pre>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        $(document).ready(function () {
+            $('.tab-container .content:first').show()
+
+            $('#tabs li').click(function (e) {
+                var tabContent = $('.tab-container .content')
+                var index = $(this).index()
+
+                if ($(this).hasClass('active')) {
+                    return
+                } else {
+                    $('#tabs li').removeClass('active')
+                    $(this).addClass('active')
+
+                    tabContent.hide().eq(index).fadeIn()
+                }
+            })
+        })
+    </script>
+    <script src="./select.demo.js"></script>
+</body>
+
+</html>

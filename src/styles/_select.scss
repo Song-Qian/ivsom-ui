@@ -1,0 +1,115 @@
+/**
+ * Developer    :   SongQian
+ * Time         :   2020-10-20
+ * eMail        :   songqian@wtoe.cn
+ * Description  :   表单输入框样式
+ */
+ @import "./ivsom-variable";
+ @import "./ivsom-mixin";
+
+ .ivsom-select {
+    border:1px solid $border-primary-color;
+    border-radius: 5px;
+    display:flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    overflow: hidden;
+    position: relative;
+    transition: border .3s ease;
+
+    
+    &.ivsom-select__medium {
+        height : 32px;
+        line-height: 32px;
+        @include font-text;
+
+        > .ivsom-select__prefix {
+            flex: 0 0 32px;
+        }
+
+        > .ivsom-select__suffix {
+            flex: 0 0 32px;
+        }
+    }
+
+    &.ivsom-select__small {
+        height : 26px;
+        line-height: 26px;
+        @include font-text;
+
+        > .ivsom-select__prefix {
+            flex: 0 0 26px;
+        }
+
+        > .ivsom-select__suffix {
+            flex: 0 0 26px;
+        }
+    }
+    
+    &.ivsom-select__mini {
+        height : 20px;
+        line-height: 20px;
+        @include font-text;
+
+        > .ivsom-select__prefix {
+            flex: 0 0 20px;
+        }
+
+        > .ivsom-select__suffix {
+            flex: 0 0 20px;
+        }
+    }
+
+    
+    &::-webkit-input-placeholder {
+        color: $font-symbol-color;
+    }
+    
+    > input {
+        width: 100%;
+        height: 100%;
+        border: 0px solid #fff;
+        flex: 1 1 auto;
+        outline: none;
+        text-indent: 1em;
+        background: transparent;
+        resize: none;
+        @include font-text;
+    }
+    
+    > .ivsom-input__prefix {
+        text-align: center;
+        align-self: center;
+        @include font-sub-text;
+
+        + input {
+            text-indent: 0px;
+        }
+    }
+
+    > .ivsom-input__suffix {
+        text-align: center;
+        @include font-sub-text;
+
+        + input {
+            text-indent: 0px;
+        }
+    }
+
+    > .ivsom-select__dropdown {
+        text-align: center;
+        cursor: pointer;
+        @include font-sub-text;
+    }
+
+    > .ivsom-select__dropArea {
+        width: 100%;
+        border: 1px solid $border-primary-color;
+        position: absolute;
+        min-height: 50px;
+        left: 0px;
+        top: calc(100% + 5px);
+        border-radius: 5px;
+    }
+
+ }

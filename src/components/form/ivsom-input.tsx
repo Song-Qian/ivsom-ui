@@ -24,7 +24,7 @@
      //尾部 icon
      Suffix : String
      //width
-     Width : String | number
+     Width : String | Number
      //表单大小
      Size : 'medium' | 'small' | 'mini'
      //多行文本
@@ -93,7 +93,7 @@
                 <input type={ me.password ? 'password' : 'text' } placeholder={ me.placeholder } value={ me.syncedValue } onInput={ me.onChange } onBlur={ me.onBlur }  disabled={ me.disabled }></input>;
         const w = typeof me.width === 'number' ? `${me.width}px` : me.width;
         return (
-            <div class={ { 'ivsom-input' : true, ['ivsom-input__' + me.size] : true, 'ivsom-input__disabled' : me.disabled, 'ivsom-input__hasErorr' : !me.validate, 'ivsom-input__limit' : me.limit } } style={{ width : w }} >
+            <div class={ { 'ivsom-input' : true, ['ivsom-input__' + me.size] : true, 'ivsom-input__disabled' : me.disabled, 'ivsom-input__hasErorr' : me.validate === false, 'ivsom-input__limit' : me.limit } } style={{ width : w }} >
                 { prefixEl }
                 { inputEl }
                 { suffixEl }

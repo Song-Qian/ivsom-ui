@@ -82,7 +82,7 @@
          let me = this;
          me.validator = true;
          if(me.required && me.validator) {
-            me.validator = me.model[me.prop] && me.model[me.prop].replace(/^(\s+)|(\s+)$/gi, '') !== '';
+            me.validator = Boolean(me.model[me.prop]) && me.model[me.prop].replace(/^(\s+)|(\s+)$/gi, '') !== '';
             me.messages = me.validator ? '' : '必填项，请输入文本。';
          }
 
