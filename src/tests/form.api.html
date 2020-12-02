@@ -232,8 +232,6 @@
                             <i-vsom-button type="danger" @click="clearForm('form2')">清空</i-vsom-button>
                         </i-vsom-button-group>
                     </blockquote>
-
-
                     <pre><code class="language-html"
 >&lt;i-vsom-form ref="form2" :model="Form1" :label-width="80" position="left"&gt;
     &lt;i-vsom-form-validater label="密码" prop="password" error-message="请输入密码，长度在6-12位长度。"
@@ -252,47 +250,62 @@
 &lt;/i-vsom-button-group&gt;
 </code></pre>
                     <pre><code class="language-js"
->   var app = new Vue({
-        el : '#app',
-        data : function() {
-            return {
-                Form1: {
-                    password: '',
-                    confirmPassword: ''
-                }
-            }
-        },
-        methods: {
-            submitForm: function (form) {
-                var me = this;
-                me.$refs[form].validateForm().then(function (valid) {
-                    if (valid) {
-                        alert("验证成功");
-                    }
-                })
-            },
-            clearForm: function (form) {
-                var me = this;
-                me.$refs[form].clearValidates();
-            },
-            confirmForm: function (callback) {
-                var me = this;
-                if (!me.$refs.form2.validateField("password")) {
-                    return callback(new Error("原密码验证失败"));
-                }
-
-                if (me.Form1.password !== me.Form1.confirmPassword) {
-                    return callback(new Error());
-                }
-                return callback();
+>var app = new Vue({
+    el : '#app',
+    data : function() {
+        return {
+            Form1: {
+                password: '',
+                confirmPassword: ''
             }
         }
-    })
+    },
+    methods: {
+        submitForm: function (form) {
+            var me = this;
+            me.$refs[form].validateForm().then(function (valid) {
+                if (valid) {
+                    alert("验证成功");
+                }
+            })
+        },
+        clearForm: function (form) {
+            var me = this;
+            me.$refs[form].clearValidates();
+        },
+        confirmForm: function (callback) {
+            var me = this;
+            if (!me.$refs.form2.validateField("password")) {
+                return callback(new Error("原密码验证失败"));
+            }
+
+            if (me.Form1.password !== me.Form1.confirmPassword) {
+                return callback(new Error());
+            }
+            return callback();
+        }
+    }
+})
 </code></pre>
+                    <h2 id="unicode-">复杂表单的布局应</h2>
+                    <hr>
+                    <ul>
+                        <li>prop: String 验证字段</li>
+                        <li>required： Boolean 是否开启必填</li>
+                        <li>min： Number 验证表单属性最小值，表单值是Number类型则验证表单值&gt;= min，表单值是String类型则验证表单值length &gt;=
+                            min，推荐：Number类型表单使用v-model.number修饰符</li>
+                        <li>max： Number 验证表单属性最小值，表单值是Number类型则验证表单值&lt;= max，表单值是String类型则验证表单值length &lt;=
+                            max，推荐：Number类型表单使用v-model.number修饰符</li>
+                        <li>e-mail: Boolean 是否开启电子邮箱验证</li>
+                        <li>phone: Boolean 是否开启手机、电话坐机验证</li>
+                        <li>double: Boolean 是否开启小数精度验证</li>
+                        <li>identifier: Boolean 是否开启身份证验证，支持15位一代身份证、18位二代身份证。</li>
+                        <li>validate： RegExp | Function 表单的自义定验证</li>
+                        <li>error-message: 上述属性，验证失败显示消息内容。</li>
+                    </ul>
                 </div>
             </div>
         </div>
-
     </div>
     <script>
         $(document).ready(function () {

@@ -4,102 +4,42 @@
  * eMail        :   songqian@wtoe.cn
  * Description  :   radio组件
  */
-import * as tsx from 'vue-tsx-support'
-import { Component, Prop, Emit, Watch, InjectReactive,} from 'vue-property-decorator'
-import uuid from '~/utils/uuid'
 
-import 'vue-tsx-support/enable-check'
+import { Component, InjectReactive } from 'vue-property-decorator';
+import * as tsx from 'vue-tsx-support';
+import 'vue-tsx-support/enable-check';
 
-interface Props{
-    options:Array<{ name : string,  value : string }>,//单选框对应的数据源
-    selectOption:String,//双向绑定对应的选中的vaule值
-    icon:String  
-    // Disabled: Boolean,
+interface Props {
+    //Radio 文本
+    Text: String,
+    //Radio v-model值
+    Value: any,
+    //Radio 禁用
+    Disabled: Boolean,
+    //Radio 大小
+    Size: 'medium' | 'small' | 'mini'
+    //Radio 样式
+    Type: 'circle' | 'check' | 'button'
 }
+
 interface Event {
-    onClick : (e : MouseEvent) => void;
-}
-interface ScopedSlots{
-    default:void
+    onChange: (e: MouseEvent) => void;
 }
 
 @Component
-export default class iVsomRadio extends tsx.Component<Props,Event,ScopedSlots>{
-    constructor(){
+export default class iVsomRadio extends tsx.Component<Props, Event>{
+    constructor() {
         super()
     }
-    @Prop({default:null}) readonly options!:Array<{ name : string,  value : string,disabled:boolean }>;
-    @Prop({ default : null }) readonly icon !: string;
-
-    // @Prop({default : false, type : Boolean}) readonly disabled!:boolean;
-    @Prop({default :"", type : String}) readonly selectOption!:string;
-    // @Ref('radio') protected readonly radio !:  HTMLInputElement;
 
     @InjectReactive(Symbol.for('validate')) validate !: boolean;
     @InjectReactive(Symbol.for('trigger')) trigger !: 'blur' | 'change';
 
-    private selectRadio : string = "";
-    // private validate : boolean = true;
- 
-    // public ValidateField(regexp : RegExp) {
-    //     const me = this;
-    //     me.validate = regexp.test(me.selectoption);
-    //     return me.validate;
-    // }
-
-    protected mounted() {
-         const me=this
-         me.selectRadio = me.selectOption;  
-    }
-     
-    @Emit()
-    protected onRadioChange(e : MouseEvent): void {
-        const me=this
-        const { value } = e.target as any
-        me.selectRadio = value
-        if(me.trigger === 'change') {
-            me.$vnode.componentInstance?.$parent.$emit('on-validate');
-        }
-   }
-
-    private readonly map = new Map<string, { name : string,  value : string ,disabled:boolean }>();
-
-    protected get optionProvide() : Map<string, { name : string,  value : string,disabled:boolean  }> {
+    protected render(): JSX.Element {
         const me = this;
-        let len = 0;
-        me.map.clear();
-        while(me.options && len < me.options.length) {
-            me.map.set(uuid(), me.options[len]);
-            ++len;
-        }
-        return me.map;
-    }
-
-    protected set optionProvide(map : Map<string, { name : string,  value : string,disabled:boolean  }>) {
-        const me = this;
-        me.$emit('update:options', [ ...map.values()]);
-    }
-  
-    protected render() : JSX.Element {
-        const me = this;
-        const m = tsx.modifiers;
-        const optionsEl = ((map) => {
-            const element = [];
-            for (let [k, item] of map.entries()) {
-                let c = (<div key={ k as string } class={{'radio-wrapper':true,"radio-wrapper_disabled":item.disabled==true}} >
-                           <lable  class={{'ivsom-radio':true,"checked":me.selectRadio == item.value,"ivsom-radio_disabled":item.disabled==true}}>
-                               <input type="radio" value={item.value} disabled={ !!item.disabled } onClick={ (e) => { me.onRadioChange(e as MouseEvent) } }  />
-                           </lable>
-                           <i class={ `iconfont ${ me.icon }` }></i>
-                           { item.name }
-                        </div>)
-                element.push(c);
-            }
-            return element.slice(0, element.length);
-        })(me.optionProvide)
         return (
-        <div>{optionsEl}</div>
-       )
+            <div class="ivsom-radio"></div>
+        )
     }
 
 }
