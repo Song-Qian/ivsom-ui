@@ -5,9 +5,9 @@
  * Description  :   radio组件
  */
 
-import { Component, InjectReactive } from 'vue-property-decorator';
-import * as tsx from 'vue-tsx-support';
-import 'vue-tsx-support/enable-check';
+import { Component, InjectReactive } from 'vue-property-decorator'
+import * as tsx from 'vue-tsx-support'
+import 'vue-tsx-support/enable-check'
 
 interface Props {
     //Radio 文本
