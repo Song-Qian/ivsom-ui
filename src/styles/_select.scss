@@ -6,18 +6,15 @@
  */
  @import "./ivsom-variable";
  @import "./ivsom-mixin";
+ @import "./animate";
 
  .ivsom-select {
+    outline: none;
     border:1px solid $border-primary-color;
     border-radius: 5px;
-    display:flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    overflow: hidden;
-    position: relative;
     transition: border .3s ease;
+    position: relative;
 
-    
     &.ivsom-select__medium {
         height : 32px;
         line-height: 32px;
@@ -60,56 +57,191 @@
         }
     }
 
-    
-    &::-webkit-input-placeholder {
-        color: $font-symbol-color;
+    &.ivsom-select__multiple {
+        height: auto;
+
+        &.ivsom-select__medium {
+            min-height: 32px;
+            line-height: 32px;
+        }
+        
+        &.ivsom-select__small {
+            min-height: 26px;
+            line-height: 26px;
+        }
+        
+        &.ivsom-select__mini {
+            min-height: 20px;
+            line-height: 20px;
+        }
     }
-    
-    > input {
-        width: 100%;
-        height: 100%;
-        border: 0px solid #fff;
-        flex: 1 1 auto;
+
+    &.ivsom-select__disabled {
+        background-color: #eee;
+        cursor: no-drop;
+
+        > .ivsom-select__warpper {
+
+            > .ivsom-select__ctx {
+                cursor: no-drop;
+            }
+        }
+    }
+
+    &.ivsom-select__hover:hover,
+    &.ivsom-select__focus:focus {
+
+        > .ivsom-select__warpper > .ivsom-select__dropdown {
+
+            i.iconfont::before {
+                content: "\e6c7";
+            }
+        }
+
+        .ivsom-select__dropArea {
+            display: block;
+            animation: ivsom-fade-down .3s linear 0s 1 none;
+        }
+    }
+
+    .ivsom-select__warpper {
+        display:flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        overflow: hidden;
         outline: none;
-        text-indent: 1em;
-        background: transparent;
-        resize: none;
-        @include font-text;
-    }
+        height: 100%;
+        position: relative;
+
+        > .ivsom-select__ctx {
+            border: 0px solid #fff;
+            flex: 1 1 auto;
+            outline: none;
+            text-indent: 1em;
+            background: transparent;
+            resize: none;
+            cursor: text;
+            position: relative;
+            white-space: nowrap;
+            overflow: hidden;
+            @include font-text;
+
+            > .ivsom-select_placeholder {
+                position: absolute;
+                left : 5px;
+                display: block;
+                z-index: 0;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                user-select: none;
+                color: $font-symbol-color;
+            }
+
+            > .ivsom-select_label {
+                color: $font-common-color;
+            }
+
+            > .ivsom-select_label_item {
+                padding: 5px;
+                height: 26px;
+                line-height: 14px;
+                font-size: 14px;
+                margin: 5px;
+                border-radius: 4px;
+                box-sizing: border-box;
+                background-color: rgba(41, 153, 247, .2);
+                color: $primary-color;
+                float: left;
+
+                > small {
+                    max-width: 4em;
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    text-indent: 0px;
+                }
+
+                > .iconfont {
+                    cursor: pointer;
+                    color: #fff;
+                }
+            }
+        }
+        
+        > .ivsom-input__prefix {
+            text-align: center;
+            align-self: center;
+            @include font-sub-text;
+        }
     
-    > .ivsom-input__prefix {
-        text-align: center;
-        align-self: center;
-        @include font-sub-text;
-
-        + input {
-            text-indent: 0px;
+        > .ivsom-input__suffix {
+            text-align: center;
+            align-self: center;
+            @include font-sub-text;
         }
-    }
-
-    > .ivsom-input__suffix {
-        text-align: center;
-        @include font-sub-text;
-
-        + input {
-            text-indent: 0px;
-        }
-    }
-
-    > .ivsom-select__dropdown {
-        text-align: center;
-        cursor: pointer;
-        @include font-sub-text;
-    }
+    
+        > .ivsom-select__dropdown {
+            text-align: center;
+            align-self: center;
+            cursor: pointer;
+            @include font-sub-text;
+        } 
+    } 
 
     > .ivsom-select__dropArea {
         width: 100%;
-        border: 1px solid $border-primary-color;
+        display: none;
+        padding-top: 5px;
         position: absolute;
-        min-height: 50px;
         left: 0px;
-        top: calc(100% + 5px);
+        top: 100%;
         border-radius: 5px;
+
+        > .ivsom-select__options {
+            width: 100%;
+            background: #fff;
+            border: 1px solid $border-primary-color;
+            min-height: 50px;
+            max-height: 320px;
+            overflow-y: auto;
+            margin-block-start: 0px;
+            margin-block-end: 0px;
+            margin-inline-start: 0px;
+            margin-inline-end: 0px;
+            border-radius: 5px;
+            box-sizing: border-box;
+
+            &::-webkit-scrollbar {
+                width: 8px;
+                border-radius: 4px;
+                background-color: #ddd;
+            }
+
+            &::-webkit-scrollbar-thumb {
+                background-color: #c8c8c8;
+                border-radius: 4px;
+            }
+
+            > li {
+                margin: 0px;
+                padding: 0px;
+                height: 36px;
+                text-indent: 20px;
+                line-height: 36px;
+                list-style: none;
+                cursor: pointer;
+
+                &.ivsom-select__option__disabled {
+                    background-color: #eee !important;
+                    cursor: no-drop;
+                }
+
+                &:hover {
+                    background-color: rgba(41, 153, 247, .1);
+                }
+            }
+        }
     }
 
  }

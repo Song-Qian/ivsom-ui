@@ -18,7 +18,7 @@ interface Props {
 }
 
 interface Event {
-    onClick : (e : MouseEvent) => void
+    click : (e : MouseEvent) => void
 }
 
 interface ScopedSlots {

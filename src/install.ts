@@ -6,36 +6,36 @@
  */
 
 import '~/styles'
-
+import iVsomBreadCrumbs from './components/breadcrumbs/ivsom-breadcrumbs'
 import iVsomButton from './components/button/ivsom-button'
 import iVsomButtonGroup from './components/button/ivsom-button-group'
-import iVsomBreadCrumbs from './components/breadcrumbs/ivsom-breadcrumbs'
-import iVsomRow from './components/layout/ivsom-row'
-import iVsomCol from './components/layout/ivsom-col'
-import iVsomTabs from './components/tabs/ivsom-tabs'
-import iVsomTabsPanel from './components/tabs/ivsom-tabs-panel'
-import iVsomMenu from './components/menu/ivsom-menu'
-import iVsomMenuItem from './components/menu/ivsom-menu-item'
-import iVsomRadio from './components/radio/ivsom-radio'
-import iVsomCheckbox from './components/checkbox/ivsom-checkbox'
-import iVsomInputNumber from './components/number/ivsom-input-number'
-import iVsomSwitch from './components/switch/ivsom-switch'
-import iVsomSlider from './components/slider/ivsom-slider'
-import iVsomPagination from './components/page/ivsom-pagination'
-import iVsomInput from './components/form/ivsom-input'
-import iVsomStep from './components/step/ivsom-step'
-import iVsomList from './components/list/ivsom-list'
+import iVsomCheckbox from './components/form/ivsom-checkbox'
 import iVsomForm from './components/form/ivsom-form'
 import iVsomFormValidater from './components/form/ivsom-form-validater'
+import iVsomInput from './components/form/ivsom-input'
+import iVsomInputNumber from './components/form/ivsom-input-number'
+import iVsomRadio from './components/form/ivsom-radio'
 import iVSomSelect from './components/form/ivsom-select'
+import iVsomSlider from './components/form/ivsom-slider'
+import iVsomCol from './components/layout/ivsom-col'
+import iVsomRow from './components/layout/ivsom-row'
+import iVsomList from './components/list/ivsom-list'
+import iVsomMenu from './components/menu/ivsom-menu'
+import iVsomMenuItem from './components/menu/ivsom-menu-item'
+import iVsomPagination from './components/page/ivsom-pagination'
+import iVsomStep from './components/step/ivsom-step'
+import iVsomSwitch from './components/switch/ivsom-switch'
+import iVsomTabs from './components/tabs/ivsom-tabs'
+import iVsomTabsPanel from './components/tabs/ivsom-tabs-panel'
 
-const components : Array<any> = [
+
+const components: Array<any> = [
     iVsomRow,
     iVsomCol,
     iVsomButton,
     iVsomButtonGroup,
-    iVsomBreadCrumbs, 
-    iVsomTabs, 
+    iVsomBreadCrumbs,
+    iVsomTabs,
     iVsomTabsPanel,
     iVsomMenu,
     iVsomMenuItem,
@@ -53,18 +53,18 @@ const components : Array<any> = [
     iVSomSelect
 ]
 
-const install = (Vue : any) => {
-    components.forEach((el, n : number) => {
+const install = (Vue: any) => {
+    components.forEach((el, n: number) => {
         Vue.component((<any>el).name, el);
     })
 }
 
-if(typeof window !== 'undefined' && window.Vue) {
+if (typeof window !== 'undefined' && window.Vue) {
     install(window.Vue);
 }
 
 export default {
-    version : '0.0.1',
+    version: '0.0.1',
     install,
     ...components
 }

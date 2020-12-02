@@ -31,6 +31,27 @@
      }
  }
 
+ @keyframes ivsom-fade-down {
+     from {
+         opacity: 0;
+         -webkit-transform: perspective(400px) scale3d(1, 0, 1);
+         transform: perspective(400px) scale3d(1, 0, 1);
+         -webkit-animation-timing-function: ease-in;
+         animation-timing-function: ease-in;
+     }
+
+     80% {
+        opacity: 1;
+        -webkit-transform: perspective(400px) scale3d(1, 1, 1);
+        transform: perspective(400px) scale3d(1, 1, 1);
+     }
+
+     to {
+         -webkit-transform: perspective(400px);
+         transform: perspective(400px);
+     }
+ }
+
  @keyframes ivsom-slider-down {
     from {
         -webkit-transform: perspective(400px) rotate3d(1, 0, 0, 90deg);
