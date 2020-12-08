@@ -15,6 +15,7 @@ import iVsomFormValidater from './components/form/ivsom-form-validater'
 import iVsomInput from './components/form/ivsom-input'
 import iVsomInputNumber from './components/form/ivsom-input-number'
 import iVsomRadio from './components/form/ivsom-radio'
+import iVsomRadioGroup from './components/form/ivsom-radio-group'
 import iVSomSelect from './components/form/ivsom-select'
 import iVsomSlider from './components/form/ivsom-slider'
 import iVsomCol from './components/layout/ivsom-col'
@@ -39,6 +40,7 @@ const components: Array<any> = [
     iVsomTabsPanel,
     iVsomMenu,
     iVsomMenuItem,
+    iVsomRadioGroup,
     iVsomRadio,
     iVsomCheckbox,
     iVsomInputNumber,
