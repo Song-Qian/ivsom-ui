@@ -81,7 +81,7 @@
                         <li>RadioGroup name属性是Radio按钮组的表单参数名</a></li>
                         <li>RadioGroup value属性是Radio选中的值</a></li>
                     </ul>
-                    <blockquote>
+                    <!-- <blockquote>
                         <i-vsom-radio-group v-model="radio_value3" name="sex">
                             <i-vsom-radio type="check" :checked="radio_value3" size="small" value="男">男</i-vsom-radio>
                             <i-vsom-radio type="check" :checked="radio_value3" size="small" value="女">女</i-vsom-radio>
@@ -92,6 +92,24 @@
     &lt;i-vsom-radio type="check" :checked="radio_value3" size="small" value="男"&gt;男&lt;/i-vsom-radio&gt;
     &lt;i-vsom-radio type="check" :checked="radio_value3" size="small" value="女"&gt;女&lt;/i-vsom-radio&gt;
  &lt;/i-vsom-radio-group&gt;
+</code></pre> -->
+            
+                    <p>Radio 按钮组的表单验证</p>
+                    <blockquote>
+                        <i-vsom-form :model="form" :label-width="80" position="left">
+                            <i-vsom-form-validater label="性别" prop="sex" trigger="change" :validate="/^[男]$/" error-message="当前选择不是男性" required>
+                                <i-vsom-radio-group v-model="form.sex" name="sex">
+                                    <i-vsom-radio type="check" :checked="form.sex" size="small" value="男">男</i-vsom-radio>
+                                    <i-vsom-radio type="check" :checked="form.sex" size="small" value="女">女</i-vsom-radio>
+                                </i-vsom-radio-group>
+                            </i-vsom-form-validater>
+                        </i-vsom-form>
+                    </blockquote>
+                    <pre><code class="language-html"
+>&lt;i-vsom-radio-group v-model="radio_value3" name="sex"&gt;
+    &lt;i-vsom-radio type="check" :checked="radio_value3" size="small" value="男"&gt;男&lt;/i-vsom-radio&gt;
+    &lt;i-vsom-radio type="check" :checked="radio_value3" size="small" value="女"&gt;女&lt;/i-vsom-radio&gt;
+&lt;/i-vsom-radio-group&gt;
 </code></pre>
                     <h2 id="unicode-">RadioGroup Event 事件</h2>
                     <hr>
@@ -99,12 +117,12 @@
                     <ul>
                         <li>onChange: Arguments(value : string) Radio 引发值改变的事件。</li>
                     </ul>
-                    <blockquote>
+                    <!-- <blockquote>
                         <i-vsom-radio-group v-model="radio_value4" name="sex" @on-change="onChange">
                             <i-vsom-radio type="check" :checked="radio_value4" size="small" value="男">男</i-vsom-radio>
                             <i-vsom-radio type="check" :checked="radio_value4" size="small" value="女">女</i-vsom-radio>
                         </i-vsom-radio-group>
-                    </blockquote>
+                    </blockquote> -->
                     <pre><code class="language-html"
 >&lt;i-vsom-radio-group v-model="radio_value" name="sex" @on-change="onChange"&gt;
     &lt;i-vsom-radio type="check" :checked="radio_value" size="small" value="男"&gt;男&lt;/i-vsom-radio&gt;

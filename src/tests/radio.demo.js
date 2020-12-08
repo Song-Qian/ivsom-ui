@@ -11,7 +11,10 @@
                 radio_value1: '',
                 radio_value2: '',
                 radio_value3: '',
-                radio_value4: ''
+                radio_value4: '',
+                form: {
+                    sex : ''
+                }
             }
         },
         watch : {

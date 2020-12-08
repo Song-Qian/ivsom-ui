@@ -40,9 +40,8 @@ export default class iVsomRadioGroup extends tsx.Component<Props, any, ScopedSlo
 
     protected mounted() {
         let me = this;
-        me.$on("click", function(val: any) {
-            me.$emit("input", val);
-        })
+        me.$on("click", function(val: any) { me.$emit("input", val); })
+        me.$on("on-validate", () => me.$parent.$emit("on-validate"));
     }
 
     protected render(): JSX.Element {
