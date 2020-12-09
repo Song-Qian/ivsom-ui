@@ -15,7 +15,7 @@ module.exports = function() {
     const bannerPlugin = new webpack.BannerPlugin({
         banner : `Developer :   SongQian
 Time    :   2020-04-21
-eMail   :   songqian@wtoe.cn
+eMail   :   onlylove1172559463@vip.qq.com
 Description :  武汉微创光电股份公司 iVsomUI 组件库`,
         raw : false,
         entryOnly : false,

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>install demo</title>
+    <link rel="stylesheet" href="./cube.min.css">
+    <link rel="stylesheet" href="./demo.css">
+    <script src="../vue.min.js"></script>
+    <script src="./jQuery-1.9.1.js"></script>
+    <script src="./PrismJs.js"></script>
+<link href="/iVsomUI.css" rel="stylesheet"><script src="/vue-class-component.min.js"></script><script src="/vue-property-decorator.min.js"></script><script src="/vue-tsx-support.min.js"></script><script src="/vendors~index.min.js"></script><script src="/index.5d7e7a33.min.js"></script></head>
+
+<body>
+    <div class="main">
+        <h1 class="logo">快速开始</h1>
+        <div class="tab-container">
+            <div class="content unicode" style="display: block;">
+                <div class="article markdown">
+                    <h2 id="unicode-">CDN 环境引用</h2>
+                    <hr>
+                    <p>CDN 环境是最前端UI最初引入方式，特点是：</p>
+                    <ul>
+                        <li>直接使用link, scripts 等脚本语言去引入所需要的依赖项</li>
+                        <li>现代浏览器中可以使用defer等技术实现异步加载</li>
+                    </ul>
+                    <p> 依赖环境：</p>
+                    <blockquote>
+                        <p>iVsomUI 是在微创光电内部基于现有产品需求，规划的一套UI组件库，当前开发环境是Vue 2.6.11与TSX语言结合进行开发，所以在使用本套UI框架前，必须引用相关的依赖支持库。</p>
+                    </blockquote>
+                    <h3 id="-font-face">第一步：引用iVsomUI.css文件</h3>
+                    <pre><code class="language-html"
+>&lt;!-- 引用全局样式文件 --&gt;
+ &lt;link rel="stylesheet" href="iVsomUI.css" /&gt;
+</code></pre>
+                    <h3 id="-iconfont-">第二步：引入相关的依赖JS库</h3>
+                    <pre><code class="language-html"
+>&lt;script src="vue.min.js"&gt;&lt;/script&gt;
+ &lt;script src="iVsom.min.js"&gt;&lt;/script&gt;
+</code></pre>
+                    <h3 id="-iconfont-">第三步：开始代码</h3>
+                        <pre><code class="language-js"
+>Vue.use(iVsomUI);
+ var app = new Vue({
+    el : '#app',
+    data : function() {
+        return {
+        }
+    },
+    methods : {
+        onClick : function(e) {
+            console.log("submit click", e);
+        }
+    }
+ })
+</code></pre>
+                    <blockquote>
+                        <p>注意：我们还继续支持AMD & UMD规范的引用，方便在RequireJS环境下使用</p>
+                    </blockquote>
+                </div>
+            </div>
+        </div> 
+    </div>
+    <script>
+        $(document).ready(function () {
+            $('.tab-container .content:first').show()
+
+            $('#tabs li').click(function (e) {
+                var tabContent = $('.tab-container .content')
+                var index = $(this).index()
+
+                if ($(this).hasClass('active')) {
+                    return
+                } else {
+                    $('#tabs li').removeClass('active')
+                    $(this).addClass('active')
+
+                    tabContent.hide().eq(index).fadeIn()
+                }
+            })
+        })
+    </script>
+</body>
+
+</html>

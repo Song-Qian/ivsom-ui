@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>button api demo</title>
+    <link rel="stylesheet" href="./cube.min.css">
+    <link rel="stylesheet" href="./demo.css">
+    <script src="../vue.min.js"></script>
+    <script src="./jQuery-1.9.1.js"></script>
+    <script src="./PrismJs.js"></script>
+<link href="/iVsomUI.css" rel="stylesheet"><script src="/vue-class-component.min.js"></script><script src="/vue-property-decorator.min.js"></script><script src="/vue-tsx-support.min.js"></script><script src="/vendors~index.min.js"></script><script src="/index.5d7e7a33.min.js"></script></head>
+
+<body>
+    <div id="app" class="main">
+        <h1 class="logo">Button Api</h1>
+        <div class="nav-tabs">
+            <ul id="tabs" class="dib-box">
+                <li class="dib active"><span> CDN </span></li>
+                <li class="dib"><span> NodeJS </span></li>
+            </ul>
+        </div>
+        <div class="tab-container">
+            <div class="content unicode" style="display: block;">
+                <div class="article markdown">
+                    <h2 id="unicode-">基础用法</h2>
+                    <hr>
+                    <p>常规按钮</p>
+                    <ul>
+                        <li>Button 组件在使用之前，需要有相关的依赖库进行支持，如需阅读：<a href="./start.api.html" target="_blank" >快速开始</a></li>
+                    </ul>
+                    <blockquote>
+                        <i-vsom-button>普通按钮</i-vsom-button>
+                        <i-vsom-button type="success">确认按钮</i-vsom-button>
+                        <i-vsom-button type="primary">功能按钮</i-vsom-button>
+                        <i-vsom-button type="warning">警示按钮</i-vsom-button>
+                        <i-vsom-button type="danger">危险性按钮</i-vsom-button>
+                    </blockquote>
+                    <pre><code class="language-html"
+>&lt;i-vsom-button&gt;普通按钮&lt;/i-vsom-button&gt;
+ &lt;i-vsom-button type="success"&gt;确认按钮&lt;/i-vsom-button&gt;
+ &lt;i-vsom-button type="primary"&gt;功能按钮&lt;/i-vsom-button&gt;
+ &lt;i-vsom-button type="warning"&gt;警示按钮&lt;/i-vsom-button&gt;
+ &lt;i-vsom-button type="danger"&gt;危险性按钮&lt;/i-vsom-button&gt;
+</code></pre>
+
+                    <h2 id="unicode-">功能按钮</h2>
+                    <hr>
+                    <p>Icon 属性接口</p>
+                    <ul>
+                        <li>方式一：功能性按钮一般是支持ICON属性，向用户表达该按钮的功能用途</li>
+                        <li>方式二：框架里面的ICON是固定有限的，在特定的业务中，功能性按钮需要通过插槽功能加入自定义ICON，向用户表达不同意义的按钮的功能用途</li>
+                    </ul>
+                    <blockquote>
+                        <i-vsom-button icon="icon-gongnengtubiao-62">打印按钮</i-vsom-button>
+                        <i-vsom-button type="success" icon="icon-gongnengtubiao-40">确认按钮</i-vsom-button>
+                        <i-vsom-button type="primary" icon="icon-gongnengtubiao-44">查询按钮</i-vsom-button>
+                        <i-vsom-button type="warning" icon="icon-gongnengtubiao-79">警示按钮</i-vsom-button>
+                        <i-vsom-button type="danger" icon="icon-gongnengtubiao-67">删除按钮</i-vsom-button>
+                    </blockquote>
+                    <pre><code class="language-html"
+>&lt;i-vsom-button icon="icon-gongnengtubiao-62"&gt;普通按钮&lt;/i-vsom-button&gt;
+ &lt;i-vsom-button type="success" icon="icon-gongnengtubiao-40"&gt;确认按钮&lt;/i-vsom-button&gt;
+ &lt;i-vsom-button type="primary" icon="icon-gongnengtubiao-44"&gt;功能按钮&lt;/i-vsom-button&gt;
+ &lt;i-vsom-button type="warning" icon="icon-gongnengtubiao-79"&gt;警示按钮&lt;/i-vsom-button&gt;
+ &lt;i-vsom-button type="danger" icon="icon-gongnengtubiao-67"&gt;危险性按钮&lt;/i-vsom-button&gt;
+</code></pre>
+                    <p>Template Default Slot 属性接口</p>
+                    <blockquote>
+                        <i-vsom-button><i class="iconfont">&#xe6e4;</i> 打印按钮</i-vsom-button>
+                        <i-vsom-button type="success"><i class="iconfont">&#xe6d5;</i> 确认按钮</i-vsom-button>
+                        <i-vsom-button type="primary"><i class="iconfont">&#xe6d6;</i> 查询按钮</i-vsom-button>
+                        <i-vsom-button type="warning"><i class="iconfont">&#xe705;</i> 警示按钮</i-vsom-button>
+                        <i-vsom-button type="danger"><i class="iconfont">&#xe6f9;</i> 删除按钮</i-vsom-button>
+                    </blockquote>
+                    <pre><code class="language-html"
+>&lt;i-vsom-button&gt;&lt;i class="iconfont"&gt;&#38;#xe6e4;&lt;/i&gt; 打印按钮&lt;/i-vsom-button&gt;
+ &lt;i-vsom-button type="success"&gt;&lt;i class="iconfont"&gt;&#38;#xe6d5;&lt;/i&gt; 确认按钮&lt;/i-vsom-button&gt;
+ &lt;i-vsom-button type="primary"&gt;&lt;i class="iconfont"&gt;&#38;#xe6d6;&lt;/i&gt; 查询按钮&lt;/i-vsom-button&gt;
+ &lt;i-vsom-button type="warning"&gt;&lt;i class="iconfont"&gt;&#38;#xe705;&lt;/i&gt; 警示按钮&lt;/i-vsom-button&gt;
+ &lt;i-vsom-button type="danger"&gt;&lt;i class="iconfont"&gt;&#38;#xe6f9;&lt;/i&gt; 删除按钮&lt;/i-vsom-button&gt;
+</code></pre>
+                    <pre><code class="language-html"
+>&lt;i-vsom-button&gt;
+    &lt;template #default&gt;
+        &lt;i class="iconfont"&gt;&#38;#xe6e4;&lt;/i&gt; 打印按钮
+    &lt;/template&gt;
+ &lt;/i-vsom-button&gt;
+ &lt;i-vsom-button type="success"&gt;
+    &lt;template #default&gt;
+        &lt;i class="iconfont"&gt;&#38;#xe6d5;&lt;/i&gt; 确认按钮
+    &lt;/template&gt;
+ &lt;/i-vsom-button&gt;
+ &lt;i-vsom-button type="primary"&gt;
+    &lt;template #default&gt;
+        &lt;i class="iconfont"&gt;&#38;#xe6d6;&lt;/i&gt; 查询按钮
+    &lt;/template&gt;
+ &lt;/i-vsom-button&gt;
+ &lt;i-vsom-button type="warning"&gt;
+    lt;template #default&gt;
+        &lt;i class="iconfont"&gt;&#38;#xe705;&lt;/i&gt; 警示按钮
+    &lt;/template&gt;
+ &lt;/i-vsom-button&gt;
+ &lt;i-vsom-button type="danger"&gt;
+    &lt;template #default&gt;
+        &lt;i class="iconfont"&gt;&#38;#xe6f9;&lt;/i&gt; 删除按钮
+    &lt;template&gt;
+ &lt;/i-vsom-button&gt;
+</code></pre>
+                    <h2 id="unicode-">圆角按钮</h2>
+                    <hr>
+                    <p>Plain 属性接口</p>
+                    <blockquote>
+                        <i-vsom-button plain><i class="iconfont">&#xe6e4;</i> 打印按钮</i-vsom-button>
+                        <i-vsom-button type="success" plain><i class="iconfont">&#xe6d5;</i> 确认按钮</i-vsom-button>
+                        <i-vsom-button type="primary" plain><i class="iconfont">&#xe6d6;</i> 查询按钮</i-vsom-button>
+                        <i-vsom-button type="warning" plain><i class="iconfont">&#xe705;</i> 警示按钮</i-vsom-button>
+                        <i-vsom-button type="danger" plain><i class="iconfont">&#xe6f9;</i> 删除按钮</i-vsom-button>
+                    </blockquote>
+                    <pre><code class="language-html"
+>&lt;i-vsom-button plain&gt;&lt;i class="iconfont"&gt;&#38;#xe6e4;&lt;/i&gt; 打印按钮&lt;/i-vsom-button&gt;
+ &lt;i-vsom-button type="success" plain&gt;&lt;i class="iconfont"&gt;&#38;#xe6d5;&lt;/i&gt; 确认按钮&lt;/i-vsom-button&gt;
+ &lt;i-vsom-button type="primary" plain&gt;&lt;i class="iconfont"&gt;&#38;#xe6d6;&lt;/i&gt; 查询按钮&lt;/i-vsom-button&gt;
+ &lt;i-vsom-button type="warning" plain&gt;&lt;i class="iconfont"&gt;&#38;#xe705;&lt;/i&gt; 警示按钮&lt;/i-vsom-button&gt;
+ &lt;i-vsom-button type="danger" plain&gt;&lt;i class="iconfont"&gt;&#38;#xe6f9;&lt;/i&gt; 删除按钮&lt;/i-vsom-button&gt;
+</code></pre>
+                    <h2 id="unicode-">禁用按钮</h2>
+                    <hr>
+                    <p>disabled 属性接口</p>
+                    <blockquote>
+                        <i-vsom-button disabled><i class="iconfont">&#xe6e4;</i> 打印按钮</i-vsom-button>
+                        <i-vsom-button type="success" disabled><i class="iconfont">&#xe6d5;</i> 确认按钮</i-vsom-button>
+                        <i-vsom-button type="primary" disabled><i class="iconfont">&#xe6d6;</i> 查询按钮</i-vsom-button>
+                        <i-vsom-button type="warning" disabled><i class="iconfont">&#xe705;</i> 警示按钮</i-vsom-button>
+                        <i-vsom-button type="danger" disabled><i class="iconfont">&#xe6f9;</i> 删除按钮</i-vsom-button>
+                    </blockquote>
+<pre><code class="language-html"
+>&lt;i-vsom-button disabled&gt;&lt;i class="iconfont"&gt;&#38;#xe6e4;&lt;/i&gt; 打印按钮&lt;/i-vsom-button&gt;
+ &lt;i-vsom-button type="success" disabled&gt;&lt;i class="iconfont"&gt;&#38;#xe6d5;&lt;/i&gt; 确认按钮&lt;/i-vsom-button&gt;
+ &lt;i-vsom-button type="primary" disabled&gt;&lt;i class="iconfont"&gt;&#38;#xe6d6;&lt;/i&gt; 查询按钮&lt;/i-vsom-button&gt;
+ &lt;i-vsom-button type="warning" disabled&gt;&lt;i class="iconfont"&gt;&#38;#xe705;&lt;/i&gt; 警示按钮&lt;/i-vsom-button&gt;
+ &lt;i-vsom-button type="danger" disabled&gt;&lt;i class="iconfont"&gt;&#38;#xe6f9;&lt;/i&gt; 删除按钮&lt;/i-vsom-button&gt;
+</code></pre>
+                    <h2 id="unicode-">按钮组</h2>
+                    <hr>
+                    <p>普通按钮组</p>
+                    <blockquote>
+                        <i-vsom-button-group>
+                            <i-vsom-button icon="icon-gongnengtubiao-62">打印按钮</i-vsom-button>
+                            <i-vsom-button type="success" icon="icon-gongnengtubiao-40">确认按钮</i-vsom-button>
+                            <i-vsom-button type="primary" icon="icon-gongnengtubiao-44">查询按钮</i-vsom-button>
+                            <i-vsom-button type="warning" icon="icon-gongnengtubiao-79">警示按钮</i-vsom-button>
+                            <i-vsom-button type="danger" icon="icon-gongnengtubiao-67">删除按钮</i-vsom-button>
+                        </i-vsom-button-group>
+                    </blockquote>
+<pre><code class="language-html"
+>&lt;i-vsom-button-group&gt;
+    &lt;i-vsom-button icon="icon-gongnengtubiao-62"&gt;打印按钮&lt;/i-vsom-button&gt;
+    &lt;i-vsom-button type="success" icon="icon-gongnengtubiao-40"&gt;确认按钮&lt;/i-vsom-button&gt;
+    &lt;i-vsom-button type="primary" icon="icon-gongnengtubiao-44"&gt;查询按钮&lt;/i-vsom-button&gt;
+    &lt;i-vsom-button type="warning" icon="icon-gongnengtubiao-79"&gt;警示按钮&lt;/i-vsom-button&gt;
+    &lt;i-vsom-button type="danger" icon="icon-gongnengtubiao-67"&gt;删除按钮&lt;/i-vsom-button&gt;
+ &lt;/i-vsom-button-group>
+</code></pre>
+                    <p>圆角按钮组</p>
+                    <blockquote>
+                        <i-vsom-button-group plain>
+                            <i-vsom-button icon="icon-gongnengtubiao-62">打印按钮</i-vsom-button>
+                            <i-vsom-button type="success" icon="icon-gongnengtubiao-40">确认按钮</i-vsom-button>
+                            <i-vsom-button type="primary" icon="icon-gongnengtubiao-44">查询按钮</i-vsom-button>
+                            <i-vsom-button type="warning" icon="icon-gongnengtubiao-79">警示按钮</i-vsom-button>
+                            <i-vsom-button type="danger" icon="icon-gongnengtubiao-67">删除按钮</i-vsom-button>
+                        </i-vsom-button-group>
+                    </blockquote>
+<pre><code class="language-html"
+>&lt;i-vsom-button-group&gt;
+    &lt;i-vsom-button icon="icon-gongnengtubiao-62" plain&gt;打印按钮&lt;/i-vsom-button&gt;
+    &lt;i-vsom-button type="success" icon="icon-gongnengtubiao-40" &gt;确认按钮&lt;/i-vsom-button&gt;
+    &lt;i-vsom-button type="primary" icon="icon-gongnengtubiao-44" &gt;查询按钮&lt;/i-vsom-button&gt;
+    &lt;i-vsom-button type="warning" icon="icon-gongnengtubiao-79" &gt;警示按钮&lt;/i-vsom-button&gt;
+    &lt;i-vsom-button type="danger" icon="icon-gongnengtubiao-67" plain&gt;删除按钮&lt;/i-vsom-button&gt;
+ &lt;/i-vsom-button-group>
+</code></pre>
+                    <h2 id="unicode-">按钮事件</h2>
+                    <hr>
+                    <p>Event 接口</p>
+                    <ul>
+                        <li>onClick: Arguments(MouseEvent) 按钮点击事件</li>
+                    </ul>
+                    <blockquote>
+                        <i-vsom-button @click="onBtnClick.apply(this, ['点击了普通按钮'])"><i class="iconfont">&#xe6e4;</i> 打印按钮</i-vsom-button>
+                        <i-vsom-button @click="onBtnClick.apply(this, ['点击了确认按钮'])" type="success"><i class="iconfont">&#xe6d5;</i> 确认按钮</i-vsom-button>
+                        <i-vsom-button @click="onBtnClick.apply(this, ['点击了查询按钮'])" type="primary"><i class="iconfont">&#xe6d6;</i> 查询按钮</i-vsom-button>
+                        <i-vsom-button @click="onBtnClick.apply(this, ['点击了警示按钮'])" type="warning"><i class="iconfont">&#xe705;</i> 警示按钮</i-vsom-button>
+                        <i-vsom-button @click="onBtnClick.apply(this, ['点击了删除按钮'])" type="danger"><i class="iconfont">&#xe6f9;</i> 删除按钮</i-vsom-button>
+                    </blockquote>
+                    <pre><code class="language-html"
+>&lt;i-vsom-button @click="onBtnClick.apply(this, ['点击了普通按钮'])"&gt;&lt;i class="iconfont"&gt;&#38;#xe6e4;&lt;/i&gt; 打印按钮&lt;/i-vsom-button&gt;
+ &lt;i-vsom-button @click="onBtnClick.apply(this, ['点击了确认按钮'])" type="success"&gt;&lt;i class="iconfont"&gt;&#38;#xe6d5;&lt;/i&gt; 确认按钮&lt;/i-vsom-button&gt;
+ &lt;i-vsom-button @click="onBtnClick.apply(this, ['点击了查询按钮'])" type="primary"&gt;&lt;i class="iconfont"&gt;&#38;#xe6d6;&lt;/i&gt; 查询按钮&lt;/i-vsom-button&gt;
+ &lt;i-vsom-button @click="onBtnClick.apply(this, ['点击了警示按钮'])" type="warning"&gt;&lt;i class="iconfont"&gt;&#38;#xe705;&lt;/i&gt; 警示按钮&lt;/i-vsom-button&gt;
+ &lt;i-vsom-button @click="onBtnClick.apply(this, ['点击了删除按钮'])" type="danger"&gt;&lt;i class="iconfont"&gt;&#38;#xe6f9;&lt;/i&gt; 删除按钮&lt;/i-vsom-button&gt;
+</code></pre>
+                    <pre><code class="language-js"
+>
+Vue.use(iVsomUI);
+var app = new Vue({
+    el : '#app',
+    data : function() {
+        return {
+        }
+    },
+    methods : {
+        onBtnClick : function(text) {
+            alert(text);
+        }
+    }
+})
+</code></pre>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        $(document).ready(function () {
+            $('.tab-container .content:first').show()
+
+            $('#tabs li').click(function (e) {
+                var tabContent = $('.tab-container .content')
+                var index = $(this).index()
+
+                if ($(this).hasClass('active')) {
+                    return
+                } else {
+                    $('#tabs li').removeClass('active')
+                    $(this).addClass('active')
+
+                    tabContent.hide().eq(index).fadeIn()
+                }
+            })
+        })
+    </script>
+    <script src="./button.demo.js"></script>
+</body>
+
+</html>

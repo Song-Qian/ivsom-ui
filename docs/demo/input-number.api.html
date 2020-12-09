@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>inputNumber api demo</title>
+        <link rel="stylesheet" href="./cube.min.css">
+        <link rel="stylesheet" href="./demo.css">
+        <script src="../vue.min.js"></script>
+        <script src="./jQuery-1.9.1.js"></script>
+        <script src="./PrismJs.js"></script>
+    <link href="/iVsomUI.css" rel="stylesheet"><script src="/vue-class-component.min.js"></script><script src="/vue-property-decorator.min.js"></script><script src="/vue-tsx-support.min.js"></script><script src="/vendors~index.min.js"></script><script src="/index.5d7e7a33.min.js"></script></head>
+    <body>
+        <div id="app" class="main">
+            <h1 class="logo">inputNumber Api</h1>
+            <div class="nav-tabs">
+                <ul id="tabs" class="dib-box">
+                    <li class="dib active"><span> CDN </span></li>
+                    <li class="dib"><span> NodeJS </span></li>
+                </ul>
+            </div>
+            <div class="tab-container">
+                <div class="content unicode" style="display: block;">
+                    <div class="article markdown">
+                        <h2 id="unicode-">基础用法</h2>
+                        <hr>
+                        <p>常规计数器</p>
+                        <ul>
+                            <li>inputNumber 组件在使用之前，需要有相关的依赖库进行支持，如需阅读：<a href="./start.api.html" target="_blank" >快速开始</a></li>
+                            <li>v-model双向绑定value值</li>
+                            <li>max min 分别表示限制最小最大的值</li>
+                        </ul>
+                        <blockquote>
+                            <i-vsom-input-number v-model="val" :min="1" :max="10" @on-change="change"></i-vsom-input-number>
+                        </blockquote>
+                        <pre><code class="language-html"
+                            >&lt;i-vsom-input-number v-model="val" :min="1" :max="10" @on-change="change" &gt;&lt;/i-vsom-button&gt;   
+                            </code></pre>
+                        <pre><code class="language-js"
+ >var app = new Vue({
+    el : '#app',
+    data : function() {
+        return {
+            val:5
+        }
+    },
+    methods:{
+        change(value){
+            console.log(value)
+        }
+    }
+})
+ </code></pre>
+                        <h2 id="unicode-">精度用法</h2>
+                        <hr>
+                        <p>常规计数器</p>
+                        <ul>
+                            <li>precision支持精度属性</li>
+                        </ul>
+                        <blockquote>
+                            <i-vsom-input-number v-model="val1" :precision="2"></i-vsom-input-number>
+                        </blockquote>
+                        <pre><code class="language-html"
+                            >&lt;i-vsom-input-number v-model="val1" :precision="2" &gt;&lt;/i-vsom-button&gt;   
+                            </code></pre>
+                        <pre><code class="language-js" 
+> var app = new Vue({
+    el : '#app',
+    data : function() {
+        return {
+            val1:5
+       }
+   },
+ })
+</code></pre>
+                        <h2 id="unicode-">步数用法</h2>
+                        <hr>
+                        <p>常规计数器</p>
+                        <ul>
+                            <li>step属性可以控制步长</li>
+                        </ul>
+                        <blockquote>
+                            <i-vsom-input-number v-model="val2" :step="2"></i-vsom-input-number>
+                        </blockquote>
+                        <pre><code class="language-html"
+                            >&lt;i-vsom-input-number v-model="val2" :step="2" &gt;&lt;/i-vsom-button&gt;   
+                            </code></pre>
+                        <pre><code class="language-js"
+ >var app = new Vue({
+    el : '#app',
+    data : function() {
+        return {
+            val:5
+        }
+    },
+ })
+ </code></pre>
+                        <h2 id="unicode-">禁用用法</h2>
+                        <hr>
+                        <ul>
+                            <li>disabled属性支持禁用状态</li>
+                        </ul>
+                        <blockquote>
+                            <i-vsom-input-number v-model="val3" disabled></i-vsom-input-number>
+                        </blockquote>
+                        <pre><code class="language-html"
+                            >&lt;i-vsom-input-number v-model="val" disabled &gt;&lt;/i-vsom-button&gt;   
+                            </code></pre>
+                        <pre><code class="language-js"
+ >var app = new Vue({
+    el : '#app',
+    data : function() {
+        return {
+            val:5
+        }
+    },
+})
+</code></pre>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script>
+                        (function() {
+    
+    Vue.use(iVsomUI);
+
+    var app = new Vue({
+        el : '#app',
+        data : function() {
+            return {
+                val:5,
+                val1:6,
+                val2:7,
+                val3:3,
+            }
+        },
+        methods:{
+            change(value){
+                console.log(value)
+            }
+        }
+       
+    })
+
+
+})()
+            $(document).ready(function () {
+                $('.tab-container .content:first').show()
+    
+                $('#tabs li').click(function (e) {
+                    var tabContent = $('.tab-container .content')
+                    var index = $(this).index()
+    
+                    if ($(this).hasClass('active')) {
+                        return
+                    } else {
+                        $('#tabs li').removeClass('active')
+                        $(this).addClass('active')
+    
+                        tabContent.hide().eq(index).fadeIn()
+                    }
+                })
+            })
+        </script>
+      
+    </body>
+</html>
