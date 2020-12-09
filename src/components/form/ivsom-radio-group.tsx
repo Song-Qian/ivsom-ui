@@ -5,7 +5,7 @@
  * Description  :   radio组件
  */
 
-import { Component, Prop, ProvideReactive, Watch } from 'vue-property-decorator'
+import { Component, InjectReactive, Prop, ProvideReactive, Watch } from 'vue-property-decorator'
 import * as tsx from 'vue-tsx-support'
 import uuid from '~/utils/uuid'
 
@@ -30,25 +30,38 @@ export default class iVsomRadioGroup extends tsx.Component<Props, any, ScopedSlo
     @ProvideReactive(Symbol.for('radio-name')) @Prop({ default : uuid() }) readonly name !: string;
     @ProvideReactive(Symbol.for('radio-value')) @Prop({ default : '' }) readonly value !: any;
 
+    @InjectReactive(Symbol.for('validate')) validate!: boolean;
+    @InjectReactive(Symbol.for('trigger')) trigger!: 'blur' | 'change';
+
     @Watch('value', {  immediate: false, deep: true })
     protected handlerChangeValue(value: string, oldValue: string) {
         let me = this;
         if(value !== oldValue && oldValue !== undefined) {
             me.$emit("on-change", value);
+            if(me.trigger === "change") {
+                me.$parent.$emit('on-validate');
+            }
+        }
+    }
+
+    
+    protected onBlur(e: FocusEvent) {
+        let me = this;
+        if(me.trigger === "blur") {
+            me.$parent.$emit('on-validate');
         }
     }
 
     protected mounted() {
         let me = this;
         me.$on("click", function(val: any) { me.$emit("input", val); })
-        me.$on("on-validate", () => me.$parent.$emit("on-validate"));
     }
 
     protected render(): JSX.Element {
         let me = this;
 
         return (
-            <div class="ivsom-radio-group">
+            <div class={{ 'ivsom-radio-group': true, 'ivsom-radio-group__hasError' : me.validate === false }}  tabindex={999}  onBlur={me.onBlur}>
                 { me.$scopedSlots.default() }
             </div>
         )

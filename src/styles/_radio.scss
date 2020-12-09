@@ -4,7 +4,6 @@
 .ivsom-radio {
     width: auto;
     cursor: pointer;
-    outline: none;
     display: inline-block;
     
     &.ivsom-radio__medium {
@@ -107,8 +106,7 @@
     }
 
     &.ivsom-radio__circle > .ivsom-radio__warp,
-    &.ivsom-radio__check > .ivsom-radio__warp,
-    &.ivsom-radio__button > .ivsom-radio__warp {
+    &.ivsom-radio__check > .ivsom-radio__warp {
         width: 100%;
         height: 100%;
         position: relative;
@@ -211,4 +209,22 @@
         }
     }
 
+}
+
+.ivsom-radio-group {
+    outline: none;
+    display: inline-block;
+
+    &.ivsom-radio-group__hasError {
+        
+        > .ivsom-radio > .ivsom-radio__warp {
+            &::before {
+                border: 2px solid $border-danger-color;
+            }
+
+            &::after {
+                background-color: $danger-color;
+            }
+        }
+    }
 }

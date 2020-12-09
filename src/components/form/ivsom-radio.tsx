@@ -42,29 +42,16 @@ export default class iVsomRadio extends tsx.Component<Props, Event, ScopedSlots>
 
     @ModelSync("checked", "on-update", { default: '', type : Object }) checkValue!: any;
 
-    @InjectReactive(Symbol.for('validate')) validate!: boolean;
-    @InjectReactive(Symbol.for('trigger')) trigger!: 'blur' | 'change';
-
     protected onChange(e: MouseEvent, value: any) {
         let me = this;
         me.checkValue = value;
         me.$parent.$emit("click", value);
-        if(me.trigger === "change") {
-            me.$parent.$emit('on-validate');
-        }
-    }
-
-    protected onBlur(e: FocusEvent) {
-        let me = this;
-        if(me.trigger === "blur") {
-            me.$parent.$emit('on-validate');
-        }
     }
 
     protected render(): JSX.Element {
         const me = this;
         return (
-            <div class={{ 'ivsom-radio': true, ['ivsom-radio__' + me.size]: true, 'ivsom-radio__disabled' : me.disabled, 'ivsom-radio__checked': me.checkValue === me.value, ['ivsom-radio__' + me.type] : true }} tabindex={999} onClick={(e) => me.disabled ? void 0 : me.onChange.apply(me, [e, me.value]) } onBlur={me.onBlur} >
+            <div class={{ 'ivsom-radio': true, ['ivsom-radio__' + me.size]: true, 'ivsom-radio__disabled' : me.disabled, 'ivsom-radio__checked': me.checkValue === me.value, ['ivsom-radio__' + me.type] : true }} onClick={(e) => me.disabled ? void 0 : me.onChange.apply(me, [e, me.value]) }>
                 <div class="ivsom-radio__warp"><input type="radio" name={me.name} value={me.value} checked={me.checkValue === me.value} />
                     <label class="ivsom-radio__text">{ me.$scopedSlots.default() }</label>
                 </div>

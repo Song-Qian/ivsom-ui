@@ -83,12 +83,12 @@ export default class iVsomSelect extends tsx.Component<Props, Event, ScopedSlots
             if (!me.syncedValue) {
                 me.syncedValue = [value];
                 if (me.trigger === 'change') {
-                    me.$vnode.componentInstance?.$parent.$emit('on-validate');
+                    me.$parent.$emit('on-validate');
                 }
             } else if (isPush) {
                 me.syncedValue = [...me.syncedValue, value];
                 if (me.trigger === 'change') {
-                    me.$vnode.componentInstance?.$parent.$emit('on-validate');
+                    me.$parent.$emit('on-validate');
                 }
             }
             return;
