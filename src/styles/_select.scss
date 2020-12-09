@@ -15,6 +15,31 @@
     transition: border .3s ease;
     position: relative;
 
+    &.ivsom-select__hasError {
+        border: 1px solid $border-danger-color;
+
+        .ivsom-select__warpper {
+            > .ivsom-select__ctx {
+                > .ivsom-select_label_item {
+                    background-color: rgba(247, 95, 60, .2);
+                    color: $danger-color;
+                }
+            }
+            
+            > .ivsom-input__prefix > .iconfont {
+                color: $danger-color;
+            }
+        
+            > .ivsom-input__suffix > .iconfont {
+                color: $danger-color;
+            }
+
+            > .ivsom-select__dropdown > .iconfont {
+                color: $danger-color;
+            }
+        }
+    }
+
     &.ivsom-select__medium {
         height : 32px;
         line-height: 32px;
@@ -78,6 +103,7 @@
 
     &.ivsom-select__disabled {
         background-color: #eee;
+        border: 1px solid $border-gray-color;
         cursor: no-drop;
 
         > .ivsom-select__warpper {
@@ -194,9 +220,10 @@
         display: none;
         padding-top: 5px;
         position: absolute;
+        border-radius: 5px;
         left: 0px;
         top: 100%;
-        border-radius: 5px;
+        z-index: 999;
 
         > .ivsom-select__options {
             width: 100%;

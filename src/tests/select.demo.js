@@ -12,23 +12,56 @@
         el : '#app',
         data : function() {
             return {
-                values : null,
-                source : [
-                    { name : '选项1', value : 1 },
-                    { name : '选项2', value : 2, disabled : true },
-                    { name : '选项3', value : 3 },
-                    { name : '选项4', value : 4 },
-                    { name : '选项5', value : 5 },
-                    { name : '选项6', value : 6 },
-                    { name : '选项7', value : 7, disabled : true },
-                    { name : '选项8', value : 8 },
-                    { name : '选项9', value : 9 },
-                    { name : '选项10', value : 10 },
-                    { name : '选项11', value : 11, disabled : true },
-                    { name : '选项12', value : 12 },
-                    { name : '选项13', value : 13 },
-                    { name : '选项14', value : 14 },
-                ]
+                value: null,
+                value1 : null,
+                value2 : null,
+                value3 : null,
+                value4 : null,
+                value5 : null,
+                value6 : null,
+                value7 : null,
+                value8 : null,
+                value9 : null,
+                source1 : [
+                    { name : '苹果', value : 1 },
+                    { name : '草莓', value : 2 },
+                    { name : '香蕉', value : 3 },
+                    { name : '荔枝', value : 4 },
+                    { name : '火龙果', value : 5 },
+                    { name : '百香果', value : 6 }
+                ],
+                source2 : [
+                    { name : '苹果', value : 1 },
+                    { name : '草莓', value : 2 },
+                    { name : '香蕉', value : 3, disabled : true },
+                    { name : '荔枝', value : 4 },
+                    { name : '火龙果', value : 5 },
+                    { name : '百香果', value : 6, disabled : true }
+                ],
+                form : {
+                    fruit : null,
+                }
+            }
+        },
+        methods : {
+            validateForm : function(callback) {
+                var me = this;
+                var result = me.form.fruit.map(function(el) { return el.name; });
+                if(result.indexOf('百香果') > -1) {
+                    return callback(new Error('百香果暂未进货'))
+                }
+
+                if(result.indexOf('香蕉') > -1) {
+                    return callback(new Error())
+                }
+
+                callback();
+            },
+            onChange: function(e, item) {
+                alert("name: " + item.name + ", value: " + item.value);
+            },
+            onRemove: function(e, item) {
+                alert("name: " + item.name + ", value: " + item.value);
             }
         }
     })

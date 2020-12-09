@@ -133,6 +133,7 @@
 
     > .ivsom-input__suffix {
         text-align: center;
+        align-self: center;
         @include font-sub-text;
 
         + textarea,

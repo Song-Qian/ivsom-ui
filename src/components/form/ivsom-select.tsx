@@ -1,11 +1,9 @@
-import { Component, Emit, InjectReactive, Prop, PropSync } from 'vue-property-decorator'
+import { Component, Emit, InjectReactive, ModelSync, Prop } from 'vue-property-decorator'
 import * as tsx from 'vue-tsx-support'
 import 'vue-tsx-support/enable-check'
 
 
 type Props = {
-    //绑定字段
-    Prop: String,
     //显示字段
     Label: String,
     //选中的值
@@ -30,18 +28,13 @@ type Props = {
     Disabled: Boolean
 }
 
-type Event = {
-    onExpansion: (e: MouseEvent) => void,
-    onReduction: (e: MouseEvent) => void
-}
-
 type ScopedSlots = {
     prefix: String
     suffix: String
 }
 
 @Component
-export default class iVsomSelect extends tsx.Component<Props, Event, ScopedSlots> {
+export default class iVsomSelect extends tsx.Component<Props, any, ScopedSlots> {
 
     constructor() {
         super()
@@ -59,17 +52,15 @@ export default class iVsomSelect extends tsx.Component<Props, Event, ScopedSlots
 
     @Prop({ default: 'click' }) readonly method !: string;
 
-    @Prop({ default: '' }) readonly prop !: string;
-
     @Prop({ default: '' }) readonly label !: string;
-
-    @PropSync('value', { default: null }) syncedValue !: any | any[];
 
     @Prop({ default: [] }) readonly dataSource !: Array<any>;
 
     @Prop({ default: false, type: Boolean }) readonly multiple !: boolean;
 
     @Prop({ default: false, type: Boolean }) readonly disabled !: boolean;
+
+    @ModelSync('value', 'on-update', { default : null }) syncedValue !: any | any[];
 
     @InjectReactive({ from: Symbol.for('validate'), default: true }) validate !: boolean;
 
@@ -93,7 +84,7 @@ export default class iVsomSelect extends tsx.Component<Props, Event, ScopedSlots
             }
             return;
         }
-        me.$emit("input", value)
+        me.syncedValue = value;
     }
 
     @Emit()
@@ -102,8 +93,10 @@ export default class iVsomSelect extends tsx.Component<Props, Event, ScopedSlots
         if (me.syncedValue instanceof Array) {
             var newValue = me.syncedValue.filter(it => it !== value);
             me.syncedValue = newValue;
+            me.$emit("on-change", e, value);
+            (me.$el as any).blur();
             if (me.trigger === 'change') {
-                me.$vnode.componentInstance?.$parent.$emit('on-validate');
+                me.$parent.$emit('on-validate');
             }
         }
     }
@@ -111,8 +104,8 @@ export default class iVsomSelect extends tsx.Component<Props, Event, ScopedSlots
     @Emit()
     protected onBlur(e: FocusEvent) {
         let me = this;
-        if (me.trigger === 'change') {
-            me.$vnode.componentInstance?.$parent.$emit('on-validate');
+        if (me.trigger === 'blur') {
+            me.$parent.$emit('on-validate');
         }
     }
 
@@ -128,10 +121,10 @@ export default class iVsomSelect extends tsx.Component<Props, Event, ScopedSlots
         const dropdownItem = me.dataSource.map((it, n) => {
             return <li class={{ 'ivsom-select__option__disabled': it.disabled }} onClick={tsx.modifiers.stop((e: MouseEvent) => !it.disabled ? me.onChange.apply(me, [e, it]) : void 0)}>{it[me.label]}</li>;
         })
-        const ctx_items = !me.syncedValue || !me.syncedValue.length ? <span class="ivsom-select_placeholder">{me.placeholder}</span> : me.syncedValue instanceof Array ? me.syncedValue.map((it, n) => <span class="ivsom-select_label_item"><small>{it[me.label]}</small><i class="iconfont icon-gongnengtubiao-41" onClick={tsx.modifiers.stop((e) => me.onRemove.apply(me, [e, it]))}></i></span>) : <span class="ivsom-select_label">{me.syncedValue[me.label]}</span>;
+        const ctx_items = !me.syncedValue || me.syncedValue instanceof Array  && !me.syncedValue.length ? <span class="ivsom-select_placeholder">{me.placeholder}</span> : me.syncedValue instanceof Array ? me.syncedValue.map((it, n) => <span class="ivsom-select_label_item"><small>{it[me.label]}</small><i class="iconfont icon-gongnengtubiao-41" onClick={tsx.modifiers.stop((e) => me.onRemove.apply(me, [e, it]))}></i></span>) : <span class="ivsom-select_label">{me.syncedValue[me.label]}</span>;
         const w = typeof me.width === 'number' ? `${me.width}px` : me.width;
         return (
-            <div class={{ "ivsom-select": true, ['ivsom-select__' + me.size]: true, 'ivsom-select__multiple': me.multiple, 'ivsom-select__disabled': me.disabled, 'ivsom-select__focus': me.method === 'click' && !me.disabled, 'ivsom-select__hover': me.method === 'hover' && !me.disabled }} onBlur={tsx.modifiers.stop(me.onBlur)} style={{ width: w }} tabindex={999}>
+            <div class={{ "ivsom-select": true, ['ivsom-select__' + me.size]: true, 'ivsom-select__multiple': me.multiple, 'ivsom-select__disabled': me.disabled, 'ivsom-select__hasError' : me.validate === false, 'ivsom-select__focus': me.method === 'click' && !me.disabled, 'ivsom-select__hover': me.method === 'hover' && !me.disabled }} onBlur={tsx.modifiers.stop(me.onBlur)} style={{ width: w }} tabindex={999}>
                 <div class="ivsom-select__warpper">
                     {prefixEl}
                     <div class="ivsom-select__ctx">

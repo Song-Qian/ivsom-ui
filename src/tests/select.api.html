@@ -7,7 +7,6 @@
     <link rel="stylesheet" href="./cube.min.css">
     <link rel="stylesheet" href="./demo.css">
     <script src="../vue.min.js"></script>
-    <script src="./vue-route.js"></script>
     <script src="./jQuery-1.9.1.js"></script>
     <script src="./PrismJs.js"></script>
 </head>
@@ -28,13 +27,139 @@
                     <hr>
                     <p>常规使用</p>
                     <ul>
-                        <li>Breadcrumbs 组件在使用之前，需要有相关的依赖库进行支持，如需阅读：<a href="./start.api.html" target="_blank" >快速开始</a></li>
+                        <li>Select 组件在使用之前，需要有相关的依赖库进行支持，如需阅读：<a href="./start.api.html" target="_blank" >快速开始</a></li>
+                        <li>label : string 选中的显示的文本</li>
+                        <li>data-source: Array 选择框数据源</li>
+                        <li>multiple: Boolean 是否支持多选</li>
+                        <li>placeholder: string 描述提示信息</li>
+                        <li>prefix: string 头部 icon</li>
+                        <li>suffix: string 尾部 icon</li>
+                        <li>width: string | number 选择框的宽度</li>
+                        <li>size: 'medium' | 'small' | 'mini' 表单元素大小</li>
+                        <li>method: 'hover' | 'click' 选择框展开下拉框的方式</li>
+                        <li>disabled: Boolean 是否禁用</li>
                     </ul>
                     <blockquote>
-                        <i-vsom-select prefix="" suffix="icon-gongnengtubiao-182" size="medium" method="hover" placeholder="请选择" :value.sync="values" multiple="true" :data-source="source" label="name" prop="value"></i-vsom-select>
+                        <i-vsom-select placeholder="请选择" v-model="value" :data-source="source1" label="name"></i-vsom-select>
                     </blockquote>
                     <pre><code class="language-html"
->&lt;i-vsom-bread-crumbs :debris='items'&gt;&lt;/i-vsom-bread-crumbs&gt;
+>&lt;i-vsom-select placeholder="请选择" v-model="value" :data-source="items" label="name"&gt;&lt;/i-vsom-select&gt;
+</code></pre>
+                    <pre><code class="language-js"
+>var app = new Vue({
+    el : '#app',
+    data : function() {
+        return {
+            value,
+            items : [
+                { name : '苹果', value : 1 },
+                { name : '草莓', value : 2 },
+                { name : '香蕉', value : 3 },
+                { name : '荔枝', value : 4 },
+                { name : '火龙果', value : 5 },
+                { name : '百香果', value : 6 }
+            ]
+        }
+    }
+})
+</code></pre>
+                    <h2 id="unicode-">不同大小的选择框</h2>
+                    <hr>
+                    <p>size 表单的大小</p>
+                    <blockquote>
+                        <i-vsom-select placeholder="请选择" size="medium" v-model="value1" :data-source="source1" label="name" style="display:inline-block"></i-vsom-select>
+                        <i-vsom-select placeholder="请选择" size="small" v-model="value1" :data-source="source1" label="name" style="display:inline-block"></i-vsom-select>
+                        <i-vsom-select placeholder="请选择" size="mini" v-model="value1" :data-source="source1" label="name" style="display:inline-block"></i-vsom-select>
+                    </blockquote>
+                    <pre><code class="language-html"
+>&lt;i-vsom-select placeholder="请选择" size="medium" v-model="value" :data-source="items" label="name"&gt;&lt;/i-vsom-select&gt;
+ &lt;i-vsom-select placeholder="请选择" size="small" v-model="value" :data-source="items" label="name"&gt;&lt;/i-vsom-select&gt;
+ &lt;i-vsom-select placeholder="请选择" size="mini" v-model="value" :data-source="items" label="name"&gt;&lt;/i-vsom-select&gt;
+</code></pre>
+                    <pre><code class="language-js"
+>var app = new Vue({
+    el : '#app',
+    data : function() {
+        return {
+            value,
+            items : [
+                { name : '苹果', value : 1 },
+                { name : '草莓', value : 2 },
+                { name : '香蕉', value : 3 },
+                { name : '荔枝', value : 4 },
+                { name : '火龙果', value : 5 },
+                { name : '百香果', value : 6 }
+            ]
+        }
+    }
+})
+</code></pre>
+                    <p>width 选择框的自定义宽度</p>
+                    <blockquote>
+                        <i-vsom-select placeholder="请选择" size="medium" width="300px" v-model="value7" :data-source="source1" label="name" style="display:inline-block"></i-vsom-select>
+                        <i-vsom-select placeholder="请选择" size="small" width="300px" v-model="value7" :data-source="source1" label="name" style="display:inline-block"></i-vsom-select>
+                        <i-vsom-select placeholder="请选择" size="mini" width="300px" v-model="value7" :data-source="source1" label="name" style="display:inline-block"></i-vsom-select>
+                    </blockquote>
+                    <pre><code class="language-html"
+>&lt;i-vsom-select placeholder="请选择" size="medium" width="300px" v-model="value" :data-source="items" label="name" style="display:inline-block"&gt;&lt;/i-vsom-select&gt;
+ &lt;i-vsom-select placeholder="请选择" size="small" width="300px" v-model="value" :data-source="items" label="name" style="display:inline-block"&gt;&lt;/i-vsom-select&gt;
+ &lt;i-vsom-select placeholder="请选择" size="mini" width="300px" v-model="value" :data-source="items" label="name" style="display:inline-block"&gt;&lt;/i-vsom-select&gt;
+</code></pre>
+                    <h2 id="unicode-">带有图标的选择框</h2>
+                    <hr>
+                    <p>前缀图标</p>
+                    <blockquote>
+                        <i-vsom-select prefix="icon-gongnengtubiao-74" placeholder="请选择" v-model="value2" :data-source="source1" label="name"></i-vsom-select>
+                    </blockquote>
+                    <pre><code class="language-html"
+>&lt;i-vsom-select prefix="icon-gongnengtubiao-74" placeholder="请选择" v-model="value" :data-source="items" label="name"&gt;&lt;/i-vsom-select&gt;
+</code></pre>
+                    <p>后缀图标</p>
+                    <blockquote>
+                        <i-vsom-select suffix="icon-gongnengtubiao-182" placeholder="请选择" v-model="value3" :data-source="source1" label="name"></i-vsom-select>
+                    </blockquote>
+                    <pre><code class="language-html"
+>&lt;i-vsom-select suffix="icon-gongnengtubiao-182" placeholder="请选择" v-model="value" :data-source="items" label="name"&gt;&lt;/i-vsom-select&gt;
+</code></pre>
+                    <h2 id="unicode-">多选</h2>
+                    <hr>
+                    <blockquote>
+                        <i-vsom-select prefix="icon-gongnengtubiao-74" placeholder="请选择" v-model="value4" :data-source="source1" label="name" multiple></i-vsom-select>
+                    </blockquote>
+                    <pre><code class="language-html"
+>&lt;i-vsom-select prefix="icon-gongnengtubiao-74" placeholder="请选择" v-model="value" :data-source="items" label="name" multiple&gt;&lt;/i-vsom-select&gt;
+</code></pre>
+                    <h2 id="unicode-">多选框的选项展开</h2>
+                    <hr>
+                    <p>点击展开</p>
+                    <blockquote>
+                        <i-vsom-select prefix="icon-gongnengtubiao-74" placeholder="请选择" v-model="value5" :data-source="source1" label="name" method="click"></i-vsom-select>
+                    </blockquote>
+                    <pre><code class="language-html"
+>&lt;i-vsom-select prefix="icon-gongnengtubiao-74" method="click" placeholder="请选择" v-model="value" :data-source="items" label="name"&gt;&lt;/i-vsom-select&gt;
+</code></pre>
+                    <p>移入展开</p>
+                    <blockquote>
+                        <i-vsom-select prefix="icon-gongnengtubiao-74" placeholder="请选择" v-model="value6" :data-source="source1" label="name" method="hover"></i-vsom-select>
+                    </blockquote>
+                    <pre><code class="language-html"
+>&lt;i-vsom-select prefix="icon-gongnengtubiao-74"  method="hover" placeholder="请选择" v-model="value" :data-source="items" label="name"&gt;&lt;/i-vsom-select&gt;
+</code></pre>
+                    <h2 id="unicode-">禁用的选择框</h2>
+                    <hr>
+                    <p>选择框的禁用</p>
+                    <blockquote>
+                        <i-vsom-select prefix="icon-gongnengtubiao-74" suffix="icon-gongnengtubiao-182" placeholder="请选择" disabled></i-vsom-select>
+                    </blockquote>
+                    <pre><code class="language-html"
+>&lt;i-vsom-select prefix="icon-gongnengtubiao-74" suffix="icon-gongnengtubiao-182" placeholder="请选择" disabled&gt;&lt;/i-vsom-select&gt;
+</code></pre>
+                    <p>选项的禁用</p>
+                    <blockquote>
+                        <i-vsom-select prefix="icon-gongnengtubiao-74" suffix="icon-gongnengtubiao-182" :data-source="source2" placeholder="请选择" label="name"></i-vsom-select>
+                    </blockquote>
+                    <pre><code class="language-html"
+>&lt;i-vsom-select prefix="icon-gongnengtubiao-74" suffix="icon-gongnengtubiao-182" :data-source="source2" placeholder="请选择" label="name"&gt;&lt;/i-vsom-select&gt;
 </code></pre>
                     <pre><code class="language-js"
 >var app = new Vue({
@@ -42,19 +167,135 @@
     data : function() {
         return {
             items : [
-                { text : '面包屑一', to : '#1'},
-                { text : '面包屑二', to : '#2'},
-                { text : '面包屑三', to : '#3'},
-                { text : '面包屑四', to : '#4'},
-                { text : '面包屑五', to : '#5'},
-                { text : '面包屑六', to : '#6'},
-                { text : '面包屑七', to : '#7'}
+                { name : '苹果', value : 1 },
+                { name : '草莓', value : 2 },
+                { name : '香蕉', value : 3, disabled : true },
+                { name : '荔枝', value : 4 },
+                { name : '火龙果', value : 5 },
+                { name : '百香果', value : 6, disabled : true }
             ]
         }
     }
 })
 </code></pre>
-                    
+                    <h2 id="unicode-">选择框的表单验证</h2>
+                    <hr>
+                    <p>多选的验证</p>
+                    <blockquote>
+                        <i-vsom-form :model="form" :label-width="80" position="left">
+                            <i-vsom-form-validater label="喜爱" prop="fruit" :validate="validateForm" error-message="当前选中的水果已售空" required>
+                                <i-vsom-select suffix="icon-gongnengtubiao-182" method="hover" placeholder="请选择" v-model="form.fruit" multiple="true" :data-source="source1" label="name"></i-vsom-select>
+                            </i-vsom-form-validater>
+                        </i-vsom-form>
+                    </blockquote>
+                    <pre><code class="language-html"
+>&lt;i-vsom-form :model="form" :label-width="80" position="left"&gt;
+    &lt;i-vsom-form-validater label="喜爱" prop="fruit" :validate="validateForm" error-message="当前选中的水果已售空" required&gt;
+        &lt;i-vsom-select suffix="icon-gongnengtubiao-182" method="hover" placeholder="请选择" v-model="form.fruit" multiple="true" :data-source="items" label="name"&gt;&lt;/i-vsom-select&gt;
+    &lt;/i-vsom-form-validater&gt;
+&lt;/i-vsom-form&gt;
+</code></pre>
+                    <pre><code class="language-js"
+>var app = new Vue({
+    el : '#app',
+    data : function() {
+        return {
+            items : [
+                { name : '苹果', value : 1 },
+                { name : '草莓', value : 2 },
+                { name : '香蕉', value : 3 },
+                { name : '荔枝', value : 4 },
+                { name : '火龙果', value : 5 },
+                { name : '百香果', value : 6 }
+            ],
+            form : {
+                fruit : null
+            }
+        }
+    },
+    methods : {
+        validateForm : function(callback) {
+            var me = this;
+            var result = me.form.fruit.map(function(el) { return el.name; });
+            if(result.indexOf('百香果') > -1) {
+                return callback(new Error('百香果暂未进货'))
+            }
+
+            if(result.indexOf('香蕉') > -1) {
+                return callback(new Error())
+            }
+
+            callback();
+        }
+    }
+})
+</code></pre>
+                    <h2 id="unicode-">Select Event 事件</h2>
+                    <hr>
+                    <ul>
+                        <li>onChange : Arguments(e: MouseEvent, value: any) 选择框的选中值变化事件</li>
+                        <li>onRemove : Arguments(e: MouseEvent, value: any) 多选模式下的选择框，移除选值事件</li>
+                    </ul>
+                    <p>onChange 事件</p>
+                    <blockquote>
+                        <i-vsom-select placeholder="请选择" v-model="value9" :data-source="source1" @on-change="onChange" label="name" multiple></i-vsom-select>
+                    </blockquote>
+                    <pre><code class="language-html"
+>&lt;i-vsom-select placeholder="请选择" v-model="value" :data-source="items" @on-change="onChange" label="name" multiple&gt;&lt;/i-vsom-select&gt;
+</code></pre>
+                    <pre><code class="language-js"
+>var app = new Vue({
+    el : '#app',
+    data : function() {
+        return {
+            value : null,
+            items : [
+                { name : '苹果', value : 1 },
+                { name : '草莓', value : 2 },
+                { name : '香蕉', value : 3 },
+                { name : '荔枝', value : 4 },
+                { name : '火龙果', value : 5 },
+                { name : '百香果', value : 6 }
+            ]
+        }
+    },
+    methods : {
+        onChange: function(e, item) {
+            alert("name: " + item.name + ", value: " + item.value);
+        }
+    }
+})
+</code></pre>
+                    <p>onRemove 事件</p>
+                    <blockquote>
+                        <i-vsom-select placeholder="请选择" v-model="value9" :data-source="source1" @on-remove="onRemove" label="name" multiple></i-vsom-select>
+                    </blockquote>
+                    <pre><code class="language-html"
+>&lt;i-vsom-select placeholder="请选择" v-model="value" :data-source="items" @on-remove="onRemove" label="name" multiple&gt;&lt;/i-vsom-select&gt;
+</code></pre>
+                    <pre><code class="language-js"
+>var app = new Vue({
+    el : '#app',
+    data : function() {
+        return {
+            value : null,
+            items : [
+                { name : '苹果', value : 1 },
+                { name : '草莓', value : 2 },
+                { name : '香蕉', value : 3 },
+                { name : '荔枝', value : 4 },
+                { name : '火龙果', value : 5 },
+                { name : '百香果', value : 6 }
+            ]
+        }
+    },
+    methods : {
+        onRemove: function(e, item) {
+            alert("name: " + item.name + ", value: " + item.value);
+        }
+    }
+})
+</code></pre>
                 </div>
             </div>
         </div>
