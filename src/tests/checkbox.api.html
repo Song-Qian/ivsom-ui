@@ -11,7 +11,7 @@
     </head>
     <body>
         <div id="app" class="main">
-            <h1 class="logo">Checkbox Api</h1>
+            <h1 class="logo">CheckBox Api</h1>
             <div class="nav-tabs">
                 <ul id="tabs" class="dib-box">
                     <li class="dib active"><span> CDN </span></li>
@@ -28,9 +28,13 @@
                             <li>Checkbox 组件在使用之前，需要有相关的依赖库进行支持，如需阅读：<a href="./start.api.html" target="_blank" >快速开始</a></li>
                         </ul>
                         <blockquote>
-                            <i-vsom-checkbox :data-source="data" @on-change="change"></i-vsom-checkbox>
+                            <i-vsom-check-box-group v-model="value">
+                                <i-vsom-check-box value="苹果">苹果</i-vsom-check-box>
+                                <i-vsom-check-box value="草莓">草莓</i-vsom-check-box>
+                                <i-vsom-check-box value="百香果">百香果</i-vsom-check-box>
+                            </i-vsom-check-box-group>
                         </blockquote>
-                        <pre><code class="language-html"
+                        <!-- <pre><code class="language-html"
                             >&lt;i-vsom-checkbox :data-source="data"&gt;&lt;/i-vsom-checkbox&gt;   
                             </code></pre>
                         <pre><code class="language-js"
@@ -45,100 +49,12 @@
     },
                                
 })
-</code></pre>
-                        <h2 id="unicode-">v-model双向绑定复选框</h2>
-                        <hr>
-                        <ul>
-                            <li>v-model支持双向数据绑定，当默认为空则不选中值，默认有值则选中对应的vaule值</li>
-                        </ul>
-                        <blockquote>
-                            <i-vsom-checkbox v-model="model" @on-change="change" :data-source="data"></i-vsom-checkbox>
-                        </blockquote>
-                        <pre><code class="language-html"
-                            >&lt;i-vsom-checkbox v-model="model" @on-change="change" :data-source="data"&gt;&lt;/i-vsom-checkbox&gt;   
-                            </code></pre>
-                        <pre><code class="language-js" 
->var app = new Vue({
-    el : '#app',
-    data : function() {
-        return {
-            data:[
-                {label:'苹果',value:'red'},{label:'香蕉',value:'write'},
-            ],
-            model:"red"
-        }
-    },
-    methods:{
-        change(value){
-            console.log(value)
-        }
-    }
-})
-</code></pre>
-                        <h2 id="unicode-">禁用复选框</h2>
-                        <hr>
-                        <ul>
-                            <li>Checkbox 组件支持禁用属性</li>
-                            <li>当某一个复选框是禁用稍微，只需在对应的数据源里加上disabled字段</li>
-                        </ul>
-                        <blockquote>
-                            <i-vsom-checkbox v-model="model1" @on-change="change" :data-source="data1"></i-vsom-checkbox>
-                        </blockquote>
-                        <pre><code class="language-html"
-                            >&lt;i-vsom-checkbox v-model="model1" @on-change="change" :data-source="data1"&gt;&lt;/i-vsom-checkbox&gt;   
-                            </code></pre>
-                        <pre><code class="language-js" 
->var app = new Vue({
-    el : '#app',
-    data : function() {
-        return {
-            optionData1:[
-                {label:'苹果',value:'red'},{label:'香蕉',value:'write',disabled:true},
-            ],
-            model1:"write"
-        }
-    },
-    methods:{
-        change(value){
-            console.log(value)
-        }
-    }
-})
-</code></pre>
+</code></pre> -->
                     </div>
                 </div>
             </div>
         </div>
         <script>
-                        (function() {
-    
-    Vue.use(iVsomUI);
-
-    var app = new Vue({
-        el : '#app',
-        data : function() {
-            return {
-                data:[
-                    {label:'苹果',value:'red'},{label:'香蕉',value:'write'},
-                ],
-                data1:[
-                    {label:'苹果',value:'red'},{label:'香蕉',value:'write',disabled:true},
-                ],
-                model:"red",
-                model1:"write",
-                val:"aaaa"
-            }
-        },
-        methods:{
-           change(value){
-              console.log(value)
-           }
-        }
-       
-    })
-
-
-})()
             $(document).ready(function () {
                 $('.tab-container .content:first').show()
     
@@ -158,5 +74,6 @@
             })
         </script>
       
+        <script src="./checkbox.demo.js"></script>
     </body>
 </html>

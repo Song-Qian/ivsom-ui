@@ -1,0 +1,146 @@
+@import "./ivsom-variable";
+@import "./ivsom-mixin";
+
+.ivsom-checkbox {
+    width: auto;
+    cursor: pointer;
+    display: inline-block;
+    vertical-align: middle;
+
+    &.ivsom-checkbox__medium {
+        height: 32px;
+        
+        > .ivsom-checkbox__warp {
+            &::before {
+                width: 32px;
+                height: 32px;
+            }
+
+            &::after {
+                width: 32px;
+                height: 32px;
+                font-size: 26px;
+                line-height: 32px;
+            }
+
+            > .ivsom-checkbox__text { 
+                line-height: 32px;
+                margin-left: 32px;
+            }
+        }
+    }
+
+    &.ivsom-checkbox__small {
+        height: 26px;
+        
+        > .ivsom-checkbox__warp {
+            &::before {
+                width: 26px;
+                height: 26px;
+            }
+
+            &::after {
+                width: 26px;
+                height: 26px;
+                font-size: 22px;
+                line-height: 26px;
+            }
+
+            > .ivsom-checkbox__text { 
+                line-height: 26px;
+                margin-left: 26px;
+            }
+        }
+    }
+
+    &.ivsom-checkbox__mini {
+        height: 20px;
+        
+        > .ivsom-checkbox__warp {
+            &::before {
+                width: 20px;
+                height: 20px;
+            }
+
+            &::after {
+                width: 20px;
+                height: 20px;
+                font-size: 18px;
+                line-height: 20px;
+            }
+
+            > .ivsom-checkbox__text { 
+                line-height: 20px;
+                margin-left: 20px;
+            }
+        }
+    }
+
+    > .ivsom-checkbox__warp {
+        width: 100%;
+        height: 100%;
+        position: relative;
+
+        &::before {
+            content: ' ';
+            top: 0px;
+            left: 0px;
+            z-index: 9;
+            position: absolute;
+            border-radius: 6px;
+            box-sizing: border-box;
+            background-color: #fff;
+            border: 2px solid $primary-color;
+        }
+
+        &::after {
+            content: '\e6d5';
+            top: 0px;
+            left: 0px;
+            z-index: 9;
+            opacity: 0;
+            color: #fff;
+            text-align: center;
+            position: absolute;
+            font-family: 'iconfont';
+            border-radius: 6px;
+            background-color: $primary-color;
+            transition: opacity .3s ease-in-out, height .3s ease-in-out;
+        }
+
+        > input {
+            display: none;
+        }
+
+        > .ivsom-checkbox__text {
+            height: 100%;
+            padding: 0px 10px;
+            box-sizing: border-box;
+            display: inline-block;
+        }
+    }
+    
+    &.ivsom-checkbox__checked {
+        > .ivsom-checkbox__warp::after {
+            opacity: 1;
+        }
+    }
+}
+
+.ivsom-checkbox-group {
+    display: inline-block;
+    outline: none;
+
+    &.ivsom-checkbox__hasError {
+        
+        > .ivsom-checkbox > .ivsom-checkbox__warp {
+            &::before {
+                border: 2px solid $border-danger-color;
+            }
+
+            &::after {
+                background-color: $danger-color;
+            }
+        }
+    }
+}

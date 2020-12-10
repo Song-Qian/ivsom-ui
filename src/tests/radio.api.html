@@ -36,8 +36,9 @@
                     <pre><code class="language-html"
 >&lt;i-vsom-radio v-model="radio_value" value="男"&gt;男&lt;/i-vsom-radio&gt;
  &lt;i-vsom-radio v-model="radio_value" value="女"&gt;女&lt;/i-vsom-radio&gt;
-</code></pre>                 
-                    <p>Radio 的大小</p>
+</code></pre>
+                    <h2 id="unicode-">不同大小的单选框</h2>
+                    <hr>
                     <ul>
                         <li>Radio size属性支持 medium、small、mini</a></li>
                     </ul>
@@ -50,8 +51,9 @@
 >&lt;i-vsom-radio size="medium" v-model="radio_value" value="medium"&gt;medium&lt;/i-vsom-radio&gt;
  &lt;i-vsom-radio size="small" v-model="radio_value" value="small"&gt;small&lt;/i-vsom-radio&gt;
  &lt;i-vsom-radio size="mini" v-model="radio_value" value="mini"&gt;mini&lt;/i-vsom-radio&gt;
-</code></pre>      
-                    <p>Radio 的类型</p>
+</code></pre>
+                    <h2 id="unicode-">不同类型的单选框</h2>
+                    <hr>
                     <ul>
                         <li>Radio type属性支持 circle、check</a></li>
                     </ul>
@@ -66,8 +68,9 @@
 &lt;i-vsom-radio size="small" v-model="radio_value1" value="女"&gt;女&lt;/i-vsom-radio&gt;
 &lt;i-vsom-radio type="check" size="small" v-model="radio_value2" value="男"&gt;男&lt;/i-vsom-radio&gt;
 &lt;i-vsom-radio type="check" size="small" v-model="radio_value2" value="女"&gt;女&lt;/i-vsom-radio&gt;
-</code></pre>            
-                    <p>Radio 禁用</p>
+</code></pre>
+                    <h2 id="unicode-">被禁用的单选框</h2>
+                    <hr>
                     <blockquote>
                         <i-vsom-radio size="small" checked="1" value="1" disabled>禁用样式一</i-vsom-radio>
                         <i-vsom-radio type="check" size="small" checked="2" value="2" disabled>禁用样式二</i-vsom-radio>
@@ -75,10 +78,11 @@
                     <pre><code class="language-html"
 >&lt;i-vsom-radio size="small" checked="1" value="1" disabled&gt;禁用样式一&lt;/i-vsom-radio&gt;
  &lt;i-vsom-radio type="check" size="small" checked="2" value="2" disabled&gt;禁用样式二&lt;/i-vsom-radio&gt;
-</code></pre>            
-                    <p>Radio 按钮组的使用</p>
+</code></pre>
+                    <h2 id="unicode-">一组单选框</h2>
+                    <hr>
                     <ul>
-                        <li>RadioGroup name属性是Radio按钮组的表单参数名</a></li>
+                        <li>RadioGroup name属性是Radio按钮组的表单参数名，在form表单提交时非常有用!</a></li>
                         <li>RadioGroup value属性是Radio选中的值</a></li>
                     </ul>
                     <blockquote>
@@ -93,8 +97,8 @@
     &lt;i-vsom-radio type="check" :checked="radio_value3" size="small" value="女"&gt;女&lt;/i-vsom-radio&gt;
  &lt;/i-vsom-radio-group&gt;
 </code></pre>
-            
-                    <p>Radio 按钮组的表单验证</p>
+                    <h2 id="unicode-">Radio 单选框的表单验证</h2>
+                    <hr>
                     <blockquote>
                         <i-vsom-form :model="form" :label-width="80" position="left">
                             <i-vsom-form-validater label="性别" prop="sex" trigger="change" :validate="/^[男]$/" error-message="当前选择不是男性" required>
