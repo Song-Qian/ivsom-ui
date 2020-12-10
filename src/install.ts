@@ -9,7 +9,8 @@ import '~/styles'
 import iVsomBreadCrumbs from './components/breadcrumbs/ivsom-breadcrumbs'
 import iVsomButton from './components/button/ivsom-button'
 import iVsomButtonGroup from './components/button/ivsom-button-group'
-import iVsomCheckbox from './components/form/ivsom-checkbox'
+import iVsomCheckBox from './components/form/ivsom-checkbox'
+import iVsomCheckBoxGroup from './components/form/ivsom-checkbox-group'
 import iVsomForm from './components/form/ivsom-form'
 import iVsomFormValidater from './components/form/ivsom-form-validater'
 import iVsomInput from './components/form/ivsom-input'
@@ -29,7 +30,6 @@ import iVsomSwitch from './components/switch/ivsom-switch'
 import iVsomTabs from './components/tabs/ivsom-tabs'
 import iVsomTabsPanel from './components/tabs/ivsom-tabs-panel'
 
-
 const components: Array<any> = [
     iVsomRow,
     iVsomCol,
@@ -42,7 +42,8 @@ const components: Array<any> = [
     iVsomMenuItem,
     iVsomRadioGroup,
     iVsomRadio,
-    iVsomCheckbox,
+    iVsomCheckBox,
+    iVsomCheckBoxGroup,
     iVsomInputNumber,
     iVsomSwitch,
     iVsomSlider,
@@ -56,6 +57,7 @@ const components: Array<any> = [
 ]
 
 const install = (Vue: any) => {
+    Vue.config.devtools = true;
     components.forEach((el, n: number) => {
         Vue.component((<any>el).name, el);
     })

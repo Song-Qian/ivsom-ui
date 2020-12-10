@@ -30,9 +30,6 @@ type ScopedSlots = {
 
 @Component
 export default class iVsomRadio extends tsx.Component<Props, Event, ScopedSlots>{
-    constructor() {
-        super()
-    }
 
     @Prop({ default: 'medium' }) readonly size!: string;
     @Prop({ default: 'circle' }) readonly type!: string;
@@ -53,7 +50,7 @@ export default class iVsomRadio extends tsx.Component<Props, Event, ScopedSlots>
         return (
             <div class={{ 'ivsom-radio': true, ['ivsom-radio__' + me.size]: true, 'ivsom-radio__disabled' : me.disabled, 'ivsom-radio__checked': me.checkValue === me.value, ['ivsom-radio__' + me.type] : true }} onClick={(e) => me.disabled ? void 0 : me.onChange.apply(me, [e, me.value]) }>
                 <div class="ivsom-radio__warp"><input type="radio" name={me.name} value={me.value} checked={me.checkValue === me.value} />
-                    <label class="ivsom-radio__text">{ me.$scopedSlots.default() }</label>
+                    <label class="ivsom-radio__text">{ me.$scopedSlots.default && me.$scopedSlots.default() }</label>
                 </div>
             </div>
         )

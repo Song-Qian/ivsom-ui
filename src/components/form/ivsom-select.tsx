@@ -36,10 +36,6 @@ type ScopedSlots = {
 @Component
 export default class iVsomSelect extends tsx.Component<Props, any, ScopedSlots> {
 
-    constructor() {
-        super()
-    }
-
     @Prop({ default: 220 }) readonly width !: string | number;
 
     @Prop({ default: 'medium' }) readonly size !: 'medium' | 'small' | 'mini';

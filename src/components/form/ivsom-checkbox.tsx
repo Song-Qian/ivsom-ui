@@ -4,151 +4,73 @@
  * eMail        :   songqian@wtoe.cn
  * Description  :   checkbox组件
  */
+import { Component, ModelSync, Prop, InjectReactive } from 'vue-property-decorator'
 import * as tsx from 'vue-tsx-support'
-import { Component, Prop,InjectReactive, Emit, Watch,} from 'vue-property-decorator'
-import uuid from '~/utils/uuid'
-
 import 'vue-tsx-support/enable-check'
 
-interface Props{
-    value:string,//v-model绑定的值
-    dataSource:Array<{ label : string,  value : string }>//复选框对应的数据源
+import uuid from '~/utils/uuid'
 
+type Props = {
+    //checkbox 指定复选框的值
+    Value: any
+    //checkbox 禁用
+    Disabled: Boolean
+    //checkbox 表单字段名称
+    Name: String
+    //checkbox 表单大小
+    Size: 'medium' | 'small' | 'mini'
+    // checkbox 选中的值
+    Checked: any
 }
-interface HTMLInputEvent extends Event {
-    target: HTMLInputElement & EventTarget&InputEvent;
-}
+
 type ScopedSlots = {
-    default : void
- }
+    default: void
+}
 
 @Component
-export default class iVsomCheckbox extends tsx.Component<Props,Event,ScopedSlots>{
-    constructor(){
-        super()
-    }
-    @Prop({ default : "" }) readonly value !: string;
-    @Prop({default:null}) readonly dataSource!:Array<{ label : string,  value : string,disabled:boolean}>;
-    @InjectReactive(Symbol.for('validate')) validate !: boolean;
-    @InjectReactive(Symbol.for('trigger')) trigger !: 'blur' | 'change';
+export default class iVsomCheckBox extends tsx.Component<Props, any, ScopedSlots> {
 
-    private checkedModel :any = this.value;
-    // private validate : boolean = true;
-    // public ValidateField(regexp : RegExp) {
-    //     const me = this;
-    //     me.validate = regexp.test(me.value);
-    //     return me.validate;
-    // }
-   
-    // @Emit()
-    protected  change(event: HTMLInputEvent){
-        var vModel = this.getModel; //每次触发都先获取父级的v-model，保证多个选项的数据同步，v-model初始值中可能存在冗余数据，后面需要用filterModel过滤掉冗余数据。
-        if (this.dataSource.length <= 1)
-        {
-        vModel.splice(0, vModel.length);
-        }
-        const  val  = event.target.value as any
-        const isChecked=event.target.checked as boolean
-        var index = vModel.indexOf(val);
-        if(isChecked){
-            if (event){
-                if (index < 0)
-                {
-                vModel.push(val);
-                }
-                }
-                else {
-                if (index >= 0) {
-                vModel.splice(index, 1); //数组中移除
-                }
-                }
-        }else{
-            vModel.splice(index, 1) 
-        }
-        vModel = this.filterModel(vModel);//清除冗余数值
-        if (!Array.isArray(this.value)) {
-        vModel = vModel.join(",");//如果v-model是字符串，同步时候也转为字符串。
-        }
-        this.$emit("on-change",vModel);//同步父级的v-model 
-        if(this.trigger === 'change') {
-            this.$vnode.componentInstance?.$parent.$emit('on-validate');
-        }
-    }
-      
-    protected isChecked(val:any){
-        var vModel = this.getModel;
-        //务必toString()后再查找，否则会和数值型不兼容。
-        if (vModel.indexOf(val.toString()) > -1)
-        {
-        return true;
-        }
-        else
-        {
-        return false;
-        }
-    }
+    @Prop({ default : '', type: Object }) readonly value !: any;
+    @Prop({ default : false, type: Boolean }) readonly disabled !: Boolean;
+    @Prop({ default : 'medium', type: String }) readonly size !: 'medium' | 'small' | 'mini';
+    @InjectReactive({ from: Symbol.for('checkbox-name'), default: '' }) @Prop({ default : '' }) readonly name !: string;
+    @InjectReactive({ from: Symbol.for('checkbox-value'), default: {} }) readonly includedValue !: { [key: string]: any }
 
-   get getModel() {
-    if (Array.isArray(this.value)) {
-    this.checkedModel = this.value;
-    }
-    else {
-        this.checkedModel = this.value.toString().split(",");
-    }
-    return this.checkedModel
-    }
+    @ModelSync('checked', 'on-update', { default : '', type: Object }) checkedValue !: any;
 
-    protected filterModel(vModel:[]){
-        const dataSource = this.dataSource;
-        const canSetValue:[] = [];
-        const dataSourceValue:any = [];
-        for (var i = 0; i < dataSource.length; i++)
-        {
-        dataSourceValue.push(dataSource[i].value.toString()); //需要转为字符串，兼容数字类型值
+    private readonly id : string = uuid();
+
+    protected onChange(e : MouseEvent, value: any) {
+        let me = this;
+        let isModify = false;
+        if(typeof me.checkedValue === "boolean") {
+            let value  = !Boolean(me.checkedValue);
+            isModify = Boolean(value === me.value || me.includedValue && me.includedValue[me.id] !== me.value);
+            me.checkedValue = value;
+            me.$parent.$emit("on-modify", me.id, isModify, value)
+        } else {
+            if(me.checkedValue === me.value || me.includedValue && me.includedValue[me.id] === me.value) {
+                isModify = Boolean('' === me.value || me.includedValue && me.includedValue[me.id] !== me.value);
+                me.checkedValue = '';
+                me.$parent.$emit("on-modify", me.id, isModify, '')
+            } else {
+                isModify = Boolean(value === me.value || me.includedValue && me.includedValue[me.id] === me.value);
+                me.checkedValue = value;
+                me.$parent.$emit("on-modify", me.id, isModify, value)
+            }
         }
-        vModel.forEach(function (item, index) {
-        const Index = dataSourceValue.indexOf(item);
-        if (Index > -1) {
-        canSetValue.push(item);
-        }
-        });
-        return canSetValue;
-    }
-
-    private readonly map = new Map<string, { label : string,  value : string,disabled:boolean }>();
-
-    protected get checkboxProvide() : Map<string, { label : string,  value : string,disabled:boolean }> {
-        const me = this;
-        let len = 0;
-        me.map.clear();
-        while(me.dataSource && len < me.dataSource.length) {
-            me.map.set(uuid(), me.dataSource[len]);
-            ++len;
-        }
-        return me.map;
-    }
-
-    protected set checkboxProvide(map : Map<string, {  label : string,  value : string,disabled:boolean }>) {
-        const me = this;
-        me.$emit('update:dataSource', [ ...map.values()]);
     }
 
     protected render() : JSX.Element {
-        const me = this;
-        const optionsEl = ((map) => {
-            const element = [];
-            for (let [k, item] of map.entries()) {
-                let c =<span data-value={item.value}> 
-                <label class={ `ivsom-checkbox  ${ item.disabled ? 'ivsom-checkbox_disabled' : '' }` }  key={ k as any }>
-                 <input type="checkbox" checked={this.isChecked(item.value)}  disabled={!!item.disabled} onChange={ (e) => { me.change(e as any) } } value={item.value}/> {item.label}
-                 </label></span>
-                element.push(c);
-            }
-             return element.slice(0, element.length);
-        })(me.checkboxProvide)
+        let me = this;
         return (
-        <div>{optionsEl}<span> { me.$scopedSlots.default && me.$scopedSlots.default() }
-        </span></div>
-       )
+            <div class={{ 'ivsom-checkbox' : true, ['ivsom-checkbox__' + me.size] : true, 'ivsom-checkbox__checked' : me.checkedValue === me.value || me.includedValue && me.includedValue[me.id] === me.value }} onClick={ (e : MouseEvent) => me.disabled ? void 0 : me.onChange(e, me.value) }>
+                <div class="ivsom-checkbox__warp">
+                    <input type="checkbox" name={me.name} value={me.value} checked={ me.checkedValue === me.value || me.includedValue && me.includedValue[me.id] === me.value } />
+                    <label class="ivsom-checkbox__text">{ me.$scopedSlots.default && me.$scopedSlots.default() }</label>
+                </div>
+            </div>
+        )
     }
+
 }

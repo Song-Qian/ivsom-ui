@@ -11,7 +11,7 @@ import uuid from '~/utils/uuid'
 
 type Props = {
     //表单提交的Radio名字
-    Name : string
+    Name : String
     //当前选中的值
     Value : any
 }
@@ -62,7 +62,7 @@ export default class iVsomRadioGroup extends tsx.Component<Props, any, ScopedSlo
 
         return (
             <div class={{ 'ivsom-radio-group': true, 'ivsom-radio-group__hasError' : me.validate === false }}  tabindex={999}  onBlur={me.onBlur}>
-                { me.$scopedSlots.default() }
+                { me.$scopedSlots.default && me.$scopedSlots.default() }
             </div>
         )
     }
