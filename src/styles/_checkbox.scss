@@ -76,6 +76,20 @@
         }
     }
 
+    &.ivsom-checkbox__disabled {
+        > .ivsom-checkbox__warp {
+            cursor: no-drop;
+            &::before {
+                border: 2px solid $border-gray-color;
+                background-color: #eee;
+            }
+    
+            &::after {
+                background-color: $border-gray-color;
+            }
+        }
+    }
+
     > .ivsom-checkbox__warp {
         width: 100%;
         height: 100%;

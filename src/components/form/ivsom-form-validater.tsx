@@ -85,11 +85,14 @@ export default class iVsomFormValidater extends tsx.Component<Props, any, Scoped
 
          if (typeof me.model[me.prop] === "string") {
             me.validator = Boolean(me.model[me.prop]) && me.model[me.prop].replace(/^(\s+)|(\s+)$/gi, '') !== '';
-         }
-
-         if (typeof me.model[me.prop] !== "string") {
+         } else if (typeof me.model[me.prop] !== "string") {
             me.validator = me.model[me.prop] !== "" || me.model[me.prop] !== null || me.model[me.prop] !== undefined;
          }
+
+         if(me.model[me.prop] instanceof Array) {
+            me.validator = Boolean(me.model[me.prop]) && me.model[me.prop].length > 0;
+         }
+
          me.messages = me.validator ? '' : me.errorMessage ? me.errorMessage : '必填项，请输入文本。';
       }
 

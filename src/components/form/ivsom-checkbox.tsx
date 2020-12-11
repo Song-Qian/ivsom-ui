@@ -64,7 +64,7 @@ export default class iVsomCheckBox extends tsx.Component<Props, any, ScopedSlots
     protected render() : JSX.Element {
         let me = this;
         return (
-            <div class={{ 'ivsom-checkbox' : true, ['ivsom-checkbox__' + me.size] : true, 'ivsom-checkbox__checked' : me.checkedValue === me.value || me.includedValue && me.includedValue[me.id] === me.value }} onClick={ (e : MouseEvent) => me.disabled ? void 0 : me.onChange(e, me.value) }>
+            <div class={{ 'ivsom-checkbox' : true, ['ivsom-checkbox__' + me.size] : true,'ivsom-checkbox__disabled' : me.disabled, 'ivsom-checkbox__checked' : me.checkedValue === me.value || me.includedValue && me.includedValue[me.id] === me.value }} onClick={ (e : MouseEvent) => me.disabled ? void 0 : me.onChange(e, me.value) }>
                 <div class="ivsom-checkbox__warp">
                     <input type="checkbox" name={me.name} value={me.value} checked={ me.checkedValue === me.value || me.includedValue && me.includedValue[me.id] === me.value } />
                     <label class="ivsom-checkbox__text">{ me.$scopedSlots.default && me.$scopedSlots.default() }</label>
