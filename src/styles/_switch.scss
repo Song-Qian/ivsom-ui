@@ -1,28 +1,65 @@
-.switch {
-    .switch-wrapper {
-      width: 60px;
-      height: 30px;
-      background: #ff4949;
-      border-radius: 15px;
-      position: relative;
-      cursor: pointer;
-    }
-    .close {
-      background: #e9ebef;
-    }
-    .disabled {
-      cursor: not-allowed;
-      opacity: 0.6;
-    }
-    .switchSlider {
+@import "./ivsom-variable";
+@import "./ivsom-mixin";
+
+.ivsom-switch {
+  padding: 2px;
+  outline: none;
+  cursor: pointer;
+  box-sizing: border-box;
+  display: inline-block;
+  background-color: #fff;
+  transition: background-color ease-in-out .3s;
+
+  &.ivsom-switch__medium {
+    width: 64px;
+    height: 32px;
+    border-radius: 16px;
+
+    > .ivsom-switch__tocuh {
       width: 28px;
-      height: 28px;
-      border-radius: 50%;
-      background: #ffffff;
-      position: absolute;
-      top: 1px;
-      left: 1px;
-      z-index: 3;
-      transition: left 0.4s;
     }
   }
+
+  &.ivsom-switch__small {
+    width: 52px;
+    height: 26px;
+    border-radius: 13px;
+
+    > .ivsom-switch__tocuh {
+      width: 22px;
+    }
+  }
+  
+  &.ivsom-switch__mini {
+    width: 40px;
+    height: 20px;
+    border-radius: 10px;
+
+    > .ivsom-switch__tocuh {
+      width: 16px;
+    }
+  }
+
+  &.ivsom-switch__active {
+    > .ivsom-switch__tocuh {
+      float: right;
+    }
+  }
+
+  &.ivsom-switch__disabled {
+    cursor: no-drop;
+    background-color: #969696 !important;
+  }
+
+  > .ivsom-switch__tocuh {
+    height: 100%;
+    display: block;
+    border-radius: 50%;
+    background-color: #eee;
+    float: left;
+    transition: float ease-in .5s;
+  }
+
+  > input { display: block; }
+
+}

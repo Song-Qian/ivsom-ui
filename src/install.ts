@@ -26,7 +26,7 @@ import iVsomMenu from './components/menu/ivsom-menu'
 import iVsomMenuItem from './components/menu/ivsom-menu-item'
 import iVsomPagination from './components/page/ivsom-pagination'
 import iVsomStep from './components/step/ivsom-step'
-import iVsomSwitch from './components/switch/ivsom-switch'
+import iVsomSwitch from './components/form/ivsom-switch'
 import iVsomTabs from './components/tabs/ivsom-tabs'
 import iVsomTabsPanel from './components/tabs/ivsom-tabs-panel'
 
