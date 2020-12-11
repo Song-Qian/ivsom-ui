@@ -29,6 +29,18 @@
                     <ul>
                         <li>Form 组件在使用之前，需要有相关的依赖库进行支持，如需阅读：<a href="./start.api.html" target="_blank">快速开始</a></li>
                         <li>Form 组件是原生Form表单对象封装而成，配合FormValidater可以对表单对象进行验证。</li>
+                        <li>prop: String 验证字段</li>
+                        <li>required： Boolean 是否开启必填</li>
+                        <li>min： Number 验证表单属性最小值，表单值是Number类型则验证表单值&gt;= min，表单值是String类型则验证表单值length &gt;=
+                            min，推荐：Number类型表单使用v-model.number修饰符</li>
+                        <li>max： Number 验证表单属性最小值，表单值是Number类型则验证表单值&lt;= max，表单值是String类型则验证表单值length &lt;=
+                            max，推荐：Number类型表单使用v-model.number修饰符</li>
+                        <li>e-mail: Boolean 是否开启电子邮箱验证</li>
+                        <li>phone: Boolean 是否开启手机、电话坐机验证</li>
+                        <li>double: Boolean 是否开启小数精度验证</li>
+                        <li>identifier: Boolean 是否开启身份证验证，支持15位一代身份证、18位二代身份证。</li>
+                        <li>validate： RegExp | Function 表单的自义定验证</li>
+                        <li>error-message: 上述属性，验证失败显示消息内容。</li>
                     </ul>
                     <p>LabelWidth 设置表单Label宽度</p>
                     <blockquote>
@@ -90,20 +102,6 @@
 </code></pre>
                     <h2 id="unicode-">表单的验证</h2>
                     <hr>
-                    <ul>
-                        <li>prop: String 验证字段</li>
-                        <li>required： Boolean 是否开启必填</li>
-                        <li>min： Number 验证表单属性最小值，表单值是Number类型则验证表单值&gt;= min，表单值是String类型则验证表单值length &gt;=
-                            min，推荐：Number类型表单使用v-model.number修饰符</li>
-                        <li>max： Number 验证表单属性最小值，表单值是Number类型则验证表单值&lt;= max，表单值是String类型则验证表单值length &lt;=
-                            max，推荐：Number类型表单使用v-model.number修饰符</li>
-                        <li>e-mail: Boolean 是否开启电子邮箱验证</li>
-                        <li>phone: Boolean 是否开启手机、电话坐机验证</li>
-                        <li>double: Boolean 是否开启小数精度验证</li>
-                        <li>identifier: Boolean 是否开启身份证验证，支持15位一代身份证、18位二代身份证。</li>
-                        <li>validate： RegExp | Function 表单的自义定验证</li>
-                        <li>error-message: 上述属性，验证失败显示消息内容。</li>
-                    </ul>
                     <p>普通表单验证</p>
                     <blockquote>
                         <i-vsom-form ref="form1" :model="Form" :label-width="80" position="left">
@@ -213,7 +211,6 @@
         }
     })
 </code></pre>
-
                     <p>自定义表单验证</p>
                     <blockquote>
                         <i-vsom-form ref="form2" :model="Form1" :label-width="80" position="left">
@@ -287,22 +284,78 @@
     }
 })
 </code></pre>
-                    <h2 id="unicode-">复杂表单的布局应</h2>
+                    <h2 id="unicode-">复杂表单的布局应用</h2>
                     <hr>
-                    <ul>
-                        <li>prop: String 验证字段</li>
-                        <li>required： Boolean 是否开启必填</li>
-                        <li>min： Number 验证表单属性最小值，表单值是Number类型则验证表单值&gt;= min，表单值是String类型则验证表单值length &gt;=
-                            min，推荐：Number类型表单使用v-model.number修饰符</li>
-                        <li>max： Number 验证表单属性最小值，表单值是Number类型则验证表单值&lt;= max，表单值是String类型则验证表单值length &lt;=
-                            max，推荐：Number类型表单使用v-model.number修饰符</li>
-                        <li>e-mail: Boolean 是否开启电子邮箱验证</li>
-                        <li>phone: Boolean 是否开启手机、电话坐机验证</li>
-                        <li>double: Boolean 是否开启小数精度验证</li>
-                        <li>identifier: Boolean 是否开启身份证验证，支持15位一代身份证、18位二代身份证。</li>
-                        <li>validate： RegExp | Function 表单的自义定验证</li>
-                        <li>error-message: 上述属性，验证失败显示消息内容。</li>
-                    </ul>
+                    <blockquote>
+                        <i-vsom-form ref="form3" :model="Form2" :label-width="80" position="left">
+                            <i-vsom-form-validater label="用户名" error-message="用户名是必填项" prop="name" :span="10" inline required>
+                                <i-vsom-input v-model="Form2.name" prefix="icon-gongnengtubiao-39"></i-vsom-input>
+                            </i-vsom-form-validater><i-vsom-form-validater label="角色名" error-message="角色名是必填项" prop="role" :span="10" inline required>
+                                <i-vsom-input v-model="Form2.role" prefix="icon-gongnengtubiao-39"></i-vsom-input>
+                            </i-vsom-form-validater><i-vsom-form-validater label="性别" prop="sex" trigger="change" :validate="/^[男]$/" error-message="当前选择不是男性" :span="10" inline required>
+                                <i-vsom-radio-group v-model="Form2.sex" name="sex">
+                                    <i-vsom-radio type="check" :checked="Form2.sex" size="small" value="男">男</i-vsom-radio>
+                                    <i-vsom-radio type="check" :checked="Form2.sex" size="small" value="女">女</i-vsom-radio>
+                                </i-vsom-radio-group>
+                            </i-vsom-form-validater><i-vsom-form-validater label="电话" prop="phone" error-message="电话格式不正确" phone :span="10" inline required>
+                                <i-vsom-input v-model="Form2.phone" prefix="icon-gongnengtubiao-39"></i-vsom-input>
+                            </i-vsom-form-validater><i-vsom-form-validater label="年龄" prop="age" error-message="年龄只能在1-100岁之间" :min="1" :max="100" :span="10" inline required>
+                                <i-vsom-input v-model.number="Form2.age" prefix="icon-gongnengtubiao-39"></i-vsom-input>
+                            </i-vsom-form-validater><i-vsom-form-validater :span="10" inline>
+                                <i-vsom-button type="primary" @click="submitForm('form3')">查询</i-vsom-button>
+                                <i-vsom-button type="danger" @click="clearForm('form3')">清空</i-vsom-button>
+                            </i-vsom-form-validater>
+                        </i-vsom-form>
+                    </blockquote>
+                    <pre><code class="language-html"
+>&lt;i-vsom-form-validater label="用户名" error-message="用户名是必填项" prop="name" :span="10" inline required&gt;
+    &lt;i-vsom-input v-model="Form2.name" prefix="icon-gongnengtubiao-39"&gt;&lt;/i-vsom-input&gt;
+ &lt;/i-vsom-form-validater&gt;&lt;i-vsom-form-validater label="角色名" error-message="角色名是必填项" prop="role" :span="10" inline required&gt;
+    &lt;i-vsom-input v-model="Form2.role" prefix="icon-gongnengtubiao-39"&gt;&lt;/i-vsom-input&gt;
+ &lt;/i-vsom-form-validater&gt;&lt;i-vsom-form-validater label="性别" prop="sex" trigger="change" :validate="/^[男]$/" error-message="当前选择不是男性" :span="10" inline required&gt;
+    &lt;i-vsom-radio-group v-model="Form2.sex" name="sex"&gt;
+        &lt;i-vsom-radio type="check" :checked="Form2.sex" size="small" value="男"&gt;男&lt;/i-vsom-radio&gt;
+        &lt;i-vsom-radio type="check" :checked="Form2.sex" size="small" value="女"&gt;女&lt;/i-vsom-radio&gt;
+    &lt;/i-vsom-radio-group&gt;
+ &lt;/i-vsom-form-validater&gt;&lt;i-vsom-form-validater label="电话" prop="phone" error-message="电话格式不正确" phone :span="10" inline required&gt;
+    &lt;i-vsom-input v-model="Form2.phone" prefix="icon-gongnengtubiao-39"&gt;&lt;/i-vsom-input&gt;
+ &lt;/i-vsom-form-validater&gt;&lt;i-vsom-form-validater label="年龄" prop="age" error-message="年龄只能在1-100岁之间" :min="1" :max="100" :span="10" inline required&gt;
+    &lt;i-vsom-input v-model.number="Form2.age" prefix="icon-gongnengtubiao-39"&gt;&lt;/i-vsom-input&gt;
+ &lt;/i-vsom-form-validater&gt;&lt;i-vsom-form-validater :span="10" inline&gt;
+    &lt;i-vsom-button type="primary" @click="submitForm('form3')"&gt;查询&lt;/i-vsom-button&gt;
+    &lt;i-vsom-button type="danger" @click="clearForm('form3')"&gt;清空&lt;/i-vsom-button&gt;
+ &lt;/i-vsom-form-validater&gt;
+</code></pre>
+                    <pre><code class="language-js"
+>var app = new Vue({
+    el : '#app',
+    data : function() {
+        return {
+            Form2 : {
+                name : '',
+                role : '',
+                sex : '',
+                phone : '',
+                age : 1
+            },
+        }
+    },
+    methods: {
+        submitForm: function (form) {
+            var me = this;
+            me.$refs[form].validateForm().then(function (valid) {
+                if (valid) {
+                    alert("验证成功");
+                }
+            })
+        },
+        clearForm: function (form) {
+            var me = this;
+            me.$refs[form].clearValidates();
+        }
+    }
+})
+</code></pre>
                 </div>
             </div>
         </div>

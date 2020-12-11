@@ -18,6 +18,22 @@
     margin-bottom: 15px;
     box-sizing: border-box;
 
+    &.ivsom-form-validator__inline {
+        display: inline-flex;
+    }
+
+    @for $col from 1 through 30 {
+        &.ivsom-form-validator__span_#{$col} {
+            width: (100% / 30) * $col;
+        }
+    }
+
+    @for $col from 1 through 30 {
+        &.ivsom-form-validator__offset_#{$col} {
+            margin-left: (100% / 30) * $col;
+        }
+    }
+
     > div.has-required {
         flex: 0 0 16px;
         text-align: center;
@@ -32,6 +48,8 @@
         overflow: hidden;
         text-emphasis: ellipsis;
         white-space : nowrap;
+        padding: 5px;
+        box-sizing: border-box;
         color: $font-common-color;
         font-family: $font-family;
         @include font-text;
@@ -40,7 +58,6 @@
     > .ivsom-form-validator__wapper {
         flex: 1 1 auto;
         position: relative;
-        padding: 0px 0px 0px 15px;
         box-sizing: border-box;
 
         > .ivsom-form-validator__error {

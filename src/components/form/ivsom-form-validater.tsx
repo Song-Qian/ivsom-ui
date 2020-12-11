@@ -11,6 +11,12 @@ import 'vue-tsx-support/enable-check'
 
 
 type Props = {
+   //是否行内布局
+   Inline : Boolean,
+   //行内布局间隙
+   Span : Number,
+   //行内布局偏移
+   Offset : Number,
    //必填
    Required: Boolean
    //表单标题
@@ -43,6 +49,12 @@ type ScopedSlots = {
 
 @Component
 export default class iVsomFormValidater extends tsx.Component<Props, any, ScopedSlots> {
+
+   @Prop({ default: false, type: Boolean }) readonly inline !: boolean;
+
+   @Prop({ default : 30, type: Number }) readonly span !: number;
+
+   @Prop({ default: 0, type: Number }) readonly offset !: number;
 
    @Prop({ default: '' }) readonly label !: string;
 
@@ -169,7 +181,7 @@ export default class iVsomFormValidater extends tsx.Component<Props, any, Scoped
    protected render(): JSX.Element {
       let me = this;
       return (
-         <div class="ivsom-form-validator">
+         <div class={{ 'ivsom-form-validator' : true, 'ivsom-form-validator__inline' : me.inline, ['ivsom-form-validator__span_' + me.span] : me.inline, ['ivsom-form-validator__offset_' + me.offset] : me.inline && me.offset > 0 }}>
             { me.required ? <div class='has-required'>*</div> : <div class='has-required'></div>}
             <div class='ivsom-form-validator-label' style={{ width: typeof me.label_width === 'number' ? `${me.label_width}px` : me.label_width, textAlign: me.position }} >{me.label}</div>
             <div class='ivsom-form-validator__wapper'>
