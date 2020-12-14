@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta charset="utf-8" />
-        <title>inputNumber api demo</title>
+        <title>InputNumber api demo</title>
         <link rel="stylesheet" href="./cube.min.css">
         <link rel="stylesheet" href="./demo.css">
         <script src="../vue.min.js"></script>
@@ -11,7 +11,7 @@
     </head>
     <body>
         <div id="app" class="main">
-            <h1 class="logo">inputNumber Api</h1>
+            <h1 class="logo">InputNumber Api</h1>
             <div class="nav-tabs">
                 <ul id="tabs" class="dib-box">
                     <li class="dib active"><span> CDN </span></li>
@@ -25,126 +25,167 @@
                         <hr>
                         <p>常规计数器</p>
                         <ul>
-                            <li>inputNumber 组件在使用之前，需要有相关的依赖库进行支持，如需阅读：<a href="./start.api.html" target="_blank" >快速开始</a></li>
-                            <li>v-model双向绑定value值</li>
-                            <li>max min 分别表示限制最小最大的值</li>
+                            <li>InputNumber 组件在使用之前，需要有相关的依赖库进行支持，如需阅读：<a href="./start.api.html" target="_blank" >快速开始</a></li>
+                            <li>max : number 最大值</li>
+                            <li>min : number 最小值</li>
+                            <li>step : float | number 每次值跳跃的跨度</li>
+                            <li>size: 'medium' | 'small' | 'mini' 表单元素大小</li>
+                            <li>disabled: Boolean 是否禁用</li>
+                            <li>precision: number 数值精度</li>
+                            <li>name: 原生表单属性</li>
+                            <li>input: Boolean 是否显示输入框</li>
                         </ul>
                         <blockquote>
-                            <i-vsom-input-number v-model="val" :min="1" :max="10" @on-change="change"></i-vsom-input-number>
+                            <i-vsom-number v-model="value"></i-vsom-number>
                         </blockquote>
                         <pre><code class="language-html"
-                            >&lt;i-vsom-input-number v-model="val" :min="1" :max="10" @on-change="change" &gt;&lt;/i-vsom-button&gt;   
-                            </code></pre>
+>&lt;i-vsom-number v-model="value" &gt;&lt;/i-vsom-number&gt;   
+</code></pre>
                         <pre><code class="language-js"
  >var app = new Vue({
     el : '#app',
     data : function() {
         return {
-            val:5
+            value: 0
         }
-    },
-    methods:{
-        change(value){
-            console.log(value)
+    }
+ })
+ </code></pre>
+                        <h2 id="unicode-">不同大小的数值框</h2>
+                        <hr>
+                        <ul>
+                            <li>Number size属性支持 medium、small、mini</a></li>
+                        </ul>
+                        <blockquote>
+                            <i-vsom-number v-model="value1" size="medium"></i-vsom-number>
+                            <br />
+                            <i-vsom-number v-model="value1" size="small"></i-vsom-number>
+                            <br />
+                            <i-vsom-number v-model="value1" size="mini"></i-vsom-number>
+                        </blockquote>
+                        <pre><code class="language-html"
+>&lt;i-vsom-number v-model="value" size="medium"&gt;&lt;/i-vsom-number&gt;
+ &lt;br /&gt;
+ &lt;i-vsom-number v-model="value" size="small"&gt;&lt;/i-vsom-number&gt;
+ &lt;br /&gt;
+ &lt;i-vsom-number v-model="value" size="mini"&gt;&lt;/i-vsom-number&gt;
+</code></pre>
+                        <h2 id="unicode-">数值框的宽度</h2>
+                        <hr>
+                        <blockquote>
+                            <i-vsom-number v-model="value4" size="medium" style="width: 180px; display: inline-flex;"></i-vsom-number>
+                            <i-vsom-number v-model="value4" size="small" style="width: 180px; margin-left: 40px; display: inline-flex;"></i-vsom-number>
+                            <i-vsom-number v-model="value4" size="mini" style="width: 180px; margin-left: 40px; display: inline-flex;"></i-vsom-number>
+                        </blockquote>
+                        <pre><code class="language-html"
+>&lt;i-vsom-number v-model="value4" size="medium" style="width: 180px; display: inline-flex;"&gt;&lt;/i-vsom-number&gt;
+ &lt;i-vsom-number v-model="value4" size="small" style="width: 180px; margin-left: 40px; display: inline-flex;"&gt;&lt;/i-vsom-number&gt;
+ &lt;i-vsom-number v-model="value4" size="mini" style="width: 180px; margin-left: 40px; display: inline-flex;"&gt;&lt;/i-vsom-number&gt;
+</code></pre>
+
+                        <h2 id="unicode-">数值框的跳跃值距离</h2>
+                        <hr>
+                        <p>整值的跳跃</p>
+                        <blockquote>
+                            <i-vsom-number v-model="value2" :step="5" size="small"></i-vsom-number>
+                        </blockquote>
+                        <pre><code class="language-html"
+>&lt;i-vsom-number v-model="value" :step="5" size="small"&gt;&lt;/i-vsom-number&gt;
+</code></pre>
+                        <p>精度值的跳跃</p>
+                        <blockquote>
+                            <i-vsom-number v-model="value6" :step="0.3" :precision="2" size="small"></i-vsom-number>
+                        </blockquote>
+                        <pre><code class="language-html"
+>&lt;i-vsom-number v-model="value" :step="0.3" :precision="2" size="small"&gt;&lt;/i-vsom-number&gt;
+</code></pre>
+                        <h2 id="unicode-">数值框的最大和最小值</h2>
+                        <hr>
+                        <blockquote>
+                            <i-vsom-number v-model="value3" :step="5" min="0" max="100" size="small"></i-vsom-number>
+                        </blockquote>
+                        <pre><code class="language-html"
+>&lt;i-vsom-number v-model="value" :step="5" min="0" max="100" size="small"&gt;&lt;/i-vsom-number&gt;
+</code></pre>
+                        <h2 id="unicode-">被禁用的数值框</h2>
+                        <hr>
+                        <blockquote>
+                            <i-vsom-number v-model="value5" min="0" max="100" size="small" disabled></i-vsom-number>
+                        </blockquote>
+                        <pre><code class="language-html"
+                        >&lt;i-vsom-number v-model="value" min="0" max="100" size="small" disabled&gt;&lt;/i-vsom-number&gt;
+</code></pre>
+                        <h2 id="unicode-">隐藏的数值框</h2>
+                        <hr>
+                        <blockquote>
+                            <i-vsom-number v-model="value7" size="small" :input="false"></i-vsom-number>
+                            <span>当前隐藏的数值框：{{value7}}</span>
+                        </blockquote>
+                        <pre><code class="language-html"
+>&lt;i-vsom-number v-model="value" size="small" :input="false"&gt;&lt;/i-vsom-number&gt;
+ &lt;span&gt;当前隐藏的数值框：{{ '\u007b\u007b value \u007d\u007d' }}&lt;/span&gt;
+</code></pre>
+                        <h2 id="unicode-">数值框的表单验证</h2>
+                        <hr>
+                        <p>整数值的验证</p>
+                        <blockquote>
+                            <i-vsom-form :model="form" :label-width="80" position="left">
+                                <i-vsom-form-validater label="年龄" prop="age" trigger="change" :min="18" :max="70" error-message="当前年龄不符合机动车驾驶年龄" required>
+                                    <i-vsom-number v-model.number="form.age" :step="1" size="small"></i-vsom-number>
+                                </i-vsom-form-validater>
+                            </i-vsom-form>
+                        </blockquote>
+                        <pre><code class="language-html"
+>&lt;i-vsom-form :model="form" :label-width="80" position="left"&gt;
+    &lt;i-vsom-form-validater label="年龄" prop="age" trigger="change" :min="18" :max="70" error-message="当前年龄不符合机动车驾驶年龄" required&gt;
+        &lt;i-vsom-number v-model.number="form.age" :step="1" size="small"&gt;&lt;/i-vsom-number&gt;
+    &lt;/i-vsom-form-validater&gt;
+ &lt;/i-vsom-form&gt;
+</code></pre>
+                        <pre><code class="language-js"
+>var app = new Vue({
+    el : '#app',
+    data : function() {
+        return {
+            form : {
+                age : 1
+            }
         }
     }
 })
- </code></pre>
-                        <h2 id="unicode-">精度用法</h2>
-                        <hr>
-                        <p>常规计数器</p>
-                        <ul>
-                            <li>precision支持精度属性</li>
-                        </ul>
-                        <blockquote>
-                            <i-vsom-input-number v-model="val1" :precision="2"></i-vsom-input-number>
-                        </blockquote>
-                        <pre><code class="language-html"
-                            >&lt;i-vsom-input-number v-model="val1" :precision="2" &gt;&lt;/i-vsom-button&gt;   
-                            </code></pre>
-                        <pre><code class="language-js" 
-> var app = new Vue({
-    el : '#app',
-    data : function() {
-        return {
-            val1:5
-       }
-   },
- })
 </code></pre>
-                        <h2 id="unicode-">步数用法</h2>
-                        <hr>
-                        <p>常规计数器</p>
-                        <ul>
-                            <li>step属性可以控制步长</li>
-                        </ul>
+                        <p>精度值的验证</p>
                         <blockquote>
-                            <i-vsom-input-number v-model="val2" :step="2"></i-vsom-input-number>
+                            <i-vsom-form :model="form" :label-width="80" position="left">
+                                <i-vsom-form-validater label="体重" prop="weight" trigger="change" double error-message="体重不能为空" required>
+                                    <i-vsom-number v-model.number="form.weight" :step="0.01" :precision="2" size="small"></i-vsom-number>
+                                </i-vsom-form-validater>
+                            </i-vsom-form>
                         </blockquote>
                         <pre><code class="language-html"
-                            >&lt;i-vsom-input-number v-model="val2" :step="2" &gt;&lt;/i-vsom-button&gt;   
-                            </code></pre>
+>&lt;i-vsom-form :model="form" :label-width="80" position="left"&gt;
+    &lt;i-vsom-form-validater label="体重" prop="weight" trigger="change" double error-message="体重不能为空" required&gt;
+        &lt;i-vsom-number v-model.number="form.weight" :step="0.01" :precision="2" size="small"&gt;&lt;/i-vsom-number&gt;
+    &lt;/i-vsom-form-validater&gt;
+ &lt;/i-vsom-form&gt;
+</code></pre>
                         <pre><code class="language-js"
- >var app = new Vue({
+>var app = new Vue({
     el : '#app',
     data : function() {
         return {
-            val:5
+            form : {
+                weight : 0.0
+            }
         }
-    },
- })
- </code></pre>
-                        <h2 id="unicode-">禁用用法</h2>
-                        <hr>
-                        <ul>
-                            <li>disabled属性支持禁用状态</li>
-                        </ul>
-                        <blockquote>
-                            <i-vsom-input-number v-model="val3" disabled></i-vsom-input-number>
-                        </blockquote>
-                        <pre><code class="language-html"
-                            >&lt;i-vsom-input-number v-model="val" disabled &gt;&lt;/i-vsom-button&gt;   
-                            </code></pre>
-                        <pre><code class="language-js"
- >var app = new Vue({
-    el : '#app',
-    data : function() {
-        return {
-            val:5
-        }
-    },
+    }
 })
 </code></pre>
-                        
                     </div>
                 </div>
             </div>
         </div>
         <script>
-                        (function() {
-    
-    Vue.use(iVsomUI);
-
-    var app = new Vue({
-        el : '#app',
-        data : function() {
-            return {
-                val:5,
-                val1:6,
-                val2:7,
-                val3:3,
-            }
-        },
-        methods:{
-            change(value){
-                console.log(value)
-            }
-        }
-       
-    })
-
-
-})()
             $(document).ready(function () {
                 $('.tab-container .content:first').show()
     
@@ -163,6 +204,6 @@
                 })
             })
         </script>
-      
+        <script src="./input-number.demo.js"></script>
     </body>
 </html>

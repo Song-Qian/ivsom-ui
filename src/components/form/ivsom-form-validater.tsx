@@ -129,7 +129,7 @@ export default class iVsomFormValidater extends tsx.Component<Props, any, Scoped
       }
 
       if (me.double && me.validator) {
-         me.validator = me.model[me.prop] && /^((-?[1-9]\d+(\.\d+)?)|(-?0(\.\d+)[1-9]\d+))$/g.test(me.model[me.prop]);
+         me.validator = me.model[me.prop] && /^((-?[1-9]\d{0,}(\.\d+)?)|(-?0(\.\d+)[1-9]{0,}))$/g.test(me.model[me.prop]);
          me.messages = me.validator ? '' : me.errorMessage ? me.errorMessage : '输入浮点数值格式不对。'
       }
 

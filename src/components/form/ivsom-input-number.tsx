@@ -1,103 +1,117 @@
+/**
+ * Developer    :   SongQian
+ * Time         :   2020-06-04
+ * eMail        :   onlylove1172559463@vip.qq.com
+ * Description  :   Number Input 组件
+ */
+
 import * as tsx from 'vue-tsx-support'
-import { Component, Prop, Emit, Watch,Ref} from 'vue-property-decorator'
+import { Component, Prop, ModelSync, Emit, InjectReactive } from 'vue-property-decorator'
 
 import 'vue-tsx-support/enable-check'
 
-interface Props{
-    max:Number,
-    min:Number,
-    step:Number,//每次计算的单位
-    value:Number,//绑定的值
-    precision:Number,
-    disabled:Boolean
+type Props = {
+    //最大值
+    Max: Number,
+    //最小值
+    Min: Number,
+    //跳跃值的步伐
+    Step: Number,
+    //是否禁用
+    Disabled: Boolean
+    //表单大小
+    Size: 'medium' | 'small' | 'mini'
+    //数值精度
+    Precision: Number
+    //表单属性
+    Name : String,
+    //控制输入框
+    Input : Boolean
 }
 
 @Component
-export default class iVsomInputNumber extends tsx.Component<Props>{
-    constructor(){
-        super()
-    }
-    @Prop({type:Number}) readonly max!:number;
-    @Prop({type:Number}) readonly min!:number;
-    @Prop({default:1,type:Number}) readonly step!:number;
-    @Prop({default:false,type:Boolean}) readonly disabled!:boolean;
-    @Prop({default:null}) readonly value!:string|number;
-    @Prop({}) readonly precision!:number;
-    @Ref('radio') protected readonly input !:  HTMLInputElement;
-
+export default class iVsomNumber extends tsx.Component<Props>{
     
-    protected reduce(e : MouseEvent){
-        if(!this.disabled){
-            let num = Number(this.value) - this.step;
-            this.emitVal(num);
-        }  
+    @Prop({ default : Infinity, type : Number}) readonly max!: number;
+    @Prop({ default : 0, type : Number}) readonly min!: number;
+    @Prop({ default : 1, type : Number}) readonly step!: number;
+    @Prop({ default : false, type : Boolean}) readonly disabled!: boolean;
+    @Prop({ default : '', type : String}) readonly name!: string;
+    @Prop({ default : 0, type : Number}) readonly precision!: number;
+    @Prop({ default : 'medium' }) readonly size !: 'medium' | 'small' | 'mini';
+    @Prop({ default : true, type : Boolean }) readonly input !: boolean;
+
+    @ModelSync('value', 'on-update', { default: 0 }) changeValue !: string;
+
+    @InjectReactive(Symbol.for('validate')) validate!: boolean;
+    @InjectReactive(Symbol.for('trigger')) trigger!: 'blur' | 'change';
+
+    @Emit()
+    protected onLess(e : MouseEvent) {
+        let me = this;
+        let val = me.changeValue;
+        val = me.precision ? Number.prototype.toFixed.apply((Number(val) - me.step), [me.precision]) : String(~~(Number(val) - me.step));
+        if(Number(val) < me.min) {
+            val = String(me.min);
+        } 
+        me.changeValue = val;
+        if(me.trigger === "change") {
+            me.$parent.$emit('on-validate');
+        }
+        me.$emit("on-change", e, val);
     }
 
-    protected add(e : MouseEvent){
-        if(!this.disabled){
-            let num = Number(this.value) + this.step; // 加上固定的长度
-            // 这里我们抽象出一个专门负责数值的变化的函数
-          this.emitVal(num);
+    @Emit()
+    protected onPlus(e : MouseEvent) {
+        let me = this;
+        let val = me.changeValue;
+        val = me.precision ? Number.prototype.toFixed.apply((Number(val) + me.step), [me.precision]) : String(~~(Number(val) + me.step));
+        if(Number(val) > Number.MAX_VALUE || Number(val) > me.max) {
+            val = String(me.max);
+        }
+        me.changeValue = val;
+        if(me.trigger === "change") {
+            me.$parent.$emit('on-validate');
+        }
+        me.$emit("on-change", e, val);
+    }
+
+    protected onChange(e : Event, value : string) {
+        let me = this;
+        value = value.endsWith(".") ? value + "0" : value;
+        if(!/^((-?[1-9]\d{0,}(\.\d+)?)|(-?0(\.\d+)[1-9]{0,})|(-?\d+))$/.test(value)) {
+            me.changeValue = String(me.min);
+        } else if(Number(value) < me.min) {
+            me.changeValue = String(me.min);
+        } else if(Number(value) > Number.MAX_VALUE || Number(value) > me.max) {
+            me.changeValue = String(me.max);
+        } else {
+            me.changeValue = isNaN(Number(value)) ? String(me.min) : me.precision ? Number.prototype.toFixed.apply(Number(value), [me.precision]) : String(~~Number(value));
+        }
+        me.$forceUpdate();
+        
+        if(me.trigger === "change") {
+            me.$parent.$emit('on-validate');
+        }
+        me.$emit("on-change", e, me.changeValue);
+    }
+
+    @Emit()
+    protected onBlur(e: FocusEvent) {
+        let me = this;
+        if(me.trigger === "blur") {
+            me.$parent.$emit('on-validate');
         }
     }
-    protected inputChange(e:InputEvent){
-          this.emitVal(Number(e.target));
-    }
-    protected emitVal(newVal:any){
-        let { max, min } = this;
-        // 不传参数的时候默认值就是undefined
-        // 对这个值的限制就是, max之内, min以上
-        if (max !== undefined && newVal > max) newVal = max;
-        if (min !== undefined && newVal < min) newVal = min;
-        // 这里兼容一下位数控制
-        let value = Number(newVal).toFixed(this.precision);
-        // console.log(this.precision)
-        // 这个oldVal下面会解释:point_down:
-        // if (value === this.oldVal) return;
-        // this.oldVal = ls;
-        // 发出两个事件, 一个负责改变value, 一个负责返回给用户
-        // 毕竟用户不可能监听input事件然后再把值附上去, 太麻烦
-        this.$emit("input", value);
-        this.$emit("on-change", value);
-        // 这一步很重要
-        // 下面会详细说
-        // this.input.value = value;
-    }
-    
-     protected created(){
-        this.$emit("input", Number(this.value).toFixed(this.precision))
-     }
-    
-    @Watch("value")
-      protected  modelValue() {
-        let newVal = this.value === undefined ? this.value : Number(this.value);
-        if (newVal !== undefined) {
-          if (isNaN(newVal)) {
-            return;
-          }
-        }
-        // if (this.precision !== undefined) {
-        //     newVal = this.toPrecision(newVal, this.precision);
-        //   }
-        this.emitVal(newVal);
-       }
-     get valueMax(){
-         return this.value == this.max
-     }
-     get valueMin(){
-        return this.value == this.min
-    }
 
-    protected render() : JSX.Element{
+    protected render() : JSX.Element {
+        let me = this;
+        let input = me.input ? (<div class="ivsom-input-number__warp"><input class="ivsom-input-number__inner" type="text" value={ me.changeValue } name={ me.name } onInput={ (e) => me.disabled ? void 0 : me.onChange(e, String(e.target.value)) } disabled={ me.disabled } onBlur={ me.onBlur } /></div>) : null;
         return (
-            <div class={ `ivsom-input-number  ${ this.disabled ? 'ivsom-inputNumber_disabled' : '' }` }>
-                <div class={ `ivsom-input-number__reduce ${this.valueMin?"limitMax":""} ${ this.disabled ? 'ivsom-inputNumber_disabled' : '' }` } disabled={this.disabled}  onClick={ (e) => { this.reduce(e as MouseEvent) } }>
-                    <i class="iconfont">&#xe6d4;</i>
-                </div>
-                <input ref="input"  type="number" disabled={this.disabled} value={this.value} onInput={ (e) => { this.inputChange(e as InputEvent) } } class={ `ivsom-input-number__input  ${ this.disabled ? 'ivsom-inputNumber_disabled' : '' }` }/>
-                <div class={ `ivsom-input-number__add ${this.valueMax?"limitMax":""} ${ this.disabled ? 'ivsom-inputNumber_disabled' : '' }` } disabled={this.disabled}  onClick={ (e) => { this.add(e as MouseEvent) } }>
-                <i class="iconfont" >&#xe6d3;</i>
-                </div>
+            <div class={{ "ivsom-input-number" : true, ['ivsom-input-number__' + me.size] : true, "ivsom-input-number__hide_input" : me.input === false, "ivsom-input-number__disabled" : me.disabled, "ivsom-input-number__hasError" : me.validate === false }}>
+                <div class="ivsom-input-number__less" onClick={ (e : MouseEvent) =>  me.disabled ? void 0 : me.onLess(e) }><i class="iconfont icon-gongnengtubiao-43" /></div>
+                { input }
+                <div class="ivsom-input-number__plus" onClick={ (e : MouseEvent) => me.disabled ? void 0 : me.onPlus(e) }><i class="iconfont icon-gongnengtubiao-42" /></div>
             </div>
         )
     }
