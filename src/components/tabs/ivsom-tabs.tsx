@@ -12,11 +12,11 @@
 
  type Props = {
     // Tabs 宽度
-    Width : number | string
+    Width : Number | String
     // Tabs 高度
-    Height : number | string
+    Height : Number | String
     // Tabs Pages 被选中的值
-    Value : string
+    Value : String
     // Tab Panel 是否响应式容器大小
     Flex : Boolean
     // Tab Label 是否自撑开宽度

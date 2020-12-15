@@ -49,8 +49,8 @@ export default class iVsomNumber extends tsx.Component<Props>{
     @Emit()
     protected onLess(e : MouseEvent) {
         let me = this;
-        let val = me.changeValue;
-        val = me.precision ? Number.prototype.toFixed.apply((Number(val) - me.step), [me.precision]) : String(~~(Number(val) - me.step));
+        let val, oldValue = me.changeValue;
+        val = me.precision ? Number.prototype.toFixed.apply((Number(oldValue) - me.step), [me.precision]) : String(~~(Number(oldValue) - me.step));
         if(Number(val) < me.min) {
             val = String(me.min);
         } 
@@ -58,14 +58,14 @@ export default class iVsomNumber extends tsx.Component<Props>{
         if(me.trigger === "change") {
             me.$parent.$emit('on-validate');
         }
-        me.$emit("on-change", e, val);
+        me.$emit("on-change", e, oldValue);
     }
 
     @Emit()
     protected onPlus(e : MouseEvent) {
         let me = this;
-        let val = me.changeValue;
-        val = me.precision ? Number.prototype.toFixed.apply((Number(val) + me.step), [me.precision]) : String(~~(Number(val) + me.step));
+        let val, oldValue = me.changeValue;
+        val = me.precision ? Number.prototype.toFixed.apply((Number(oldValue) + me.step), [me.precision]) : String(~~(Number(oldValue) + me.step));
         if(Number(val) > Number.MAX_VALUE || Number(val) > me.max) {
             val = String(me.max);
         }
@@ -73,7 +73,7 @@ export default class iVsomNumber extends tsx.Component<Props>{
         if(me.trigger === "change") {
             me.$parent.$emit('on-validate');
         }
-        me.$emit("on-change", e, val);
+        me.$emit("on-change", e, oldValue);
     }
 
     protected onChange(e : Event, value : string) {

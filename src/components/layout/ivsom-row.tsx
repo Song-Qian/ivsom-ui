@@ -12,11 +12,11 @@
 
  type Props = {
      //flex 布局下的垂直排列方式
-     align : 'top' | 'middle' | 'bottom'
+     Align : 'top' | 'middle' | 'bottom'
      //flex 布局下的水平排列方式
      Justify : 'start' | 'end' | 'center' | 'space-around' | 'space-between'
      //布局模式
-     flex : boolean
+     Flex : boolean
  }
 
  type ScopedSlots = {

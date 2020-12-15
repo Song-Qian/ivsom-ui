@@ -17,7 +17,7 @@ type Props = {
     //是否开启跳转路由， 支持vue-router
     AutoRoute: boolean,
     //路由跳转链接文档方式
-    Target: '_parent' | '_blank' | '_self' | '_top' | string,
+    Target: string,
     //分隔符样式
     Separator: string
 }
@@ -37,7 +37,7 @@ export default class iVsomBreadCrumbs extends tsx.Component<Props, Event> {
 
     @Prop({ default: false, type: Boolean }) readonly autoRoute !: boolean;
 
-    @Prop({ default: '_self' }) readonly target !: '_parent' | '_blank' | '_self' | '_top' | string;
+    @Prop({ default: '_self' }) readonly target !: string;
 
     @Prop({ default: 'icon-gongnengtubiao-29' }) readonly separator !: string;
 

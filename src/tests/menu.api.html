@@ -29,6 +29,17 @@
                     <ul>
                         <li>Menu 组件在使用之前，需要有相关的依赖库进行支持，如需阅读：<a href="./start.api.html" target="_blank" >快速开始</a></li>
                         <li>Menu 组件默认自适应外部容器高度与宽度。</li>
+                        <li style="font-weight: bold;">Menu Props :</li>
+                        <li>search: boolean 开启菜单筛选功能</li>
+                        <li>dark: boolean 开启黑色皮肤</li>
+                        <li>filter: function(children : any, text : string, deepNumber : number) boolean 自定义过滤条件函数</li>
+                        <li>searchText: string 筛选功能输入文本，支持sync双向绑定</li>
+                        <li>horizontal: boolean 是否横向菜单</li>
+                        <li>target: string 菜单跳转方式</li>
+                        <li style="font-weight: bold;">Menu Item Props :</li>
+                        <li>icon: string 菜单项图标</li>
+                        <li>disabled: boolean 禁用菜单项</li>
+                        <li>href: string 菜单点击跳转路径</li>
                     </ul>
                     <blockquote>
                         <div style="height: 400px; width: 400px; display: inline-block; vertical-align: top;">
@@ -155,6 +166,27 @@
         &lt;/template&gt;
     &lt;/i-vsom-menu-item&gt;
  &lt;/i-vsom-menu&gt;
+</code></pre>
+                    <pre><code class="language-js"
+>var app = new Vue({
+    el : '#app',
+    data : function() {
+        return {
+            searchText : ''
+        }
+    },
+    methods : {
+        handlerFilter : function(els, text, deepLevel) {
+            var me = this;
+            if(els.$children.length && !!me.searchText && els.$children.every(function(item) { return item.hasFilter; })  && text.indexOf(me.searchText) === -1) {
+                return true;
+            } else if (!els.$children.length && !!me.searchText && text.indexOf(me.searchText) === -1 ) {
+                return true;
+            }
+            return false;
+        }
+    }
+})
 </code></pre>
 
                     <h2 id="unicode-">横向菜单</h2>

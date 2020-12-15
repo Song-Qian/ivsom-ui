@@ -181,6 +181,62 @@
     }
 })
 </code></pre>
+                        <h2 id="unicode-">Input Number Event 事件</h2>
+                        <hr>
+                        <ul>
+                            <li>onChange: Arguments(e : Event, value : string) 值改变的事件。</li>
+                            <li>onLess: Arguments(e : MouseEvent) 值递减按钮点击事件</li>
+                            <li>onPlus: Arguments(e : MouseEvent) 值递增按钮点击事件</li>
+                        </ul>
+
+                        <p>值改变的事件</p>
+                        <blockquote>
+                            <i-vsom-number v-model="value8" :step="0.1" :precision="2" size="small" @on-change="onChange"></i-vsom-number>
+                        </blockquote>
+                        <pre><code class="language-html"
+>&lt;i-vsom-number v-model="value" :step="0.1" :precision="2" size="small" @on-change="onChange"&gt;&lt;/i-vsom-number&gt;
+</code></pre>
+                        <pre><code class="language-js"
+>var app = new Vue({
+    el : '#app',
+    data : function() {
+        return {
+            value : 0
+        }
+    },
+    methods : {
+        onChange : function(e, value) {
+            alert(value)
+        }
+    }
+})
+</code></pre>
+
+                        <p>值递减、递增按钮点击事件</p>
+                        <blockquote>
+                            <i-vsom-number v-model="value8" :step="0.1" :precision="2" size="small" @on-less="onLess" @on-plus="onPlus"></i-vsom-number>
+                        </blockquote>
+                        <pre><code class="language-html"
+>&lt;i-vsom-number v-model="value" :step="0.1" :precision="2" size="small" @on-less="onLess" @on-plus="onPlus"&gt;&lt;/i-vsom-number&gt;
+</code></pre>
+<pre><code class="language-js"
+>var app = new Vue({
+    el : '#app',
+    data : function() {
+        return {
+            value : 0
+        }
+    },
+    methods : {
+        onLess : function(e) {
+            alert("递减");
+        },
+        onPlus : function(e) {
+            alert("递增");
+        }
+    }
+})
+</code></pre>
                     </div>
                 </div>
             </div>

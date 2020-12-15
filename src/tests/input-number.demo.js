@@ -20,10 +20,22 @@
                 value5 : 0,
                 value6 : 0,
                 value7 : 0,
+                value8 : 0,
                 form : {
                     age : 1,
                     weight : 0.0
                 }
+            }
+        },
+        methods : {
+            onChange : function(e, value) {
+                alert(value)
+            },
+            onLess : function(e) {
+                alert("递减");
+            },
+            onPlus : function(e) {
+                alert("递增");
             }
         }
     })

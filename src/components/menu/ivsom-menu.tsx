@@ -22,7 +22,7 @@
     //是否横向菜单
     Horizontal : boolean
     //菜单跳转方式
-    Target : 'top' | 'blank' | 'parent' | 'self' | String
+    Target : String
  }
 
  type ScopedSlots = {
@@ -46,7 +46,7 @@
 
     @Prop({ default : false, type : Boolean}) readonly horizontal !: boolean;
 
-    @Provide(Symbol.for('target')) @Prop({ default : 'self'}) readonly target !: 'top' | 'blank' | 'parent' | 'self' | String;
+    @Provide(Symbol.for('target')) @Prop({ default : 'self'}) readonly target !: String;
 
     @Provide(Symbol.for('menu')) get rootMenu() {
         return this;
@@ -110,7 +110,7 @@
                     me.iVsomMenuItem = menuItemsScopedSlots || null;
                     me.iVsomMenuItemOther = null;
                     if(me.horizontal && (menuItemsScopedSlots?.length || 0) > maxItem) {
-                         me.iVsomMenuItem = [ ...menuItemsScopedSlots?.slice(0, maxItem)] || null;
+                         me.iVsomMenuItem = menuItemsScopedSlots ? [ ...menuItemsScopedSlots.slice(0, maxItem)] : null;
                          me.iVsomMenuItemOther = (
                             <i-vsom-menu-item class="ivsom-menu-item__other" icon="icon-gongnengtubiao-135" scopedSlots={{ default : () => void 0, submenu : () => menuItemsScopedSlots?.slice(maxItem, menuItemsScopedSlots.length) || null }}>
             
@@ -132,7 +132,7 @@
         me.iVsomMenuItem = menuItemsScopedSlots || null;
         me.iVsomMenuItemOther = null;
         if(me.horizontal && (menuItemsScopedSlots?.length || 0) > maxItem) {
-             me.iVsomMenuItem = [ ...menuItemsScopedSlots?.slice(0, maxItem)] || null;
+             me.iVsomMenuItem = menuItemsScopedSlots ? [ ...menuItemsScopedSlots.slice(0, maxItem)] : null;
              me.iVsomMenuItemOther = (
                 <i-vsom-menu-item class="ivsom-menu-item__other" icon="icon-gongnengtubiao-135" scopedSlots={{ default : () => void 0, submenu : () => menuItemsScopedSlots?.slice(maxItem, menuItemsScopedSlots.length) || null }}>
 

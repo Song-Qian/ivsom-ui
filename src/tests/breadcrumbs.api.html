@@ -29,6 +29,10 @@
                     <p>常规使用</p>
                     <ul>
                         <li>Breadcrumbs 组件在使用之前，需要有相关的依赖库进行支持，如需阅读：<a href="./start.api.html" target="_blank" >快速开始</a></li>
+                        <li>debris : Array<{ text: string, to: string }> 面包屑层级数据</li>
+                        <li>autoRoute : boolean 是否开启跳转路由， 支持vue-router</li>
+                        <li>target : string 路由跳转链接文档方式</li>
+                        <li>separator: string 分隔符样式</li>
                     </ul>
                     <blockquote>
                         <i-vsom-bread-crumbs :debris='items'></i-vsom-bread-crumbs>
