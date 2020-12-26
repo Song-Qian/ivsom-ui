@@ -1,0 +1,159 @@
+/**
+ * Developer    :   SongQian
+ * Time         :   2020-08-10
+ * eMail        :   songqian@wtoe.cn
+ * Description  :   button 按钮样式封装
+ */
+
+ @import "./ivsom-variable";
+ @import './ivsom-mixin';
+
+ .ivsom-upload {
+    position: relative;
+    display: inline-block;
+
+    > .ivsom-upload__files {
+        display: none;
+    }
+
+    > .ivsom-upload__warp {
+        width: 100%;
+        height: 100%;
+
+        &.ivsom-upload_drag {
+            cursor: pointer;
+            
+            &.ivsom-upload_empty {
+                padding: 10px;
+                display: block;
+                border-radius: 5px;
+                text-align: center;
+                position: relative;
+                border: 1px dashed $border-sub-color;
+                
+                &::before {
+                    content: '\e717';
+                    display: block;
+                    user-select: none;
+                    font-family: "iconfont" !important;
+                    font-size: 48px !important;
+                    @include font-sub-text;
+                }
+
+                &::after {
+                    content: attr(empty-text);
+                    display: block;
+                    user-select: none;
+                    font-size: 28px !important;
+                    font-weight: bold !important;
+                    @include font-sub-text;
+                }
+            }
+
+            > .ivsom-upload__annex:not(:empty),
+            > .ivsom-upload__list:not(:empty),
+            > .ivsom-upload__grid:not(:empty) {
+                border-radius: 5px;
+                padding: 5px;
+                box-sizing: border-box;
+                border: 1px dashed $border-sub-color;
+            }
+        }
+
+        > .ivsom-upload__annex {
+            display: block;
+            overflow: hidden;
+
+            > .ivsom-upload__annex_file {
+                width: 260px;
+                padding: 5px;
+                position: relative;
+                vertical-align: top;
+                display: inline-flex;
+                flex-flow: row nowrap;
+                box-sizing: border-box;
+                margin: 5px 10px 15px 0px;
+                background-color: #f4f6fc;
+
+                &.ivsom-upload__annex_error {
+                    > .ivsom-upload__annex_progress {
+                        background-color: rgba(247, 95, 60, .3);
+                    }
+                }
+                
+                > .ivsom-upload__annex_progress {
+                    height: 100%;
+                    top: 0px;
+                    left: 0px;
+                    z-index: 0;
+                    width: 0px;
+                    position: absolute;
+                    background-color: rgba(41, 153, 247, .3);
+                    transition: width ease-in-out .3s, background-color ease-in-out .5s;
+                }
+
+                > .ivsom-upload__annex_message {
+                    z-index: 0;
+                    left: 0px;
+                    width: 100%;
+                    bottom: -15px;
+                    position: absolute;
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    color: $danger-color !important;
+                    transition: all ease-in .5s;
+
+                    @include font-sub-text;
+                }
+
+                > i.iconfont {
+                    flex: 0 0 20px;
+                    z-index: 1;
+                    overflow: hidden;
+                    position: relative;
+                    align-self: center;
+                }
+    
+                > span.ivsom-upload__annex_name {
+                    flex: 1 1 auto;
+                    z-index: 1;
+                    position: relative;
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    align-self: center;
+                    
+                    @include font-text;
+                }
+                
+                > span.ivsom-upload__annex_size {
+                    flex: 0 0 80px;
+                    z-index: 1;
+                    position: relative;
+                    overflow: hidden;
+                    text-align: center;
+                    align-self: center;
+                    
+                    @include font-text;
+                }
+    
+                > span.ivsom-upload__annex_drop {
+                    flex: 0 0 40px;
+                    color: $primary-color !important;
+                    cursor: pointer;
+                    z-index: 1;
+                    overflow: hidden;
+                    position: relative;
+                    text-align: center;
+                    align-self: center;
+                    
+                    @include font-text;
+                }
+            }
+
+            
+        }
+
+    }
+ }

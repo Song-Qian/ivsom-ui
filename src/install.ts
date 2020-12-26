@@ -29,6 +29,7 @@ import iVsomStep from './components/step/ivsom-step'
 import iVsomSwitch from './components/form/ivsom-switch'
 import iVsomTabs from './components/tabs/ivsom-tabs'
 import iVsomTabsPanel from './components/tabs/ivsom-tabs-panel'
+import iVsomUpload from './components/upload/ivsom-upload'
 
 const components: Array<any> = [
     iVsomRow,
@@ -53,7 +54,8 @@ const components: Array<any> = [
     iVsomList,
     iVsomForm,
     iVsomFormValidater,
-    iVSomSelect
+    iVSomSelect,
+    iVsomUpload
 ]
 
 const install = (Vue: any) => {
