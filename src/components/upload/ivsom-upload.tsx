@@ -163,7 +163,7 @@
     @Emit()
     protected onFileRemove(e : MouseEvent | null, file: { id : string, name : string, size : number, complete: boolean, loaded : number, type: string, error: string}) {
         let me = this;
-        if(me.xhrUpload.isUploading(file.id)) {
+        if(me.xhrUpload.isFileUploading(file.id)) {
             me.xhrUpload.abortUploadFlie(file.id);
         }
         me.xhrUpload.removeUploadFile(file.id);
@@ -182,6 +182,13 @@
         me.xhrUpload.registerXhrUploadListener("xhrOnErrorCallback", me.onXhrOnError);
         me.xhrUpload.registerXhrUploadListener("xhrOnTimeoutCallback", me.onXhrOnTimeout);
         me.xhrUpload.setConfiguration({ url : me.url, headers : me.headers, params : me.params, name : "file", mimeType: me.mimeType, timeout : me.timeout, split: me.split, splitLimit : me.splitLimit });
+    }
+    
+    protected updated() {
+        let me = this;
+        if(me.xhrUpload.isAllUploaded()) {
+            me.xhrUpload.setConfiguration({ url : me.url, headers : me.headers, params : me.params, name : "file", mimeType: me.mimeType, timeout : me.timeout, split: me.split, splitLimit : me.splitLimit });
+        }
     }
 
     protected onXhrOnProgress(e : ProgressEvent, id : string, scale : number, file : File, xhrUpload : XhrUpload, data : any) : void {

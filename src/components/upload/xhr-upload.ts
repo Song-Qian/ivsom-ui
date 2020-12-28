@@ -27,13 +27,6 @@ export default class XhrUpload {
     private split : boolean = false;
     //分包大小 KB
     private splitLimit : number = 1;
-    
-    private Unit = {
-        GB : 2 << 29,
-        MB : 2 << 19,
-        KB : 2 << 9,
-        B : 1 << 0
-    }
 
     private xhrOnProgressCallback !: (e : ProgressEvent, id : string, scale : number, file : File, xhrUpload : XhrUpload, data : any) => void;
     private xhrOnCompleteCallback !: (e : Event, id : string, scale : number, file :File, xhrUpload : XhrUpload, data : any) => void;
@@ -159,10 +152,15 @@ export default class XhrUpload {
         }
     }
 
-    public isUploading(id: string) : boolean {
+    public isAllUploaded() : boolean {
+        let me = this;
+        return me.xhrPool.size === 0;
+    }
+
+    public isFileUploading(id: string) : boolean {
         let me = this;
         let xhr = me.xhrPool.get(id);
-        return xhr?.readyState === 3;
+        return Boolean(xhr);
     }
 
     public abortUploadFlie(id: string) : void {
@@ -213,11 +211,11 @@ export default class XhrUpload {
         let me = this;
         let total = file.size;
         let detritu = 0;
-        let limit = me.splitLimit * me.Unit.KB;
+        let limit = me.splitLimit * (2 << 9);
         let maxDetritus = Math.ceil(total / limit);
         let bytes = await file.arrayBuffer();
         let chunkMd5 = new SparkMD5.ArrayBuffer();
-        let md5 = chunkMd5.append(bytes.slice(0, Math.min(2 * me.Unit.MB, bytes.byteLength))).end();
+        let md5 = chunkMd5.append(bytes.slice(0, Math.min(2 * (2 << 19), bytes.byteLength))).end();
 
         let loopUploadDetritu = () => {
             let xhr = new XMLHttpRequest();
@@ -229,14 +227,13 @@ export default class XhrUpload {
                     let contentType = xhr.getResponseHeader("Content-Type");
                     let data = contentType === "application/json" ? JSON.parse(xhr.response) : xhr.response;
                     let chunkDetritu = data["ivsom-upload-detritu"] && data["detritu"] || 0;
-                    detritu = detritu < chunkDetritu ? Number(chunkDetritu) - 1 : detritu; 
-                    let scale = ((detritu * limit / bytes.byteLength) * 100).toFixed(2);
-                    if(detritu > maxDetritus) {
+                    let scale = ((Math.min(detritu * limit, bytes.byteLength) / bytes.byteLength) * 100).toFixed(2);
+                    if(detritu + 1 > maxDetritus) {
                         me.xhrOnCompleteCallback && me.xhrOnCompleteCallback(e, id, Number(scale), file, me, data);
                         return;
                     }
                     if(isSuccess) {
-                        detritu += 1;
+                        detritu = detritu < chunkDetritu ? Number(chunkDetritu) - 1 : detritu + 1;
                         loopUploadDetritu();
                     } else if (xhr.status === 0 && xhr.timeout === me.timeout) {
                         me.xhrOnTimeoutCallback && me.xhrOnTimeoutCallback(e, id, Number(scale), file, me, { ok : false, message : '服务器响应超时!' });
@@ -267,14 +264,14 @@ export default class XhrUpload {
             xhr.upload.onload = me.xhrUploadLoad.bind({ xhr, id, file, detritu, limit, bytes, xhrUpload : me });
             xhr.upload.onloadend = me.xhrUploadEnd.bind({ xhr, id, file, detritu, limit, bytes, xhrUpload : me });
             xhr.upload.ontimeout = me.xhrUploadTimeout.bind({ xhr, id, file, detritu, limit, bytes, xhrUpload : me });
-            xhr.send(me.createFormData(fileBlob, me.params))
+            xhr.send(me.createFormData(new File([fileBlob], file.name, { type: file.type }), me.params))
         }
 
         loopUploadDetritu();
 
     }
 
-    private createFormData(file : File | Blob, params : { [key:string] : any }) : FormData {
+    private createFormData(file : File, params : { [key:string] : any }) : FormData {
         let me = this;
         let formData = new FormData();
         formData.append(me.name, file);
@@ -324,7 +321,7 @@ export default class XhrUpload {
 
         if(xhrUpload.split) {
             let { detritu, limit, bytes } = this as any;
-            let scale = (((detritu * limit + e.loaded) / bytes.byteLength) * 100).toFixed(2);
+            let scale = ((Math.min(detritu * limit + e.loaded, bytes.byteLength) / bytes.byteLength) * 100).toFixed(2);
             xhrUpload.xhrOnProgressCallback && xhrUpload.xhrOnProgressCallback(e, id, Number(scale), file, xhrUpload, xhr.response);
         }
     }
@@ -340,7 +337,7 @@ export default class XhrUpload {
 
         if(xhrUpload.split && e.lengthComputable) {
             let { detritu, limit, bytes } = this as any;
-            let scale = (((detritu * limit + e.loaded) / bytes.byteLength) * 100).toFixed(2);
+            let scale = ((Math.min(detritu * limit + e.loaded, bytes.byteLength) / bytes.byteLength) * 100).toFixed(2);
             xhrUpload.xhrOnAbortCallback && xhrUpload.xhrOnAbortCallback(e, id, Number(scale), file, xhrUpload, { ok : false, message : "上传文件被中止" });
         }
 
@@ -358,7 +355,7 @@ export default class XhrUpload {
 
         if(xhrUpload.split && e.lengthComputable) {
             let { detritu, limit, bytes } = this as any;
-            let scale = (((detritu * limit + e.loaded) / bytes.byteLength) * 100).toFixed(2);
+            let scale = ((Math.min(detritu * limit + e.loaded, bytes.byteLength) / bytes.byteLength) * 100).toFixed(2);
             if(detritu === 0) {
                 xhrUpload.xhrOnLoadStartCallback && xhrUpload.xhrOnLoadStartCallback(e, id, Number(scale), file, xhrUpload, xhr.response);
             }
@@ -376,7 +373,7 @@ export default class XhrUpload {
 
         if(xhrUpload.split && e.lengthComputable) {
             let { detritu, limit, bytes } = this as any;
-            let scale = (((detritu * limit + e.loaded) / bytes.byteLength) * 100).toFixed(2);
+            let scale = ((Math.min(detritu * limit + e.loaded, bytes.byteLength) / bytes.byteLength) * 100).toFixed(2);
             xhrUpload.xhrOnLoadCallback && xhrUpload.xhrOnLoadCallback(e, id, Number(scale), file, xhrUpload, xhr.response);
         }
     }
@@ -392,7 +389,7 @@ export default class XhrUpload {
 
         if(xhrUpload.split && e.lengthComputable) {
             let { detritu, limit, bytes} = this as any;
-            let scale = (((detritu * limit + e.loaded) / bytes.byteLength) * 100).toFixed(2);
+            let scale = ((Math.min(detritu * limit + e.loaded, bytes.byteLength) / bytes.byteLength) * 100).toFixed(2);
             if(detritu * limit >= bytes.byteLength) {
                 xhrUpload.xhrOnLoadEndCallback && xhrUpload.xhrOnLoadEndCallback(e, id, Number(scale), file, xhrUpload, xhr.response);
             }
@@ -410,7 +407,7 @@ export default class XhrUpload {
 
         if(xhrUpload.split && e.lengthComputable) {
             let { detritu, limit, bytes } = this as any;
-            let scale = (((detritu * limit + e.loaded) / bytes.byteLength) * 100).toFixed(2);
+            let scale = ((Math.min(detritu * limit + e.loaded, bytes.byteLength) / bytes.byteLength) * 100).toFixed(2);
             xhrUpload.xhrOnTimeoutCallback && xhrUpload.xhrOnTimeoutCallback(e, id, Number(scale), file, xhrUpload, { ok : false, message : '服务器响应超时!' });
         }
     }
@@ -425,7 +422,7 @@ export default class XhrUpload {
 
         if(xhrUpload.split && e.lengthComputable) {
             let { detritu, limit, bytes } = this as any;
-            let scale = (((detritu * limit + e.loaded) / bytes.byteLength) * 100).toFixed(2);
+            let scale = ((Math.min(detritu * limit + e.loaded, bytes.byteLength) / bytes.byteLength) * 100).toFixed(2);
             xhrUpload.xhrOnErrorCallback && xhrUpload.xhrOnErrorCallback(e, id, file, scale, xhrUpload, { ok : false, message : '服务器出现网络异常!' });
         }
     }
