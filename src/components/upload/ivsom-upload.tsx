@@ -344,14 +344,21 @@
         let me = this;
         let annexContainer = 
             me.view === "Annex" ? (
-                <div class="ivsom-upload__annex">
+                <div 
+                    class={{ "ivsom-upload__annex" :true, "ivsom-upload_drag" : me.drag, "ivsom-upload_empty" : me.uploadState.size === 0 && me.view === "Annex" }} 
+                    empty-text={me.uploadState.size === 0 ? me.emptyText :  ''}
+                    onClick={ tsx.modifiers.stop((e : MouseEvent) => me.uploadState.size === 0 && me.drag ? tsx.modifiers.stop(me.onFileSelect) : void 0) }
+                    onDragenter={ tsx.modifiers.stop.prevent((e : DragEvent) => me.drag ? me.onEnterDragArea(e) : void 0) } 
+                    onDragover={ tsx.modifiers.stop.prevent((e : DragEvent) => me.drag ? me.onDragFileWait(e) : void 0) } 
+                    onDragleave={ tsx.modifiers.stop.prevent((e : DragEvent) => me.drag ? me.onLeaveDragArea(e) : void 0) } 
+                    onDrop={ tsx.modifiers.stop.prevent((e : DragEvent) => me.drag ? me.onDragFileDone(e) : void 0) }>
                     {
                         [...me.uploadState.values()].map((it) => {
                             return (
                                 <div class={{ "ivsom-upload__annex_file" : true, "ivsom-upload__annex_error" : it.error !== "" }} key={it.id}>
                                     <div class="ivsom-upload__annex_progress" style={ { width: [it.loaded, '%'].join('') } }></div>
                                     <i class="iconfont icon-gongnengtubiao-117" ></i>
-                                    <span class="ivsom-upload__annex_name">{ it.name }</span>
+                                    <span class="ivsom-upload__annex_name" title={ it.name }>{ it.name }</span>
                                     <span class="ivsom-upload__annex_size">{ me.formatSize(it.size) }</span>
                                     <span class="ivsom-upload__annex_drop" onClick={ tsx.modifiers.stop((e : MouseEvent) => me.onFileRemove(e, it))  }>删除</span>
                                     <div class="ivsom-upload__annex_message" style={{ "display" : it.error ? "block" : "none" }}>{ it.error }</div>
@@ -359,22 +366,72 @@
                             )
                         })
                     }
-                </div>) : (
-                <div class={{ "ivsom-upload__list" : me.view === "List", "ivsom-upload__grid" : me.view === "Grid"}}>
-                    
+                </div>) : me.view === "List" ? (
+                <div class="ivsom-upload__list">
+                    <div class="ivsom-upload__list_header">
+                        <div class="ivsom-upload__columns_name">文件名</div>
+                        <div class="ivsom-upload__columns_status">状态</div>
+                        <div class="ivsom-upload__columns_size">大小</div>
+                        <div class="ivsom-upload__columns_action">操作</div>
+                    </div>
+                    <div 
+                        class={{ "ivsom-upload__list_body" : true, "ivsom-upload_drag" : me.drag, "ivsom-upload_empty" : me.uploadState.size === 0 }} 
+                        empty-text={me.uploadState.size === 0 ? me.emptyText :  ''} 
+                        onClick={ tsx.modifiers.stop((e : MouseEvent) => me.uploadState.size === 0 && me.drag ? tsx.modifiers.stop(me.onFileSelect) : void 0) }
+                        onDragenter={ tsx.modifiers.stop.prevent((e : DragEvent) => me.drag ? me.onEnterDragArea(e) : void 0) } 
+                        onDragover={ tsx.modifiers.stop.prevent((e : DragEvent) => me.drag ? me.onDragFileWait(e) : void 0) } 
+                        onDragleave={ tsx.modifiers.stop.prevent((e : DragEvent) => me.drag ? me.onLeaveDragArea(e) : void 0) } 
+                        onDrop={ tsx.modifiers.stop.prevent((e : DragEvent) => me.drag ? me.onDragFileDone(e) : void 0) }>
+                        {
+                            [...me.uploadState.values()].map((it) => {
+                                return (
+                                    <div class={{"ivsom-upload__list_file" : true, "ivsom-upload__list_error" :  it.error !== "" }} key={it.id}>
+                                        <div class="ivsom-upload__list_progress" style={{ width: [it.loaded, '%'].join('') }}></div>
+                                        <div class="ivsom-upload__columns_name" title={ it.name }>{ it.name }</div>
+                                        <div class="ivsom-upload__columns_status">{ it.error ? it.error : it.complete ? '上传完成' : it.loaded > 0 ? '上传中,请等待...' : '等待上传'  }</div>
+                                        <div class="ivsom-upload__columns_size">{ me.formatSize(it.size) }</div>
+                                        <div class="ivsom-upload__columns_action">
+                                            <span onClick={ tsx.modifiers.stop((e : MouseEvent) => me.onFileRemove(e, it)) }>删除</span>
+                                        </div>
+                                    </div>
+                                )
+                            })
+                        }
+                    </div>
                 </div>
-            );
-        let container = !me.drag ? <i-vsom-button icon={ me.icon } type="primary" onClick={ tsx.modifiers.stop(me.onFileSelect) }>{ me.text }</i-vsom-button> : null;
-        return (
-            <div class="ivsom-upload" style={{ width: me.getContainer.width, height: me.getContainer.height }}>
-                <input class="ivsom-upload__files" type="file" ref="files" accept={ me.accept } multiple={ me.multiple } onChange={me.onFileSelected}></input>
-                <div class={{ "ivsom-upload__warp" : true, "ivsom-upload_drag" : me.drag, "ivsom-upload_empty" : me.uploadState.size === 0 }}
+            ) : me.view === "Grid" ? (
+                <div
+                    class={{ "ivsom-upload__grid" : true, "ivsom-upload_drag" : me.drag, "ivsom-upload_empty" : me.uploadState.size === 0 }} 
                     empty-text={me.uploadState.size === 0 ? me.emptyText :  ''} 
-                    onClick={ tsx.modifiers.stop(me.onFileSelect) }
+                    onClick={ tsx.modifiers.stop((e : MouseEvent) => me.uploadState.size === 0 && me.drag ? tsx.modifiers.stop(me.onFileSelect) : void 0) }
                     onDragenter={ tsx.modifiers.stop.prevent((e : DragEvent) => me.drag ? me.onEnterDragArea(e) : void 0) } 
                     onDragover={ tsx.modifiers.stop.prevent((e : DragEvent) => me.drag ? me.onDragFileWait(e) : void 0) } 
                     onDragleave={ tsx.modifiers.stop.prevent((e : DragEvent) => me.drag ? me.onLeaveDragArea(e) : void 0) } 
                     onDrop={ tsx.modifiers.stop.prevent((e : DragEvent) => me.drag ? me.onDragFileDone(e) : void 0) }>
+                    {
+                        [...me.uploadState.values()].map((it) => {
+                            return (
+                                <div class={{"ivsom-upload__grid_file" : true, "ivsom-upload__list_error" :  it.error !== "" }} key={it.id}>
+                                    <div class="ivsom-upload__grid_item">
+                                        <div class="ivsom-upload__drop" onClick={ tsx.modifiers.stop((e : MouseEvent) => me.onFileRemove(e, it)) }><i class="iconfont icon-gongnengtubiao-41"></i></div>
+                                        <div class={{ "ivsom-upload__content" :true, ["ivsom-upload__mime_" + (it.name.substr(it.name.lastIndexOf(".") + 1))] : true }} file-size={me.formatSize(it.size)}></div>
+                                    </div>
+                                    <div class="ivsom-upload__columns_name" title={ it.name }>
+                                        <div class="ivsom-upload__grid_progress" style={{ width: [it.loaded, '%'].join('') }}></div>
+                                        { it.name }
+                                    </div>
+                                    <div class="ivsom-upload__columns_status" title={ it.error ? it.error : it.complete ? '上传完成' : it.loaded > 0 ? '上传中,请等待...' : '等待上传' }>{ it.error ? it.error : it.complete ? '上传完成' : it.loaded > 0 ? '上传中,请等待...' : '等待上传'  }</div>
+                                </div>
+                            )
+                        })
+                    }
+                </div>
+            ) : null;
+        let container = !me.drag ? <i-vsom-button icon={ me.icon } type="primary" onClick={ tsx.modifiers.stop(me.onFileSelect) }>{ me.text }</i-vsom-button> : null;
+        return (
+            <div class="ivsom-upload" style={{ width: me.getContainer.width, height: me.getContainer.height }}>
+                <input class="ivsom-upload__files" type="file" ref="files" accept={ me.accept } multiple={ me.multiple } onChange={me.onFileSelected}></input>
+                <div class="ivsom-upload__warp">
                     { container }
                     { annexContainer }
                 </div>

@@ -111,7 +111,7 @@ const MimeMap = {
     "audio/3gpp" : [".3gp"],
     "audio/3gpp2" : [".3g2"],
     "audio/basic" : [".au", ".snd"],
-    "adio/mid" : [".mid", ".rmi"],
+    "aduio/mid" : [".mid", ".rmi"],
     "audio/midi" : [".mid"],
     "video/ogg" : [".ogv"],
     "audio/mpeg" : [".mp3"],
