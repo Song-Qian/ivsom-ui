@@ -171,8 +171,30 @@
         me.$forceUpdate();
     }
 
+    public Start() {
+        let me = this;
+        me.xhrUpload.FileUploadStart();
+    }
+
+    public AbortAll() {
+        let me = this;
+        for (let [key, file] of me.uploadState.entries()) {
+            me.xhrUpload.abortUploadFlie(key);
+        }
+    }
+
+    public Abort(fileId: string) {
+        let me = this;
+        if(me.uploadState.has(fileId)) {
+            me.xhrUpload.abortUploadFlie(fileId);
+        }
+    }
+
     protected mounted() {
         let me = this;
+        if(!me.hasSupportFileApi()) {
+            throw new Error("当前浏览器不支持H5 File Api!")
+        }
         me.xhrUpload.registerXhrUploadListener("xhrOnProgressCallback", me.onXhrOnProgress);
         me.xhrUpload.registerXhrUploadListener("xhrOnCompleteCallback", me.onXhrOnComplete);
         me.xhrUpload.registerXhrUploadListener("xhrOnAbortCallback", me.onXhrOnAbort);
@@ -186,6 +208,11 @@
     
     protected updated() {
         let me = this;
+        
+        if(!me.hasSupportFileApi()) {
+            throw new Error("当前浏览器不支持H5 File Api!")
+        }
+
         if(me.xhrUpload.isAllUploaded()) {
             me.xhrUpload.setConfiguration({ url : me.url, headers : me.headers, params : me.params, name : "file", mimeType: me.mimeType, timeout : me.timeout, split: me.split, splitLimit : me.splitLimit });
         }
@@ -200,7 +227,7 @@
             me.uploadState.set(id, s);
             me.$forceUpdate();
         }
-        me.$emit("on-upload-progress", file, data)
+        me.$emit("on-upload-progress", id, file, data)
     }
     
     protected onXhrOnComplete(e : Event, id : string, scale : number, file :File, xhrUpload : XhrUpload, data : any) : void {
@@ -209,7 +236,7 @@
             me.onFileRemove(null, { id, name : file.name, size : file.size, type : file.type, complete: true, loaded: 100, error: '' });
         }
         me.$forceUpdate();
-        me.$emit("on-upload-complete", file, data)
+        me.$emit("on-upload-complete", id, file, data)
     }
     
     protected onXhrOnAbort(e : ProgressEvent, id : string, scale : number, file :File, xhrUpload : XhrUpload, data : any) : void {
@@ -222,7 +249,7 @@
             me.uploadState.set(id, state);
         }
         me.$forceUpdate();
-        me.$emit("on-upload-abort", file, data)
+        me.$emit("on-upload-abort", id, file, data)
     }
     
     protected onXhrOnLoadStart(e : ProgressEvent, id : string, scale : number, file :File, xhrUpload : XhrUpload, data : any) : void {
@@ -234,12 +261,12 @@
             me.uploadState.set(id, state);
         }
         me.$forceUpdate();
-        me.$emit("on-upload-beforeLoad", file, data)
+        me.$emit("on-upload-beforeLoad", id, file, data)
     }
     
     protected onXhrOnLoad(e : ProgressEvent, id : string, scale : number, file :File, xhrUpload : XhrUpload, data : any) : void {
         let me = this;
-        me.$emit("on-upload-load", file, data)
+        me.$emit("on-upload-load", id, file, data)
     }
     
     protected onXhrOnLoadEnd(e : ProgressEvent, id : string, scale : number, file :File, xhrUpload : XhrUpload, data : any) : void {
@@ -251,7 +278,7 @@
             me.uploadState.set(id, state);
         }
         me.$forceUpdate();
-        me.$emit("on-upload-afterLoad", file, data)
+        me.$emit("on-upload-afterLoad", id, file, data)
     }
     
     protected onXhrOnError(e : ProgressEvent | Event, id : string, scale : number, file :File, xhrUpload : XhrUpload, data : any) : void {
@@ -267,7 +294,7 @@
             me.onFileRemove(null, { id, name : file.name, size : file.size, type : file.type, complete: data.ok, loaded: 0, error: data.message });
         }
         me.$forceUpdate();
-        me.$emit("on-upload-error", file, data)
+        me.$emit("on-upload-error", id, file, data)
     }
     
     protected onXhrOnTimeout(e : ProgressEvent | Event, id : string, scale : number, file :File, xhrUpload : XhrUpload, data : any) : void {
@@ -279,7 +306,7 @@
             me.uploadState.set(id, state);
             me.$forceUpdate();
         }
-        me.$emit("on-upload-timeout", file, data)
+        me.$emit("on-upload-timeout", id, file, data)
     }
 
     //拖拽文件进入目标区域时
