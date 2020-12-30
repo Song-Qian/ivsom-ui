@@ -32,11 +32,12 @@
                     <blockquote>
                         <i-vsom-upload width="100%" 
                             url="http://localhost:8080/upload/detritu" 
-                            accept="image/*,application/zip,application/x-zip-compressed" 
+                            accept="image/*,application/zip,application/x-zip-compressed,text/plain" 
                             empty-text="请拖拽上传文件到此区域"
                             view="Grid"
+                            height="400px"
                             :split-limit="512"
-                            split auto drag multiple>
+                            split drag multiple>
                         </i-vsom-upload>
                     </blockquote>
                     <!-- <pre><code class="language-html"

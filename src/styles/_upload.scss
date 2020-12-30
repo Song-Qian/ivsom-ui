@@ -19,6 +19,7 @@
     > .ivsom-upload__warp {
         width: 100%;
         height: 100%;
+        overflow: hidden;
 
         .ivsom-upload_drag {
             
@@ -30,6 +31,7 @@
                 padding: 10px;
                 border: 1px dashed $border-sub-color;
                 text-align: center;
+                box-sizing: border-box;
                 
                 &::before {
                     content: '\e717';
@@ -148,6 +150,20 @@
 
         > .ivsom-upload__list {
             height: 100%;
+            position: relative;
+            overflow-y: auto;
+            overflow-x: hidden;
+    
+            &::-webkit-scrollbar {
+                width: 10px;
+                background-color: #fff;
+            }
+    
+            &::-webkit-scrollbar-thumb {
+                border-radius: 5px;
+                background-color: #ddd;
+            }
+
             > .ivsom-upload__list_header {
                 width: 100%;
                 height: 40px;
@@ -155,6 +171,9 @@
                 display: flex;
                 flex-flow: row nowrap;
                 overflow: hidden;
+                position: sticky;
+                top: 0px;
+                z-index: 99;
                 border-top: 1px dashed $border-sub-color;
                 border-left: 1px dashed $border-sub-color;
                 border-right: 1px dashed $border-sub-color;
@@ -200,23 +219,12 @@
 
             > .ivsom-upload__list_body {
                 width: 100%;
-                height: calc(100% - 40px);
+                min-height: calc(100% - 40px);
                 border-top: none;
                 box-sizing: border-box;
                 border-left: 1px dashed $border-sub-color;
                 border-right: 1px dashed $border-sub-color;
                 border-bottom: 1px dashed $border-sub-color;
-                overflow-y: auto;
-
-                &::-webkit-scrollbar {
-                    width: 10px;
-                    background-color: #fff;
-                }
-
-                &::-webkit-scrollbar-thumb {
-                    border-radius: 5px;
-                    background-color: #ddd;
-                }
 
                 > .ivsom-upload__list_file {
                     display: flex;
@@ -310,320 +318,344 @@
         > .ivsom-upload__grid {
             width: 100%;
             height: 100%;
-            display: grid;
-            grid-gap: 5px 5px;
-            grid-auto-flow: row dense;
-            justify-self: center;
-            grid-template-rows: repeat(auto-fill, 160px);
-            grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+            box-sizing: border-box;
+            border: 1px dashed $border-sub-color;
+            overflow-x: hidden;
+            overflow-y: auto;
+    
+            &::-webkit-scrollbar {
+                width: 10px;
+                background-color: #fff;
+            }
+    
+            &::-webkit-scrollbar-thumb {
+                border-radius: 5px;
+                background-color: #ddd;
+            }
 
-            > .ivsom-upload__grid_file {
+            > .ivsom-upload__warp {
                 width: 100%;
                 height: 100%;
-                position: relative;
+                display: grid;
+                grid-gap: 5px 5px;
+                grid-auto-flow: row dense;
+                justify-self: center;
+                grid-template-rows: repeat(auto-fill, 160px);
+                grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
 
-                &.ivsom-upload__list_error > .ivsom-upload__columns_name {
-                    > .ivsom-upload__grid_progress {
-                        background-color: rgba(247, 95, 60, .3);
-                    }
+                &:empty {
+                    display: none;
                 }
 
-                > .ivsom-upload__grid_item {
-                    width : 100px;
-                    height: 100px;
-                    padding: 5px;
-                    box-sizing: border-box;
-
-                    > .ivsom-upload__drop {
-                        top: 0px;
-                        right: 0px;
-                        z-index: 99;
-                        width: 20px;
-                        height: 20px;
-                        line-height: 20px;
-                        cursor: pointer;
-                        background-color: #fff;
-                        border-radius: 10px;
-                        box-sizing: border-box;
-                        position: absolute;
-                    }
-
-                    > .ivsom-upload__content {
-                        width: 100%;
-                        height: 100%;
-                        background-color: #333;
-
-                        &::before {
-                            content: '\e6fd';
-                            font-family: "iconfont" !important;
-                            font-size: 46px;
-                            color: #fff;
-                            display:block;
-                            text-align: center;
-                        }
-
-                        &::after {
-                            content: attr(file-size);
-                            font-size: 14px;
-                            color: #fff;
-                            display:block;
-                            text-align: center;
-                            user-select: none;
-
-                            @include font-sub-text;
-                        }
-
-                        &.ivsom-upload__mime_zip {
-                            &::before {
-                                content: '\e6d2';
-                                font-size: 27px;
-                                padding: 10px 0px;
-                                box-sizing: border-box;
-                                font-family: "iconfont-resource" !important;
-                            }
-                        }
-
-                        &.ivsom-upload__mime_rar {
-                            &::before {
-                                content: '\e6d3';
-                                font-size: 27px;
-                                padding: 10px 0px;
-                                box-sizing: border-box;
-                                font-family: "iconfont-resource" !important;
-                            }
-                        }
-
-                        &.ivsom-upload__mime_7z {
-                            &::before {
-                                content: '\e6d4';
-                                font-size: 27px;
-                                padding: 10px 0px;
-                                box-sizing: border-box;
-                                font-family: "iconfont-resource" !important;
-                            }
-                        }
-
-                        &.ivsom-upload__mime_iso {
-                            &::before {
-                                content: '\e6d5';
-                                font-size: 27px;
-                                padding: 10px 0px;
-                                box-sizing: border-box;
-                                font-family: "iconfont-resource" !important;
-                            }
-                        }
-
-                        &.ivsom-upload__mime_tar {
-                            &::before {
-                                content: '\e6d6';
-                                font-size: 27px;
-                                padding: 10px 0px;
-                                box-sizing: border-box;
-                                font-family: "iconfont-resource" !important;
-                            }
-                        }
-                        
-                        &.ivsom-upload__mime_txt {
-                            &::before {
-                                content: '\e718';
-                                font-size: 27px;
-                                padding: 10px 0px;
-                                box-sizing: border-box;
-                                font-family: "iconfont-resource" !important;
-                            }
-                        }
-                        
-                        &.ivsom-upload__mime_ogv,
-                        &.ivsom-upload__mime_3gp,
-                        &.ivsom-upload__mime_3g2,
-                        &.ivsom-upload__mime_mp2,
-                        &.ivsom-upload__mime_mpa,
-                        &.ivsom-upload__mime_mpe,
-                        &.ivsom-upload__mime_mpeg,
-                        &.ivsom-upload__mime_mpg,
-                        &.ivsom-upload__mime_mpv2,
-                        &.ivsom-upload__mime_mov,
-                        &.ivsom-upload__mime_qt,
-                        &.ivsom-upload__mime_lsf,
-                        &.ivsom-upload__mime_lsx,
-                        &.ivsom-upload__mime_asf,
-                        &.ivsom-upload__mime_asr,
-                        &.ivsom-upload__mime_asx,
-                        &.ivsom-upload__mime_avi,
-                        &.ivsom-upload__mime_movie,
-                        &.ivsom-upload__mime_webm {
-                            &::before {
-                                content: '\e789';
-                                font-size: 27px;
-                                padding: 10px 0px;
-                                box-sizing: border-box;
-                                font-family: "iconfont-resource" !important;
-                            }
-                        }
-                        
-                        &.ivsom-upload__mime_xla,
-                        &.ivsom-upload__mime_xlc,
-                        &.ivsom-upload__mime_xlm,
-                        &.ivsom-upload__mime_xls,
-                        &.ivsom-upload__mime_xlt,
-                        &.ivsom-upload__mime_xlw,
-                        &.ivsom-upload__mime_csv {
-                            &::before {
-                                content: '\e998';
-                                font-size: 27px;
-                                padding: 10px 0px;
-                                box-sizing: border-box;
-                                font-family: "iconfont-resource" !important;
-                            }
-                        }
-
-                        &.ivsom-upload__mime_doc,
-                        &.ivsom-upload__mime_dot,
-                        &.ivsom-upload__mime_docs {
-                            &::before {
-                                content: '\e99a';
-                                font-size: 27px;
-                                padding: 10px 0px;
-                                box-sizing: border-box;
-                                font-family: "iconfont-resource" !important;
-                            }
-                        }
-
-                        &.ivsom-upload__mime_js {
-                            &::before {
-                                content: '\e60e';
-                                font-size: 27px;
-                                padding: 10px 0px;
-                                box-sizing: border-box;
-                                font-family: "iconfont-resource" !important;
-                            }
-                        }
-
-                        &.ivsom-upload__mime_css {
-                            &::before {
-                                content: '\e62a';
-                                font-size: 27px;
-                                padding: 10px 0px;
-                                box-sizing: border-box;
-                                font-family: "iconfont-resource" !important;
-                            }
-                        }
-
-                        &.ivsom-upload__mime_html,
-                        &.ivsom-upload__mime_htm {
-                            &::before {
-                                content: '\e629';
-                                font-size: 27px;
-                                padding: 10px 0px;
-                                box-sizing: border-box;
-                                font-family: "iconfont-resource" !important;
-                            }
-                        }
-                        
-                        &.ivsom-upload__mime_sh,
-                        &.ivsom-upload__mime_bat,
-                        &.ivsom-upload__mime_php,
-                        &.ivsom-upload__mime_jsp,
-                        &.ivsom-upload__mime_asp,
-                        &.ivsom-upload__mime_xml {
-                            &::before {
-                                content: '\e61d';
-                                font-size: 27px;
-                                padding: 10px 0px;
-                                box-sizing: border-box;
-                                font-family: "iconfont-resource" !important;
-                            }
-                        }
-                        
-                        &.ivsom-upload__mime_png,
-                        &.ivsom-upload__mime_bmp,
-                        &.ivsom-upload__mime_cod,
-                        &.ivsom-upload__mime_gif,
-                        &.ivsom-upload__mime_ief,
-                        &.ivsom-upload__mime_jpe,
-                        &.ivsom-upload__mime_jpeg,
-                        &.ivsom-upload__mime_jpg,
-                        &.ivsom-upload__mime_jfif,
-                        &.ivsom-upload__mime_svg,
-                        &.ivsom-upload__mime_tif,
-                        &.ivsom-upload__mime_tiff,
-                        &.ivsom-upload__mime_ico,
-                        &.ivsom-upload__mime_webp,
-                        &.ivsom-upload__mime_ras,
-                        &.ivsom-upload__mime_cmx,
-                        &.ivsom-upload__mime_icon,
-                        &.ivsom-upload__mime_pnm,
-                        &.ivsom-upload__mime_pbm,
-                        &.ivsom-upload__mime_pgm,
-                        &.ivsom-upload__mime_ppm,
-                        &.ivsom-upload__mime_rgb,
-                        &.ivsom-upload__mime_xbm,
-                        &.ivsom-upload__mime_xpm,
-                        &.ivsom-upload__mime_xwd {
-                            &::before {
-                                content: '\e754';
-                            }
-                        }
-
-                        
-                        &.ivsom-upload__mime_aac,
-                        &.ivsom-upload__mime_au,
-                        &.ivsom-upload__mime_snd,
-                        &.ivsom-upload__mime_mid,
-                        &.ivsom-upload__mime_rmi,
-                        &.ivsom-upload__mime_mp3,
-                        &.ivsom-upload__mime_oga,
-                        &.ivsom-upload__mime_aif,
-                        &.ivsom-upload__mime_aifc,
-                        &.ivsom-upload__mime_aiff,
-                        &.ivsom-upload__mime_m3u,
-                        &.ivsom-upload__mime_midi,
-                        &.ivsom-upload__mime_ra,
-                        &.ivsom-upload__mime_ram,
-                        &.ivsom-upload__mime_wav,
-                        &.ivsom-upload__mime_weba {
-                            &::before {
-                                content: '\e6b1';
-                            }
-                        }
-                    }
-                }
-
-                > .ivsom-upload__columns_name {
+                > .ivsom-upload__grid_file {
                     width: 100%;
-                    height: 30px;
-                    height: 30px;
-                    line-height: 30px;
-                    white-space: nowrap;
-                    text-overflow: ellipsis;
-                    overflow: hidden;
+                    height: 100%;
                     position: relative;
-
-                    @include font-text;
-
-                    > .ivsom-upload__grid_progress {
-                        height: 100%;
-                        top: 0px;
-                        left: 0px;
-                        z-index: 0;
-                        width: 0px;
-                        position: absolute;
-                        background-color: rgba(41, 153, 247, .3);
-                        transition: width ease-in-out .3s, background-color ease-in-out .5s;
+    
+                    &.ivsom-upload__list_error > .ivsom-upload__columns_name {
+                        > .ivsom-upload__grid_progress {
+                            background-color: rgba(247, 95, 60, .3);
+                        }
                     }
-                }
-
-                > .ivsom-upload__columns_status {
-                    width: 100%;
-                    height: 30px;
-                    line-height: 30px;
-                    text-align: center;
-                    white-space: nowrap;
-                    text-overflow: ellipsis;
-                    overflow: hidden;
-                    @include font-sub-text;
+    
+                    > .ivsom-upload__grid_item {
+                        width : 100px;
+                        height: 100px;
+                        padding: 5px;
+                        box-sizing: border-box;
+    
+                        > .ivsom-upload__drop {
+                            top: 0px;
+                            right: 0px;
+                            z-index: 99;
+                            width: 20px;
+                            height: 20px;
+                            line-height: 20px;
+                            cursor: pointer;
+                            background-color: #fff;
+                            border-radius: 10px;
+                            box-sizing: border-box;
+                            position: absolute;
+                        }
+    
+                        > .ivsom-upload__content {
+                            width: 100%;
+                            height: 100%;
+                            background-color: #333;
+    
+                            &::before {
+                                content: '\e6fd';
+                                font-family: "iconfont" !important;
+                                font-size: 46px;
+                                color: #fff;
+                                display:block;
+                                text-align: center;
+                            }
+    
+                            &::after {
+                                content: attr(file-size);
+                                font-size: 14px;
+                                color: #fff;
+                                display:block;
+                                text-align: center;
+                                user-select: none;
+    
+                                @include font-sub-text;
+                            }
+    
+                            &.ivsom-upload__mime_zip {
+                                &::before {
+                                    content: '\e6d2';
+                                    font-size: 27px;
+                                    padding: 10px 0px;
+                                    box-sizing: border-box;
+                                    font-family: "iconfont-resource" !important;
+                                }
+                            }
+    
+                            &.ivsom-upload__mime_rar {
+                                &::before {
+                                    content: '\e6d3';
+                                    font-size: 27px;
+                                    padding: 10px 0px;
+                                    box-sizing: border-box;
+                                    font-family: "iconfont-resource" !important;
+                                }
+                            }
+    
+                            &.ivsom-upload__mime_7z {
+                                &::before {
+                                    content: '\e6d4';
+                                    font-size: 27px;
+                                    padding: 10px 0px;
+                                    box-sizing: border-box;
+                                    font-family: "iconfont-resource" !important;
+                                }
+                            }
+    
+                            &.ivsom-upload__mime_iso {
+                                &::before {
+                                    content: '\e6d5';
+                                    font-size: 27px;
+                                    padding: 10px 0px;
+                                    box-sizing: border-box;
+                                    font-family: "iconfont-resource" !important;
+                                }
+                            }
+    
+                            &.ivsom-upload__mime_tar {
+                                &::before {
+                                    content: '\e6d6';
+                                    font-size: 27px;
+                                    padding: 10px 0px;
+                                    box-sizing: border-box;
+                                    font-family: "iconfont-resource" !important;
+                                }
+                            }
+                            
+                            &.ivsom-upload__mime_txt {
+                                &::before {
+                                    content: '\e718';
+                                    font-size: 27px;
+                                    padding: 10px 0px;
+                                    box-sizing: border-box;
+                                    font-family: "iconfont-resource" !important;
+                                }
+                            }
+                            
+                            &.ivsom-upload__mime_ogv,
+                            &.ivsom-upload__mime_3gp,
+                            &.ivsom-upload__mime_3g2,
+                            &.ivsom-upload__mime_mp2,
+                            &.ivsom-upload__mime_mpa,
+                            &.ivsom-upload__mime_mpe,
+                            &.ivsom-upload__mime_mpeg,
+                            &.ivsom-upload__mime_mpg,
+                            &.ivsom-upload__mime_mpv2,
+                            &.ivsom-upload__mime_mov,
+                            &.ivsom-upload__mime_qt,
+                            &.ivsom-upload__mime_lsf,
+                            &.ivsom-upload__mime_lsx,
+                            &.ivsom-upload__mime_asf,
+                            &.ivsom-upload__mime_asr,
+                            &.ivsom-upload__mime_asx,
+                            &.ivsom-upload__mime_avi,
+                            &.ivsom-upload__mime_movie,
+                            &.ivsom-upload__mime_webm {
+                                &::before {
+                                    content: '\e789';
+                                    font-size: 27px;
+                                    padding: 10px 0px;
+                                    box-sizing: border-box;
+                                    font-family: "iconfont-resource" !important;
+                                }
+                            }
+                            
+                            &.ivsom-upload__mime_xla,
+                            &.ivsom-upload__mime_xlc,
+                            &.ivsom-upload__mime_xlm,
+                            &.ivsom-upload__mime_xls,
+                            &.ivsom-upload__mime_xlt,
+                            &.ivsom-upload__mime_xlw,
+                            &.ivsom-upload__mime_csv {
+                                &::before {
+                                    content: '\e998';
+                                    font-size: 27px;
+                                    padding: 10px 0px;
+                                    box-sizing: border-box;
+                                    font-family: "iconfont-resource" !important;
+                                }
+                            }
+    
+                            &.ivsom-upload__mime_doc,
+                            &.ivsom-upload__mime_dot,
+                            &.ivsom-upload__mime_docs {
+                                &::before {
+                                    content: '\e99a';
+                                    font-size: 27px;
+                                    padding: 10px 0px;
+                                    box-sizing: border-box;
+                                    font-family: "iconfont-resource" !important;
+                                }
+                            }
+    
+                            &.ivsom-upload__mime_js {
+                                &::before {
+                                    content: '\e60e';
+                                    font-size: 27px;
+                                    padding: 10px 0px;
+                                    box-sizing: border-box;
+                                    font-family: "iconfont-resource" !important;
+                                }
+                            }
+    
+                            &.ivsom-upload__mime_css {
+                                &::before {
+                                    content: '\e62a';
+                                    font-size: 27px;
+                                    padding: 10px 0px;
+                                    box-sizing: border-box;
+                                    font-family: "iconfont-resource" !important;
+                                }
+                            }
+    
+                            &.ivsom-upload__mime_html,
+                            &.ivsom-upload__mime_htm {
+                                &::before {
+                                    content: '\e629';
+                                    font-size: 27px;
+                                    padding: 10px 0px;
+                                    box-sizing: border-box;
+                                    font-family: "iconfont-resource" !important;
+                                }
+                            }
+                            
+                            &.ivsom-upload__mime_sh,
+                            &.ivsom-upload__mime_bat,
+                            &.ivsom-upload__mime_php,
+                            &.ivsom-upload__mime_jsp,
+                            &.ivsom-upload__mime_asp,
+                            &.ivsom-upload__mime_xml {
+                                &::before {
+                                    content: '\e61d';
+                                    font-size: 27px;
+                                    padding: 10px 0px;
+                                    box-sizing: border-box;
+                                    font-family: "iconfont-resource" !important;
+                                }
+                            }
+                            
+                            &.ivsom-upload__mime_png,
+                            &.ivsom-upload__mime_bmp,
+                            &.ivsom-upload__mime_cod,
+                            &.ivsom-upload__mime_gif,
+                            &.ivsom-upload__mime_ief,
+                            &.ivsom-upload__mime_jpe,
+                            &.ivsom-upload__mime_jpeg,
+                            &.ivsom-upload__mime_jpg,
+                            &.ivsom-upload__mime_jfif,
+                            &.ivsom-upload__mime_svg,
+                            &.ivsom-upload__mime_tif,
+                            &.ivsom-upload__mime_tiff,
+                            &.ivsom-upload__mime_ico,
+                            &.ivsom-upload__mime_webp,
+                            &.ivsom-upload__mime_ras,
+                            &.ivsom-upload__mime_cmx,
+                            &.ivsom-upload__mime_icon,
+                            &.ivsom-upload__mime_pnm,
+                            &.ivsom-upload__mime_pbm,
+                            &.ivsom-upload__mime_pgm,
+                            &.ivsom-upload__mime_ppm,
+                            &.ivsom-upload__mime_rgb,
+                            &.ivsom-upload__mime_xbm,
+                            &.ivsom-upload__mime_xpm,
+                            &.ivsom-upload__mime_xwd {
+                                &::before {
+                                    content: '\e754';
+                                }
+                            }
+    
+                            
+                            &.ivsom-upload__mime_aac,
+                            &.ivsom-upload__mime_au,
+                            &.ivsom-upload__mime_snd,
+                            &.ivsom-upload__mime_mid,
+                            &.ivsom-upload__mime_rmi,
+                            &.ivsom-upload__mime_mp3,
+                            &.ivsom-upload__mime_oga,
+                            &.ivsom-upload__mime_aif,
+                            &.ivsom-upload__mime_aifc,
+                            &.ivsom-upload__mime_aiff,
+                            &.ivsom-upload__mime_m3u,
+                            &.ivsom-upload__mime_midi,
+                            &.ivsom-upload__mime_ra,
+                            &.ivsom-upload__mime_ram,
+                            &.ivsom-upload__mime_wav,
+                            &.ivsom-upload__mime_weba {
+                                &::before {
+                                    content: '\e6b1';
+                                }
+                            }
+                        }
+                    }
+    
+                    > .ivsom-upload__columns_name {
+                        width: 100%;
+                        height: 30px;
+                        height: 30px;
+                        line-height: 30px;
+                        white-space: nowrap;
+                        text-overflow: ellipsis;
+                        overflow: hidden;
+                        position: relative;
+    
+                        @include font-text;
+    
+                        > .ivsom-upload__grid_progress {
+                            height: 100%;
+                            top: 0px;
+                            left: 0px;
+                            z-index: 0;
+                            width: 0px;
+                            position: absolute;
+                            background-color: rgba(41, 153, 247, .3);
+                            transition: width ease-in-out .3s, background-color ease-in-out .5s;
+                        }
+                    }
+    
+                    > .ivsom-upload__columns_status {
+                        width: 100%;
+                        height: 30px;
+                        line-height: 30px;
+                        text-align: center;
+                        white-space: nowrap;
+                        text-overflow: ellipsis;
+                        overflow: hidden;
+                        @include font-sub-text;
+                    }
                 }
             }
+            
         }
 
     }

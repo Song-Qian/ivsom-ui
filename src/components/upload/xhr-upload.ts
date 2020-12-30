@@ -10,7 +10,7 @@ import * as SparkMD5 from 'spark-md5'
 export default class XhrUpload {
 
     //文件列表
-    private records : Map<string, File> = new Map<string, File>();
+    private records : Map<string, { complete : boolean, loaded : number, error : string, file : File  }> = new Map<string, { complete : boolean, loaded : number, error : string, file : File  }>();
     //请求地址
     private url : string = "";
     //发送上传文件的字段名
@@ -47,8 +47,8 @@ export default class XhrUpload {
     public get fileList() : Array<{ id : string, name : string, size : number, type : string }> {
         let me = this;
         let result = [];
-        for(let[id, file] of me.records.entries()) {
-            result.push({ id, name : file.name, size : file.size, type : file.type });
+        for(let[id, it] of me.records.entries()) {
+            result.push({ id, name : it.file.name, size : it.file.size, type : it.file.type });
         }
         return result;
     }
@@ -101,7 +101,7 @@ export default class XhrUpload {
         }
         for(let i = 0, n = records.length; i < n; i++) {
             let UID = uuid().replace(/\-/g, '');
-            me.records.set(UID, records[i]);
+            me.records.set(UID, { complete : false, error : '', loaded : 0, file : records[i] });
         }
     }
 
@@ -113,7 +113,7 @@ export default class XhrUpload {
 
         for(let i = 0, n = records.length; i < n; i++) {
             let UID = uuid().replace(/\-/g, '');
-            me.records.set(UID, records[i]);
+            me.records.set(UID, { complete : false, error : '', loaded : 0, file : records[i] });
         }
     }
 
@@ -136,17 +136,19 @@ export default class XhrUpload {
     public FileUploadStart() {
         let me = this;
         if(!me.split) {
-            for(let [key, file] of me.records ) {
-                if(!me.xhrPool.has(key)) {
-                    me.createXhrRequest(key, file);
+            for(let [key, it] of me.records ) {
+                let s = me.records.get(key);
+                if(s && !s.complete && s.error === '') {
+                    me.createXhrRequest(key, it.file);
                 }
             }
         }
 
         if(me.split) {
-            for(let [key, file] of me.records) {
-                if(!me.xhrPool.has(key)) {
-                    me.createDetritusXhrRequest(key, file);
+            for(let [key, it] of me.records) {
+                let s = me.records.get(key);
+                if(s && !s.complete && s.error === '') {
+                    me.createDetritusXhrRequest(key, it.file);
                 }
             }
         }
@@ -229,6 +231,13 @@ export default class XhrUpload {
                     let chunkDetritu = data["ivsom-upload-detritu"] && data["detritu"] || 0;
                     let scale = ((Math.min(detritu * limit, bytes.byteLength) / bytes.byteLength) * 100).toFixed(2);
                     if(detritu + 1 > maxDetritus) {
+                        let s = me.records.get(id);
+                        if(s) {
+                            s.error = '';
+                            s.complete = true;
+                            s.loaded = 100;
+                            me.records.set(id, s);
+                        }
                         me.xhrPool.delete(id);
                         me.xhrOnCompleteCallback && me.xhrOnCompleteCallback(e, id, Number(scale), file, me, data);
                         return;
@@ -237,9 +246,23 @@ export default class XhrUpload {
                         detritu = detritu < chunkDetritu ? Number(chunkDetritu) - 1 : detritu + 1;
                         loopUploadDetritu();
                     } else if (xhr.status === 0 && xhr.timeout === me.timeout) {
+                        let s = me.records.get(id);
+                        if(s) {
+                            s.error = '服务器响应超时!';
+                            s.complete = false;
+                            s.loaded = Number(scale);
+                            me.records.set(id, s);
+                        }
                         me.xhrPool.delete(id);
                         me.xhrOnTimeoutCallback && me.xhrOnTimeoutCallback(e, id, Number(scale), file, me, { ok : false, message : '服务器响应超时!' });
                     } else if (xhr.status === 0) {
+                        let s = me.records.get(id);
+                        if(s) {
+                            s.error = '服务器出现网络异常!';
+                            s.complete = false;
+                            s.loaded = Number(scale);
+                            me.records.set(id, s);
+                        }
                         me.xhrPool.delete(id);
                         me.xhrOnErrorCallback && me.xhrOnErrorCallback(e, id, Number(scale), file, me, { ok : false, message : "服务器出现网络异常!" });
                     }
@@ -306,9 +329,18 @@ export default class XhrUpload {
             let data = contentType === "application/json" ? JSON.parse(xhr.response) : xhr.response;
             data = xhr.status === 0 ? { ok : false, message : "服务器出现网络异常!" } : data;
             if(isSuccess) {
+                let s = xhrUpload.records.get(id);
+                s.complete = true;
+                s.loaded = 100;
+                xhrUpload.records.set(id, s);
                 xhrUpload.xhrPool.delete(id);
                 xhrUpload.xhrOnCompleteCallback && xhrUpload.xhrOnCompleteCallback(e, id, file, xhrUpload, data);
             } else {
+                let s = xhrUpload.records.get(id);
+                s.error = '服务器响应超时!';
+                s.complete = false;
+                s.loaded = 0;
+                xhrUpload.records.set(id, s);
                 xhrUpload.xhrPool.delete(id);
                 xhrUpload.xhrOnErrorCallback && xhrUpload.xhrOnErrorCallback(e, id, file, 0, xhrUpload, data);
             }
@@ -321,12 +353,20 @@ export default class XhrUpload {
         let { xhr, id , file, xhrUpload } = this as any;
         if(!xhrUpload.split && e.lengthComputable) {
             let scale = ((e.loaded / e.total) * 100).toFixed(2);
+            let s = xhrUpload.records.get(id);
+            s.complete = false;
+            s.loaded = scale;
+            xhrUpload.records.set(id, s);
             xhrUpload.xhrOnProgressCallback && xhrUpload.xhrOnProgressCallback(e, id, Number(scale), file, xhrUpload, xhr.response);
         }
 
         if(xhrUpload.split) {
             let { detritu, limit, bytes } = this as any;
             let scale = ((Math.min(detritu * limit + e.loaded, bytes.byteLength) / bytes.byteLength) * 100).toFixed(2);
+            let s = xhrUpload.records.get(id);
+            s.complete = false;
+            s.loaded = scale;
+            xhrUpload.records.set(id, s);
             xhrUpload.xhrOnProgressCallback && xhrUpload.xhrOnProgressCallback(e, id, Number(scale), file, xhrUpload, xhr.response);
         }
     }
@@ -338,12 +378,22 @@ export default class XhrUpload {
         xhrUpload.xhrPool.delete(id);
         if(!xhrUpload.split && e.lengthComputable) {
             let scale = ((e.loaded / e.total) * 100).toFixed(2);
+            let s = xhrUpload.records.get(id);
+            s.complete = false;
+            s.loaded = scale;
+            s.error = '上传文件被中止';
+            xhrUpload.records.set(id, s);
             xhrUpload.xhrOnAbortCallback && xhrUpload.xhrOnAbortCallback(e, id, Number(scale), file, xhrUpload, { ok : false, message : "上传文件被中止" });
         }
 
         if(xhrUpload.split && e.lengthComputable) {
             let { detritu, limit, bytes } = this as any;
             let scale = ((Math.min(detritu * limit + e.loaded, bytes.byteLength) / bytes.byteLength) * 100).toFixed(2);
+            let s = xhrUpload.records.get(id);
+            s.complete = false;
+            s.loaded = scale;
+            s.error = '上传文件被中止';
+            xhrUpload.records.set(id, s);
             xhrUpload.xhrOnAbortCallback && xhrUpload.xhrOnAbortCallback(e, id, Number(scale), file, xhrUpload, { ok : false, message : "上传文件被中止" });
         }
 
@@ -355,6 +405,10 @@ export default class XhrUpload {
         let { xhr, id, file, xhrUpload } = this as any;
         if(!xhrUpload.split && e.lengthComputable) {
             let scale = ((e.loaded / e.total) * 100).toFixed(2);
+            let s = xhrUpload.records.get(id);
+            s.loaded = 0;
+            s.complete = false;
+            xhrUpload.records.set(id, s);
             xhrUpload.xhrOnLoadStartCallback && xhrUpload.xhrOnLoadStartCallback(e, id, Number(scale), file, xhrUpload, xhr.response);
         }
 
@@ -362,6 +416,10 @@ export default class XhrUpload {
             let { detritu, limit, bytes } = this as any;
             let scale = ((Math.min(detritu * limit + e.loaded, bytes.byteLength) / bytes.byteLength) * 100).toFixed(2);
             if(detritu === 0) {
+                let s = xhrUpload.records.get(id);
+                s.loaded = 0;
+                s.complete = false;
+                xhrUpload.records.set(id, s);
                 xhrUpload.xhrOnLoadStartCallback && xhrUpload.xhrOnLoadStartCallback(e, id, Number(scale), file, xhrUpload, xhr.response);
             }
         }
@@ -389,6 +447,10 @@ export default class XhrUpload {
         let { xhr, id , file, xhrUpload } = this as any;
         if(!xhrUpload.split && e.lengthComputable) {
             let scale = ((e.loaded / e.total) * 100).toFixed(2);
+            let s = xhrUpload.records.get(id);
+            s.loaded = scale;
+            s.complete = true;
+            xhrUpload.records.set(id, s);
             xhrUpload.xhrOnLoadEndCallback && xhrUpload.xhrOnLoadEndCallback(e, id, Number(scale), file, xhrUpload, xhr.response);
         }
 
@@ -396,6 +458,10 @@ export default class XhrUpload {
             let { detritu, limit, bytes} = this as any;
             let scale = ((Math.min(detritu * limit + e.loaded, bytes.byteLength) / bytes.byteLength) * 100).toFixed(2);
             if(detritu * limit >= bytes.byteLength) {
+                let s = xhrUpload.records.get(id);
+                s.loaded = scale;
+                s.complete = true;
+                xhrUpload.records.set(id, s);
                 xhrUpload.xhrOnLoadEndCallback && xhrUpload.xhrOnLoadEndCallback(e, id, Number(scale), file, xhrUpload, xhr.response);
             }
         }
@@ -408,12 +474,22 @@ export default class XhrUpload {
         xhrUpload.xhrPool.delete(id);
         if(!xhrUpload.split) {
             let scale = ((e.loaded / e.total) * 100).toFixed(2);
+            let s = xhrUpload.records.get(id);
+            s.error = '服务器响应超时!';
+            s.complete = false;
+            s.loaded = scale;
+            xhrUpload.records.set(id, s);
             xhrUpload.xhrOnTimeoutCallback && xhrUpload.xhrOnTimeoutCallback(e, id, Number(scale), file, xhrUpload, { ok : false, message : '服务器响应超时!' });
         }
 
         if(xhrUpload.split && e.lengthComputable) {
             let { detritu, limit, bytes } = this as any;
             let scale = ((Math.min(detritu * limit + e.loaded, bytes.byteLength) / bytes.byteLength) * 100).toFixed(2);
+            let s = xhrUpload.records.get(id);
+            s.error = '服务器响应超时!';
+            s.complete = false;
+            s.loaded = scale;
+            xhrUpload.records.set(id, s);
             xhrUpload.xhrOnTimeoutCallback && xhrUpload.xhrOnTimeoutCallback(e, id, Number(scale), file, xhrUpload, { ok : false, message : '服务器响应超时!' });
         }
 
@@ -425,12 +501,22 @@ export default class XhrUpload {
         let { xhr, id , file, xhrUpload } = this as any;
         xhrUpload.xhrPool.delete(id);
         if(!xhrUpload.split && e.lengthComputable) {
+            let s = xhrUpload.records.get(id);
+            s.error = '服务器出现网络异常!';
+            s.complete = false;
+            s.loaded = 0;
+            xhrUpload.records.set(id, s);
             xhrUpload.xhrOnErrorCallback && xhrUpload.xhrOnErrorCallback(e, id, file, 0, xhrUpload, { ok : false, message : '服务器出现网络异常!' });
         }
 
         if(xhrUpload.split && e.lengthComputable) {
             let { detritu, limit, bytes } = this as any;
             let scale = ((Math.min(detritu * limit + e.loaded, bytes.byteLength) / bytes.byteLength) * 100).toFixed(2);
+            let s = xhrUpload.records.get(id);
+            s.error = '服务器出现网络异常!';
+            s.complete = false;
+            s.loaded = scale;
+            xhrUpload.records.set(id, s);
             xhrUpload.xhrOnErrorCallback && xhrUpload.xhrOnErrorCallback(e, id, file, scale, xhrUpload, { ok : false, message : '服务器出现网络异常!' });
         }
 

@@ -53,12 +53,8 @@
     SplitLimit : Number
  }
 
- type EventsWith = {
-
- }
-
  @Component
- export default class iVsomUpload extends tsx.Component<Props, EventsWith> {
+ export default class iVsomUpload extends tsx.Component<Props> {
 
     @Prop({ default: '' }) readonly url !: string;
     @Prop({ default: null, type: Object }) readonly params !: { [key: string]: any };
@@ -232,6 +228,13 @@
     
     protected onXhrOnComplete(e : Event, id : string, scale : number, file :File, xhrUpload : XhrUpload, data : any) : void {
         let me = this;
+        let s = me.uploadState.get(id);
+        if(s) {
+            s.loaded = 100;
+            s.complete = true;
+            me.uploadState.set(id, s);
+        }
+
         if(me.rmoveOnComplete) {
             me.onFileRemove(null, { id, name : file.name, size : file.size, type : file.type, complete: true, loaded: 100, error: '' });
         }
@@ -427,31 +430,32 @@
                     </div>
                 </div>
             ) : me.view === "Grid" ? (
-                <div
-                    class={{ "ivsom-upload__grid" : true, "ivsom-upload_drag" : me.drag, "ivsom-upload_empty" : me.uploadState.size === 0 }} 
+                <div class={{ "ivsom-upload__grid" : true, "ivsom-upload_drag" : me.drag, "ivsom-upload_empty" : me.uploadState.size === 0 }} 
                     empty-text={me.uploadState.size === 0 ? me.emptyText :  ''} 
                     onClick={ tsx.modifiers.stop((e : MouseEvent) => me.uploadState.size === 0 && me.drag ? tsx.modifiers.stop(me.onFileSelect) : void 0) }
                     onDragenter={ tsx.modifiers.stop.prevent((e : DragEvent) => me.drag ? me.onEnterDragArea(e) : void 0) } 
                     onDragover={ tsx.modifiers.stop.prevent((e : DragEvent) => me.drag ? me.onDragFileWait(e) : void 0) } 
                     onDragleave={ tsx.modifiers.stop.prevent((e : DragEvent) => me.drag ? me.onLeaveDragArea(e) : void 0) } 
                     onDrop={ tsx.modifiers.stop.prevent((e : DragEvent) => me.drag ? me.onDragFileDone(e) : void 0) }>
-                    {
-                        [...me.uploadState.values()].map((it) => {
-                            return (
-                                <div class={{"ivsom-upload__grid_file" : true, "ivsom-upload__list_error" :  it.error !== "" }} key={it.id}>
-                                    <div class="ivsom-upload__grid_item">
-                                        <div class="ivsom-upload__drop" onClick={ tsx.modifiers.stop((e : MouseEvent) => me.onFileRemove(e, it)) }><i class="iconfont icon-gongnengtubiao-41"></i></div>
-                                        <div class={{ "ivsom-upload__content" :true, ["ivsom-upload__mime_" + (it.name.substr(it.name.lastIndexOf(".") + 1))] : true }} file-size={me.formatSize(it.size)}></div>
+                    <div class="ivsom-upload__warp">
+                        {
+                            [...me.uploadState.values()].map((it) => {
+                                return (
+                                    <div class={{"ivsom-upload__grid_file" : true, "ivsom-upload__list_error" :  it.error !== "" }} key={it.id}>
+                                        <div class="ivsom-upload__grid_item">
+                                            <div class="ivsom-upload__drop" onClick={ tsx.modifiers.stop((e : MouseEvent) => me.onFileRemove(e, it)) }><i class="iconfont icon-gongnengtubiao-41"></i></div>
+                                            <div class={{ "ivsom-upload__content" :true, ["ivsom-upload__mime_" + (it.name.substr(it.name.lastIndexOf(".") + 1))] : true }} file-size={me.formatSize(it.size)}></div>
+                                        </div>
+                                        <div class="ivsom-upload__columns_name" title={ it.name }>
+                                            <div class="ivsom-upload__grid_progress" style={{ width: [it.loaded, '%'].join('') }}></div>
+                                            { it.name }
+                                        </div>
+                                        <div class="ivsom-upload__columns_status" title={ it.error ? it.error : it.complete ? '上传完成' : it.loaded > 0 ? '上传中,请等待...' : '等待上传' }>{ it.error ? it.error : it.complete ? '上传完成' : it.loaded > 0 ? '上传中,请等待...' : '等待上传'  }</div>
                                     </div>
-                                    <div class="ivsom-upload__columns_name" title={ it.name }>
-                                        <div class="ivsom-upload__grid_progress" style={{ width: [it.loaded, '%'].join('') }}></div>
-                                        { it.name }
-                                    </div>
-                                    <div class="ivsom-upload__columns_status" title={ it.error ? it.error : it.complete ? '上传完成' : it.loaded > 0 ? '上传中,请等待...' : '等待上传' }>{ it.error ? it.error : it.complete ? '上传完成' : it.loaded > 0 ? '上传中,请等待...' : '等待上传'  }</div>
-                                </div>
-                            )
-                        })
-                    }
+                                )
+                            })
+                        }
+                    </div>
                 </div>
             ) : null;
         let container = !me.drag ? <i-vsom-button icon={ me.icon } type="primary" onClick={ tsx.modifiers.stop(me.onFileSelect) }>{ me.text }</i-vsom-button> : null;
