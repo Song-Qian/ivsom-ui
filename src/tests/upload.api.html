@@ -28,26 +28,383 @@
                     <p>默认样式</p>
                     <ul>
                         <li>Upload 组件在使用之前，需要有相关的依赖库进行支持，如需阅读：<a href="./start.api.html" target="_blank" >快速开始</a></li>
+                        <li style="font-weight: bold;">Upload Props :</li>
+                        <li>url: string 上传文件服务端地址</li>
+                        <li>params: Object 上传文件附带的参数，Post multipart/form-data格式提交</li>
+                        <li>headers: Object 上传文件时标头属性，跨域请求时，服务端需要设置 Access-Control-Allow-Headers</li>
+                        <li>multiple: boolean 是否支持多文件上传</li>
+                        <li>view: "Annex" | "List" | "Grid" 视图类型</li>
+                        <li>accept: string 选择文件的文件类型, mime : https://www.w3school.com.cn/media/media_mimeref.asp</li>
+                        <li>mime-type: string 上传文件时，响应内容Mime类型重定义, mime : https://www.w3school.com.cn/media/media_mimeref.asp</li>
+                        <li>auto: boolean 是否自动上传</li>
+                        <li>timeout: number 异步上传超时时间</li>
+                        <li>width: number | string 组件的宽度</li>
+                        <li>height: number | string 组件的高度</li>
+                        <li>empty-text: string 当View === List，Grid时并且drag模式下生效，显示的空文本内容</li>
+                        <li>icon: string 上传视图界面为Button时，生效。</li>
+                        <li>text: string 上传视图界面为Button时，生效。按钮的文字</li>
+                        <li>split: boolean 上传大文件是否切片上传</li>
+                        <li>rmove-on-complete: boolean 上传完成后，是否自动移除文件</li>
+                        <li>remove-on-error: boolean 上传失败后，是否自动移除文件</li>
+                        <li>split-limit: number 切片的大小, KB</li>
+                        <li style="font-weight: bold;">Upload Event :</li>
+                        <li>on-file-select: e: MouseEvent 打开选择文件窗口事件</li>
+                        <li>on-file-selected: e : Event 文件选择完毕</li>
+                        <li>on-file-remove: e : MouseEvent, file: { id : string, name : string, size : number, complete: boolean, loaded : number, type: string, error: string} 文件被移除出列表事件</li>
+                        <li>on-enter-drag-area: e : DragEvent 拖拽文件进入目标区域时</li>
+                        <li>on-drag-file-wait: e : DragEvent 拖拽文件在目标区域时</li>
+                        <li>on-leave-drag-area: e : DragEvent 拖拽文件离开目标区域时</li>
+                        <li>on-drag-file-done: e : DragEvent 拖拽文件在目标区域释放时</li>
+                        <li>on-upload-progress: id : string, file : File, data : any 文件上传进度加载事件</li>
+                        <li>on-upload-complete: id : string, file : File, data : any 文件上传完成事件</li>
+                        <li>on-upload-abort: id : string, file : File, data : any 文件上传被中止事件</li>
+                        <li>on-upload-beforeLoad: id : string, file : File, data : any 文件上传加载之前事件</li>
+                        <li>on-upload-load: id : string, file : File, data : any 文件上传加载完成事件</li>
+                        <li>on-upload-afterLoad: id : string, file : File, data : any 文件上传加载完成（无论是成功（load之后）还是失败（abort或error之后））之后事件</li>
+                        <li>on-upload-error: id : string, file : File, data : any 文件上传请求遇到错误时</li>
+                        <li>on-upload-timeout: id : string, file : File, data : any 文件上传服务端响应超过预设时间到期事件</li>
+                        <li style="font-weight: bold;">Upload Methods :</li>
+                        <li>Start: void 启动上传</li>
+                        <li>AbortAll: void 中止所有正在上传的文件</li>
+                        <li>Abort: id : string 中止某个正在上传的文件</li>
                     </ul>
+                    <h2 id="unicode-">事件的持行顺序</h2>
+                    <hr>
                     <blockquote>
-                        <i-vsom-upload width="100%" 
-                            url="http://localhost:8080/upload/detritu" 
-                            accept="image/*,application/zip,application/x-zip-compressed,text/plain" 
-                            empty-text="请拖拽上传文件到此区域"
-                            view="Grid"
-                            height="400px"
-                            :split-limit="512"
-                            split drag multiple>
+                        正常上传<br />
+                        on-upload-beforeLoad -> on-upload-progress -> on-upload-load -> on-upload-afterLoad -> on-upload-complete<br />
+                        服务端正常错误<br />
+                        on-upload-beforeLoad -> on-upload-progress -> on-upload-load -> on-upload-afterLoad -> on-upload-complete(on-upload-error)<br />
+                        服务端网络错误<br />
+                        on-upload-beforeLoad -> on-upload-complete(on-upload-error) -> on-upload-error -> on-upload-afterLoad<br />
+                        服务端超时<br />
+                        on-upload-beforeLoad -> on-upload-progress -> on-upload-complete(on-upload-error) -> on-upload-timeout -> on-upload-afterLoad
+                    </blockquote>
+                    <h2 id="unicode-">默认上传组件</h2>
+                    <hr>
+                    <blockquote>
+                        <i-vsom-upload
+                            url="http://localhost:8080/upload" 
+                            accept="image/*,application/zip,application/x-zip-compressed,text/plain"
+                            width="100%" 
+                            height="auto">
                         </i-vsom-upload>
                     </blockquote>
-                    <!-- <pre><code class="language-html"
->&lt;i-vsom-tabs v-model="index"&gt;
-    &lt;i-vsom-tabs-panel name='Tabs - 1' index="1"&gt;Tabs - 1&lt;/i-vsom-tabs-panel&gt;
-    &lt;i-vsom-tabs-panel name='Tabs - 2' index="2"&gt;Tabs - 2&lt;/i-vsom-tabs-panel&gt;
-    &lt;i-vsom-tabs-panel name='Tabs - 3' index="3"&gt;Tabs - 3&lt;/i-vsom-tabs-panel&gt;
-    &lt;i-vsom-tabs-panel name='Tabs - 4' index="4"&gt;Tabs - 4&lt;/i-vsom-tabs-panel&gt;
- &lt;/i-vsom-tabs&gt;
-</code></pre> -->
+                    <pre><code class="language-html"
+>&lt;i-vsom-upload
+    url="http://localhost:8080/upload" 
+    accept="image/*,application/zip,application/x-zip-compressed,text/plain"
+    width="100%" 
+    height="auto"&gt;
+ &lt;/i-vsom-upload&gt;
+</code></pre>
+                    <h2 id="unicode-">启用批量文件上传</h2>
+                    <hr>
+                    <blockquote>
+                        <i-vsom-upload
+                            url="http://localhost:8080/upload" 
+                            accept="image/*,application/zip,application/x-zip-compressed,text/plain"
+                            width="100%" 
+                            height="auto"
+                            multiple>
+                        </i-vsom-upload>
+                    </blockquote>
+                    <pre><code class="language-html"
+>&lt;i-vsom-upload
+    url="http://localhost:8080/upload" 
+    accept="image/*,application/zip,application/x-zip-compressed,text/plain"
+    width="100%" 
+    height="auto"
+    multiple&gt;
+ &lt;/i-vsom-upload&gt;
+</code></pre>
+                    <h2 id="unicode-">启用自动上传</h2>
+                    <hr>
+                    <blockquote>
+                        <i-vsom-upload
+                            url="http://localhost:8080/upload" 
+                            accept="image/*,application/zip,application/x-zip-compressed,text/plain"
+                            width="100%" 
+                            height="auto"
+                            auto
+                            multiple>
+                        </i-vsom-upload>
+                    </blockquote>
+                    <pre><code class="language-html"
+>&lt;i-vsom-upload
+    url="http://localhost:8080/upload" 
+    accept="image/*,application/zip,application/x-zip-compressed,text/plain"
+    width="100%" 
+    height="auto"
+    auto
+    multiple&gt;
+&lt;/i-vsom-upload&gt;
+</code></pre>
+                    <h2 id="unicode-">不同视觉的上传组件</h2>
+                    <hr>
+                    <p>附件形式</p>
+                    <blockquote>
+                        <i-vsom-upload
+                            url="http://localhost:8080/upload" 
+                            accept="image/*,application/zip,application/x-zip-compressed,text/plain"
+                            width="100%" 
+                            height="auto"
+                            view="Annex"
+                            multiple>
+                        </i-vsom-upload>
+                    </blockquote>
+                    <pre><code class="language-html"
+>&lt;i-vsom-upload
+    url="http://localhost:8080/upload" 
+    accept="image/*,application/zip,application/x-zip-compressed,text/plain"
+    width="100%" 
+    height="auto"
+    view="Annex"
+    multiple&gt;
+&lt;/i-vsom-upload&gt;
+</code></pre>
+                    <p>列表形式</p>
+                    <blockquote>
+                        <i-vsom-upload
+                            url="http://localhost:8080/upload" 
+                            accept="image/*,application/zip,application/x-zip-compressed,text/plain"
+                            width="100%" 
+                            height="auto"
+                            view="List"
+                            multiple>
+                        </i-vsom-upload>
+                    </blockquote>
+                    <pre><code class="language-html"
+>&lt;i-vsom-upload
+    url="http://localhost:8080/upload" 
+    accept="image/*,application/zip,application/x-zip-compressed,text/plain"
+    width="100%" 
+    height="auto"
+    view="List"
+    multiple&gt;
+&lt;/i-vsom-upload&gt;
+</code></pre>
+                    <p>网格形式</p>
+                    <blockquote>
+                        <i-vsom-upload
+                            url="http://localhost:8080/upload" 
+                            accept="image/*,application/zip,application/x-zip-compressed,text/plain"
+                            width="100%" 
+                            height="auto"
+                            view="Grid"
+                            multiple>
+                        </i-vsom-upload>
+                    </blockquote>
+                    <pre><code class="language-html"
+                    >&lt;i-vsom-upload
+    url="http://localhost:8080/upload" 
+    accept="image/*,application/zip,application/x-zip-compressed,text/plain"
+    width="100%" 
+    height="auto"
+    view="Grid"
+    multiple&gt;
+&lt;/i-vsom-upload&gt;
+</code></pre>
+                    <h2 id="unicode-">可拖拽文件上传</h2>
+                    <hr>
+                    <blockquote>
+                        <i-vsom-upload
+                            url="http://localhost:8080/upload" 
+                            accept="image/*,application/zip,application/x-zip-compressed,text/plain"
+                            width="100%" 
+                            height="auto"
+                            view="Grid"
+                            drag
+                            multiple>
+                        </i-vsom-upload>
+                    </blockquote>
+                    <pre><code class="language-html"
+>&lt;i-vsom-upload
+    url="http://localhost:8080/upload" 
+    accept="image/*,application/zip,application/x-zip-compressed,text/plain"
+    width="100%" 
+    height="auto"
+    view="Grid"
+    drag
+    multiple&gt;
+&lt;/i-vsom-upload&gt;
+</code></pre>
+                    <h2 id="unicode-">设置上传容器高度</h2>
+                    <hr>
+                    <blockquote>
+                        <i-vsom-upload
+                            url="http://localhost:8080/upload" 
+                            accept="image/*,application/zip,application/x-zip-compressed,text/plain"
+                            width="100%" 
+                            height="300px"
+                            view="Grid"
+                            drag
+                            multiple>
+                        </i-vsom-upload>
+                    </blockquote>
+                    <pre><code class="language-html"
+>&lt;i-vsom-upload
+    url="http://localhost:8080/upload" 
+    accept="image/*,application/zip,application/x-zip-compressed,text/plain"
+    width="100%" 
+    height="400px"
+    view="Grid"
+    drag
+    multiple&gt;
+&lt;/i-vsom-upload&gt;
+</code></pre>
+                    <h2 id="unicode-">后端如何获取上传文件</h2>
+                    <hr>
+                    <p>前端单文件上传</p>
+                    <pre><code class="language-js"
+>func (me *Upload) ServeHTTP(w http.ResponseWriter, r *http.Request) {
+	//设置前端允许跨域上传文件，并且允许前端传输自定义报文头
+	w.Header().Set("Access-Control-Allow-Origin", "*")
+	w.Header().Set("Access-Control-Allow-Headers", "*")
+	if r.Method == "OPTIONS" {
+		w.WriteHeader(200)
+		return
+	}
+
+	//获取上传文件
+	_, fileheader, err := r.FormFile("file")
+
+	if err != nil {
+		fmt.Fprintf(w, "获取文件失败")
+		return
+	}
+
+	if fileheader.Filename == "mysql-8.0.20-winx64.zip" {
+		//模拟上传文件异常错误。
+		w.Header().Set("Content-Type", "application/json")
+		w.WriteHeader(500)
+		data := make(map[string]interface{})
+		data["ok"] = false
+		data["message"] = "非法文件"
+		output, _ := json.Marshal(data)
+		w.Write(output)
+		return
+	}
+
+	//...模拟上传文件IO磁盘操作延迟时间。
+	time.Sleep(time.Duration(2) * time.Second)
+	
+	if that, ok := os.Open(fileheader.Filename); ok == nil {
+		fileInfo, _ := that.Stat()
+		defer that.Close()
+		fmt.Fprintf(w, fileInfo.Name())
+		return
+	}
+}
+</code></pre>
+                    <p>前端文件切片上传</p>
+                    <pre><code class="language-js"
+>func (d *DetrituUpload) ServeHTTP(w http.ResponseWriter, r *http.Request) {
+	rootPath := GetAppPath()
+	//设置前端允许跨域上传 & 允许前端将文件标识(ivsom-uploader-mark-uid)写入报文头
+	w.Header().Set("Access-Control-Allow-Origin", "*")
+	w.Header().Set("Access-Control-Allow-Headers", "*")
+	if r.Method == "OPTIONS" {
+		w.WriteHeader(200)
+		return
+	}
+
+	// TODO 获取文件标识
+	fileId := r.Header.Get("ivsom-uploader-mark-uid")
+	// TODO 获取文件md5码，相同的文件，md5码唯一。
+	fileMD5 := r.Header.Get("ivsom-uploader-detritu-md5")
+	// TODO 获取当前文件的断点
+	detritu, _ := strconv.ParseInt(r.Header.Get("ivsom-uploader-detritu"), 10, 64)
+
+	file, fileheader, err := r.FormFile("file")
+	if err != nil {
+		fmt.Fprintf(w, "获取文件失败")
+		return
+	}
+	defer file.Close()
+
+	// TODO 模拟断点文件上传， 当文件mysql-8.0.20-winx64.zip文件上传的断点小于30，则通知前端，文件从第30个前端开始上传
+	if detritu < 30 && fileMD5 == "a3f9669000835a44163c206bfeaea044" {
+		w.Header().Set("Content-Type", "application/json")
+		//告诉前端，该文件第30个断点是最后一次记录点,下次从第31个断点开始上传。
+		data := make(map[string]interface{})
+		//告诉前端，是否跳过冗余的切片
+		data["ivsom-upload-detritu"] = true
+		data["detritu"] = 30;
+		output, _ := json.Marshal(data)
+		w.Write(output)
+		return
+	}
+
+	// TODO 模拟服务器在上传mysql-8.0.20-winx64.zip文件到第60个断点时，人为制造异常。
+	if detritu == 60 && fileMD5 == "a3f9669000835a44163c206bfeaea044" {
+		w.Header().Set("Content-Type", "application/json")
+		w.WriteHeader(500)
+		data := make(map[string]interface{})
+		data["ok"] = false
+		data["message"] = "非法文件，请检查文件。"
+		output, _ := json.Marshal(data)
+		w.Write(output)
+		return
+	}
+
+    // TODO 模拟服务器在上传文件IO操作中，导致Http请求超时处理。
+	if detritu == 90 && fileMD5 == "a3f9669000835a44163c206bfeaea044" {
+		time.Sleep(time.Duration(90) * time.Second)
+		return
+	}
+
+	//...模拟上传文件IO磁盘操作延迟时间。
+	time.Sleep(time.Duration(1) * time.Second)
+	
+	dirPath := filepath.Join(rootPath, "../assets/upload", fileId)
+	dirUpload, isExists := os.Open(dirPath)
+
+	if os.IsNotExist(isExists) {
+		os.MkdirAll(dirPath, 0777)
+	}
+	defer dirUpload.Close()
+	
+	upPath := filepath.Join(dirPath, fileheader.Filename)
+	
+	if that, ok := fileheader.Open(); ok == nil {
+		defer that.Close()
+		//将碎屑文件一点一点写到服务器本地磁盘中。
+		thatFile, err := os.OpenFile(upPath, os.O_CREATE|os.O_RDWR|os.O_APPEND, os.ModeAppend|os.ModePerm)
+		if err == nil {
+			defer thatFile.Close()
+			var detrituChuck []byte
+			detrituChuck, _ = ioutil.ReadAll(file)
+			// that.Read(detrituChuck)
+			thatFile.Write(detrituChuck)
+		}
+		fmt.Fprintf(w, fileheader.Filename)
+		return
+	}
+}
+</code></pre>
+                    <h2 id="unicode-">如何开启切片上传</h2>
+                    <hr>
+                    <blockquote>
+                        <i-vsom-upload
+                            url="http://localhost:8080/upload" 
+                            accept="image/*,application/zip,application/x-zip-compressed,text/plain"
+                            width="100%" 
+                            height="200px"
+                            view="List"
+                            drag split split-limit="512" multiple>
+                        </i-vsom-upload>
+                    </blockquote>
+                    <pre><code class="language-html"
+>&lt;i-vsom-upload
+    url="http://localhost:8080/upload" 
+    accept="image/*,application/zip,application/x-zip-compressed,text/plain"
+    width="100%" 
+    height="200px"
+    view="List"
+    drag split split-limit="512" multiple&gt;
+ &lt;/i-vsom-upload&gt;
+</code></pre>
                 </div>
             </div>
         </div>

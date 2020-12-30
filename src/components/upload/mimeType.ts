@@ -186,8 +186,8 @@ const MimeMap = {
  */
 export function hasExistsMimeType(...mimes : string[]) : boolean {
     for(let i = 0, len = mimes.length; i < len; i++) {
-        var regex = new RegExp(`^(${mimes[i].replace("*", ".*").replace("/", "\/")})$`);
-        if( mimes[i] === "*/*" ||  Object.keys(MimeMap).some((key) => regex.test(key))) {
+        var regex = new RegExp(`^(${mimes[i].trim().replace("*", ".*").replace("/", "\/")})$`);
+        if( mimes[i].trim() === "*/*" ||  Object.keys(MimeMap).some((key) => regex.test(key))) {
             continue;
         }
         return false;
@@ -202,7 +202,7 @@ export function hasExistsMimeType(...mimes : string[]) : boolean {
  * @param mimes Mime类型列表
  */
 export function hasUseMimeType(use : string, ext : string, ...mimes : string[] ) : boolean {
-    let regexs = mimes.map((mime) => new RegExp(`^(${mime.replace("*", ".*").replace("/", "\/")})$`));
+    let regexs = mimes.map((mime) => new RegExp(`^(${mime.trim().replace("*", ".*").replace("/", "\/")})$`));
     let isIncludeUse = regexs.some((regex) => regex.test(use));
     if(!isIncludeUse) 
         return false;
@@ -216,7 +216,7 @@ export function hasUseMimeType(use : string, ext : string, ...mimes : string[] )
  */
 export function getUseMimeExt(...mimes : string[]) : string[] {
     let result : string[] = [];
-    let regexs = mimes.map((mime) => new RegExp(`^(${mime.replace("*", ".*").replace("/", "\/")})$`));
+    let regexs = mimes.map((mime) => new RegExp(`^(${mime.trim().replace("*", ".*").replace("/", "\/")})$`));
     for(let i = 0, len = Object.keys(MimeMap).length; i < len; i++) {
         if (regexs.some(it => it.test(Object.keys(MimeMap)[i]))) {
             result.push(...Object.values(MimeMap)[i])

@@ -265,6 +265,16 @@ export default class XhrUpload {
                         }
                         me.xhrPool.delete(id);
                         me.xhrOnErrorCallback && me.xhrOnErrorCallback(e, id, Number(scale), file, me, { ok : false, message : "服务器出现网络异常!" });
+                    } else {
+                        let s = me.records.get(id);
+                        if (s) {
+                            s.error = data.message;
+                            s.complete = data.ok;
+                            s.loaded = Number(scale);
+                            me.records.set(id, s);
+                        }
+                        me.xhrPool.delete(id);
+                        me.xhrOnErrorCallback && me.xhrOnErrorCallback(e, id, Number(scale), file, me, data);
                     }
                 }
             }
@@ -334,7 +344,7 @@ export default class XhrUpload {
                 s.loaded = 100;
                 xhrUpload.records.set(id, s);
                 xhrUpload.xhrPool.delete(id);
-                xhrUpload.xhrOnCompleteCallback && xhrUpload.xhrOnCompleteCallback(e, id, file, xhrUpload, data);
+                xhrUpload.xhrOnCompleteCallback && xhrUpload.xhrOnCompleteCallback(e, id, 100, file, xhrUpload, data);
             } else {
                 let s = xhrUpload.records.get(id);
                 s.error = '服务器响应超时!';
@@ -342,7 +352,7 @@ export default class XhrUpload {
                 s.loaded = 0;
                 xhrUpload.records.set(id, s);
                 xhrUpload.xhrPool.delete(id);
-                xhrUpload.xhrOnErrorCallback && xhrUpload.xhrOnErrorCallback(e, id, file, 0, xhrUpload, data);
+                xhrUpload.xhrOnErrorCallback && xhrUpload.xhrOnErrorCallback(e, id, 0, file, xhrUpload, data);
             }
         }
     }
@@ -506,7 +516,7 @@ export default class XhrUpload {
             s.complete = false;
             s.loaded = 0;
             xhrUpload.records.set(id, s);
-            xhrUpload.xhrOnErrorCallback && xhrUpload.xhrOnErrorCallback(e, id, file, 0, xhrUpload, { ok : false, message : '服务器出现网络异常!' });
+            xhrUpload.xhrOnErrorCallback && xhrUpload.xhrOnErrorCallback(e, id, 0, file, xhrUpload, { ok : false, message : '服务器出现网络异常!' });
         }
 
         if(xhrUpload.split && e.lengthComputable) {
@@ -517,7 +527,7 @@ export default class XhrUpload {
             s.complete = false;
             s.loaded = scale;
             xhrUpload.records.set(id, s);
-            xhrUpload.xhrOnErrorCallback && xhrUpload.xhrOnErrorCallback(e, id, file, scale, xhrUpload, { ok : false, message : '服务器出现网络异常!' });
+            xhrUpload.xhrOnErrorCallback && xhrUpload.xhrOnErrorCallback(e, id, scale, file, xhrUpload, { ok : false, message : '服务器出现网络异常!' });
         }
 
     }

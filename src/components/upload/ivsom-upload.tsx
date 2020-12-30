@@ -143,6 +143,7 @@
         let me = this;
         let target = (e.target as HTMLInputElement);
         let files = target.files;
+        me.uploadState.clear();
         me.xhrUpload.SaveUploadFiles(files)
         target.value = "";
         for(let file of me.xhrUpload.fileList) {
@@ -377,7 +378,7 @@
                 <div 
                     class={{ "ivsom-upload__annex" :true, "ivsom-upload_drag" : me.drag, "ivsom-upload_empty" : me.uploadState.size === 0 && me.view === "Annex" }} 
                     empty-text={me.uploadState.size === 0 ? me.emptyText :  ''}
-                    onClick={ tsx.modifiers.stop((e : MouseEvent) => me.uploadState.size === 0 && me.drag ? tsx.modifiers.stop(me.onFileSelect) : void 0) }
+                    onClick={ tsx.modifiers.stop((e : MouseEvent) => me.uploadState.size === 0 && me.drag ? me.onFileSelect(e) : void 0) }
                     onDragenter={ tsx.modifiers.stop.prevent((e : DragEvent) => me.drag ? me.onEnterDragArea(e) : void 0) } 
                     onDragover={ tsx.modifiers.stop.prevent((e : DragEvent) => me.drag ? me.onDragFileWait(e) : void 0) } 
                     onDragleave={ tsx.modifiers.stop.prevent((e : DragEvent) => me.drag ? me.onLeaveDragArea(e) : void 0) } 
@@ -407,7 +408,7 @@
                     <div 
                         class={{ "ivsom-upload__list_body" : true, "ivsom-upload_drag" : me.drag, "ivsom-upload_empty" : me.uploadState.size === 0 }} 
                         empty-text={me.uploadState.size === 0 ? me.emptyText :  ''} 
-                        onClick={ tsx.modifiers.stop((e : MouseEvent) => me.uploadState.size === 0 && me.drag ? tsx.modifiers.stop(me.onFileSelect) : void 0) }
+                        onClick={ tsx.modifiers.stop((e : MouseEvent) => me.uploadState.size === 0 && me.drag ? me.onFileSelect(e) : void 0) }
                         onDragenter={ tsx.modifiers.stop.prevent((e : DragEvent) => me.drag ? me.onEnterDragArea(e) : void 0) } 
                         onDragover={ tsx.modifiers.stop.prevent((e : DragEvent) => me.drag ? me.onDragFileWait(e) : void 0) } 
                         onDragleave={ tsx.modifiers.stop.prevent((e : DragEvent) => me.drag ? me.onLeaveDragArea(e) : void 0) } 
@@ -432,7 +433,7 @@
             ) : me.view === "Grid" ? (
                 <div class={{ "ivsom-upload__grid" : true, "ivsom-upload_drag" : me.drag, "ivsom-upload_empty" : me.uploadState.size === 0 }} 
                     empty-text={me.uploadState.size === 0 ? me.emptyText :  ''} 
-                    onClick={ tsx.modifiers.stop((e : MouseEvent) => me.uploadState.size === 0 && me.drag ? tsx.modifiers.stop(me.onFileSelect) : void 0) }
+                    onClick={ tsx.modifiers.stop((e : MouseEvent) => me.uploadState.size === 0 && me.drag ? me.onFileSelect(e) : void 0) }
                     onDragenter={ tsx.modifiers.stop.prevent((e : DragEvent) => me.drag ? me.onEnterDragArea(e) : void 0) } 
                     onDragover={ tsx.modifiers.stop.prevent((e : DragEvent) => me.drag ? me.onDragFileWait(e) : void 0) } 
                     onDragleave={ tsx.modifiers.stop.prevent((e : DragEvent) => me.drag ? me.onLeaveDragArea(e) : void 0) } 
@@ -458,7 +459,7 @@
                     </div>
                 </div>
             ) : null;
-        let container = !me.drag ? <i-vsom-button icon={ me.icon } type="primary" onClick={ tsx.modifiers.stop(me.onFileSelect) }>{ me.text }</i-vsom-button> : null;
+        let container = !me.drag ? <i-vsom-button size="small"  type="primary" style="margin-bottom: 5px;" icon={ me.icon } onClick={ tsx.modifiers.stop(me.onFileSelect) }>{ me.text }</i-vsom-button> : null;
         return (
             <div class="ivsom-upload" style={{ width: me.getContainer.width, height: me.getContainer.height }}>
                 <input class="ivsom-upload__files" type="file" ref="files" accept={ me.accept } multiple={ me.multiple } onChange={me.onFileSelected}></input>
