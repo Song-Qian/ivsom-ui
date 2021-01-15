@@ -85,6 +85,29 @@
     }
  } 
 
+ @keyframes ivsom-slider-center-down {
+    from {
+        -webkit-transform: translate3d(-50%, -100%, 0);
+        transform: translate3d(-50%, -100%, 0);
+        visibility: visible;
+    }
+
+    to {
+        -webkit-transform: translate3d(-50%, 0, 0);
+        transform: translate3d(-50%, 0, 0);
+    }
+ }
+
+ @keyframes ivsom-rotate-right {
+     from {
+         transform: rotate(0deg)
+     }
+
+     to {
+         transform: rotate(360deg)
+     }
+ }
+
  @keyframes ivsom-slider-up {
     from {
         -webkit-transform: perspective(400px);

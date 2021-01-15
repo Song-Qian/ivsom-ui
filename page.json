@@ -19,6 +19,7 @@
         "list.api.html",
         "form.api.html",
         "select.api.html",
-        "upload.api.html"
+        "upload.api.html",
+        "message.api.html"
     ]
 }

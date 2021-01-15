@@ -30,6 +30,7 @@ import iVsomSwitch from './components/form/ivsom-switch'
 import iVsomTabs from './components/tabs/ivsom-tabs'
 import iVsomTabsPanel from './components/tabs/ivsom-tabs-panel'
 import iVsomUpload from './components/upload/ivsom-upload'
+import iVsomMessage from './components/message/ivsom-message'
 
 const components: Array<any> = [
     iVsomRow,
@@ -63,10 +64,13 @@ const install = (Vue: any) => {
     components.forEach((el, n: number) => {
         Vue.component((<any>el).name, el);
     })
-}
 
-if (typeof window !== 'undefined' && window.Vue) {
-    install(window.Vue);
+    Vue.prototype.$ivsom_message = {
+        alert : iVsomMessage.alert,
+        confirm : iVsomMessage.confirm,
+        prompt : iVsomMessage.prompt,
+        toast : iVsomMessage.toast
+    }
 }
 
 export default {

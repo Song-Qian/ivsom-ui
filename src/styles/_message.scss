@@ -1,0 +1,219 @@
+/**
+ * Developer    :   SongQian
+ * Time         :   2020-12-01
+ * eMail        :   onlylove1172559463@vip.qq.com
+ * Description  :   消息框样式
+ */
+
+@import "./ivsom-variable";
+@import "./ivsom-mixin";
+@import "./animate";
+
+.ivsom-message-alert {
+    top: 0px;
+    left: 0px;
+    z-index: 999;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    user-select: none;
+    pointer-events: none;
+
+    &.ivsom-message-mask {
+        pointer-events: auto;
+        background-color: rgba( 255, 255, 255, .5);
+    }
+
+    &.ivsom-message__hasHide {
+        display: none;
+    }
+
+    > .ivsom-message-alert__body {
+        min-width: 280px;
+        min-height: 120px;
+        border-radius: 5px;
+        background-color: #ebeef5;
+        border: 1px solid $border-sub-color;
+        box-shadow: 0px 1px 3px 1px $border-sub-color;
+        display: flex;
+        position:  absolute;
+        top: 15%;
+        left: 50%;
+        z-index: 999;
+        transform: translateX(-50%);
+        flex-flow: column nowrap;
+        animation: ivsom-slider-center-down .3s ease-out .0s 1 normal backwards;
+
+        > .ivsom-message-title {
+            flex: 0 0 36px;
+            overflow: hidden;
+            line-height: 36px;
+            text-indent: 1em;
+            box-sizing: border-box;
+            color: $font-primary-color !important;
+            border-bottom: 1px solid $border-sub-color;
+
+            @include font-sub-text;
+        }
+
+        > .ivsom-message-body {
+            flex : 1 1 auto;
+            overflow: hidden;
+            padding: 10px;
+            box-sizing: border-box;
+            color: $font-primary-color !important;
+            box-sizing: border-box;
+        }
+
+        
+        > .ivsom-message-footer {
+            flex: 0 0 32px;
+            cursor: pointer;
+            line-height: 32px;
+            text-align: center;
+            box-sizing: border-box;
+            pointer-events: auto;
+            color: $primary-color !important;
+            border-top: 1px solid $border-sub-color;
+
+            > .ivsom-message-footer__inner {
+                width: 100%;
+                height: 100%;
+                display: flex;
+
+                > .ivsom-message__success,
+                > .ivsom-message__cancel {
+                    flex: 1 1 auto;
+                    overflow: hidden;
+                    text-align: center;
+    
+                    &:hover {
+                        background-color: #edf2fc;
+                    }
+                }
+
+            }
+
+
+            @include font-sub-text;
+        }
+    }
+}
+
+.ivsom-message-toast {
+    width: 100%;
+    height: 100%;
+    top: 0px;
+    left: 0px;
+    position: fixed;
+    pointer-events: none;
+
+    &.ivsom-message__isHide {
+        display: none;
+    }
+
+    &.ivsom-message-mask {
+        pointer-events: auto;
+        background-color: rgba( 255, 255, 255, .5);
+    }
+
+    > .ivsom-message__body {
+        width: 60px;
+        height: 60px;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        padding: 10px;
+        box-sizing: border-box;
+        border-radius: 5px;
+        background-color: #333;
+        position: absolute;
+
+        > .ivsom-message-loading {
+            width: 40px;
+            height: 40px;
+            line-height: 40px;
+            text-align: center;
+            vertical-align: middle;
+            animation: ivsom-rotate-right 1.5s linear 0s infinite normal forwards;
+        }
+    }
+}
+
+.ivsom-message-prompt {
+    top: 20px;
+    left: 50%;
+    padding: 10px;
+    position: fixed;
+    max-width: 480px;
+    overflow: hidden;
+    box-sizing: border-box;
+    transform: translateX(-50%);
+    border-radius: 5px;
+    background-color: #ebeef5;
+    border: 1px solid $border-sub-color;
+    animation: ivsom-slider-center-down .3s ease-out .0s 1 normal backwards;
+    transition: top .3s ease-out;
+
+    &.ivsom-message-info {
+        background-color: #ebeef5;
+        border: 1px solid $border-sub-color;
+        box-shadow: 0px 1px 3px 1px $border-sub-color;
+        > .ivsom-message__body {
+            color: $font-primary-color;
+        }
+    }
+
+    &.ivsom-message-success {
+        background-color: rgba(59, 209, 52, .5);
+        border: 1px solid $border-success-color;
+        box-shadow: 0px 1px 3px 1px $border-sub-color;
+        > .ivsom-message__body {
+            color: $default-color;
+
+            > i {
+                color: $default-color;
+            }
+        }
+    }
+
+    &.ivsom-message-primary {
+        background-color: rgba(41, 153, 247, .5);
+        border: 1px solid $border-primary-color;
+        box-shadow: 0px 1px 3px 1px $border-sub-color;
+        > .ivsom-message__body {
+            color: $default-color;
+
+            > i {
+                color: $default-color;
+            }
+        }
+    }
+
+    &.ivsom-message-warning {
+        background-color: rgba(236, 192, 37, .5);
+        border: 1px solid $border-warning-color;
+        box-shadow: 0px 1px 3px 1px $border-sub-color;
+        > .ivsom-message__body {
+            color: $default-color;
+
+            > i {
+                color: $default-color;
+            }
+        }
+    }
+
+    &.ivsom-message-error {
+        background-color: rgba(247, 95, 60, .5);
+        border: 1px solid $border-danger-color;
+        box-shadow: 0px 1px 3px 1px $border-sub-color;
+        > .ivsom-message__body {
+            color: $default-color;
+
+            > i {
+                color: $default-color;
+            }
+        }
+    }
+
+}
