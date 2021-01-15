@@ -9,7 +9,7 @@
     <script src="../vue.min.js"></script>
     <script src="./jQuery-1.9.1.js"></script>
     <script src="./PrismJs.js"></script>
-<link href="/ivsom-ui/iVsomUI.css" rel="stylesheet"><script src="/ivsom-ui/vue-class-component.min.js"></script><script src="/ivsom-ui/vue-property-decorator.min.js"></script><script src="/ivsom-ui/vue-tsx-support.min.js"></script><script src="/ivsom-ui/vendors~index.min.js"></script><script src="/ivsom-ui/index.e9f44cd5.min.js"></script></head>
+<link href="/ivsom-ui/iVsomUI.css" rel="stylesheet"><script src="/ivsom-ui/vue-class-component.min.js"></script><script src="/ivsom-ui/vue-property-decorator.min.js"></script><script src="/ivsom-ui/vue-tsx-support.min.js"></script><script src="/ivsom-ui/vendors~index.min.js"></script><script src="/ivsom-ui/index.b8cbb99e.min.js"></script></head>
 
 <body>
     <div id="app" class="main">
@@ -30,6 +30,18 @@
                         <li>Tabs 组件在使用之前，需要有相关的依赖库进行支持，如需阅读：<a href="./start.api.html" target="_blank" >快速开始</a></li>
                         <li>Tabs 组件具有默认的<b>宽度 (100%)</b> 和<b>高度 (auto)</b>, 且Tab Nav栏的<b>高度固定占用40px</b></li>
                         <li><b>iVsomTabs 与 iVsomTabsPanel 需配合使用</b>，单独使用任一组件，将会无法达到预定期望。</li>
+                        <li style="font-weight: bold;">Tabs Props: </li>
+                        <li>width: number | string 宽度</li>
+                        <li>height: number | string Tabs 高度</li>
+                        <li>value: string Tabs Pages 被选中的值</li>
+                        <li>flex: boolean Tab Panel 是否响应式容器大小</li>
+                        <li>stretch: boolean  Tab Label 是否自撑开宽度</li>
+                        <li>type: 'default' | 'card' | 'nav' Tabs 外形样式定义</li>
+                        <li>closable: boolean Tabs Nav 关闭按钮</li>
+                        <li>opne: boolean Tabs Nav 新增按钮</li>
+                        <li style="font-weight: bold;">TabPanel Props: </li>
+                        <li>name: string Tabs label 标题</li>
+                        <li>index: string Tab label 选中值</li>
                     </ul>
                     <blockquote>
                         <i-vsom-tabs v-model="index">

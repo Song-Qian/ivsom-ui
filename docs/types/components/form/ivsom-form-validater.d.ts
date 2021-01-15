@@ -1,6 +1,9 @@
 import * as tsx from 'vue-tsx-support';
 import 'vue-tsx-support/enable-check';
 declare type Props = {
+    Inline: Boolean;
+    Span: Number;
+    Offset: Number;
     Required: Boolean;
     Label: String;
     Min: number;
@@ -18,6 +21,9 @@ declare type ScopedSlots = {
     default: void;
 };
 export default class iVsomFormValidater extends tsx.Component<Props, any, ScopedSlots> {
+    readonly inline: boolean;
+    readonly span: number;
+    readonly offset: number;
     readonly label: string;
     readonly required: boolean;
     readonly min: number;

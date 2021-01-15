@@ -34,6 +34,13 @@
                     password: '',
                     confirmPassword: ''
                 },
+                Form2 : {
+                    name : '',
+                    role : '',
+                    sex : '',
+                    phone : '',
+                    age : 1
+                },
                 position: 'left'
             }
         },

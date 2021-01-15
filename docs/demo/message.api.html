@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>Message api demo</title>
+    <link rel="stylesheet" href="./cube.min.css">
+    <link rel="stylesheet" href="./demo.css">
+    <script src="../vue.min.js"></script>
+    <script src="./jQuery-1.9.1.js"></script>
+    <script src="./PrismJs.js"></script>
+<link href="/ivsom-ui/iVsomUI.css" rel="stylesheet"><script src="/ivsom-ui/vue-class-component.min.js"></script><script src="/ivsom-ui/vue-property-decorator.min.js"></script><script src="/ivsom-ui/vue-tsx-support.min.js"></script><script src="/ivsom-ui/vendors~index.min.js"></script><script src="/ivsom-ui/index.b8cbb99e.min.js"></script></head>
+
+<body>
+    <div id="app" class="main">
+        <h1 class="logo">Message Api</h1>
+        <div class="nav-tabs">
+            <ul id="tabs" class="dib-box">
+                <li class="dib active"><span> CDN </span></li>
+                <li class="dib"><span> NodeJS </span></li>
+            </ul>
+        </div>
+        <div class="tab-container">
+            <div class="content unicode" style="display: block;">
+                <div class="article markdown">
+                    <h2 id="unicode-">基础用法</h2>
+                    <hr>
+                    <p>普通菜单</p>
+                    <ul>
+                        <li>Message 组件在使用之前，需要有相关的依赖库进行支持，如需阅读：<a href="./start.api.html" target="_blank" >快速开始</a></li>
+                        <li style="font-weight: bold;">Message 公共属性:</li>
+                        <li>message: string 消息内容</li>
+                        <li>mask: boolean 是否遮罩</li>
+                        <li>target: VNode 消息框弹出时，追加到哪个元素里面。</li>
+                        <li>isDestroy: boolean 消息框移除时，是否销毁。</li>
+                        <li style="font-weight: bold;">Alert Props :</li>
+                        <li>mask: boolean 默认值 false</li>
+                        <li>isDestroy: boolean 默认值 true</li>
+                        <li>type: "success" | "primary" | "info" | "warning" | "error" 消息框的图标类型</li>
+                        <li>title: string 消息框的标题头</li>
+                        <li>width: number | string 消息框的宽度</li>
+                        <li>height: number | string 消息框的高度</li>
+                        <li>isOuterClose: boolean 是否点击外部关闭按钮, mask === true 时生效。</li>
+                        <li style="font-weight: bold;">Toast Props :</li>
+                        <li>mask: boolean 默认值 true</li>
+                        <li>isDestroy: boolean 默认值 true</li>
+                        <li>message: string Toast此属性无效</li>
+                        <li style="font-weight: bold;">Prompt Props :</li>
+                        <li>mask: boolean Prompt此属性无效</li>
+                        <li>isDestroy: boolean 默认值 true</li>
+                        <li>timeout: number 消息停留时间</li>
+                        <li>type: number 消息类型</li>
+                    </ul>
+                    <h2 id="unicode-">普通消息框</h2>
+                    <hr>
+                    <blockquote>
+                        <i-vsom-button type="primary" icon="icon-gongnengtubiao-60" @click="openAlert({ title : '提示', message : '这是一个普通的消息框' })">alert 消息框</i-vsom-button>
+                    </blockquote>
+                    <pre><code class="language-html"
+>&lt;i-vsom-button type="primary" icon="icon-gongnengtubiao-60" @click="openAlert({ title : '提示', message : '这是一个普通的消息框' })"&gt;alert 消息框&lt;/i-vsom-button&gt;
+</code></pre>
+                    <pre><code class="language-js"
+>var app = new Vue({
+    el : '#app',
+    data : function() {
+        return {
+        }
+    },
+    methods : {
+        openAlert: function(opts) {
+            var me = this;
+            me.$ivsom_message.alert(opts);
+        }
+    }
+})
+</code></pre>
+                    <h2 id="unicode-">模态消息框</h2>
+                    <hr>
+                    <blockquote>
+                        <i-vsom-button type="primary" icon="icon-gongnengtubiao-60" @click="$ivsom_message.alert({ title : '提示', message : '这是一个普通的消息框', mask: true })">alert 消息框</i-vsom-button>
+                    </blockquote>
+                    <pre><code class="language-html"
+>&lt;i-vsom-button type="primary" icon="icon-gongnengtubiao-60" @click="$ivsom_message.alert({ title : '提示', message : '这是一个普通的消息框', mask: true })"&gt;alert 消息框&lt;/i-vsom-button&gt;
+</code></pre>
+                    <h2 id="unicode-">取消点击模态背景移除消息框</h2>
+                    <hr>
+                    <blockquote>
+                        <i-vsom-button type="primary" icon="icon-gongnengtubiao-60" @click="$ivsom_message.alert({ title : '提示', message : '这是一个普通的消息框', mask: true, isOuterClose: false })">alert 消息框</i-vsom-button>
+                    </blockquote>
+                    <pre><code class="language-html"
+>&lt;i-vsom-button type="primary" icon="icon-gongnengtubiao-60" @click="$ivsom_message.alert({ title : '提示', message : '这是一个普通的消息框', mask: true, isOuterClose: false })"&gt;alert 消息框&lt;/i-vsom-button&gt;
+</code></pre>
+                    <h2 id="unicode-">消息框追加到页面上某个元素内部，默认是body</h2>
+                    <hr>
+                    <blockquote>
+                        <i-vsom-button type="primary" icon="icon-gongnengtubiao-60" @click="$ivsom_message.alert({ title : '提示', message : '这是一个普通的消息框', mask: true, target : $root })">alert 消息框</i-vsom-button>
+                    </blockquote>
+                    <pre><code class="language-html"
+>&lt;i-vsom-button type="primary" icon="icon-gongnengtubiao-60" @click="$ivsom_message.alert({ title : '提示', message : '这是一个普通的消息框', mask: true, target : $root })"&gt;alert 消息框&lt;/i-vsom-button&gt;
+</code></pre>
+                    <h2 id="unicode-">复用同一个消息框</h2>
+                    <hr>
+                    <blockquote>
+                        <i-vsom-button type="primary" icon="icon-gongnengtubiao-60" @click="$ivsom_message.alert({ title : '提示', message : '这是一个普通的消息框', mask: true, target : $root, isDestroy: false })">alert 消息框</i-vsom-button>
+                    </blockquote>
+                    <pre><code class="language-html"
+>&lt;i-vsom-button type="primary" icon="icon-gongnengtubiao-60" @click="$ivsom_message.alert({ title : '提示', message : '这是一个普通的消息框', mask: true, target : $root, isDestroy: false })"&gt;alert 消息框&lt;/i-vsom-button&gt;
+</code></pre>   
+                    <h2 id="unicode-">设置消息框大小</h2>
+                    <hr>
+                    <blockquote>
+                        <i-vsom-button type="primary" icon="icon-gongnengtubiao-60" @click="$ivsom_message.alert({ title : '提示', message : '这是一个普通的消息框', mask: true, target : $root, width: 460, height: 220 })">alert 消息框</i-vsom-button>
+                    </blockquote>
+                    <pre><code class="language-html"
+>&lt;i-vsom-button type="primary" icon="icon-gongnengtubiao-60" @click="$ivsom_message.alert({ title : '提示', message : '这是一个普通的消息框', mask: true, target : $root, width: 460, height: 220 })"&gt;alert 消息框&lt;/i-vsom-button&gt;
+</code></pre>  
+                    <h2 id="unicode-">不同类型的消息框</h2>
+                    <hr>
+                    <blockquote>
+                        <i-vsom-button type="primary" icon="icon-gongnengtubiao-60" @click="$ivsom_message.alert({ title : '提示', message : '这是一个普通的消息框', mask: true, target : $root, type: 'info' })">info 消息框</i-vsom-button>
+                        <i-vsom-button type="primary" icon="icon-gongnengtubiao-60" @click="$ivsom_message.alert({ title : '提示', message : '这是一个普通的消息框', mask: true, target : $root, type: 'primary' })">primary 消息框</i-vsom-button>
+                        <i-vsom-button type="primary" icon="icon-gongnengtubiao-60" @click="$ivsom_message.alert({ title : '提示', message : '这是一个普通的消息框', mask: true, target : $root, type: 'success' })">success 消息框</i-vsom-button>
+                        <i-vsom-button type="primary" icon="icon-gongnengtubiao-60" @click="$ivsom_message.alert({ title : '提示', message : '这是一个普通的消息框', mask: true, target : $root, type: 'warning' })">warning 消息框</i-vsom-button>
+                        <i-vsom-button type="primary" icon="icon-gongnengtubiao-60" @click="$ivsom_message.alert({ title : '提示', message : '这是一个普通的消息框', mask: true, target : $root, type: 'error' })">error 消息框</i-vsom-button>
+                    </blockquote>
+                    <pre><code class="language-html"
+>&lt;i-vsom-button type="primary" icon="icon-gongnengtubiao-60" @click="$ivsom_message.alert({ title : '提示', message : '这是一个普通的消息框', mask: true, target : $root, type: 'info' })"&gt;info 消息框&lt;/i-vsom-button&gt;
+ &lt;i-vsom-button type="primary" icon="icon-gongnengtubiao-60" @click="$ivsom_message.alert({ title : '提示', message : '这是一个普通的消息框', mask: true, target : $root, type: 'primary' })"&gt;primary 消息框&lt;/i-vsom-button&gt;
+ &lt;i-vsom-button type="primary" icon="icon-gongnengtubiao-60" @click="$ivsom_message.alert({ title : '提示', message : '这是一个普通的消息框', mask: true, target : $root, type: 'success' })"&gt;success 消息框&lt;/i-vsom-button&gt;
+ &lt;i-vsom-button type="primary" icon="icon-gongnengtubiao-60" @click="$ivsom_message.alert({ title : '提示', message : '这是一个普通的消息框', mask: true, target : $root, type: 'warning' })"&gt;warning 消息框&lt;/i-vsom-button&gt;
+ &lt;i-vsom-button type="primary" icon="icon-gongnengtubiao-60" @click="$ivsom_message.alert({ title : '提示', message : '这是一个普通的消息框', mask: true, target : $root, type: 'error' })"&gt;error 消息框&lt;/i-vsom-button&gt;
+</code></pre>
+                    <h2 id="unicode-">消息框的关闭事件</h2>
+                    <hr> 
+                    <blockquote>
+                        <i-vsom-button type="primary" icon="icon-gongnengtubiao-60" @click="openAlertOn({ title : '提示', message : '这是一个普通的消息框', mask: true, target : $root })">alert 消息框</i-vsom-button>
+                    </blockquote>
+                    <pre><code class="language-html"
+>&lt;i-vsom-button type="primary" icon="icon-gongnengtubiao-60" @click="openAlertOn({ title : '提示', message : '这是一个普通的消息框', mask: true, target : $root })"&gt;alert 消息框&lt;/i-vsom-button&gt;
+</code></pre>
+                    <pre><code class="language-js"
+>var app = new Vue({
+    el : '#app',
+    data : function() {
+        return {
+        }
+    },
+    methods : {
+        openAlertOn: function(opts) {
+            var me = this;
+            me.$ivsom_message.alert(opts, function(e){
+                alert("消息框被关闭了");
+            });
+        }
+    }
+})
+</code></pre>
+                    <h2 id="unicode-">普通确认框</h2>
+                    <hr> 
+                    <blockquote>
+                        <i-vsom-button type="primary" icon="icon-gongnengtubiao-60" @click="$ivsom_message.confirm({ title : '提示', message : '这是一个普通的确认框' })">confirm 确认框</i-vsom-button>
+                    </blockquote>
+                    <pre><code class="language-html"
+    >&lt;i-vsom-button type="primary" icon="icon-gongnengtubiao-60" @click="$ivsom_message.confirm({ title : '提示', message : '这是一个普通的确认框' })"&gt;confirm 确认框&lt;/i-vsom-button&gt;
+    </code></pre>
+                    <h2 id="unicode-">不同类型的确认框</h2>
+                    <hr> 
+                    <blockquote>
+                        <i-vsom-button type="primary" icon="icon-gongnengtubiao-60" @click="$ivsom_message.confirm({ title : '提示', message : '这是一个普通的确认框', type: 'info' })">info 确认框</i-vsom-button>
+                        <i-vsom-button type="primary" icon="icon-gongnengtubiao-60" @click="$ivsom_message.confirm({ title : '提示', message : '这是一个普通的确认框', type: 'success' })">success 确认框</i-vsom-button>
+                        <i-vsom-button type="primary" icon="icon-gongnengtubiao-60" @click="$ivsom_message.confirm({ title : '提示', message : '这是一个普通的确认框', type: 'primary' })">primary 确认框</i-vsom-button>
+                        <i-vsom-button type="primary" icon="icon-gongnengtubiao-60" @click="$ivsom_message.confirm({ title : '提示', message : '这是一个普通的确认框', type: 'warning' })">warning 确认框</i-vsom-button>
+                        <i-vsom-button type="primary" icon="icon-gongnengtubiao-60" @click="$ivsom_message.confirm({ title : '提示', message : '这是一个普通的确认框', type: 'error' })">error 确认框</i-vsom-button>
+                    </blockquote>
+                    <pre><code class="language-html"
+>&lt;i-vsom-button type="primary" icon="icon-gongnengtubiao-60" @click="$ivsom_message.confirm({ title : '提示', message : '这是一个普通的确认框', type: 'info' })"&gt;info 确认框&lt;/i-vsom-button&gt;
+ &lt;i-vsom-button type="primary" icon="icon-gongnengtubiao-60" @click="$ivsom_message.confirm({ title : '提示', message : '这是一个普通的确认框', type: 'success' })"&gt;success 确认框&lt;/i-vsom-button&gt;
+ &lt;i-vsom-button type="primary" icon="icon-gongnengtubiao-60" @click="$ivsom_message.confirm({ title : '提示', message : '这是一个普通的确认框', type: 'primary' })"&gt;primary 确认框&lt;/i-vsom-button&gt;
+ &lt;i-vsom-button type="primary" icon="icon-gongnengtubiao-60" @click="$ivsom_message.confirm({ title : '提示', message : '这是一个普通的确认框', type: 'warning' })"&gt;warning 确认框&lt;/i-vsom-button&gt;
+ &lt;i-vsom-button type="primary" icon="icon-gongnengtubiao-60" @click="$ivsom_message.confirm({ title : '提示', message : '这是一个普通的确认框', type: 'error' })"&gt;error 确认框&lt;/i-vsom-button&gt;
+</code></pre>
+                    <h2 id="unicode-">确认框的事件</h2>
+                    <hr>
+                    <blockquote>
+                        <i-vsom-button type="primary" icon="icon-gongnengtubiao-60" @click="openConfirmOn({ title : '提示', message : '这是一个普通的确认框', isDestroy : true, target: $root })">确认框</i-vsom-button>
+                    </blockquote>
+                    <pre><code class="language-html"
+>&lt;i-vsom-button type="primary" icon="icon-gongnengtubiao-60" @click="openConfirmOn({ title : '提示', message : '这是一个普通的确认框', isDestroy : true, target: $root })"&gt;确认框&lt;/i-vsom-button&gt;
+</code></pre>
+<pre><code class="language-js"
+>var app = new Vue({
+    el : '#app',
+    data : function() {
+        return {
+        }
+    },
+    methods : {
+        openConfirmOn: function(opts) {
+            var me = this;
+            me.$ivsom_message.confirm(opts, function(e) {
+                alert("yes")
+            }, function(e) {
+                alert("no")
+            });
+        }
+    }
+})
+</code></pre>
+                    <h2 id="unicode-">具有遮罩事件的确认框</h2>
+                    <hr>
+                    <blockquote>
+                        <i-vsom-button type="primary" icon="icon-gongnengtubiao-60" @click="$ivsom_message.confirm({ title : '提示', message : '这是一个普通的确认框', isDestroy : true, target: $root, mask:true, isOuterClose : false })">确认框</i-vsom-button>
+                    </blockquote>
+                    <pre><code class="language-html"
+>&lt;i-vsom-button type="primary" icon="icon-gongnengtubiao-60" @click="$ivsom_message.confirm({ title : '提示', message : '这是一个普通的确认框', isDestroy : true, target: $root, mask:true, isOuterClose : false })"&gt;确认框&lt;/i-vsom-button&gt;
+</code></pre>
+                    <h2 id="unicode-">普通状态框</h2>
+                    <hr>
+                    <blockquote>
+                        <i-vsom-button type="primary" icon="icon-gongnengtubiao-60" @click="$ivsom_message.toast({ target: $root, timeout : 3000 })">状态框</i-vsom-button>
+                    </blockquote>
+                    <pre><code class="language-html"
+>&lt;i-vsom-button type="primary" icon="icon-gongnengtubiao-60" @click="$ivsom_message.toast({ target: $root, timeout : 3000 })"&gt;状态框&lt;/i-vsom-button&gt;
+</code></pre>
+                    <h2 id="unicode-">没有遮罩的状态框</h2>
+                    <hr>
+                    <blockquote>
+                        <i-vsom-button type="primary" icon="icon-gongnengtubiao-60" @click="$ivsom_message.toast({ target: $root, timeout : 3000, mask: false })">状态框</i-vsom-button>
+                    </blockquote>
+                    <pre><code class="language-html"
+>&lt;i-vsom-button type="primary" icon="icon-gongnengtubiao-60" @click="$ivsom_message.toast({ target: $root, timeout : 3000, mask: false })"&gt;状态框&lt;/i-vsom-button&gt;
+</code></pre>
+                    <h2 id="unicode-">如何手动关闭状态框</h2>
+                    <hr>
+                    <blockquote>
+                        <i-vsom-button type="primary" icon="icon-gongnengtubiao-60" @click="openToast({ target: $root, mask: true, isDestroy: true })">状态框</i-vsom-button>
+                    </blockquote>
+                    <pre><code class="language-html"
+>&lt;i-vsom-button type="primary" icon="icon-gongnengtubiao-60" @click="openToast({ target: $root, mask: true, isDestroy: true })"&gt;状态框&lt;/i-vsom-button&gt;
+</code></pre>
+<pre><code class="language-js"
+>var app = new Vue({
+    el : '#app',
+    data : function() {
+        return {
+        }
+    },
+    methods : {
+        openToast: function(opts) {
+            var me = this;
+            var toast = me.$ivsom_message.toast(opts);
+            setTimeout(function() {
+                toast.Hide();
+            }, 3000)
+        }
+    }
+})
+</code></pre>
+                    <h2 id="unicode-">普通提示框</h2>
+                    <hr>
+                    <blockquote>
+                        <i-vsom-button type="primary" icon="icon-gongnengtubiao-60" @click="$ivsom_message.prompt({ target: $root, type : 'info', message : '这是一个普通提示框' })">普通提示框</i-vsom-button>
+                        <i-vsom-button type="primary" icon="icon-gongnengtubiao-60" @click="$ivsom_message.prompt({ target: $root, type : 'primary', message : '这是一个主要提示框' })">主要提示框</i-vsom-button>
+                        <i-vsom-button type="primary" icon="icon-gongnengtubiao-60" @click="$ivsom_message.prompt({ target: $root, type : 'success', message : '这是一个正确提示框' })">正确提示框</i-vsom-button>
+                        <i-vsom-button type="primary" icon="icon-gongnengtubiao-60" @click="$ivsom_message.prompt({ target: $root, type : 'warning', message : '这是一个警告提示框' })">警告提示框</i-vsom-button>
+                        <i-vsom-button type="primary" icon="icon-gongnengtubiao-60" @click="$ivsom_message.prompt({ target: $root, type : 'error', message : '这是一个异常提示框' })">异常提示框</i-vsom-button>
+                    </blockquote>
+                    <pre><code class="language-html"
+>&lt;i-vsom-button type="primary" icon="icon-gongnengtubiao-60" @click="$ivsom_message.prompt({ target: $root, type : 'info', message : '这是一个普通提示框' })"&gt;普通提示框&lt;/i-vsom-button&gt;
+ &lt;i-vsom-button type="primary" icon="icon-gongnengtubiao-60" @click="$ivsom_message.prompt({ target: $root, type : 'primary', message : '这是一个主要提示框' })"&gt;主要提示框&lt;/i-vsom-button&gt;
+ &lt;i-vsom-button type="primary" icon="icon-gongnengtubiao-60" @click="$ivsom_message.prompt({ target: $root, type : 'success', message : '这是一个正确提示框' })"&gt;正确提示框&lt;/i-vsom-button&gt;
+ &lt;i-vsom-button type="primary" icon="icon-gongnengtubiao-60" @click="$ivsom_message.prompt({ target: $root, type : 'warning', message : '这是一个警告提示框' })"&gt;警告提示框&lt;/i-vsom-button&gt;
+ &lt;i-vsom-button type="primary" icon="icon-gongnengtubiao-60" @click="$ivsom_message.prompt({ target: $root, type : 'error', message : '这是一个异常提示框' })"&gt;异常提示框&lt;/i-vsom-button&gt;
+</code></pre>
+                    <h2 id="unicode-">延长提示框显示时间</h2>
+                    <hr>
+                    <blockquote>
+                        <i-vsom-button type="primary" icon="icon-gongnengtubiao-60" @click="$ivsom_message.prompt({ target: $root, type : 'info', message : '这是一个普通提示框', timeout: 5000 })">提示框</i-vsom-button>
+                    </blockquote>
+                    <pre><code class="language-html"
+>&lt;i-vsom-button type="primary" icon="icon-gongnengtubiao-60" @click="$ivsom_message.prompt({ target: $root, type : 'info', message : '这是一个普通提示框', timeout: 5000 })"&gt;提示框&lt;/i-vsom-button&gt;
+</code></pre>
+
+                    <h2 id="unicode-">提示框隐移除事件</h2>
+                    <hr>
+                    <blockquote>
+                        <i-vsom-button type="primary" icon="icon-gongnengtubiao-60" @click="openPrompt({ target: $root, type : 'info', message : '这是一个普通提示框' })">提示框</i-vsom-button>
+                    </blockquote>
+                    <pre><code class="language-html"
+>&lt;i-vsom-button type="primary" icon="icon-gongnengtubiao-60" @click="openPrompt({ target: $root, type : 'info', message : '这是一个普通提示框' })"&gt;提示框&lt;/i-vsom-button&gt;
+</code></pre>
+                    <pre><code class="language-js"
+>var app = new Vue({
+    el : '#app',
+    data : function() {
+        return {
+        }
+    },
+    methods : {
+        openPrompt: function(opts) {
+            var me = this;
+            me.$ivsom_message.prompt(opts, function() {
+                alert("prompt leave");
+            });
+        }
+    }
+})
+</code></pre>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        $(document).ready(function () {
+            $('.tab-container .content:first').show()
+
+            $('#tabs li').click(function (e) {
+                var tabContent = $('.tab-container .content')
+                var index = $(this).index()
+
+                if ($(this).hasClass('active')) {
+                    return
+                } else {
+                    $('#tabs li').removeClass('active')
+                    $(this).addClass('active')
+
+                    tabContent.hide().eq(index).fadeIn()
+                }
+            })
+        })
+    </script>
+    <script src="./message.demo.js"></script>
+</body>
+
+</html>

@@ -6,7 +6,7 @@ declare type Props = {
         to: string;
     }>;
     AutoRoute: boolean;
-    Target: '_parent' | '_blank' | '_self' | '_top' | string;
+    Target: string;
     Separator: string;
 };
 declare type Event = {
@@ -19,7 +19,7 @@ export default class iVsomBreadCrumbs extends tsx.Component<Props, Event> {
         to: string;
     }>;
     readonly autoRoute: boolean;
-    readonly target: '_parent' | '_blank' | '_self' | '_top' | string;
+    readonly target: string;
     readonly separator: string;
     private readonly map;
     protected get DebrisProvide(): Map<string, {

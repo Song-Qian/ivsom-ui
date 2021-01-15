@@ -1,9 +1,9 @@
 import * as tsx from 'vue-tsx-support';
 import 'vue-tsx-support/enable-check';
 declare type Props = {
-    Width: number | string;
-    Height: number | string;
-    Value: string;
+    Width: Number | String;
+    Height: Number | String;
+    Value: String;
     Flex: Boolean;
     Stretch: Boolean;
     Type: 'default' | 'card' | 'nav';

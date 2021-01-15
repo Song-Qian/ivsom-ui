@@ -6,7 +6,7 @@ declare type Props = {
     Filter: (children: any, text: string, deepNumber: number) => boolean;
     SearchText: String;
     Horizontal: boolean;
-    Target: 'top' | 'blank' | 'parent' | 'self' | String;
+    Target: String;
 };
 declare type ScopedSlots = {
     default: void;
@@ -18,7 +18,7 @@ export default class iVsomMenu extends tsx.Component<Props, any, ScopedSlots> {
     readonly filter: (children: any, text: string, deepNumber: number) => boolean;
     readonly searchText: string;
     readonly horizontal: boolean;
-    readonly target: 'top' | 'blank' | 'parent' | 'self' | String;
+    readonly target: String;
     get rootMenu(): this;
     readonly search_input: JSX.Element;
     protected readonly menu_warp: HTMLElement;

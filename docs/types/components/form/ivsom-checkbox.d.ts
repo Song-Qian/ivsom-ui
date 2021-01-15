@@ -1,44 +1,26 @@
 import * as tsx from 'vue-tsx-support';
 import 'vue-tsx-support/enable-check';
-interface Props {
-    value: string;
-    dataSource: Array<{
-        label: string;
-        value: string;
-    }>;
-}
-interface HTMLInputEvent extends Event {
-    target: HTMLInputElement & EventTarget & InputEvent;
-}
+declare type Props = {
+    Value: any;
+    Disabled: Boolean;
+    Name: String;
+    Size: 'medium' | 'small' | 'mini';
+    Checked: any;
+};
 declare type ScopedSlots = {
     default: void;
 };
-export default class iVsomCheckbox extends tsx.Component<Props, Event, ScopedSlots> {
-    constructor();
-    readonly value: string;
-    readonly dataSource: Array<{
-        label: string;
-        value: string;
-        disabled: boolean;
-    }>;
-    validate: boolean;
-    trigger: 'blur' | 'change';
-    private checkedModel;
-    protected change(event: HTMLInputEvent): void;
-    protected isChecked(val: any): boolean;
-    get getModel(): any;
-    protected filterModel(vModel: []): [];
-    private readonly map;
-    protected get checkboxProvide(): Map<string, {
-        label: string;
-        value: string;
-        disabled: boolean;
-    }>;
-    protected set checkboxProvide(map: Map<string, {
-        label: string;
-        value: string;
-        disabled: boolean;
-    }>);
+export default class iVsomCheckBox extends tsx.Component<Props, any, ScopedSlots> {
+    readonly value: any;
+    readonly disabled: Boolean;
+    readonly size: 'medium' | 'small' | 'mini';
+    readonly name: string;
+    readonly includedValue: {
+        [key: string]: any;
+    };
+    checkedValue: any;
+    private readonly id;
+    protected onChange(e: MouseEvent, value: any): void;
     protected render(): JSX.Element;
 }
 export {};

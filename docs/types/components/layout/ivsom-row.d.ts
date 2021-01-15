@@ -1,9 +1,9 @@
 import * as tsx from 'vue-tsx-support';
 import 'vue-tsx-support/enable-check';
 declare type Props = {
-    align: 'top' | 'middle' | 'bottom';
+    Align: 'top' | 'middle' | 'bottom';
     Justify: 'start' | 'end' | 'center' | 'space-around' | 'space-between';
-    flex: boolean;
+    Flex: boolean;
 };
 declare type ScopedSlots = {
     default: void;

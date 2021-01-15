@@ -18,7 +18,6 @@ declare type ScopedSlots = {
     suffix: String;
 };
 export default class iVsomSelect extends tsx.Component<Props, any, ScopedSlots> {
-    constructor();
     readonly width: string | number;
     readonly size: 'medium' | 'small' | 'mini';
     readonly prefix: string;

@@ -8,10 +8,10 @@
         <script src="../vue.min.js"></script>
         <script src="./jQuery-1.9.1.js"></script>
         <script src="./PrismJs.js"></script>
-    <link href="/ivsom-ui/iVsomUI.css" rel="stylesheet"><script src="/ivsom-ui/vue-class-component.min.js"></script><script src="/ivsom-ui/vue-property-decorator.min.js"></script><script src="/ivsom-ui/vue-tsx-support.min.js"></script><script src="/ivsom-ui/vendors~index.min.js"></script><script src="/ivsom-ui/index.e9f44cd5.min.js"></script></head>
+    <link href="/ivsom-ui/iVsomUI.css" rel="stylesheet"><script src="/ivsom-ui/vue-class-component.min.js"></script><script src="/ivsom-ui/vue-property-decorator.min.js"></script><script src="/ivsom-ui/vue-tsx-support.min.js"></script><script src="/ivsom-ui/vendors~index.min.js"></script><script src="/ivsom-ui/index.b8cbb99e.min.js"></script></head>
     <body>
         <div id="app" class="main">
-            <h1 class="logo">Checkbox Api</h1>
+            <h1 class="logo">CheckBox Api</h1>
             <div class="nav-tabs">
                 <ul id="tabs" class="dib-box">
                     <li class="dib active"><span> CDN </span></li>
@@ -23,84 +23,238 @@
                     <div class="article markdown">
                         <h2 id="unicode-">基础用法</h2>
                         <hr>
-                        <p>常规复选框</p>
+                        <p>常规单选框</p>
                         <ul>
-                            <li>Checkbox 组件在使用之前，需要有相关的依赖库进行支持，如需阅读：<a href="./start.api.html" target="_blank" >快速开始</a></li>
+                            <li>CheckBox 组件在使用之前，需要有相关的依赖库进行支持，如需阅读：<a href="./start.api.html" target="_blank">快速开始</a></li>
+                            <li>name : string 表单字段名称</li>
+                            <li>checked : any 复选框选中的值</li>
+                            <li>size: 'medium' | 'small' | 'mini' 表单元素大小</li>
+                            <li>disabled: Boolean 是否禁用</li>
                         </ul>
                         <blockquote>
-                            <i-vsom-checkbox :data-source="data" @on-change="change"></i-vsom-checkbox>
+                            <i-vsom-check-box v-model="value" value="苹果">苹果</i-vsom-check-box>
+                            <i-vsom-check-box v-model="value" value="草莓">草莓</i-vsom-check-box>
+                            <i-vsom-check-box v-model="value" value="香蕉">香蕉</i-vsom-check-box>
+                            <i-vsom-check-box v-model="value" value="火龙果">火龙果</i-vsom-check-box>
+                            <i-vsom-check-box v-model="value" value="橙子">橙子</i-vsom-check-box>
+                            <i-vsom-check-box v-model="value" value="榴莲">榴莲</i-vsom-check-box>
+                            <i-vsom-check-box v-model="value" value="百香果">百香果</i-vsom-check-box>
                         </blockquote>
                         <pre><code class="language-html"
-                            >&lt;i-vsom-checkbox :data-source="data"&gt;&lt;/i-vsom-checkbox&gt;   
-                            </code></pre>
+>&lt;i-vsom-check-box v-model="value" value="苹果"&gt;苹果&lt;/i-vsom-check-box&gt;
+ &lt;i-vsom-check-box v-model="value" value="草莓"&gt;草莓&lt;/i-vsom-check-box&gt;
+ &lt;i-vsom-check-box v-model="value" value="香蕉"&gt;香蕉&lt;/i-vsom-check-box&gt;
+ &lt;i-vsom-check-box v-model="value" value="火龙果"&gt;火龙果&lt;/i-vsom-check-box&gt;
+ &lt;i-vsom-check-box v-model="value" value="橙子"&gt;橙子&lt;/i-vsom-check-box&gt;
+ &lt;i-vsom-check-box v-model="value" value="榴莲"&gt;榴莲&lt;/i-vsom-check-box&gt;
+ &lt;i-vsom-check-box v-model="value" value="百香果"&gt;百香果&lt;/i-vsom-check-box&gt;
+</code></pre>
                         <pre><code class="language-js"
  >var app = new Vue({
-     el : '#app',
+    el : '#app',
     data : function() {
         return {
-            data:[
-                {label:'苹果',value:'red'},{label:'香蕉'',value:'write'},
-            ]
+            value : ''
         }
-    },
-                               
+    }                       
 })
 </code></pre>
-                        <h2 id="unicode-">v-model双向绑定复选框</h2>
+                        <h2 id="unicode-">不同大小的复选框</h2>
                         <hr>
-                        <ul>
-                            <li>v-model支持双向数据绑定，当默认为空则不选中值，默认有值则选中对应的vaule值</li>
-                        </ul>
+                        <p>size 表单的大小</p>
                         <blockquote>
-                            <i-vsom-checkbox v-model="model" @on-change="change" :data-source="data"></i-vsom-checkbox>
+                            <i-vsom-check-box v-model="value1" size="medium" value="苹果">苹果</i-vsom-check-box>
+                            <i-vsom-check-box v-model="value1" size="medium" value="草莓">草莓</i-vsom-check-box>
+                            <i-vsom-check-box v-model="value1" size="small" value="香蕉">香蕉</i-vsom-check-box>
+                            <i-vsom-check-box v-model="value1" size="small" value="火龙果">火龙果</i-vsom-check-box>
+                            <i-vsom-check-box v-model="value1" size="small" value="橙子">橙子</i-vsom-check-box>
+                            <i-vsom-check-box v-model="value1" size="mini" value="榴莲">榴莲</i-vsom-check-box>
+                            <i-vsom-check-box v-model="value1" size="mini" value="百香果">百香果</i-vsom-check-box>
                         </blockquote>
                         <pre><code class="language-html"
-                            >&lt;i-vsom-checkbox v-model="model" @on-change="change" :data-source="data"&gt;&lt;/i-vsom-checkbox&gt;   
-                            </code></pre>
-                        <pre><code class="language-js" 
+>&lt;i-vsom-check-box v-model="value" size="medium" value="苹果"&gt;苹果&lt;/i-vsom-check-box&gt;
+ &lt;i-vsom-check-box v-model="value" size="medium" value="草莓"&gt;草莓&lt;/i-vsom-check-box&gt;
+ &lt;i-vsom-check-box v-model="value" size="small" value="香蕉"&gt;香蕉&lt;/i-vsom-check-box&gt;
+ &lt;i-vsom-check-box v-model="value" size="small" value="火龙果"&gt;火龙果&lt;/i-vsom-check-box&gt;
+ &lt;i-vsom-check-box v-model="value" size="small" value="橙子"&gt;橙子&lt;/i-vsom-check-box&gt;
+ &lt;i-vsom-check-box v-model="value" size="mini" value="榴莲"&gt;榴莲&lt;/i-vsom-check-box&gt;
+ &lt;i-vsom-check-box v-model="value" size="mini" value="百香果"&gt;百香果&lt;/i-vsom-check-box&gt;
+</code></pre>
+                        <pre><code class="language-js"
 >var app = new Vue({
     el : '#app',
     data : function() {
         return {
-            data:[
-                {label:'苹果',value:'red'},{label:'香蕉',value:'write'},
-            ],
-            model:"red"
+            value : ''
+        }
+    }                       
+})
+</code></pre>
+                        <h2 id="unicode-">复选框的禁用</h2>
+                        <hr>
+                        <p>disabled 表单的大小</p>
+                        <blockquote>
+                            <i-vsom-check-box v-model="value2" size="small" value="苹果">苹果</i-vsom-check-box>
+                            <i-vsom-check-box v-model="value2" size="small" value="草莓">草莓</i-vsom-check-box>
+                            <i-vsom-check-box size="small" value="香蕉" disabled>香蕉</i-vsom-check-box>
+                            <i-vsom-check-box size="small" value="火龙果" disabled>火龙果</i-vsom-check-box>
+                            <i-vsom-check-box size="small" value="橙子" disabled>橙子</i-vsom-check-box>
+                            <i-vsom-check-box checked="榴莲" size="small" value="榴莲" disabled>榴莲</i-vsom-check-box>
+                            <i-vsom-check-box checked="百香果" size="small" value="百香果" disabled>百香果</i-vsom-check-box>
+                        </blockquote>
+                        <pre><code class="language-html"
+>&lt;i-vsom-check-box v-model="value" size="small" value="苹果"&gt;苹果&lt;/i-vsom-check-box&gt;
+ &lt;i-vsom-check-box v-model="value" size="small" value="草莓"&gt;草莓&lt;/i-vsom-check-box&gt;
+ &lt;i-vsom-check-box size="small" value="香蕉" disabled&gt;香蕉&lt;/i-vsom-check-box&gt;
+ &lt;i-vsom-check-box size="small" value="火龙果" disabled&gt;火龙果&lt;/i-vsom-check-box&gt;
+ &lt;i-vsom-check-box size="small" value="橙子" disabled&gt;橙子&lt;/i-vsom-check-box&gt;
+ &lt;i-vsom-check-box checked="榴莲" size="small" value="榴莲" disabled&gt;榴莲&lt;/i-vsom-check-box&gt;
+ &lt;i-vsom-check-box checked="百香果" size="small" value="百香果" disabled&gt;百香果&lt;/i-vsom-check-box&gt;
+</code></pre>
+                        <pre><code class="language-js"
+>var app = new Vue({
+    el : '#app',
+    data : function() {
+        return {
+            value : ''
+        }
+    }                       
+})
+</code></pre>
+                        <h2 id="unicode-">复选框组的使用</h2>
+                        <hr>
+                        <ul>
+                            <li>name : string 表单字段名称</li>
+                            <li>value : any[] 复选框选中的值</li>
+                        </ul>
+                        <blockquote>
+                            <i-vsom-check-box-group name="fruit" v-model="value3">
+                                <i-vsom-check-box size="small" value="苹果">苹果</i-vsom-check-box>
+                                <i-vsom-check-box size="small" value="草莓">草莓</i-vsom-check-box>
+                                <i-vsom-check-box size="small" value="香蕉">香蕉</i-vsom-check-box>
+                                <i-vsom-check-box size="small" value="火龙果">火龙果</i-vsom-check-box>
+                                <i-vsom-check-box size="small" value="橙子">橙子</i-vsom-check-box>
+                                <i-vsom-check-box size="small" value="榴莲">榴莲</i-vsom-check-box>
+                                <i-vsom-check-box size="small" value="百香果">百香果</i-vsom-check-box>
+                            </i-vsom-check-box-group>
+                        </blockquote>
+                        <pre><code class="language-html"
+>&lt;i-vsom-check-box-group name="fruit" v-model="value"&gt;
+    &lt;i-vsom-check-box size="small" value="苹果"&gt;苹果&lt;/i-vsom-check-box&gt;
+    &lt;i-vsom-check-box size="small" value="草莓"&gt;草莓&lt;/i-vsom-check-box&gt;
+    &lt;i-vsom-check-box size="small" value="香蕉"&gt;香蕉&lt;/i-vsom-check-box&gt;
+    &lt;i-vsom-check-box size="small" value="火龙果"&gt;火龙果&lt;/i-vsom-check-box&gt;
+    &lt;i-vsom-check-box size="small" value="橙子"&gt;橙子&lt;/i-vsom-check-box&gt;
+    &lt;i-vsom-check-box size="small" value="榴莲"&gt;榴莲&lt;/i-vsom-check-box&gt;
+    &lt;i-vsom-check-box size="small" value="百香果"&gt;百香果&lt;/i-vsom-check-box&gt;
+ &lt;/i-vsom-check-box-group&gt;
+</code></pre>
+                        <pre><code class="language-js"
+>var app = new Vue({
+    el : '#app',
+    data : function() {
+        return {
+            value : ['榴莲', '火龙果']
+        }
+    }                       
+})
+</code></pre>
+                        <h2 id="unicode-">复选框组的表单验证</h2>
+                        <hr>
+                        <blockquote>
+                            <i-vsom-form ref="form" :model="form" :label-width="80" position="left">
+                                <i-vsom-form-validater label="水果" prop="fruit" trigger="change" :validate="validateForm" error-message="当前未选中的水果" required>
+                                    <i-vsom-check-box-group name="fruit" v-model="form.fruit">
+                                        <i-vsom-check-box size="small" value="苹果">苹果</i-vsom-check-box>
+                                        <i-vsom-check-box size="small" value="草莓">草莓</i-vsom-check-box>
+                                        <i-vsom-check-box size="small" value="香蕉">香蕉</i-vsom-check-box>
+                                        <i-vsom-check-box size="small" value="火龙果">火龙果</i-vsom-check-box>
+                                        <i-vsom-check-box size="small" value="橙子">橙子</i-vsom-check-box>
+                                        <i-vsom-check-box size="small" value="榴莲">榴莲</i-vsom-check-box>
+                                        <i-vsom-check-box size="small" value="百香果">百香果</i-vsom-check-box>
+                                    </i-vsom-check-box-group>
+                                </i-vsom-form-validater>
+                            </i-vsom-form>
+                            <i-vsom-button type="primary" size="small" @click="$refs.form.validateForm()">点击验证</i-vsom-button>
+                        </blockquote>
+                        <pre><code class="language-html"
+>&lt;i-vsom-form :model="form" :label-width="80" position="left"&gt;
+    &lt;i-vsom-form-validater label="水果" prop="fruit" trigger="change" :validate="validateForm" error-message="当前选中的水果已售完" required&gt;
+        &lt;i-vsom-check-box-group name="fruit" v-model="form.fruit"&gt;
+            &lt;i-vsom-check-box size="small" value="苹果"&gt;苹果&lt;/i-vsom-check-box&gt;
+            &lt;i-vsom-check-box size="small" value="草莓"&gt;草莓&lt;/i-vsom-check-box&gt;
+            &lt;i-vsom-check-box size="small" value="香蕉"&gt;香蕉&lt;/i-vsom-check-box&gt;
+            &lt;i-vsom-check-box size="small" value="火龙果"&gt;火龙果&lt;/i-vsom-check-box&gt;
+            &lt;i-vsom-check-box size="small" value="橙子"&gt;橙子&lt;/i-vsom-check-box&gt;
+            &lt;i-vsom-check-box size="small" value="榴莲"&gt;榴莲&lt;/i-vsom-check-box&gt;
+            &lt;i-vsom-check-box size="small" value="百香果"&gt;百香果&lt;/i-vsom-check-box&gt;
+        &lt;/i-vsom-check-box-group&gt;
+    &lt;/i-vsom-form-validater&gt;
+&lt;/i-vsom-form&gt;
+</code></pre>
+                        <pre><code class="language-js"
+>var app = new Vue({
+    el : '#app',
+    data : function() {
+        return {
+            form: {
+                fruit : []
+            }
         }
     },
-    methods:{
-        change(value){
-            console.log(value)
+    methods : {
+        validateForm : function(callback) {
+            let me = this;
+            if(me.form.fruit.indexOf('香蕉') > -1) {
+                return callback(new Error('香蕉未进货。'))
+            }
+
+            if(me.form.fruit.indexOf('百香果') > -1) {
+                return callback(new Error('当前选中的水果已售完'))
+            }
+            return callback()
         }
     }
 })
 </code></pre>
-                        <h2 id="unicode-">禁用复选框</h2>
+                        <h2 id="unicode-">CheckBoxGroup Event 事件</h2>
                         <hr>
                         <ul>
-                            <li>Checkbox 组件支持禁用属性</li>
-                            <li>当某一个复选框是禁用稍微，只需在对应的数据源里加上disabled字段</li>
+                            <li>onChange: Arguments(data : any[]) CheckBox 引发值改变的事件。</li>
                         </ul>
                         <blockquote>
-                            <i-vsom-checkbox v-model="model1" @on-change="change" :data-source="data1"></i-vsom-checkbox>
+                            <i-vsom-check-box-group name="fruit" v-model="value4" @on-change="onChange">
+                                <i-vsom-check-box size="small" value="苹果">苹果</i-vsom-check-box>
+                                <i-vsom-check-box size="small" value="草莓">草莓</i-vsom-check-box>
+                                <i-vsom-check-box size="small" value="香蕉">香蕉</i-vsom-check-box>
+                                <i-vsom-check-box size="small" value="火龙果">火龙果</i-vsom-check-box>
+                                <i-vsom-check-box size="small" value="橙子">橙子</i-vsom-check-box>
+                                <i-vsom-check-box size="small" value="榴莲">榴莲</i-vsom-check-box>
+                                <i-vsom-check-box size="small" value="百香果">百香果</i-vsom-check-box>
+                            </i-vsom-check-box-group>
                         </blockquote>
                         <pre><code class="language-html"
-                            >&lt;i-vsom-checkbox v-model="model1" @on-change="change" :data-source="data1"&gt;&lt;/i-vsom-checkbox&gt;   
-                            </code></pre>
-                        <pre><code class="language-js" 
+>&lt;i-vsom-check-box-group name="fruit" v-model="value" @on-change="onChange"&gt;
+    &lt;i-vsom-check-box size="small" value="苹果"&gt;苹果&lt;/i-vsom-check-box&gt;
+    &lt;i-vsom-check-box size="small" value="草莓"&gt;草莓&lt;/i-vsom-check-box&gt;
+    &lt;i-vsom-check-box size="small" value="香蕉"&gt;香蕉&lt;/i-vsom-check-box&gt;
+    &lt;i-vsom-check-box size="small" value="火龙果"&gt;火龙果&lt;/i-vsom-check-box&gt;
+    &lt;i-vsom-check-box size="small" value="橙子"&gt;橙子&lt;/i-vsom-check-box&gt;
+    &lt;i-vsom-check-box size="small" value="榴莲"&gt;榴莲&lt;/i-vsom-check-box&gt;
+    &lt;i-vsom-check-box size="small" value="百香果"&gt;百香果&lt;/i-vsom-check-box&gt;
+ &lt;/i-vsom-check-box-group&gt;
+</code></pre>
+                        <pre><code class="language-js"
 >var app = new Vue({
     el : '#app',
     data : function() {
         return {
-            optionData1:[
-                {label:'苹果',value:'red'},{label:'香蕉',value:'write',disabled:true},
-            ],
-            model1:"write"
+            value: []
         }
     },
-    methods:{
-        change(value){
-            console.log(value)
+    methods : {
+        onChange: function(data) {
+            alert(data.join(','));
         }
     }
 })
@@ -110,35 +264,6 @@
             </div>
         </div>
         <script>
-                        (function() {
-    
-    Vue.use(iVsomUI);
-
-    var app = new Vue({
-        el : '#app',
-        data : function() {
-            return {
-                data:[
-                    {label:'苹果',value:'red'},{label:'香蕉',value:'write'},
-                ],
-                data1:[
-                    {label:'苹果',value:'red'},{label:'香蕉',value:'write',disabled:true},
-                ],
-                model:"red",
-                model1:"write",
-                val:"aaaa"
-            }
-        },
-        methods:{
-           change(value){
-              console.log(value)
-           }
-        }
-       
-    })
-
-
-})()
             $(document).ready(function () {
                 $('.tab-container .content:first').show()
     
@@ -158,5 +283,6 @@
             })
         </script>
       
+        <script src="./checkbox.demo.js"></script>
     </body>
 </html>

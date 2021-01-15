@@ -8,7 +8,7 @@
         <script src="../vue.min.js"></script>
         <script src="./jQuery-1.9.1.js"></script>
         <script src="./PrismJs.js"></script>
-    <link href="/ivsom-ui/iVsomUI.css" rel="stylesheet"><script src="/ivsom-ui/vue-class-component.min.js"></script><script src="/ivsom-ui/vue-property-decorator.min.js"></script><script src="/ivsom-ui/vue-tsx-support.min.js"></script><script src="/ivsom-ui/vendors~index.min.js"></script><script src="/ivsom-ui/index.e9f44cd5.min.js"></script></head>
+    <link href="/ivsom-ui/iVsomUI.css" rel="stylesheet"><script src="/ivsom-ui/vue-class-component.min.js"></script><script src="/ivsom-ui/vue-property-decorator.min.js"></script><script src="/ivsom-ui/vue-tsx-support.min.js"></script><script src="/ivsom-ui/vendors~index.min.js"></script><script src="/ivsom-ui/index.b8cbb99e.min.js"></script></head>
     <body>
         <div id="app" class="main">
             <h1 class="logo">switch Api</h1>
@@ -26,110 +26,121 @@
                         <p>常规switch</p>
                         <ul>
                             <li>switch 组件在使用之前，需要有相关的依赖库进行支持，如需阅读：<a href="./start.api.html" target="_blank" >快速开始</a></li>
+                            <li>name : string 表单字段名称</li>
+                            <li>checked : Boolean 状态开关默认值</li>
+                            <li>size: 'medium' | 'small' | 'mini' 表单元素大小</li>
+                            <li>disabled: Boolean 是否禁用</li>
+                            <li>active-color: #3bd134 激活开关状态颜色</li>
+                            <li>inactive-color: #f75f3c 失活开关状态颜色</li>
                         </ul>
                         <blockquote>
-                            <i-vsom-switch v-model="status" ></i-vsom-switch>
+                            <i-vsom-switch v-model="value"></i-vsom-switch>
                         </blockquote>
                         <pre><code class="language-html"
-                            >&lt;i-vsom-switch v-model="status" &gt;&lt;/i-vsom-switch&gt;   
-                            </code></pre>
+>&lt;i-vsom-switch v-model="value"&gt;&lt;/i-vsom-switch&gt;
+</code></pre>
                         <pre><code class="language-js" 
  >var app = new Vue({
     el : '#app',
     data : function() {
         return {
-            status: true,
+            value: true
         }
-    },
+    }
 })
 </code></pre>
-                        <h2 id="unicode-">选择背景用法</h2>
+                        <h2 id="unicode-">自定义开关颜色</h2>
                         <hr>
-                        <ul>
-                            <li>open-color close-color 分别支持打开关闭switch时背景色的设置</li>
-                        </ul>
                         <blockquote>
-                            <i-vsom-switch v-model="status" :open-color="background1" :close-color="background2" ></i-vsom-switch>
+                            <i-vsom-switch v-model="value1" active-color="#2999f7" inactive-color="#959595"></i-vsom-switch>
                         </blockquote>
                         <pre><code class="language-html"
-                            >&lt;i-vsom-switch v-model="status" :open-color="background1" :close-color="background2" &gt;&lt;/i-vsom-switch&gt;   
-                            </code></pre>
-                        <pre><code class="language-js"
+>&lt;i-vsom-switch v-model="value" active-color="#2999f7" inactive-color="#959595"&gt;&lt;/i-vsom-switch&gt;
+</code></pre>
+                        <pre><code class="language-js" 
  >var app = new Vue({
     el : '#app',
     data : function() {
         return {
-            status: true,
-            background1: "#13CE66",
-            background2:"#ff4949",
+            value: true
         }
-    },
+    }
 })
 </code></pre>
-                        <h2 id="unicode-">宽高属性设置</h2>
+                        <h2 id="unicode-">不同大小的开关</h2>
                         <hr>
-                        <ul>
-                            <li>width height 支持设置自定义宽高</li>
-                        </ul>
                         <blockquote>
-                            <i-vsom-switch v-model="status" width="100" height="50" ></i-vsom-switch>
+                            <i-vsom-switch v-model="value2" size="medium"></i-vsom-switch>
+                            <i-vsom-switch v-model="value3" size="small"></i-vsom-switch>
+                            <i-vsom-switch v-model="value4" size="mini"></i-vsom-switch>
                         </blockquote>
                         <pre><code class="language-html"
-                            >&lt;i-vsom-switch v-model="status" width="100" height="50" &gt;&lt;/i-vsom-switch&gt;   
-                            </code></pre>
-                        <pre><code class="language-js"
+>&lt;i-vsom-switch v-model="value1" size="medium"&gt;&lt;/i-vsom-switch&gt;
+ &lt;i-vsom-switch v-model="value2" size="small"&gt;&lt;/i-vsom-switch&gt;
+ &lt;i-vsom-switch v-model="value3" size="mini"&gt;&lt;/i-vsom-switch&gt;
+</code></pre>
+                        <pre><code class="language-js" 
  >var app = new Vue({
     el : '#app',
     data : function() {
         return {
-            status: true,
+            value1: true,
+            value2: true,
+            value3: true
         }
-    },
+    }
 })
 </code></pre>
-                        <h2 id="unicode-">禁用用法</h2>
+                        <h2 id="unicode-">开关的表单验证</h2>
                         <hr>
-                        <ul>
-                            <li>disabled 支持设置禁用</li>
-                        </ul>
                         <blockquote>
-                            <i-vsom-switch v-model="status" disabled="true" ></i-vsom-switch>
+                            <i-vsom-form :model="form" :label-width="80" position="left">
+                                <i-vsom-form-validater label="扩音器" prop="open" trigger="change" :validate="(cb) => form.open ? cb() : cb(new Error())" error-message="当前已关闭扩音器">
+                                    <i-vsom-switch v-model="form.open" size="small"></i-vsom-switch>
+                                </i-vsom-form-validater>
+                            </i-vsom-form>
                         </blockquote>
                         <pre><code class="language-html"
-                            >&lt;i-vsom-switch v-model="status"  &gt;&lt;/i-vsom-switch&gt;   
-                            </code></pre>
-                        <pre><code class="language-js"
+>&lt;i-vsom-form :model="form" :label-width="80" position="left"&gt;
+    &lt;i-vsom-form-validater label="扩音器" prop="open" trigger="change" :validate="(cb) => form.open ? cb() : cb(new Error())" error-message="当前已关闭扩音器"&gt;
+        &lt;i-vsom-switch v-model="form.open" size="small"&gt;&lt;/i-vsom-switch&gt;
+    &lt;/i-vsom-form-validater&gt;
+&lt;/i-vsom-form&gt;
+</code></pre>
+                        <pre><code class="language-js" 
  >var app = new Vue({
     el : '#app',
     data : function() {
         return {
-             status: true,
+            form : {
+                open: false
+            }
         }
-    },
- })
+    }
+})
 </code></pre>
-                        <h2 id="unicode-">触发事件</h2>
+                        <h2 id="unicode-">Switch Event 事件</h2>
                         <hr>
                         <ul>
-                            <li>支持change触发事件</li>
+                            <li>onChange: Arguments(e: MouseEvent, value: Boolean) Switch 引发值改变的事件。</li>
                         </ul>
                         <blockquote>
-                            <i-vsom-switch v-model="status" @change="change" ></i-vsom-switch>
+                            <i-vsom-switch v-model="value5" size="small" @on-change="onChange" ></i-vsom-switch>
                         </blockquote>
                         <pre><code class="language-html"
-                            >&lt;i-vsom-switch v-model="status" @change="change"  &gt;&lt;/i-vsom-switch&gt;   
-                            </code></pre>
-                        <pre><code class="language-js"
-> var app = new Vue({
+>&lt;i-vsom-switch v-model="value" size="small" @on-change="onChange" &gt;&lt;/i-vsom-switch&gt;
+</code></pre>
+                        <pre><code class="language-js" 
+ >var app = new Vue({
     el : '#app',
     data : function() {
         return {
-            status: true,
+            value : true
         }
     },
-    methods:{
-        change(value){
-            console.log(value)
+    methods : {
+        onChange : function(e, value) {
+            console.log(value);
         }
     }
 })
@@ -139,29 +150,6 @@
             </div>
         </div>
         <script>
-                        (function() {
-    
-    Vue.use(iVsomUI);
-
-    var app = new Vue({
-        el : '#app',
-        data : function() {
-            return {
-                status: true,
-                background1: "#13CE66",
-                background2:"#ff4949",
-            }
-        },
-        methods:{
-           change(value){
-              console.log(value)
-           }
-        }
-       
-    })
-
-
-})()
             $(document).ready(function () {
                 $('.tab-container .content:first').show()
     
@@ -181,5 +169,6 @@
             })
         </script>
       
+        <script src="./switch.demo.js"></script>
     </body>
 </html>

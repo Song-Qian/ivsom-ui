@@ -12,7 +12,6 @@ declare type ScopedSlots = {
     default: void;
 };
 export default class iVsomRadio extends tsx.Component<Props, Event, ScopedSlots> {
-    constructor();
     readonly size: string;
     readonly type: string;
     readonly disabled: boolean;
