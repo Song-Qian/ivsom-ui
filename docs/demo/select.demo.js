@@ -1,7 +1,7 @@
 /**
  * Developer    :   SongQian
  * Time         :   2020-10-23
- * eMail        :   songqian@wtoe.cn
+ * eMail        :   onlylove1172559463@vip.qq.com
  * Description  :   ivsom 面包屑组件demo
  */
 ;(function() {

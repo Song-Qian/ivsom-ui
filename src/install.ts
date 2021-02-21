@@ -1,7 +1,7 @@
 /**
  * Developer    :   SongQian
  * Time         :   2020-04-21
- * eMail        :   songqian@wtoe.cn
+ * eMail        :   onlylove1172559463@vip.qq.com
  * Description  :   ivsom组件打包入口   
  */
 
@@ -31,6 +31,8 @@ import iVsomTabs from './components/tabs/ivsom-tabs'
 import iVsomTabsPanel from './components/tabs/ivsom-tabs-panel'
 import iVsomUpload from './components/upload/ivsom-upload'
 import iVsomMessage from './components/message/ivsom-message'
+import iVsomTable from './components/table/ivsom-table'
+import iVsomTableColumn from './components/table/ivsom-table-column'
 
 const components: Array<any> = [
     iVsomRow,
@@ -56,7 +58,9 @@ const components: Array<any> = [
     iVsomForm,
     iVsomFormValidater,
     iVSomSelect,
-    iVsomUpload
+    iVsomUpload,
+    iVsomTable,
+    iVsomTableColumn
 ]
 
 const install = (Vue: any) => {

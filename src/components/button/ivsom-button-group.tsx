@@ -1,7 +1,7 @@
 /**
  * Developer    :   SongQian
  * Time         :   2020-04-29
- * eMail        :   songqian@wtoe.cn
+ * eMail        :   onlylove1172559463@vip.qq.com
  * Description  :   button Group组件
  */
 

@@ -227,7 +227,7 @@ export default class XhrUpload {
                 let isSuccess = xhr.status >= 200 && xhr.status < 300 || xhr.status === 304;
                 if(xhr.readyState === 4) {
                     let contentType = xhr.getResponseHeader("Content-Type");
-                    let data = contentType === "application/json" ? JSON.parse(xhr.response) : xhr.response;
+                    let data = ["application/json", "application/json; charset=utf-8"].indexOf(contentType || '') > 0 ? JSON.parse(xhr.response) : xhr.response;
                     let chunkDetritu = data["ivsom-upload-detritu"] && data["detritu"] || 0;
                     let scale = ((Math.min(detritu * limit, bytes.byteLength) / bytes.byteLength) * 100).toFixed(2);
                     if(detritu + 1 > maxDetritus) {
@@ -336,7 +336,7 @@ export default class XhrUpload {
         let isSuccess = xhr.status >= 200 && xhr.status < 300 || xhr.status === 304;
         if(xhr.readyState === 4) {
             let contentType = xhr.getResponseHeader("Content-Type")
-            let data = contentType === "application/json" ? JSON.parse(xhr.response) : xhr.response;
+            let data = ["application/json", "application/json; charset=utf-8"].indexOf(contentType || '') > 0 ? JSON.parse(xhr.response) : xhr.response;
             data = xhr.status === 0 ? { ok : false, message : "服务器出现网络异常!" } : data;
             if(isSuccess) {
                 let s = xhrUpload.records.get(id);

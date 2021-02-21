@@ -1,7 +1,7 @@
 /**
  * Developer    :   SongQian
  * Time         :   2019/03/09
- * eMail        :   songqian@wtoe.cn
+ * eMail        :   onlylove1172559463@vip.qq.com
  * Description  :   生产编译处理配置
  */
 const merge = require('webpack-merge')

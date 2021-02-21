@@ -105,6 +105,7 @@
     height: 100%;
     top: 0px;
     left: 0px;
+    z-index: 999;
     position: fixed;
     pointer-events: none;
 
@@ -150,6 +151,7 @@
     box-sizing: border-box;
     transform: translateX(-50%);
     border-radius: 5px;
+    z-index: 999;
     background-color: #ebeef5;
     border: 1px solid $border-sub-color;
     animation: ivsom-slider-center-down .3s ease-out .0s 1 normal backwards;

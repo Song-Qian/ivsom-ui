@@ -1,7 +1,7 @@
 /**
  * Developer    :   SongQian
  * Time         :   2020-06-10
- * eMail        :   songqian@wtoe.cn
+ * eMail        :   onlylove1172559463@vip.qq.com
  * Description  :   switch组件
  */
 import * as tsx from 'vue-tsx-support'

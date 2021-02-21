@@ -1,7 +1,7 @@
 /**
  * Developer    :   SongQian
  * Time         :   2020-12-01
- * eMail        :   songqian@wtoe.cn
+ * eMail        :   onlylove1172559463@vip.qq.com
  * Description  :   ivsom 消息框组件Demo
  */
 ;(function() {

@@ -1,7 +1,7 @@
 /**
  * Developer    :   SongQian
  * Time         :   2019/03/17
- * eMail        :   songqian@wtoe.cn
+ * eMail        :   onlylove1172559463@vip.qq.com
  * Description  :   UUID生成算法
  */
 

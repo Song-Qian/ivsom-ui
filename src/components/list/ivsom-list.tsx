@@ -1,7 +1,7 @@
 /**
- * Developer    :   SongQian
+ * Developer    :   DongGuiLing
  * Time         :   2020-05-28
- * eMail        :   songqian@wtoe.cn
+ * eMail        :   
  * Description  :   radio组件
  */
 import * as tsx from 'vue-tsx-support'

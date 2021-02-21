@@ -1,7 +1,7 @@
 /**
  * Developer    :   SongQian
  * Time         :   2020-06-04
- * eMail        :   songqian@wtoe.cn
+ * eMail        :   onlylove1172559463@vip.qq.com
  * Description  :   checkbox组件
  */
 import { Component, ModelSync, Prop, InjectReactive } from 'vue-property-decorator'

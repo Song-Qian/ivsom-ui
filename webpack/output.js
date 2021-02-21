@@ -1,7 +1,7 @@
 /**
  * Developer    :   SongQian
  * Time         :   2019/03/09
- * eMail        :   songqian@wtoe.cn
+ * eMail        :   onlylove1172559463@vip.qq.com
  * Description  :   生产配置
  */
 var path = require("path");

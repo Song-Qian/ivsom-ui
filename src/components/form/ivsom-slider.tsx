@@ -1,7 +1,7 @@
 /**
- * Developer    :   SongQian
+ * Developer    :   DongGuiLing
  * Time         :   2020-06-11
- * eMail        :   songqian@wtoe.cn
+ * eMail        :   
  * Description  :   slider组件
  */
 

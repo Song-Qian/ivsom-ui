@@ -1,7 +1,7 @@
 /**
  * Developer    :   SongQian
  * Time         :   2019/03/09
- * eMail        :   songqian@wtoe.cn
+ * eMail        :   onlylove1172559463@vip.qq.com
  * Description  :   生产依赖插件配置
  */
 const path = require('path')

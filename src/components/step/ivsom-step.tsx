@@ -1,7 +1,7 @@
 /**
- * Developer    :   SongQian
+ * Developer    :   DongGuiLing
  * Time         :   2020-06-15
- * eMail        :   songqian@wtoe.cn
+ * eMail        :   
  * Description  :   pagination组件
  */
 import * as tsx from 'vue-tsx-support'

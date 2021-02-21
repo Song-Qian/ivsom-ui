@@ -9,7 +9,7 @@
     <script src="../vue.min.js"></script>
     <script src="./jQuery-1.9.1.js"></script>
     <script src="./PrismJs.js"></script>
-<link href="/ivsom-ui/iVsomUI.css" rel="stylesheet"><script src="/ivsom-ui/vue-class-component.min.js"></script><script src="/ivsom-ui/vue-property-decorator.min.js"></script><script src="/ivsom-ui/vue-tsx-support.min.js"></script><script src="/ivsom-ui/vendors~index.min.js"></script><script src="/ivsom-ui/index.1b889c17.min.js"></script></head>
+<link href="/ivsom-ui/iVsomUI.css" rel="stylesheet"><script src="/ivsom-ui/vue-class-component.min.js"></script><script src="/ivsom-ui/vue-property-decorator.min.js"></script><script src="/ivsom-ui/vue-tsx-support.min.js"></script><script src="/ivsom-ui/vendors~index.min.js"></script><script src="/ivsom-ui/index.8945f720.min.js"></script></head>
 
 <body>
     <div id="app" class="main">
@@ -46,7 +46,7 @@
                         <li>split: boolean 上传大文件是否切片上传</li>
                         <li>rmove-on-complete: boolean 上传完成后，是否自动移除文件</li>
                         <li>remove-on-error: boolean 上传失败后，是否自动移除文件</li>
-                        <li>split-limit: number 切片的大小, KB</li>
+                        <li>split-limit: number 切片的大小(KB), 默认512KB</li>
                         <li style="font-weight: bold;">Upload Event :</li>
                         <li>on-file-select: e: MouseEvent 打开选择文件窗口事件</li>
                         <li>on-file-selected: e : Event 文件选择完毕</li>
@@ -82,6 +82,17 @@
                     </blockquote>
                     <h2 id="unicode-">默认上传组件</h2>
                     <hr>
+                    <blockquote>
+                        <i-vsom-upload
+                            url="http://localhost:8080/upload/detritu" 
+                            accept="image/*,application/zip,application/x-zip-compressed,text/plain"
+                            width="100%" 
+                            height="auto"
+                            view="List"
+                            :split-limit="512"
+                            auto multiple split>
+                        </i-vsom-upload>
+                    </blockquote>
                     <blockquote>
                         <i-vsom-upload
                             url="http://localhost:8080/upload" 
@@ -324,7 +335,7 @@
 	defer file.Close()
 
 	// TODO 模拟断点文件上传， 当文件mysql-8.0.20-winx64.zip文件上传的断点小于30，则通知前端，文件从第30个前端开始上传
-	if detritu < 30 && fileMD5 == "a3f9669000835a44163c206bfeaea044" {
+	if detritu &lt; 30 && fileMD5 == "a3f9669000835a44163c206bfeaea044" {
 		w.Header().Set("Content-Type", "application/json")
 		//告诉前端，该文件第30个断点是最后一次记录点,下次从第31个断点开始上传。
 		data := make(map[string]interface{})

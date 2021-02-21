@@ -74,7 +74,7 @@
     @Prop({ default : false, type: Boolean}) readonly rmoveOnComplete !: boolean;
     @Prop({ default : false, type: Boolean}) readonly removeOnError !: boolean;
     @Prop({ default : false, type: Boolean }) readonly split !: boolean;
-    @Prop({ default : 1, type : Number }) readonly splitLimit !: number;
+    @Prop({ default : 512, type : Number }) readonly splitLimit !: number;
 
     private xhrUpload = new XhrUpload();
     private uploadState : Map<string, { id : string, name : string, size : number, loaded : number, type: string, complete: boolean, error : string }> = new Map();

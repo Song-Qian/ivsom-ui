@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>Tabs api demo</title>
+    <link rel="stylesheet" href="./cube.min.css">
+    <link rel="stylesheet" href="./demo.css">
+    <script src="../vue.min.js"></script>
+    <script src="./jQuery-1.9.1.js"></script>
+    <script src="./PrismJs.js"></script>
+<link href="/ivsom-ui/iVsomUI.css" rel="stylesheet"><script src="/ivsom-ui/vue-class-component.min.js"></script><script src="/ivsom-ui/vue-property-decorator.min.js"></script><script src="/ivsom-ui/vue-tsx-support.min.js"></script><script src="/ivsom-ui/vendors~index.min.js"></script><script src="/ivsom-ui/index.8945f720.min.js"></script></head>
+
+<body>
+    <div id="app" class="main">
+        <h1 class="logo">Table Api</h1>
+        <div class="nav-tabs">
+            <ul id="tabs" class="dib-box">
+                <li class="dib active"><span> CDN </span></li>
+                <li class="dib"><span> NodeJS </span></li>
+            </ul>
+        </div>
+        <div class="tab-container">
+            <div class="content unicode" style="display: block;">
+                <div class="article markdown">
+                    <h2 id="unicode-">基础用法</h2>
+                    <hr>
+                    <p>默认样式</p>
+                    <ul>
+                        <li>Table 组件在使用之前，需要有相关的依赖库进行支持，如需阅读：<a href="./start.api.html" target="_blank" >快速开始</a></li>
+                        <li>Table 组件具有默认的<b>宽度 (100%)</b> 和<b>高度 (auto)</b></li>
+                        <li><b>iVsomTable 与 iVsomTableColumn 需配合使用</b>，单独使用任一组件，将会无法达到预定期望。</li>
+                        <li style="font-weight: bold;">Table Props: </li>
+                        <li>width: number | string Table 宽度</li>
+                        <li>height: number | string Table 高度</li>
+                        <li>row-style: object 表格的行样式</li>
+                        <li>col-style: object 表格的单元格样式</li>
+                        <li>border: boolean  是否显示边框</li>
+                        <li>stripe: boolean 是否显示斑马纹</li>
+                        <li>round: boolean 是否圆角</li>
+                        <li>highlight-row: boolean 是否高亮行</li>
+                        <li>source: Array 数据源</li>
+                        <li>empty-text: string 空内容显示</li>
+                        <li style="font-weight: bold;">Table Column Props: </li>
+                        <li>width: number | string 列的宽度</li>
+                        <li>Flex: boolean 是否固定列</li>
+                        <li>FlexAlign: "start" | "end" 固定列位置</li>
+                        <li>HeaderAlign: 'left' | 'center' | 'right' 头部标题对齐方式</li>
+                        <li>Align: 'left' | 'center' | 'right' 列内容对齐方式</li>
+                        <li>title: string 列标题</li>
+                        <li>Field: string 列字段</li>
+                        <li>Sort: boolean 是否启用排序</li>
+                        <li style="font-weight: bold;">Table Event: </li>
+                        <li>onCellClick: (e: MouseEvent, data : any, rowIndex: number, field: string) Table单元格点击事件</li>
+                        <li>onCellDbclick: (e: MouseEvent, data : any, rowIndex: number, field: string) Table单元格双击事件</li>
+                        <li>onRowHighlight: (e: MouseEvent, data : any, rowIndex: number, field: string) Table表格行鼠标移入行高亮事件</li>
+                        <li>onTableSort: (e: MouseEvent, data : any, rowIndex: number, field: string) Table表格排序事件</li>
+                    </ul>
+                    <h2 id="unicode-">默认表格组件</h2>
+                    <hr>
+                    <blockquote>
+                        <i-vsom-table :source="getSource" width="100%" :height="400">
+                            <i-vsom-table-column title="名称" field="name"></i-vsom-table-column>
+                            <i-vsom-table-column title="年龄" field="age"></i-vsom-table-column>
+                            <i-vsom-table-column title="手机号码" field="phone"></i-vsom-table-column>
+                            <i-vsom-table-column title="职业" field="job"></i-vsom-table-column>
+                            <i-vsom-table-column title="爱好" field="interest"></i-vsom-table-column>
+                        </i-vsom-table>
+                    </blockquote>
+                    <pre><code class="language-html"
+>&lt;i-vsom-table :source="getSource" width="100%" :height="400"&gt;
+    &lt;i-vsom-table-column title="名称" field="name"&gt;&lt;/i-vsom-table-column&gt;
+    &lt;i-vsom-table-column title="年龄" field="age"&gt;&lt;/i-vsom-table-column&gt;
+    &lt;i-vsom-table-column title="手机号码" field="phone"&gt;&lt;/i-vsom-table-column&gt;
+    &lt;i-vsom-table-column title="职业" field="job"&gt;&lt;/i-vsom-table-column&gt;
+    &lt;i-vsom-table-column title="爱好" field="interest"&gt;&lt;/i-vsom-table-column&gt;
+&lt;/i-vsom-table&gt;
+</code></pre>
+                    <h2 id="unicode-">带有边框的表格</h2>
+                    <hr>
+                    <blockquote>
+                        <i-vsom-table :source="getSource" width="100%" :height="400" border>
+                            <i-vsom-table-column title="名称" field="name"></i-vsom-table-column>
+                            <i-vsom-table-column title="年龄" field="age"></i-vsom-table-column>
+                            <i-vsom-table-column title="手机号码" field="phone"></i-vsom-table-column>
+                            <i-vsom-table-column title="职业" field="job"></i-vsom-table-column>
+                            <i-vsom-table-column title="爱好" field="interest"></i-vsom-table-column>
+                        </i-vsom-table>
+                    </blockquote>
+                    <pre><code class="language-html"
+>&lt;i-vsom-table :source="getSource" width="100%" :height="400" border&gt;
+    &lt;i-vsom-table-column title="名称" field="name"&gt;&lt;/i-vsom-table-column&gt;
+    &lt;i-vsom-table-column title="年龄" field="age"&gt;&lt;/i-vsom-table-column&gt;
+    &lt;i-vsom-table-column title="手机号码" field="phone"&gt;&lt;/i-vsom-table-column&gt;
+    &lt;i-vsom-table-column title="职业" field="job"&gt;&lt;/i-vsom-table-column&gt;
+    &lt;i-vsom-table-column title="爱好" field="interest"&gt;&lt;/i-vsom-table-column&gt;
+ &lt;/i-vsom-table&gt;
+</code></pre>
+                    <h2 id="unicode-">表格显示斑马纹</h2>
+                    <hr>
+                    <blockquote>
+                        <i-vsom-table :source="getSource" width="100%" :height="400" border stripe>
+                            <i-vsom-table-column title="名称" field="name"></i-vsom-table-column>
+                            <i-vsom-table-column title="年龄" field="age"></i-vsom-table-column>
+                            <i-vsom-table-column title="手机号码" field="phone"></i-vsom-table-column>
+                            <i-vsom-table-column title="职业" field="job"></i-vsom-table-column>
+                            <i-vsom-table-column title="爱好" field="interest"></i-vsom-table-column>
+                        </i-vsom-table>
+                    </blockquote>
+                    <pre><code class="language-html"
+>&lt;i-vsom-table :source="getSource" width="100%" :height="400" border stripe&gt;
+    &lt;i-vsom-table-column title="名称" field="name"&gt;&lt;/i-vsom-table-column&gt;
+    &lt;i-vsom-table-column title="年龄" field="age"&gt;&lt;/i-vsom-table-column&gt;
+    &lt;i-vsom-table-column title="手机号码" field="phone"&gt;&lt;/i-vsom-table-column&gt;
+    &lt;i-vsom-table-column title="职业" field="job"&gt;&lt;/i-vsom-table-column&gt;
+    &lt;i-vsom-table-column title="爱好" field="interest"&gt;&lt;/i-vsom-table-column&gt;
+&lt;/i-vsom-table&gt;
+</code></pre>
+                    <h2 id="unicode-">取消表格的圆角和鼠标高亮效果</h2>
+                    <hr>
+                    <blockquote>
+                        <i-vsom-table :source="getSource" width="100%" :height="400" :highlight-row='false' :round='false' border>
+                            <i-vsom-table-column title="名称" field="name"></i-vsom-table-column>
+                            <i-vsom-table-column title="年龄" field="age"></i-vsom-table-column>
+                            <i-vsom-table-column title="手机号码" field="phone"></i-vsom-table-column>
+                            <i-vsom-table-column title="职业" field="job"></i-vsom-table-column>
+                            <i-vsom-table-column title="爱好" field="interest"></i-vsom-table-column>
+                        </i-vsom-table>
+                    </blockquote>
+                    <pre><code class="language-html"
+>&lt;i-vsom-table :source="getSource" width="100%" :height="400" :highlight-row='false' :round='false' border&gt;
+    &lt;i-vsom-table-column title="名称" field="name"&gt;&lt;/i-vsom-table-column&gt;
+    &lt;i-vsom-table-column title="年龄" field="age"&gt;&lt;/i-vsom-table-column&gt;
+    &lt;i-vsom-table-column title="手机号码" field="phone"&gt;&lt;/i-vsom-table-column&gt;
+    &lt;i-vsom-table-column title="职业" field="job"&gt;&lt;/i-vsom-table-column&gt;
+    &lt;i-vsom-table-column title="爱好" field="interest"&gt;&lt;/i-vsom-table-column&gt;
+ &lt;/i-vsom-table&gt;
+</code></pre>
+                    <h2 id="unicode-">空表格文字内容设置</h2>
+                    <hr>
+                    <blockquote>
+                        <i-vsom-table :source="[]" width="100%" empty-text='未查询到数据' border>
+                            <i-vsom-table-column title="名称" field="name"></i-vsom-table-column>
+                            <i-vsom-table-column title="年龄" field="age"></i-vsom-table-column>
+                            <i-vsom-table-column title="手机号码" field="phone"></i-vsom-table-column>
+                            <i-vsom-table-column title="职业" field="job"></i-vsom-table-column>
+                            <i-vsom-table-column title="爱好" field="interest"></i-vsom-table-column>
+                        </i-vsom-table>
+                    </blockquote>
+                    <pre><code class="language-html"
+>&lt;i-vsom-table :source="[]" width="100%" :height="400" empty-text='未查询到数据' border&gt;
+    &lt;i-vsom-table-column title="名称" field="name"&gt;&lt;/i-vsom-table-column&gt;
+    &lt;i-vsom-table-column title="年龄" field="age"&gt;&lt;/i-vsom-table-column&gt;
+    &lt;i-vsom-table-column title="手机号码" field="phone"&gt;&lt;/i-vsom-table-column&gt;
+    &lt;i-vsom-table-column title="职业" field="job"&gt;&lt;/i-vsom-table-column&gt;
+    &lt;i-vsom-table-column title="爱好" field="interest"&gt;&lt;/i-vsom-table-column&gt;
+ &lt;/i-vsom-table&gt;
+</code></pre>
+                    <h2 id="unicode-">表格的行内样式和单元格样式</h2>
+                    <hr>
+                    <blockquote>
+                        <i-vsom-table :source="getSource" width="100%" :height="400" :row-style='handlerRowStyle' border>
+                            <i-vsom-table-column title="名称" field="name"></i-vsom-table-column>
+                            <i-vsom-table-column title="年龄" :col-style='handlerColStyle' field="age"></i-vsom-table-column>
+                            <i-vsom-table-column title="手机号码" field="phone"></i-vsom-table-column>
+                            <i-vsom-table-column title="职业" field="job"></i-vsom-table-column>
+                            <i-vsom-table-column title="爱好" field="interest"></i-vsom-table-column>
+                        </i-vsom-table>
+                    </blockquote>
+                    <pre><code class="language-html"
+>&lt;i-vsom-table :source="getSource" width="100%" :height="400" :row-style='handlerRowStyle' border&gt;
+    &lt;i-vsom-table-column title="名称" field="name"&gt;&lt;/i-vsom-table-column&gt;
+    &lt;i-vsom-table-column title="年龄" :col-style='handlerColStyle' field="age"&gt;&lt;/i-vsom-table-column&gt;
+    &lt;i-vsom-table-column title="手机号码" field="phone"&gt;&lt;/i-vsom-table-column&gt;
+    &lt;i-vsom-table-column title="职业" field="job"&gt;&lt;/i-vsom-table-column&gt;
+    &lt;i-vsom-table-column title="爱好" field="interest"&gt;&lt;/i-vsom-table-column&gt;
+ &lt;/i-vsom-table&gt;
+</code></pre>
+                    <pre><code class="language-js"
+>var app = new Vue({
+    el : '#app',
+    methods : {
+        handlerRowStyle: function(index, data) {
+            if(index % 4 === 0) {
+                return { 'background-color' : '#2999f7' }
+            }
+
+            if(index % 4 === 1) {
+                return { 'background-color' : '#3bd134' }
+            }
+
+            if(index % 4 === 2) {
+                return { 'background-color' : '#ecc025' }
+            }
+
+            return { 'background-color' : '#f75f3c' }
+        },
+        handlerColStyle: function(rowIndex, value) {
+            if( value > 50) {
+                return { color : 'red' }
+            }
+            return { color : '#fff' }
+        }
+    }
+ })
+</code></pre>
+                    <h2 id="unicode-">复杂表头表格</h2>
+                    <hr>
+                    <blockquote>
+                        <i-vsom-table :source="getSource" width="100%" :height="400" border>
+                            <i-vsom-table-column title="用户表" header-align="center">
+                                <template v-slot:title>
+                                    <span>自定义表头</span>
+                                </template>
+                                <i-vsom-table-column title="用户信息" header-align="center">
+                                    <i-vsom-table-column title="名称" field="name"></i-vsom-table-column>
+                                    <i-vsom-table-column title="年龄" field="age"></i-vsom-table-column>
+                                    <i-vsom-table-column title="手机号码" field="phone"></i-vsom-table-column>
+                                </i-vsom-table-column>
+                                <i-vsom-table-column title="用户职业" header-align="center">
+                                    <i-vsom-table-column title="职业" field="job"></i-vsom-table-column>
+                                    <i-vsom-table-column title="爱好" field="interest"></i-vsom-table-column>
+                                </i-vsom-table-column>
+                            </i-vsom-table-column>
+                        </i-vsom-table>
+                    </blockquote>
+                    <pre><code class="language-html"
+>&lt;i-vsom-table :source="getSource" width="100%" :height="400" border&gt;
+    &lt;i-vsom-table-column title="用户表" header-align="center"&gt;
+        &lt;template v-slot:title&gt;
+            &lt;span&gt;自定义表头&lt;/span&gt;
+        &lt;/template&gt;
+        &lt;i-vsom-table-column title="用户信息" header-align="center"&gt;
+            &lt;i-vsom-table-column title="名称" field="name"&gt;&lt;/i-vsom-table-column&gt;
+            &lt;i-vsom-table-column title="年龄" field="age"&gt;&lt;/i-vsom-table-column&gt;
+            &lt;i-vsom-table-column title="手机号码" field="phone"&gt;&lt;/i-vsom-table-column&gt;
+        &lt;/i-vsom-table-column&gt;
+        &lt;i-vsom-table-column title="用户职业" header-align="center"&gt;
+            &lt;i-vsom-table-column title="职业" field="job"&gt;&lt;/i-vsom-table-column&gt;
+            &lt;i-vsom-table-column title="爱好" field="interest"&gt;&lt;/i-vsom-table-column&gt;
+        &lt;/i-vsom-table-column&gt;
+    &lt;/i-vsom-table-column&gt;
+ &lt;/i-vsom-table&gt;
+</code></pre>
+                    <h2 id="unicode-">复杂表格排序操作</h2>
+                    <hr>
+                    <blockquote>
+                        <i-vsom-table :source="getSource" width="100%" :height="400" border stripe>
+                            <i-vsom-table-column title="用户表" header-align="center">
+                                <template v-slot:title>
+                                    <span>自定义表头</span>
+                                </template>
+                                <i-vsom-table-column title="用户信息" header-align="center">
+                                    <i-vsom-table-column title="名称" field="name"  @on-sort-change="onSort" sort></i-vsom-table-column>
+                                    <i-vsom-table-column title="年龄" field="age"  @on-sort-change="onSort" sort></i-vsom-table-column>
+                                    <i-vsom-table-column title="手机号码" field="phone"></i-vsom-table-column>
+                                </i-vsom-table-column>
+                                <i-vsom-table-column title="用户职业" header-align="center">
+                                    <i-vsom-table-column title="职业" field="job"></i-vsom-table-column>
+                                    <i-vsom-table-column title="爱好" field="interest"></i-vsom-table-column>
+                                </i-vsom-table-column>
+                            </i-vsom-table-column>
+                        </i-vsom-table>
+                    </blockquote>
+                    <pre><code class="language-html"
+>&lt;i-vsom-table :source="getSource" width="100%" :height="400" border stripe&gt;
+    &lt;i-vsom-table-column title="用户表" header-align="center"&gt;
+        &lt;template v-slot:title&gt;
+            &lt;span&gt;自定义表头&lt;/span&gt;
+        &lt;/template&gt;
+        &lt;i-vsom-table-column title="用户信息" header-align="center"&gt;
+            &lt;i-vsom-table-column title="名称" field="name"  @on-sort-change="onSort" sort&gt;&lt;/i-vsom-table-column&gt;
+            &lt;i-vsom-table-column title="年龄" field="age"  @on-sort-change="onSort" sort&gt;&lt;/i-vsom-table-column&gt;
+            &lt;i-vsom-table-column title="手机号码" field="phone"&gt;&lt;/i-vsom-table-column&gt;
+        &lt;/i-vsom-table-column&gt;
+        &lt;i-vsom-table-column title="用户职业" header-align="center"&gt;
+            &lt;i-vsom-table-column title="职业" field="job"&gt;&lt;/i-vsom-table-column&gt;
+            &lt;i-vsom-table-column title="爱好" field="interest"&gt;&lt;/i-vsom-table-column&gt;
+        &lt;/i-vsom-table-column&gt;
+    &lt;/i-vsom-table-column&gt;
+ &lt;/i-vsom-table&gt;
+</code></pre>
+                    <h2 id="unicode-">表格的内容布局</h2>
+                    <hr>
+                    <blockquote>
+                        <i-vsom-table :source="getSource1" width="100%" :height="400" border stripe>
+                            <i-vsom-table-column title="用户表" header-align="center">
+                                <template v-slot:title>
+                                    <span>自定义表头</span>
+                                </template>
+                                <i-vsom-table-column width='50%' title="用户信息" header-align="center">
+                                    <i-vsom-table-column title="名称" field="name" header-align="center" align="center" :width="400"  @on-sort-change="onSort" sort></i-vsom-table-column>
+                                    <i-vsom-table-column title="年龄" field="age" header-align="center" align="right" :width="80"  @on-sort-change="onSort" sort></i-vsom-table-column>
+                                    <i-vsom-table-column title="手机号码" field="phone" align="right" header-align="center" flex-align="end" flex></i-vsom-table-column>
+                                </i-vsom-table-column>
+                                <i-vsom-table-column title="用户职业" header-align="center">
+                                    <i-vsom-table-column title="职业" field="job" align="center" header-align="center"></i-vsom-table-column>
+                                    <i-vsom-table-column title="爱好" field="interest" align="center"  header-align="center"></i-vsom-table-column>
+                                </i-vsom-table-column>
+                            </i-vsom-table-column>
+                        </i-vsom-table>
+                    </blockquote>
+                    <pre><code class="language-html"
+>&lt;i-vsom-table :source="getSource" width="100%" :height="400" border stripe&gt;
+    &lt;i-vsom-table-column title="用户表" header-align="center"&gt;
+        &lt;template v-slot:title&gt;
+            &lt;span&gt;自定义表头&lt;/span&gt;
+        &lt;/template&gt;
+        &lt;i-vsom-table-column width='50%' title="用户信息" header-align="center"&gt;
+            &lt;i-vsom-table-column title="名称" field="name" header-align="center" align="center" :width="400"  @on-sort-change="onSort" sort&gt;&lt;/i-vsom-table-column&gt;
+            &lt;i-vsom-table-column title="年龄" field="age" header-align="center" align="right" :width="80"  @on-sort-change="onSort" sort&gt;&lt;/i-vsom-table-column&gt;
+            &lt;i-vsom-table-column title="手机号码" field="phone" align="right" header-align="center" flex-align="end" flex&gt;&lt;/i-vsom-table-column&gt;
+        &lt;/i-vsom-table-column&gt;
+        &lt;i-vsom-table-column title="用户职业" header-align="center"&gt;
+            &lt;i-vsom-table-column title="职业" field="job" align="center" header-align="center"&gt;&lt;/i-vsom-table-column&gt;
+            &lt;i-vsom-table-column title="爱好" field="interest" align="center"  header-align="center"&gt;&lt;/i-vsom-table-column&gt;
+        &lt;/i-vsom-table-column&gt;
+    &lt;/i-vsom-table-column&gt;
+ &lt;/i-vsom-table&gt;
+</code></pre>
+                    <h2 id="unicode-">表格的事件</h2>
+                    <hr>
+                    <blockquote>
+                        <i-vsom-table :source="getSource" width="100%" :height="400" @on-cell-click='onCellClick' @on-cell-dbclick='onCellDbClick' @on-row-highlight='onRowHighlight' @on-table-sort='onTableSort' border stripe>
+                            <i-vsom-table-column title="用户表" header-align="center">
+                                <template v-slot:title>
+                                    <span>自定义表头</span>
+                                </template>
+                                <i-vsom-table-column title="用户信息" header-align="center">
+                                    <i-vsom-table-column title="名称" field="name" header-align="center" align="center"  @on-sort-change="onSort" sort></i-vsom-table-column>
+                                    <i-vsom-table-column title="年龄" field="age" header-align="center" align="right"  @on-sort-change="onSort" sort></i-vsom-table-column>
+                                    <i-vsom-table-column title="手机号码" field="phone" align="right" header-align="center" flex-align="end" flex></i-vsom-table-column>
+                                </i-vsom-table-column>
+                                <i-vsom-table-column title="用户职业" header-align="center">
+                                    <i-vsom-table-column title="职业" field="job" align="center" header-align="center"></i-vsom-table-column>
+                                    <i-vsom-table-column title="爱好" field="interest" align="center"  header-align="center"></i-vsom-table-column>
+                                </i-vsom-table-column>
+                            </i-vsom-table-column>
+                        </i-vsom-table>
+                    </blockquote>
+                    <pre><code class="language-html"
+>&lt;i-vsom-table :source="getSource" width="100%" :height="400" @on-cell-click='onCellClick' @on-cell-dbclick='onCellDbClick' @on-row-highlight='onRowHighlight' @on-table-sort='onTableSort' border stripe&gt;
+    &lt;i-vsom-table-column title="用户表" header-align="center"&gt;
+        &lt;template v-slot:title&gt;
+            &lt;span&gt;自定义表头&lt;/span&gt;
+        &lt;/template&gt;
+        &lt;i-vsom-table-column title="用户信息" header-align="center"&gt;
+            &lt;i-vsom-table-column title="名称" field="name" header-align="center" align="center"  @on-sort-change="onSort" sort&gt;&lt;/i-vsom-table-column&gt;
+            &lt;i-vsom-table-column title="年龄" field="age" header-align="center" align="right"  @on-sort-change="onSort" sort&gt;&lt;/i-vsom-table-column&gt;
+            &lt;i-vsom-table-column title="手机号码" field="phone" align="right" header-align="center" flex-align="end" flex&gt;&lt;/i-vsom-table-column&gt;
+        &lt;/i-vsom-table-column&gt;
+        &lt;i-vsom-table-column title="用户职业" header-align="center"&gt;
+            &lt;i-vsom-table-column title="职业" field="job" align="center" header-align="center"&gt;&lt;/i-vsom-table-column&gt;
+            &lt;i-vsom-table-column title="爱好" field="interest" align="center"  header-align="center"&gt;&lt;/i-vsom-table-column&gt;
+        &lt;/i-vsom-table-column&gt;
+    &lt;/i-vsom-table-column&gt;
+ &lt;/i-vsom-table&gt;
+</code></pre>
+                    <pre><code class="language-js"
+>var app = new Vue({
+    el : '#app',
+    methods : {
+        onCellClick: function(e, row, rowIndex, field) {
+            var me = this;
+            me.$ivsom_message.prompt({ title : '提示', type : 'success', message : '当前点击的是第' + rowIndex + '行,' + field + '字段!' });
+        },
+        onCellDbClick: function(e, row, rowIndex, field) {
+            var me = this;
+            me.$ivsom_message.prompt({ title : '提示', type : 'success', message : '当前双击的是第' + rowIndex + '行,' + field + '字段!' });
+        },
+        onRowHighlight: function(rowIndex) {
+            var me = this;
+            me.$ivsom_message.prompt({ title : '提示', type : 'success', message : '当前高亮行是' + rowIndex + '行' });
+        },
+        onTableSort: function(field, sort) {
+            var me = this;
+            var isAsc = sort === 'asc' ? '正序' : '倒序';
+            me.$ivsom_message.prompt({ title : '提示', type : 'success', message : '当前'+ isAsc +'排序字段是' + field });
+        }
+    }
+ })
+</code></pre>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <script>
+        $(document).ready(function () {
+            $('.tab-container .content:first').show()
+
+            $('#tabs li').click(function (e) {
+                var tabContent = $('.tab-container .content')
+                var index = $(this).index()
+
+                if ($(this).hasClass('active')) {
+                    return
+                } else {
+                    $('#tabs li').removeClass('active')
+                    $(this).addClass('active')
+
+                    tabContent.hide().eq(index).fadeIn()
+                }
+            })
+        })
+    </script>
+    <script src="./table.demo.js"></script>
+</body>
+
+</html>

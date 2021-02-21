@@ -1,11 +1,11 @@
 /**
- * Developer    :   SongQian
+ * Developer    :   DongGuiLing
  * Time         :   2020-06-15
- * eMail        :   songqian@wtoe.cn
+ * eMail        :   
  * Description  :   pagination组件
  */
 import * as tsx from 'vue-tsx-support'
-import { Component, Prop, Emit, Watch, } from 'vue-property-decorator'
+import { Component, Prop } from 'vue-property-decorator'
 
 import 'vue-tsx-support/enable-check'
 

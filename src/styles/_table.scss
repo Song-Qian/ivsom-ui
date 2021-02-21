@@ -1,0 +1,224 @@
+/**
+ * Developer    :   SongQian
+ * Time         :   2020-05-10
+ * eMail        :   onlylove1172559463@vip.qq.com
+ * Description  :   table 样式封装
+ */
+
+ @import "./ivsom-variable";
+ @import './ivsom-mixin';
+
+.ivsom-table {
+    display: block;
+    box-sizing: border-box;
+    flex-flow: column nowrap;
+    overflow: hidden;
+    background-color: #fff;
+
+    &.ivsom-table-round {
+        border: 0px solid #fff;
+        border-radius: 5px;
+    }
+
+    &.ivsom-table-border {
+        border-right: 1px solid $border-sub-color;
+        border-bottom: 1px solid $border-sub-color;
+
+        .ivsom-table-column > .ivsom-table-column__wapper {
+            > .ivsom-table-header {
+                border-top: 1px solid $border-sub-color;
+                border-left: 1px solid $border-sub-color;
+            }
+        }
+
+        & .ivsom-table-column,
+        .ivsom-table-column .ivsom-table-column {
+            > .ivsom-table-column__wapper {
+                > .ivsom-table-body {
+                    > .ivsom-table-body__wapper {
+                        > .ivsom-table-row_wapper {
+                            > .ivsom-table-row {
+                                border-left: 1px solid $border-sub-color;
+                                &:first-child {
+                                    border-top:1px solid $border-sub-color;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+    }
+
+    > .ivsom-table_wapper {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-flow: row nowrap;
+        box-sizing: border-box;
+        position: relative;
+        border: 0px solid $border-sub-color;
+
+        > .ivsom-table-scroll__vertical {
+            height: 100%;
+            width: 8px;
+            position: absolute;
+            bottom: 0px;
+            right: 0px;
+            border-radius: 4px;
+            z-index: 999;
+            background: linear-gradient(90deg, #d0d0d0, #fbfbfb);
+
+            > .ivsom-table-scroll__thumb {
+                width: 100%;
+                border-radius: 4px;
+                cursor: pointer;
+                position: absolute;
+                top: 0px;
+                background: linear-gradient(90deg, #afafaf, #4c4c4c);
+            }
+        }
+
+        > .ivsom-table-column,
+        .ivsom-table-body__wapper > .ivsom-table-column {
+            user-select: none;
+            box-sizing: border-box;
+            border: 0px solid $border-sub-color;
+            background-color: #fff;
+            z-index: 999;
+
+            &.ivsom-table__flex {
+                position: sticky;
+                z-index: 999;
+
+                &.ivsom-table__flex_start {
+                    left: 0px;
+                }
+
+                &.ivsom-table__flex_end {
+                    right: 0px;
+                }
+            }
+
+            > .ivsom-table-column__wapper {
+                display: flex;
+                width: 100%;
+                height: 100%;
+                flex-flow: column nowrap;
+                box-sizing: border-box;
+                border: 0px solid #f1f3f5;
+
+                > .ivsom-table-header {
+                    flex: 0 0 auto;
+                    padding: 10px;
+                    width: 100%;
+                    box-sizing: border-box;
+                    text-overflow: ellipsis;
+                    white-space: nowrap;
+                    font-weight: bold;
+                    position: relative;
+                    background-color: #f1f3f5;
+                    z-index: 998;
+                    @include font-text;
+
+                    > .ivsom-table-field-sort {
+                        width: 20px;
+                        height: 20px;
+                        right: 0px;
+                        cursor: pointer;
+                        position: absolute;
+
+                        &.ivsom-table-sort__active > i,
+                        &:hover > i {
+                            color: $primary-color;
+                        }
+                    }
+                    
+                }
+                
+                > .ivsom-table-header.ivsom-table-border { 
+                    border-bottom: 1px solid $border-sub-color;
+                    border-right: 1px solid $border-sub-color;
+                }
+    
+                > .ivsom-table-body {
+                    flex: 1 1 auto;
+                    overflow: hidden;
+    
+                    > .ivsom-table-body__wapper {
+                        width: 100%;
+                        height: 100%;
+                        display: flex;
+                        flex-flow: row nowrap;
+                        box-sizing: border-box;
+                        overflow-y: hidden;
+                        overflow-x: auto;
+                        border: 0px solid $border-sub-color;
+
+                        &::-webkit-scrollbar {
+                            height:8px;
+                            border-radius: 4px;
+                            background: linear-gradient(180deg, #d0d0d0, #fbfbfb);
+                        }
+
+                        &::-webkit-scrollbar-thumb {
+                            height: 8px;
+                            border-radius: 4px;
+                            background: linear-gradient(0deg, #afafaf, #4c4c4c);
+                        }
+    
+                        > .ivsom-table-row_wapper {
+                            width: 100%;
+                            height: max-content;
+                            display: block;
+                            flex: none;
+                            box-sizing: border-box;
+                            transition: all .2s linear;
+    
+                            > .ivsom-table-row {
+                                padding: 5px;
+                                line-height: 26px;
+                                white-space: nowrap;
+                                text-overflow: ellipsis;
+                                box-sizing: border-box;
+                                position: relative;
+                                border-bottom: 1px solid $border-sub-color;
+                                @include font-text;
+
+                                &.ivsom-table__stripe {
+                                    background-color:#fafafa;
+                                }
+
+                                &.ivsom-table__hover {
+                                    background-color: #f5f7fa;
+                                }
+
+                                > .ivsom-table-col {
+                                    width: 100%;
+                                    text-overflow: ellipsis;
+                                    overflow: hidden;
+                                    white-space: nowrap;
+                                }
+                            }
+                        }
+    
+                    }
+                }
+            }
+        }
+        
+    }
+
+    > .ivsom-table__empty {
+        text-align: center;
+        font-weight: bold;
+        padding: 10px;
+        box-sizing: border-box;
+        border-top: 1px solid #e4e7ed;
+        border-left: 1px solid #e4e7ed;
+        color: $font-symbol-color !important;
+
+        @include font-big-text;
+    }
+}
