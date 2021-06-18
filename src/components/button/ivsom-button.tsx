@@ -10,18 +10,19 @@ import { Component, Prop } from 'vue-property-decorator'
 
 import 'vue-tsx-support/enable-check'
 
-interface Props {
+type Props = {
     Icon : String,
     Plain : Boolean,
     Disabled: Boolean,
+    Size: 'medium' | 'small' | 'mini',
     Type : 'success' | 'primary' | 'warning' | 'danger' | 'default'
 }
 
-interface Event {
+type Event = {
     click : (e : MouseEvent) => void
 }
 
-interface ScopedSlots {
+type ScopedSlots = {
     default: void
 }
 
@@ -38,6 +39,8 @@ export default class iVsomButton extends tsx.Component<Props, Event, ScopedSlots
 
     @Prop({ default : false, type : Boolean }) readonly disabled !: Boolean;
 
+    @Prop({ default: 'medium' }) readonly size !: 'medium' | 'small' | 'mini';
+
     @Prop({ default : 'default' }) readonly type !: 'success' | 'primary' | 'warning' | 'danger' | 'default';
 
     protected get cssName() {
@@ -51,8 +54,9 @@ export default class iVsomButton extends tsx.Component<Props, Event, ScopedSlots
     }
 
     protected render() : JSX.Element {
+        const me = this;
         return (
-            <button class={ `ivsom-btn ${this.cssName} ${ this.plain ? 'ivsom-btn__plain' : ''} ${ this.disabled ? 'ivsom-btn_disabled' : '' }` } disabled={ !!this.disabled }  onClick={ (event : MouseEvent) => this.$emit('click', event) }>
+            <button class={{'ivsom-btn': true, [me.cssName] : true, 'ivsom-btn_plain' : this.plain, 'ivsom-btn_disabled' : this.disabled, [`ivsom-btn__${me.size}`] : true }} disabled={ !!this.disabled }  onClick={ (event : MouseEvent) => this.$emit('click', event) }>
                 { this.icon ? <i class={ `iconfont ${this.icon}` } ></i> : '' }
                 { this.$scopedSlots.default && this.$scopedSlots.default() }
             </button>

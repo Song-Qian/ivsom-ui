@@ -21,6 +21,7 @@
         "select.api.html",
         "upload.api.html",
         "message.api.html",
-        "table.api.html"
+        "table.api.html",
+        "datetime.api.html"
     ]
 }

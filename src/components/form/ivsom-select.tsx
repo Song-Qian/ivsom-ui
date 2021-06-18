@@ -2,7 +2,6 @@ import { Component, Emit, InjectReactive, ModelSync, Prop } from 'vue-property-d
 import * as tsx from 'vue-tsx-support'
 import 'vue-tsx-support/enable-check'
 
-
 type Props = {
     //显示字段
     Label: String,
@@ -73,7 +72,7 @@ export default class iVsomSelect extends tsx.Component<Props, any, ScopedSlots> 
                     me.$parent.$emit('on-validate');
                 }
             } else if (isPush) {
-                me.syncedValue = [...me.syncedValue, value];
+                me.syncedValue = [...(me.syncedValue as any[]), value];
                 if (me.trigger === 'change') {
                     me.$parent.$emit('on-validate');
                 }

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>InputNumber api demo</title>
+        <link rel="stylesheet" href="./cube.min.css">
+        <link rel="stylesheet" href="./demo.css">
+        <script src="../vue.min.js"></script>
+        <script src="./jQuery-1.9.1.js"></script>
+        <script src="./PrismJs.js"></script>
+    </head>
+    <body>
+        <div id="app" class="main">
+            <h1 class="logo">DateTimePicker Api</h1>
+            <div class="nav-tabs">
+                <ul id="tabs" class="dib-box">
+                    <li class="dib active"><span> CDN </span></li>
+                    <li class="dib"><span> NodeJS </span></li>
+                </ul>
+            </div>
+            <div class="tab-container">
+                <div class="content unicode" style="display: block;">
+                    <div class="article markdown">
+                        <h2 id="unicode-">基础用法</h2>
+                        <hr>
+                        <p>日期常规用法</p>
+                        <ul>
+                            <li>InputNumber 组件在使用之前，需要有相关的依赖库进行支持，如需阅读：<a href="./start.api.html" target="_blank" >快速开始</a></li>
+                            <li>max : number 最大值</li>
+                            <li>min : number 最小值</li>
+                            <li>step : float | number 每次值跳跃的跨度</li>
+                            <li>size: 'medium' | 'small' | 'mini' 表单元素大小</li>
+                            <li>disabled: Boolean 是否禁用</li>
+                            <li>precision: number 数值精度</li>
+                            <li>name: 原生表单属性</li>
+                            <li>input: Boolean 是否显示输入框</li>
+                        </ul>
+                        <blockquote>
+                            <i-vsom-date-time-picker suffix='iconfont icon-gongnengtubiao-182' v-model='time' label-formatter='yyyy/MM/dd hh:mm:ss' range></i-vsom-date-time-picker>
+                        </blockquote>
+                        <pre><code class="language-html"
+>&lt;i-vsom-date-time-picker &gt;&lt;/i-vsom-date-time-picker&gt;   
+</code></pre>
+                        <pre><code class="language-js"
+ >var app = new Vue({
+    el : '#app',
+    data : function() {
+        return {
+            value: 0
+        }
+    }
+ })
+ </code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script>
+            $(document).ready(function () {
+                $('.tab-container .content:first').show()
+    
+                $('#tabs li').click(function (e) {
+                    var tabContent = $('.tab-container .content')
+                    var index = $(this).index()
+    
+                    if ($(this).hasClass('active')) {
+                        return
+                    } else {
+                        $('#tabs li').removeClass('active')
+                        $(this).addClass('active')
+    
+                        tabContent.hide().eq(index).fadeIn()
+                    }
+                })
+            })
+        </script>
+        <script src="./datetime.demo.js"></script>
+    </body>
+</html>

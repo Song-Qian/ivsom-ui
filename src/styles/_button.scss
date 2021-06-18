@@ -9,18 +9,31 @@
 @import "./ivsom-mixin";
 
 .ivsom-btn {
-    min-width: 100px;
-    min-height: 38px;
     border-radius: 3px;
-    padding: 5px;
-    box-sizing: border-box;
     cursor: pointer;
+    box-sizing: border-box;
     background-color: $default-color;
     color: $font-common-color;
     border: 1px solid $border-default-color;
     transition: all .3s ease;
     outline: none;
+    overflow: hidden;
     @include font-text;
+
+    &.ivsom-btn__medium {
+        font-size: 14px;
+        padding: 12px 20px;
+    }
+
+    &.ivsom-btn__small {
+        font-size: 14px;
+        padding: 8px 12px;
+    }
+    
+    &.ivsom-btn__mini {
+        font-size: 12px;
+        padding: 7px 10px;
+    }
 
     &:hover {
         color: $default-color;

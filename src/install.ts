@@ -33,6 +33,7 @@ import iVsomUpload from './components/upload/ivsom-upload'
 import iVsomMessage from './components/message/ivsom-message'
 import iVsomTable from './components/table/ivsom-table'
 import iVsomTableColumn from './components/table/ivsom-table-column'
+import iVsomDateTimePicker from './components/form/ivsom-datetimepicker'
 
 const components: Array<any> = [
     iVsomRow,
@@ -60,7 +61,8 @@ const components: Array<any> = [
     iVSomSelect,
     iVsomUpload,
     iVsomTable,
-    iVsomTableColumn
+    iVsomTableColumn,
+    iVsomDateTimePicker
 ]
 
 const install = (Vue: any) => {
