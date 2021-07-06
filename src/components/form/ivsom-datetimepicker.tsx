@@ -84,7 +84,7 @@ export default class iVsomDateTimePicker extends tsx.Component<Props, any, Scope
 
     protected isStart(date: Date, unit: string): boolean {
         const me = this;
-        let value = me.range ? me.valueSync[0] : me.valueSync[0] as string;
+        let value = me.range ? me.valueSync[0] : me.valueSync as string;
         return !!value && setDateTime(new Date(value), 0, unit).getTime() === setDateTime(date, 0, unit).getTime();
     }
 
@@ -152,10 +152,26 @@ export default class iVsomDateTimePicker extends tsx.Component<Props, any, Scope
         let value =  eventDelta / 120 > 0 ? 1 : -1;
         if (type === 'prev') {
             let hours = Math.min(Math.max(0,  me.current.getHours() + value), 23);
-            me.current = setDateTime(me.current, hours, 'h');
+            if (me.range) {
+                let now = me.valueSync[0] ? new Date(me.valueSync[0]) : new Date(new Date().toLocaleDateString());
+                me.current = setDateTime(me.current, hours, 'h');
+                me.valueSync = [formatDateTime(now, me.valueFormatter, me.isTwentyFour), me.valueSync[1]];
+                return;
+            }
+            let now =  me.valueSync ? new Date(me.valueSync as string) : new Date(new Date().toLocaleDateString());
+            me.current = setDateTime(now, hours, 'h');
+            me.valueSync = formatDateTime(now, me.valueFormatter, me.isTwentyFour);
         } else if (type === 'next') {
             let hours = Math.min(Math.max(0,  me.next.getHours() + value), 23);
-            me.next = setDateTime(me.next, hours, 'h');
+            if (me.range) {
+                let now = me.valueSync[1] ? new Date(me.valueSync[1]) : new Date(new Date().toLocaleDateString());
+                me.next = setDateTime(me.next, hours, 'h');
+                me.valueSync = [me.valueSync[0], formatDateTime(now, me.valueFormatter, me.isTwentyFour)];
+                return;
+            }
+            let now = me.valueSync ? new Date(me.valueSync as string) : new Date(new Date().toLocaleDateString());
+            me.next = setDateTime(me.next, hours, 'h')
+            me.valueSync = formatDateTime(now, me.valueFormatter, me.isTwentyFour);
         }
     }
 
@@ -202,6 +218,21 @@ export default class iVsomDateTimePicker extends tsx.Component<Props, any, Scope
         }
     }
 
+    protected onChange(event: MouseEvent, value: Date): void {
+        const me = this;
+        if (me.range) {
+            var min = Math.min(new Date(me.valueSync[0]).getTime(), value.getTime());
+            var max = Math.max(new Date(me.valueSync[0]).getTime(), value.getTime());
+            me.valueSync = me.valueSync.length === 2 ? [formatDateTime(value, me.valueFormatter, me.isTwentyFour)] : [
+                formatDateTime(new Date(min), me.valueFormatter, me.isTwentyFour), 
+                formatDateTime(new Date(max), me.valueFormatter, me.isTwentyFour)
+            ];
+            return;
+        }
+
+        me.valueSync = formatDateTime(value, me.valueFormatter, me.isTwentyFour);
+    }
+
     protected mounted() {
         const me  = this;
         const today = setDateTime(new Date(), 0, 'h');
@@ -209,18 +240,21 @@ export default class iVsomDateTimePicker extends tsx.Component<Props, any, Scope
     }
 
     protected render() : JSX.Element {
-        var me = this;
+        const me = this;
+        let startTime = me.range && me.valueSync[0] ? formatDateTime(new Date(me.valueSync[0]), me.labelFormat, me.isTwentyFour) : "";
+        let endTime = me.range && me.valueSync[1] ? formatDateTime(new Date(me.valueSync[1]), me.labelFormat, me.isTwentyFour) : "";
+        let time = !me.range && me.valueSync ? formatDateTime(new Date(me.valueSync as string), me.labelFormat, me.isTwentyFour) : "";
         const prefixEl = (me.$scopedSlots.prefix ? <div class='ivsom-datetimepicker__prefix'>{me.$scopedSlots.prefix && me.$scopedSlots.prefix(me.prefix)}</div> :
             me.prefix ? <div class='ivsom-datetimepicker__prefix'><i class={['iconfont', me.prefix]}></i></div> : null)
         const suffixEl = (me.$scopedSlots.suffix ? <div class='ivsom-datetimepicker__suffix'>{me.$scopedSlots.suffix && me.$scopedSlots.suffix(me.suffix)}</div> :
             me.suffix ? <div class='ivsom-datetimepicker__suffix'><i class={['iconfont', me.suffix]}></i></div> : null)
         const ctx = me.range ? 
             (<div class="ivsom-datetimepicker__ctx">
-                <input class='ivsom-datetimepicker__start' value={ me.range ?  me.valueSync[0] : me.valueSync } />
+                <input class='ivsom-datetimepicker__start' value={ startTime } />
                 <div class='ivsom-datetimepicker__separator'>至</div>
-                <input class='ivsom-datetimepicker__end' value={ me.range ? me.valueSync[1] : me.valueSync } />
+                <input class='ivsom-datetimepicker__end' value={ endTime } />
             </div> ) :  ( <div class="ivsom-datetimepicker__ctx">
-                <input class='ivsom-datetimepicker__timer' value={'2010-01-01 23:00:00'} />
+                <input class='ivsom-datetimepicker__timer' value={ time } />
             </div>);
         
         const w = typeof me.width === 'number' ? `${me.width}px` : me.width;
@@ -274,7 +308,7 @@ export default class iVsomDateTimePicker extends tsx.Component<Props, any, Scope
                                                             "ivsom-datetimepicker__isEnd" : me.isEnd(setDateTime(me.current, k - c_week + 1, 'd'), 'h')
                                                         }
                                                     } 
-                                                    // onClick={ tsx.modifiers.stop(() => setDateTime(me.current, k - c_week + 1, 'd')) }
+                                                    onClick={ tsx.modifiers.stop((event : MouseEvent) => me.onChange(event, setDateTime(me.current, k - c_week + 1, 'd'))) }
                                                 >
                                                     <span>{ k - c_week + 1 }</span>
                                                 </div>
@@ -350,7 +384,7 @@ export default class iVsomDateTimePicker extends tsx.Component<Props, any, Scope
                                                                     "ivsom-datetimepicker__isEnd" : me.isEnd(setDateTime(me.next, k - p_week + 1, 'd'), 'h')
                                                                 }
                                                             }
-                                                            // onClick={  tsx.modifiers.stop(() => setDateTime(me.next, k - p_week + 1, 'd')) }
+                                                            onClick={ tsx.modifiers.stop((event : MouseEvent) => me.onChange(event, setDateTime(me.next, k - p_week + 1, 'd'))) }
                                                         >
                                                             <span>{ k - p_week + 1 }</span>
                                                         </div>
